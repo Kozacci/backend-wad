@@ -61,6 +61,24 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>8.0.0</version>
+                <configuration>
+                    <user>postgres</user>
+                    <password>qwerty</password>
+                    <sqlMigrationSeparator>__</sqlMigrationSeparator>
+                    <locations>
+                        <location>filesystem:src/main/resources/db/migration</location>
+                    </locations>
+                    <mixed>true</mixed>
+                    <url>jdbc:postgresql://localhost:5432/wateradventure</url>
+                    <schemas>
+                        <schema>wateradventure</schema>
+                    </schemas>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
