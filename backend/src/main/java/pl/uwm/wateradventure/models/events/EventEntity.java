@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.uwm.wateradventure.global.WaterAdventureChangeMetricEntity;
+import pl.uwm.wateradventure.models.global.WaterAdventureChangeMetricEntity;
 
 import java.util.Date;
 

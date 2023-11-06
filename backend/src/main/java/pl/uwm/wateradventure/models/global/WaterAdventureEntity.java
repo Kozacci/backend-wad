@@ -1,4 +1,4 @@
-package pl.uwm.wateradventure.global;
+package pl.uwm.wateradventure.models.global;
 
 import jakarta.persistence.*;
 import lombok.Getter;
