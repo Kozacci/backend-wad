@@ -26,7 +26,7 @@ public class EventEntity extends WaterAdventureChangeMetricEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
-    private String city;
+    private String address;
 
     @Column(name = "orderer_email")
     private String ordererEmail;
