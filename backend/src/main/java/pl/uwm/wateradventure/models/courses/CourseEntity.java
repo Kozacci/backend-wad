@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.uwm.wateradventure.global.WaterAdventureEntity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "courses")
@@ -20,11 +20,11 @@ public class CourseEntity extends WaterAdventureEntity {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "date_from")
-    private Date dateFrom;
+    private LocalDate dateFrom;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "date_to")
-    private Date dateTo;
+    private LocalDate dateTo;
 
     private String status;
 }

@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.uwm.wateradventure.global.WaterAdventureEntity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "events")
@@ -24,7 +24,7 @@ public class EventEntity extends WaterAdventureEntity {
     private Double cost;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+    private LocalDateTime date;
 
     private String city;
 
