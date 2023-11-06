@@ -9,7 +9,7 @@ import pl.uwm.wateradventure.global.WaterAdventureChangeMetricEntity;
 import java.util.Date;
 
 @Entity
-@Table(name = "courses", schema = "wateradventure")
+@Table(name = "courses")
 @Getter
 @Setter
 @NoArgsConstructor

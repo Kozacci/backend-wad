@@ -6,7 +6,7 @@
 CREATE SCHEMA IF NOT EXISTS wateradventure;
 
 -- Creating a sequence for all tables
-CREATE SEQUENCE wateradventure.id_seq;
+CREATE SEQUENCE IF NOT EXISTS wateradventure.id_seq;
 
 -- Table Courses
 CREATE TABLE IF NOT EXISTS wateradventure.courses (
