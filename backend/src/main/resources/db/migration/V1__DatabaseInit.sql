@@ -17,18 +17,9 @@ CREATE TABLE IF NOT EXISTS wateradventure.courses (
                                             status VARCHAR(30) NOT NULL
 );
 
--- Table Participant_Courses
-CREATE TABLE IF NOT EXISTS wateradventure.participant_courses (
-                                                            id BIGINT DEFAULT nextval('wateradventure.id_seq') PRIMARY KEY,
-                                                            access_date TIMESTAMP NOT NULL,
-                                                            is_passed BOOLEAN NOT NULL,
-                                                            course_id BIGINT NOT NULL,
-                                                            CONSTRAINT fk_Accesses_Courses1 FOREIGN KEY (course_id) REFERENCES wateradventure.courses (id)
-);
-
 -- Table Answers_History
 CREATE TABLE IF NOT EXISTS wateradventure.answers_history (
-    id BIGINT DEFAULT nextval('wateradventure.id_seq') PRIMARY KEY
+                                                id BIGINT DEFAULT nextval('wateradventure.id_seq') PRIMARY KEY
 );
 
 -- Table Participants
@@ -39,10 +30,20 @@ CREATE TABLE IF NOT EXISTS wateradventure.participants (
                                                  email VARCHAR(40) NOT NULL,
                                                  password VARCHAR(255) NOT NULL,
                                                  phone_number VARCHAR(9) NOT NULL,
-                                                 access_id BIGINT NOT NULL,
                                                  answers_history_id BIGINT NOT NULL,
-                                                 CONSTRAINT fk_Users_Accesses FOREIGN KEY (access_id) REFERENCES wateradventure.participant_courses (id),
                                                  CONSTRAINT fk_Participants_Answers_History1 FOREIGN KEY (answers_history_id) REFERENCES wateradventure.answers_history (id)
+);
+
+-- Table Participant_Courses
+CREATE TABLE IF NOT EXISTS wateradventure.participant_courses (
+                                                id BIGINT DEFAULT nextval('wateradventure.id_seq') PRIMARY KEY,
+                                                access_date TIMESTAMP NOT NULL,
+                                                is_passed BOOLEAN NOT NULL,
+                                                course_id BIGINT NOT NULL,
+                                                participant_id BIGINT NOT NULL,
+                                                CONSTRAINT fk_Accesses_Courses1 FOREIGN KEY (course_id) REFERENCES wateradventure.courses (id),
+                                                CONSTRAINT fk_Accesses_Participants1 FOREIGN KEY (participant_id) REFERENCES wateradventure.participants (id)
+
 );
 
 -- Table Questions
