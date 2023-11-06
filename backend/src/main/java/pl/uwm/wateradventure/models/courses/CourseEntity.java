@@ -4,16 +4,16 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.uwm.wateradventure.global.WaterAdventureEntity;
+import pl.uwm.wateradventure.global.WaterAdventureChangeMetricEntity;
 
 import java.util.Date;
 
 @Entity
-@Table(name = "courses")
+@Table(name = "courses", schema = "wateradventure")
 @Getter
 @Setter
 @NoArgsConstructor
-public class CourseEntity extends WaterAdventureEntity {
+public class CourseEntity extends WaterAdventureChangeMetricEntity {
 
     @Enumerated(EnumType.STRING)
     private CourseType type;
@@ -26,5 +26,6 @@ public class CourseEntity extends WaterAdventureEntity {
     @Column(name = "date_to")
     private Date dateTo;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private CourseStatus status;
 }

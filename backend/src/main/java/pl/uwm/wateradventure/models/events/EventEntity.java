@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.uwm.wateradventure.global.WaterAdventureEntity;
+import pl.uwm.wateradventure.global.WaterAdventureChangeMetricEntity;
 
 import java.util.Date;
 
@@ -13,10 +13,10 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-public class EventEntity extends WaterAdventureEntity {
+public class EventEntity extends WaterAdventureChangeMetricEntity {
 
-    // TODO -- Create the enum
-//    private String type;
+    @Enumerated(EnumType.STRING)
+    private EventType type;
 
     @Column(name = "is_paid")
     private Boolean isPaid;
