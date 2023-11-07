@@ -24,6 +24,9 @@ public class ParticipantCourseEntity extends WaterAdventureChangeMetricEntity {
     @Column(name = "is_passed")
     private Boolean isPassed;
 
+    @Column(name = "online_payment")
+    private Boolean onlinePayment;
+
     @ManyToOne
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     private CourseEntity courseId;
