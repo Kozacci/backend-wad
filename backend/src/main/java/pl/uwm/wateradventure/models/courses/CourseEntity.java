@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.uwm.wateradventure.models.global.WaterAdventureChangeMetricEntity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "courses")
@@ -20,12 +20,29 @@ public class CourseEntity extends WaterAdventureChangeMetricEntity {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "date_from")
-    private Date dateFrom;
+    private LocalDate dateFrom;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "date_to")
-    private Date dateTo;
+    private LocalDate dateTo;
 
     @Enumerated(EnumType.STRING)
     private CourseStatus status;
+
+    public CourseEntity(CourseType courseType, LocalDate dateFrom, LocalDate dateTo) {
+        this.type = courseType;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
+        this.status = CourseStatus.NIEROZPOCZETY;
+    }
+
+    public CourseEntityDTO toDto() {
+        return CourseEntityDTO.builder()
+                .courseType(this.type.enumValue)
+                .dateFrom(this.dateFrom)
+                .dateTo(this.dateTo)
+                .courseStatus(this.status.enumValue)
+                .build();
+    }
+
 }
