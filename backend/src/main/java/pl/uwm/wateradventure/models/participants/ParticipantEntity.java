@@ -1,12 +1,17 @@
 package pl.uwm.wateradventure.models.participants;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.uwm.wateradventure.models.global.WaterAdventureChangeMetricEntity;
-import pl.uwm.wateradventure.models.learning.answershistory.AnswerHistoryEntity;
+import pl.uwm.wateradventure.models.participant_courses.ParticipantCourseEntity;
+
+import java.util.List;
 
 @Entity
 @Table(name = "participants")
@@ -28,8 +33,7 @@ public class ParticipantEntity extends WaterAdventureChangeMetricEntity {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @ManyToOne
-    @JoinColumn(name = "answers_history_id", referencedColumnName = "id")
-    private AnswerHistoryEntity answersHistoryId;
+    @OneToMany(mappedBy = "participantId")
+    private List<ParticipantCourseEntity> participantCourses;
 
 }

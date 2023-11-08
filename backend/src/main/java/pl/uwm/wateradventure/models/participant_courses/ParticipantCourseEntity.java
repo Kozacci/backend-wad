@@ -4,8 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.uwm.wateradventure.models.global.WaterAdventureChangeMetricEntity;
 import pl.uwm.wateradventure.models.courses.CourseEntity;
+import pl.uwm.wateradventure.models.global.WaterAdventureChangeMetricEntity;
+import pl.uwm.wateradventure.models.learning.answershistory.AnswerHistoryEntity;
 import pl.uwm.wateradventure.models.participants.ParticipantEntity;
 
 import java.util.Date;
@@ -24,6 +25,9 @@ public class ParticipantCourseEntity extends WaterAdventureChangeMetricEntity {
     @Column(name = "is_passed")
     private Boolean isPassed;
 
+    @Column(name = "is_paid")
+    private Boolean isPaid;
+
     @Column(name = "online_payment")
     private Boolean onlinePayment;
 
@@ -34,5 +38,9 @@ public class ParticipantCourseEntity extends WaterAdventureChangeMetricEntity {
     @ManyToOne
     @JoinColumn(name = "participant_id", referencedColumnName = "id")
     private ParticipantEntity participantId;
+
+    @OneToOne
+    @JoinColumn(name = "answers_history_id", referencedColumnName = "id")
+    private AnswerHistoryEntity answerHistory;
 
 }
