@@ -51,6 +51,8 @@ public class CourseEntity extends WaterAdventureChangeMetricEntity {
                 .dateFrom(this.dateFrom)
                 .dateTo(this.dateTo)
                 .courseStatus(this.status.enumValue)
+                .maxParticipantsNumber(this.maxParticipantsNumber)
+                .city(this.city.enumValue)
                 .build();
     }
 
