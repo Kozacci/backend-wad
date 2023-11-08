@@ -19,4 +19,10 @@ class CourseController {
         return courseFacade.getCourseById(courseId).toDto();
     }
 
+    @DeleteMapping("/{courseId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deleteCourseById(@PathVariable Long courseId) {
+        courseFacade.deleteCourseById(courseId);
+    }
+
 }

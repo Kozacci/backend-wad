@@ -29,10 +29,19 @@ public class CourseEntity extends WaterAdventureChangeMetricEntity {
     @Enumerated(EnumType.STRING)
     private CourseStatus status;
 
-    public CourseEntity(CourseType courseType, LocalDate dateFrom, LocalDate dateTo) {
+    @Enumerated(EnumType.STRING)
+    private CourseCity city;
+
+    private Integer maxParticipantsNumber;
+
+    public CourseEntity(CourseType courseType, LocalDate dateFrom,
+                        LocalDate dateTo, CourseCity city,
+                        Integer maxParticipantsNumber) {
         this.type = courseType;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
+        this.city = city;
+        this.maxParticipantsNumber = maxParticipantsNumber;
         this.status = CourseStatus.NIEROZPOCZETY;
     }
 

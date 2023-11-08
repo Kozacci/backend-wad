@@ -9,9 +9,14 @@ import pl.uwm.wateradventure.models.courses.CourseEntity;
 public class CourseCRUDService {
 
     private final CourseReader reader;
+    private final CourseDeleter deleter;
 
     public CourseEntity getCourseById(Long courseId) {
         return reader.getCourseById(courseId);
     }
 
+    public void deleteCourseById(Long courseId) {
+        var course = reader.getCourseById(courseId);
+        deleter.deleteCourse(course);
+    }
 }

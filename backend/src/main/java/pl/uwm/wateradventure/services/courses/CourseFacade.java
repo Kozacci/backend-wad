@@ -15,4 +15,7 @@ public class CourseFacade {
         return courseCRUDService.getCourseById(courseId);
     }
 
+    public void deleteCourseById(Long courseId) {
+        courseCRUDService.deleteCourseById(courseId);
+    }
 }
