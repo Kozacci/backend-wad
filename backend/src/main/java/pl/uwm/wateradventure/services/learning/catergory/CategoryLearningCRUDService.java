@@ -1,12 +1,9 @@
-package pl.uwm.wateradventure.services.participants.crud;
+package pl.uwm.wateradventure.services.learning.catergory;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class ParticipantsCRUDService {
-
-
-
+public class CategoryLearningCRUDService {
 }

@@ -8,7 +8,7 @@ import pl.uwm.wateradventure.services.courses.CoursesFacade;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/courses")
-class CoursesController {
+class CourseController {
 
     private final CoursesFacade coursesFacade;
 }

@@ -2,13 +2,13 @@ package pl.uwm.wateradventure.services.participants;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.uwm.wateradventure.services.participants.crud.ParticipantsCRUDService;
+import pl.uwm.wateradventure.services.participants.crud.ParticipantCRUDService;
 
 @Component
 @RequiredArgsConstructor
-public class ParticipantsFacade {
+public class ParticipantFacade {
 
-    private final ParticipantsCRUDService participantsCRUDService;
+    private final ParticipantCRUDService participantCRUDService;
 
 
 }

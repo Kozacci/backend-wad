@@ -6,7 +6,7 @@ import pl.uwm.wateradventure.services.events.crud.EventsCRUDService;
 
 @Component
 @RequiredArgsConstructor
-public class EventsFacade {
+public class EventFacade {
 
     private final EventsCRUDService eventsCRUDService;
 

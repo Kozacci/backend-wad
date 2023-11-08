@@ -1,9 +1,9 @@
-package pl.uwm.wateradventure.services.questions.crud;
+package pl.uwm.wateradventure.services.learning.answers_history;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class QuestionsCRUDService {
+public class AnswerHistoryCRUDService {
 }

@@ -1,9 +1,9 @@
-package pl.uwm.wateradventure.services.participant_courses.crud;
+package pl.uwm.wateradventure.services.learning.trial_exams;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class ParticipantCoursesCRUDService {
+public class TrialExamCRUDService {
 }
