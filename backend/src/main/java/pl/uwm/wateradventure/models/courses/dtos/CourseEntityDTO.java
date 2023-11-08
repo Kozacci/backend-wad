@@ -1,4 +1,4 @@
-package pl.uwm.wateradventure.models.courses;
+package pl.uwm.wateradventure.models.courses.dtos;
 
 import lombok.Builder;
 

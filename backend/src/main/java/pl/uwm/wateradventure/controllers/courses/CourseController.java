@@ -3,7 +3,7 @@ package pl.uwm.wateradventure.controllers.courses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.uwm.wateradventure.models.courses.CourseEntityDTO;
+import pl.uwm.wateradventure.models.courses.dtos.CourseEntityDTO;
 import pl.uwm.wateradventure.services.courses.CourseFacade;
 
 @RestController
@@ -16,7 +16,7 @@ class CourseController {
     @GetMapping("/{courseId}")
     @ResponseStatus(HttpStatus.OK)
     CourseEntityDTO getCourseById(@PathVariable Long courseId) {
-        return courseFacade.getCourseById(courseId).toDto();
+        return courseFacade.getCourseById(courseId).toDTO();
     }
 
     @DeleteMapping("/{courseId}")

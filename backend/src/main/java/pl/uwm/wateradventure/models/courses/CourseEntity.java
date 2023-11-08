@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.uwm.wateradventure.models.courses.dtos.CourseEntityDTO;
 import pl.uwm.wateradventure.models.global.WaterAdventureChangeMetricEntity;
 
 import java.time.LocalDate;
@@ -45,7 +46,7 @@ public class CourseEntity extends WaterAdventureChangeMetricEntity {
         this.status = CourseStatus.NIEROZPOCZETY;
     }
 
-    public CourseEntityDTO toDto() {
+    public CourseEntityDTO toDTO() {
         return CourseEntityDTO.builder()
                 .courseType(this.type.enumValue)
                 .dateFrom(this.dateFrom)

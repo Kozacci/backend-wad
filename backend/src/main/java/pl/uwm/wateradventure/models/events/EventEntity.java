@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.uwm.wateradventure.models.events.dtos.EventEntityDTO;
 import pl.uwm.wateradventure.models.global.WaterAdventureChangeMetricEntity;
 
 import java.util.Date;
@@ -39,5 +40,39 @@ public class EventEntity extends WaterAdventureChangeMetricEntity {
 
     @Column(name = "orderer_phone_number")
     private String ordererPhoneNumber;
+
+
+    public EventEntity(EventType type, Boolean isPaid,
+                       Double cost, Date date,
+                       String address,
+                       String ordererEmail,
+                       String ordererFirstName,
+                       String ordererLastName,
+                       String ordererPhoneNumber) {
+        this.type = type;
+        this.isPaid = isPaid;
+        this.cost = cost;
+        this.date = date;
+        this.address = address;
+        this.ordererEmail = ordererEmail;
+        this.ordererFirstName = ordererFirstName;
+        this.ordererLastName = ordererLastName;
+        this.ordererPhoneNumber = ordererPhoneNumber;
+    }
+
+    public EventEntityDTO toDTO() {
+        return EventEntityDTO.builder()
+                .type(this.type.enumValue)
+                .isPaid(this.isPaid)
+                .cost(this.cost)
+                .date(this.date)
+                .address(this.address)
+                .ordererEmail(this.ordererEmail)
+                .ordererFirstName(this.ordererFirstName)
+                .ordererLastName(this.ordererLastName)
+                .ordererPhoneNumber(this.ordererPhoneNumber)
+                .build();
+    }
+
 
 }

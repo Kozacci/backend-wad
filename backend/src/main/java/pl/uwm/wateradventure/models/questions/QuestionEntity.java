@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.uwm.wateradventure.models.global.WaterAdventureChangeMetricEntity;
 import pl.uwm.wateradventure.models.learning.category.Category;
+import pl.uwm.wateradventure.models.questions.dtos.QuestionEntityDTO;
 
 @Entity
 @Table(name = "questions")
@@ -36,5 +37,31 @@ public class QuestionEntity extends WaterAdventureChangeMetricEntity {
 
     private String image;
 
+
+    public QuestionEntity(String content, Category category, String firstAnswer,
+                          String secondAnswer, String thirdAnswer, String correctAnswer,
+                          String explanation, String image) {
+        this.content = content;
+        this.category = category;
+        this.firstAnswer = firstAnswer;
+        this.secondAnswer = secondAnswer;
+        this.thirdAnswer = thirdAnswer;
+        this.correctAnswer = correctAnswer;
+        this.explanation = explanation;
+        this.image = image;
+    }
+
+    public QuestionEntityDTO toDTO() {
+        return QuestionEntityDTO.builder()
+                .content(this.content)
+                .category(this.category.enumValue)
+                .firstAnswer(this.firstAnswer)
+                .secondAnswer(this.secondAnswer)
+                .thirdAnswer(this.thirdAnswer)
+                .correctAnswer(this.correctAnswer)
+                .explanation(this.explanation)
+                .image(this.image)
+                .build();
+    }
 
 }
