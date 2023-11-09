@@ -3,7 +3,7 @@ package pl.uwm.wateradventure.services.courses.crud;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.models.courses.CourseEntity;
-import pl.uwm.wateradventure.models.courses.dtos.CourseCreateDTO;
+import pl.uwm.wateradventure.models.courses.dtos.CourseCreateUpdateDTO;
 import pl.uwm.wateradventure.models.courses.dtos.CourseEntityDTO;
 
 @Component
@@ -12,7 +12,7 @@ class CourseCreator {
 
     private final CourseRepository courseRepository;
 
-    protected CourseEntityDTO addCourse(CourseCreateDTO courseCreateDTO) {
+    protected CourseEntityDTO addCourse(CourseCreateUpdateDTO courseCreateDTO) {
 
         CourseEntity newCourse = new CourseEntity(
                 courseCreateDTO.courseType(),
@@ -21,7 +21,7 @@ class CourseCreator {
                 courseCreateDTO.city(),
                 courseCreateDTO.maxParticipantsNumber());
 
-        courseRepository.save(newCourse);
+        courseRepository.saveAndFlush(newCourse);
         return newCourse.toDTO();
     }
 
