@@ -11,7 +11,7 @@ class CourseReader {
 
     private final CourseRepository repository;
 
-    public CourseEntity getCourseById(Long courseId) {
+    protected CourseEntity getCourseById(Long courseId) {
         return repository.findById(courseId)
                 .orElseThrow(() -> new EntityNotFoundException("course", "Course with id: " + courseId + " does not exist!"));
     }
