@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.uwm.wateradventure.models.events.EventCity;
 import pl.uwm.wateradventure.models.events.EventType;
+import pl.uwm.wateradventure.models.events.dtos.EventCreateUpdateDTO;
 import pl.uwm.wateradventure.models.events.dtos.EventEntityDTO;
 import pl.uwm.wateradventure.models.events.dtos.EventFilteredDTO;
 import pl.uwm.wateradventure.models.events.dtos.EventFiltersDTO;
@@ -24,6 +25,12 @@ class EventController {
 
     private final EventFacade eventFacade;
 
+    @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    EventEntityDTO addEvent(@RequestBody EventCreateUpdateDTO eventCreateDTO) {
+        return eventFacade.addEvent(eventCreateDTO);
+    }
+
     @GetMapping("/{eventId}")
     @ResponseStatus(HttpStatus.OK)
     EventEntityDTO getEventById(@PathVariable Long eventId) {
@@ -40,6 +47,12 @@ class EventController {
         var filters = new EventFiltersDTO(type, city, clientLastName, clientEmail, sortBy);
         List<EventFilteredDTO> filteredEvents = eventFacade.getEventsByFilers(filters);
         return !filteredEvents.isEmpty() ? ResponseEntity.ok(filteredEvents) : ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{eventId}")
+    @ResponseStatus(HttpStatus.OK)
+    EventEntityDTO updateEvent(@PathVariable Long eventId, @RequestBody EventCreateUpdateDTO eventUpdateDTO) {
+        return eventFacade.updateEvent(eventId, eventUpdateDTO);
     }
 
     @DeleteMapping("/{eventId}")
