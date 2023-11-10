@@ -15,7 +15,7 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class) // entity to listen to the changes of creation/update
 @Getter
 @Setter
-public class WaterAdventureChangeMetricEntity extends WaterAdventureEntity {
+public abstract class WaterAdventureChangeMetricEntity extends WaterAdventureEntity {
 
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp // at every update of entity - the date is automatically updated
@@ -27,5 +27,4 @@ public class WaterAdventureChangeMetricEntity extends WaterAdventureEntity {
     @Column(name = "created_at")
     private Date createdAt;
 
-    // TODO - methods to initialize the user change metric (user login / admin)
 }

@@ -7,7 +7,7 @@ import lombok.Setter;
 @MappedSuperclass
 @Getter
 @Setter
-public class WaterAdventureEntity {
+public abstract class WaterAdventureEntity {
 
     public static final String SEQUENCE_NAME = "id_seq";
 
