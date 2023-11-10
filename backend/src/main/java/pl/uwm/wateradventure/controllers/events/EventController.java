@@ -1,8 +1,9 @@
 package pl.uwm.wateradventure.controllers.events;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import pl.uwm.wateradventure.models.events.dtos.EventEntityDTO;
 import pl.uwm.wateradventure.services.events.EventFacade;
 
 /** REST Controller created in the needs of Create, Read, Update, Delete
@@ -15,5 +16,17 @@ import pl.uwm.wateradventure.services.events.EventFacade;
 class EventController {
 
     private final EventFacade eventFacade;
+
+    @GetMapping("{/eventId}")
+    @ResponseStatus(HttpStatus.OK)
+    EventEntityDTO getEventById(@PathVariable Long eventId) {
+        return eventFacade.getEventById(eventId).toDTO();
+    }
+
+    @DeleteMapping("/{eventId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deleteEventById(@PathVariable Long eventId) {
+        eventFacade.deleteEventById(eventId);
+    }
 
 }
