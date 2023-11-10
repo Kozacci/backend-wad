@@ -24,6 +24,12 @@ class CourseController {
 
     private final CourseFacade courseFacade;
 
+    @PostMapping("")
+    @ResponseStatus(HttpStatus.CREATED)
+    CourseEntityDTO addCourse(@RequestBody CourseCreateUpdateDTO courseCreateDTO) {
+        return courseFacade.addCourse(courseCreateDTO);
+    }
+
     @GetMapping("/{courseId}")
     @ResponseStatus(HttpStatus.OK)
     CourseEntityDTO getCourseById(@PathVariable Long courseId) {
@@ -43,12 +49,6 @@ class CourseController {
                             registeredParticipants, participantsLimit, sortBy);
         List<CourseFilteredDTO> filteredCourses = courseFacade.getCoursesByFilters(filters);
         return !filteredCourses.isEmpty() ? ResponseEntity.ok(filteredCourses) : ResponseEntity.noContent().build();
-    }
-
-    @PostMapping("")
-    @ResponseStatus(HttpStatus.CREATED)
-    CourseEntityDTO addCourse(@RequestBody CourseCreateUpdateDTO courseCreateDTO) {
-        return courseFacade.addCourse(courseCreateDTO);
     }
 
     @PutMapping("/{courseId}")

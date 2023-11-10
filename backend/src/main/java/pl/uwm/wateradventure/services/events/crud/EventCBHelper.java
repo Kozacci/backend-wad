@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Class created in the needs of EventReader class
  */
-public class EventCBHelper {
+class EventCBHelper {
 
 
     public static void addSortBy(String sort, CriteriaQuery<EventFilteredDTO> query,

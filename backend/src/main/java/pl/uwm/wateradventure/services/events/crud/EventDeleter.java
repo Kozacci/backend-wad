@@ -9,9 +9,11 @@ import pl.uwm.wateradventure.models.events.EventEntity;
 class EventDeleter {
 
     private final EventRepository repository;
+    private final EventReader reader;
 
-    public void deleteEvent(EventEntity event) {
-        repository.delete(event);
+    public void deleteEvent(Long eventId) {
+        var eventToDelete = reader.getEventById(eventId);
+        repository.delete(eventToDelete);
     }
 
 }
