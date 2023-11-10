@@ -5,7 +5,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.uwm.wateradventure.models.courses.dtos.CourseCreateUpdateDTO;
 import pl.uwm.wateradventure.models.courses.dtos.CourseEntityDTO;
+import pl.uwm.wateradventure.models.courses.dtos.CourseFilteredDTO;
+import pl.uwm.wateradventure.models.courses.dtos.CourseFiltersDTO;
 import pl.uwm.wateradventure.services.courses.CourseFacade;
+
+import java.time.LocalDate;
+import java.util.List;
 
 /** REST Controller created in the needs of Create, Read, Update, Delete
  * and more complex operations for Course Entity
@@ -22,6 +27,20 @@ class CourseController {
     @ResponseStatus(HttpStatus.OK)
     CourseEntityDTO getCourseById(@PathVariable Long courseId) {
         return courseFacade.getCourseById(courseId).toDTO();
+    }
+
+    @GetMapping()
+    List<CourseFilteredDTO> getCoursesByFilters(@RequestParam(required = false) String courseType,
+                                                @RequestParam(required = false) String courseStatus,
+                                                @RequestParam(required = false) String courseCity,
+                                                @RequestParam(required = false) LocalDate dateFrom,
+                                                @RequestParam(required = false) LocalDate dateTo,
+                                                @RequestParam(required = false) Integer registeredParticipants,
+                                                @RequestParam(required = false) Integer participantsLimit,
+                                                @RequestParam(required = false) String sortBy) {
+        var filters = new CourseFiltersDTO(courseType, courseStatus, courseCity, dateFrom, dateTo,
+                            registeredParticipants, participantsLimit, sortBy);
+        return courseFacade.getCoursesByFilters(filters);
     }
 
     @PostMapping("")

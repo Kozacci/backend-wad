@@ -33,7 +33,7 @@ public class ParticipantEntity extends WaterAdventureChangeMetricEntity {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "participantId")
+    @OneToMany(mappedBy = "participant")
     private List<ParticipantCourseEntity> participantCourses;
 
 }

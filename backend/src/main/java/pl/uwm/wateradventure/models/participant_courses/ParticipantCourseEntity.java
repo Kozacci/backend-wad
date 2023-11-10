@@ -33,11 +33,11 @@ public class ParticipantCourseEntity extends WaterAdventureChangeMetricEntity {
 
     @ManyToOne
     @JoinColumn(name = "course_id", referencedColumnName = "id")
-    private CourseEntity courseId;
+    private CourseEntity course;
 
     @ManyToOne
     @JoinColumn(name = "participant_id", referencedColumnName = "id")
-    private ParticipantEntity participantId;
+    private ParticipantEntity participant;
 
     @OneToOne
     @JoinColumn(name = "answers_history_id", referencedColumnName = "id")

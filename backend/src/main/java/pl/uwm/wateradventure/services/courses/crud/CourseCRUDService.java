@@ -5,6 +5,10 @@ import org.springframework.stereotype.Service;
 import pl.uwm.wateradventure.models.courses.CourseEntity;
 import pl.uwm.wateradventure.models.courses.dtos.CourseCreateUpdateDTO;
 import pl.uwm.wateradventure.models.courses.dtos.CourseEntityDTO;
+import pl.uwm.wateradventure.models.courses.dtos.CourseFilteredDTO;
+import pl.uwm.wateradventure.models.courses.dtos.CourseFiltersDTO;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -32,5 +36,9 @@ public class CourseCRUDService {
     public void deleteCourseById(Long courseId) {
         var course = reader.getCourseById(courseId);
         deleter.deleteCourse(course);
+    }
+
+    public List<CourseFilteredDTO> getCoursesByFilters(CourseFiltersDTO filters) {
+        return reader.getCoursesByFilters(filters);
     }
 }

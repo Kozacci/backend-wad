@@ -5,7 +5,11 @@ import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.models.courses.CourseEntity;
 import pl.uwm.wateradventure.models.courses.dtos.CourseCreateUpdateDTO;
 import pl.uwm.wateradventure.models.courses.dtos.CourseEntityDTO;
+import pl.uwm.wateradventure.models.courses.dtos.CourseFilteredDTO;
+import pl.uwm.wateradventure.models.courses.dtos.CourseFiltersDTO;
 import pl.uwm.wateradventure.services.courses.crud.CourseCRUDService;
+
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -27,5 +31,9 @@ public class CourseFacade {
 
     public void deleteCourseById(Long courseId) {
         courseCRUDService.deleteCourseById(courseId);
+    }
+
+    public List<CourseFilteredDTO> getCoursesByFilters(CourseFiltersDTO filters) {
+        return courseCRUDService.getCoursesByFilters(filters);
     }
 }

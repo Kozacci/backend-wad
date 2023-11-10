@@ -1,6 +1,7 @@
 package pl.uwm.wateradventure.models.events.dtos;
 
 import lombok.Builder;
+
 import java.util.Date;
 
 public record EventEntityDTO(String type,
