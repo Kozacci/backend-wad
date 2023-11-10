@@ -2,7 +2,6 @@ package pl.uwm.wateradventure.models.validators;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
-import pl.uwm.wateradventure.exceptions.custom_exceptions.InvalidQuestionCategoryException;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
