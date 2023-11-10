@@ -52,7 +52,9 @@ class CourseReader {
         return em.createQuery(query).getResultList();
     }
 
-    private List<Selection<?>> toSelection(Root<CourseEntity> root, CriteriaQuery<CourseFilteredDTO> cq, CriteriaBuilder cb) {
+    private List<Selection<?>> toSelection(Root<CourseEntity> root,
+                                           CriteriaQuery<CourseFilteredDTO> cq,
+                                           CriteriaBuilder cb) {
         return Arrays.asList(
                 root.get("id"),
                 root.get("dateFrom"),

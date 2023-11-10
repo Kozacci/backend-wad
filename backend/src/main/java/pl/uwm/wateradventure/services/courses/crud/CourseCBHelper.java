@@ -18,35 +18,41 @@ import java.util.Objects;
 class CourseCBHelper {
 
 
-    public static void addSortBy(String sort, CriteriaQuery<CourseFilteredDTO> query, CriteriaBuilder cb, Root<CourseEntity> course) {
+    public static void addSortBy(String sort, CriteriaQuery<CourseFilteredDTO> query,
+                                 CriteriaBuilder cb, Root<CourseEntity> course) {
         query.orderBy(cb.asc(course.get(Objects.requireNonNullElse(sort, "dateFrom"))));
     }
 
-    public static void addTypePredicate(CriteriaBuilder cb, Root<CourseEntity> course, List<Predicate> predicates, String courseType) {
+    public static void addTypePredicate(CriteriaBuilder cb, Root<CourseEntity> course,
+                                        List<Predicate> predicates, String courseType) {
         if (courseType != null) {
             predicates.add(cb.equal(course.get("type"), CourseType.valueOf(courseType)));
         }
     }
 
-    public static void addStatusPredicate(CriteriaBuilder cb, Root<CourseEntity> course, List<Predicate> predicates, String courseStatus) {
+    public static void addStatusPredicate(CriteriaBuilder cb, Root<CourseEntity> course,
+                                          List<Predicate> predicates, String courseStatus) {
         if (courseStatus != null) {
             predicates.add(cb.equal(course.get("status"), CourseStatus.valueOf(courseStatus)));
         }
     }
 
-    public static void addCityPredicate(CriteriaBuilder cb, Root<CourseEntity> course, List<Predicate> predicates, String courseCity) {
+    public static void addCityPredicate(CriteriaBuilder cb, Root<CourseEntity> course,
+                                        List<Predicate> predicates, String courseCity) {
         if (courseCity != null) {
             predicates.add(cb.equal(course.get("city"), CourseCity.valueOf(courseCity)));
         }
     }
 
-    public static void addDateFromPredicate(CriteriaBuilder cb, Root<CourseEntity> course, List<Predicate> predicates, LocalDate dateFrom) {
+    public static void addDateFromPredicate(CriteriaBuilder cb, Root<CourseEntity> course,
+                                            List<Predicate> predicates, LocalDate dateFrom) {
         if (dateFrom != null) {
             predicates.add(cb.greaterThanOrEqualTo(course.get("dateFrom"), dateFrom));
         }
     }
 
-    public static void addDateToPredicate(CriteriaBuilder cb, Root<CourseEntity> course, List<Predicate> predicates, LocalDate dateTo) {
+    public static void addDateToPredicate(CriteriaBuilder cb, Root<CourseEntity> course,
+                                          List<Predicate> predicates, LocalDate dateTo) {
         if (dateTo != null) {
             predicates.add(cb.lessThanOrEqualTo(course.get("dateTo"), dateTo));
         }
@@ -54,17 +60,18 @@ class CourseCBHelper {
 
     public static Subquery<Long> addRegisteredParticipants(CriteriaBuilder cb, Root<CourseEntity> course,
                                                           CriteriaQuery<CourseFilteredDTO> query) {
-        Subquery<Long> sq = query.subquery(Long.class);
-        Root<ParticipantCourseEntity> sqRoot = sq.from(ParticipantCourseEntity.class);
-        Join<ParticipantCourseEntity, CourseEntity> join = sqRoot.join("course");
-        sq.select(cb.count(sqRoot.get("id")));
-        sq.where(cb.equal(join, course));
-        return sq;
+        Subquery<Long> subQuery = query.subquery(Long.class);
+        Root<ParticipantCourseEntity> subQueryRoot = subQuery.from(ParticipantCourseEntity.class);
+        Join<ParticipantCourseEntity, CourseEntity> join = subQueryRoot.join("course");
+        subQuery.select(cb.count(subQueryRoot.get("id")));
+        subQuery.where(cb.equal(join, course));
+        return subQuery;
     }
 
-    public static void addParticipantsLimitPredicate(CriteriaBuilder cb, Root<CourseEntity> course, List<Predicate> predicates, Integer participantsLimit) {
+    public static void addParticipantsLimitPredicate(CriteriaBuilder cb, Root<CourseEntity> course,
+                                                     List<Predicate> predicates, Integer participantsLimit) {
         if (participantsLimit != null) {
-            predicates.add(cb.lessThanOrEqualTo(course.get("maxParticipantsNumber"), participantsLimit));
+            predicates.add(cb.equal(course.get("maxParticipantsNumber"), participantsLimit));
         }
     }
 
