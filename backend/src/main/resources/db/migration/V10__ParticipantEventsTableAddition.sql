@@ -1,5 +1,5 @@
 -- PostgreSQL Script
--- 08.11.2023 13:00
+-- 10.11.2023 13:00
 -- Deleting unnecessary fields from events entity
 -- Adding Participant Event entity
 
@@ -35,6 +35,5 @@ CREATE TABLE IF NOT EXISTS wateradventure.participant_events (
                                                      participants_number INTEGER NOT NULL,
                                                      is_paid BOOLEAN NOT NULL,
                                                      event_id BIGINT NOT NULL,
-                                                     CONSTRAINT fk_Participant_Events1 FOREIGN KEY (event_id) REFERENCES wateradventure.events (id),
-
+                                                     CONSTRAINT fk_Participant_Events1 FOREIGN KEY (event_id) REFERENCES wateradventure.events (id)
 );
