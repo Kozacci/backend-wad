@@ -2,12 +2,12 @@ package pl.uwm.wateradventure.models.events.dtos;
 
 import lombok.Builder;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Date;
 
 public record EventEntityDTO(String type,
                              Double cost,
-                             Date date,
+                             LocalDateTime date,
                              String city,
                              LocalTime duration,
                              Integer maxParticipantsNumber) {

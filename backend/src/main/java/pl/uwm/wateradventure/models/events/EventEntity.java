@@ -8,8 +8,8 @@ import pl.uwm.wateradventure.models.events.dtos.EventEntityDTO;
 import pl.uwm.wateradventure.models.global.WaterAdventureChangeMetricEntity;
 import pl.uwm.wateradventure.models.participant_events.ParticipantEventEntity;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -25,7 +25,7 @@ public class EventEntity extends WaterAdventureChangeMetricEntity {
     private Double cost;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+    private LocalDateTime date;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "address")
@@ -41,7 +41,7 @@ public class EventEntity extends WaterAdventureChangeMetricEntity {
     private List<ParticipantEventEntity> participantEvents;
 
     public EventEntity(EventType type, Double cost,
-                       Date date, EventCity city,
+                       LocalDateTime date, EventCity city,
                        LocalTime duration,
                        Integer maxParticipantsNumber) {
         this.type = type;

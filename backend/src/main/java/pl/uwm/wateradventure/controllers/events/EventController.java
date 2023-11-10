@@ -2,9 +2,16 @@ package pl.uwm.wateradventure.controllers.events;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.uwm.wateradventure.models.events.EventCity;
+import pl.uwm.wateradventure.models.events.EventType;
 import pl.uwm.wateradventure.models.events.dtos.EventEntityDTO;
+import pl.uwm.wateradventure.models.events.dtos.EventFilteredDTO;
+import pl.uwm.wateradventure.models.events.dtos.EventFiltersDTO;
 import pl.uwm.wateradventure.services.events.EventFacade;
+
+import java.util.List;
 
 /** REST Controller created in the needs of Create, Read, Update, Delete
  * and more complex operations for Event Entity
@@ -21,6 +28,18 @@ class EventController {
     @ResponseStatus(HttpStatus.OK)
     EventEntityDTO getEventById(@PathVariable Long eventId) {
         return eventFacade.getEventById(eventId).toDTO();
+    }
+
+    @GetMapping()
+    ResponseEntity<List<EventFilteredDTO>> getEventsByFilters(@RequestParam(required = false) EventType type,
+                                              @RequestParam(required = false) EventCity city,
+                                              @RequestParam(required = false) String clientLastName,
+                                              @RequestParam(required = false) String clientEmail,
+                                              @RequestParam(required = false) String sortBy
+                                              ) {
+        var filters = new EventFiltersDTO(type, city, clientLastName, clientEmail, sortBy);
+        List<EventFilteredDTO> filteredEvents = eventFacade.getEventsByFilers(filters);
+        return !filteredEvents.isEmpty() ? ResponseEntity.ok(filteredEvents) : ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{eventId}")
