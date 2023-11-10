@@ -4,7 +4,8 @@ import lombok.Builder;
 
 import java.time.LocalDate;
 
-public record CourseEntityDTO(String courseType,
+public record CourseEntityDTO(Long id,
+                              String courseType,
                               LocalDate dateFrom,
                               LocalDate dateTo,
                               String courseStatus,
