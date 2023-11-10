@@ -17,7 +17,7 @@ class EventController {
 
     private final EventFacade eventFacade;
 
-    @GetMapping("{/eventId}")
+    @GetMapping("/{eventId}")
     @ResponseStatus(HttpStatus.OK)
     EventEntityDTO getEventById(@PathVariable Long eventId) {
         return eventFacade.getEventById(eventId).toDTO();
