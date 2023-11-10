@@ -6,8 +6,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.uwm.wateradventure.models.events.dtos.EventEntityDTO;
 import pl.uwm.wateradventure.models.global.WaterAdventureChangeMetricEntity;
+import pl.uwm.wateradventure.models.participant_events.ParticipantEventEntity;
 
+import java.time.LocalTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "events")
@@ -19,58 +22,45 @@ public class EventEntity extends WaterAdventureChangeMetricEntity {
     @Enumerated(EnumType.STRING)
     private EventType type;
 
-    @Column(name = "is_paid")
-    private Boolean isPaid;
-
     private Double cost;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
-    private String address;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "address")
+    private EventCity city;
 
-    @Column(name = "orderer_email")
-    private String ordererEmail;
+    @Temporal(TemporalType.TIME)
+    private LocalTime duration;
 
-    @Column(name = "orderer_first_name")
-    private String ordererFirstName;
+    @Column(name = "max_participants_number")
+    private Integer maxParticipantsNumber;
 
-    @Column(name = "orderer_last_name")
-    private String ordererLastName;
+    @OneToMany(mappedBy = "event")
+    private List<ParticipantEventEntity> participantEvents;
 
-    @Column(name = "orderer_phone_number")
-    private String ordererPhoneNumber;
-
-
-    public EventEntity(EventType type, Boolean isPaid,
-                       Double cost, Date date,
-                       String address,
-                       String ordererEmail,
-                       String ordererFirstName,
-                       String ordererLastName,
-                       String ordererPhoneNumber) {
+    public EventEntity(EventType type, Double cost,
+                       Date date, EventCity city,
+                       LocalTime duration,
+                       Integer maxParticipantsNumber) {
         this.type = type;
-        this.isPaid = isPaid;
         this.cost = cost;
         this.date = date;
-        this.address = address;
-        this.ordererEmail = ordererEmail;
-        this.ordererFirstName = ordererFirstName;
-        this.ordererLastName = ordererLastName;
-        this.ordererPhoneNumber = ordererPhoneNumber;
+        this.city = city;
+        this.duration = duration;
+        this.maxParticipantsNumber = maxParticipantsNumber;
     }
+
 
     public EventEntityDTO toDTO() {
         return EventEntityDTO.builder()
                 .type(this.type.enumValue)
-                .isPaid(this.isPaid)
                 .cost(this.cost)
                 .date(this.date)
-                .address(this.address)
-                .ordererEmail(this.ordererEmail)
-                .ordererFirstName(this.ordererFirstName)
-                .ordererLastName(this.ordererLastName)
-                .ordererPhoneNumber(this.ordererPhoneNumber)
+                .city(this.city.enumValue)
+                .duration(this.duration)
+                .maxParticipantsNumber(this.maxParticipantsNumber)
                 .build();
     }
 

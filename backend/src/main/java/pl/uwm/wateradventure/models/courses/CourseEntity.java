@@ -33,6 +33,7 @@ public class CourseEntity extends WaterAdventureChangeMetricEntity {
     @Enumerated(EnumType.STRING)
     private CourseCity city;
 
+    @Column(name = "max_participants_number")
     private Integer maxParticipantsNumber;
 
     public CourseEntity(CourseType courseType, LocalDate dateFrom,

@@ -2,17 +2,15 @@ package pl.uwm.wateradventure.models.events.dtos;
 
 import lombok.Builder;
 
+import java.time.LocalTime;
 import java.util.Date;
 
 public record EventEntityDTO(String type,
-                             Boolean isPaid,
                              Double cost,
                              Date date,
-                             String address,
-                             String ordererEmail,
-                             String ordererFirstName,
-                             String ordererLastName,
-                             String ordererPhoneNumber) {
+                             String city,
+                             LocalTime duration,
+                             Integer maxParticipantsNumber) {
 
     @Builder
     public EventEntityDTO {}
