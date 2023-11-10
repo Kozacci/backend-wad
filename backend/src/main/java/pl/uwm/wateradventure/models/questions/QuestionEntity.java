@@ -31,7 +31,8 @@ public class QuestionEntity extends WaterAdventureChangeMetricEntity {
     private String thirdAnswer;
 
     @Column(name = "correct_answer")
-    private String correctAnswer; // TODO --> correct answer probably should be Integer (1st,2nd or 3rd answer is correct, not entire fourth answer)
+    @Enumerated(EnumType.STRING)
+    private CorrectAnswer correctAnswer;
 
     private String explanation;
 
@@ -39,7 +40,7 @@ public class QuestionEntity extends WaterAdventureChangeMetricEntity {
 
 
     public QuestionEntity(String content, Category category, String firstAnswer,
-                          String secondAnswer, String thirdAnswer, String correctAnswer,
+                          String secondAnswer, String thirdAnswer, CorrectAnswer correctAnswer,
                           String explanation, String image) {
         this.content = content;
         this.category = category;
@@ -53,12 +54,13 @@ public class QuestionEntity extends WaterAdventureChangeMetricEntity {
 
     public QuestionEntityDTO toDTO() {
         return QuestionEntityDTO.builder()
+                .questionId(this.id)
                 .content(this.content)
                 .category(this.category.enumValue)
                 .firstAnswer(this.firstAnswer)
                 .secondAnswer(this.secondAnswer)
                 .thirdAnswer(this.thirdAnswer)
-                .correctAnswer(this.correctAnswer)
+                .correctAnswer(this.correctAnswer.enumValue)
                 .explanation(this.explanation)
                 .image(this.image)
                 .build();

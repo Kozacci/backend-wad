@@ -1,5 +1,9 @@
 package pl.uwm.wateradventure.models.learning.category;
 
+import pl.uwm.wateradventure.exceptions.custom_exceptions.InvalidQuestionCategoryException;
+
+import java.util.stream.Stream;
+
 public enum Category {
 
     PRZEPISY("Przepisy"),
@@ -19,4 +23,10 @@ public enum Category {
         this.enumValue = enumValue;
     }
 
+    public static Category getCategory(String givenValue) {
+        return Stream.of(values())
+                .filter(category -> category.enumValue.equals(givenValue))
+                .findFirst()
+                .orElseThrow(InvalidQuestionCategoryException::new);
+    }
 }

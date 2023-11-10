@@ -2,7 +2,8 @@ package pl.uwm.wateradventure.models.questions.dtos;
 
 import lombok.Builder;
 
-public record QuestionEntityDTO(String content,
+public record QuestionEntityDTO(Long questionId,
+                                String content,
                                 String category,
                                 String firstAnswer,
                                 String secondAnswer,
