@@ -1,6 +1,7 @@
 package pl.uwm.wateradventure.services.courses.crud;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import pl.uwm.wateradventure.models.courses.CourseEntity;
 import pl.uwm.wateradventure.models.courses.dtos.CourseCreateUpdateDTO;
@@ -27,6 +28,10 @@ public class CourseCRUDService {
 
     public CourseEntity getCourseById(Long courseId) {
         return reader.getCourseById(courseId);
+    }
+
+    public Page<CourseEntityDTO> getAllCoursesPageable() {
+        return reader.getAllCoursesPageable();
     }
 
     public CourseEntityDTO updateCourse(Long courseId, CourseCreateUpdateDTO courseUpdateDTO) {

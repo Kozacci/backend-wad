@@ -3,11 +3,14 @@ package pl.uwm.wateradventure.services.courses.crud;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.exceptions.custom_exceptions.EntityNotFoundException;
 import pl.uwm.wateradventure.models.courses.CourseEntity;
+import pl.uwm.wateradventure.models.courses.dtos.CourseEntityDTO;
 import pl.uwm.wateradventure.models.courses.dtos.CourseFilteredDTO;
 import pl.uwm.wateradventure.models.courses.dtos.CourseFiltersDTO;
+import pl.uwm.wateradventure.services.global.PageReader;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +20,7 @@ import static pl.uwm.wateradventure.services.courses.crud.CourseCBHelper.*;
 
 @Component
 @RequiredArgsConstructor
-class CourseReader {
+class CourseReader extends PageReader<CourseEntity> {
 
     private final CourseRepository repository;
     private final EntityManager em;
@@ -25,6 +28,12 @@ class CourseReader {
     protected CourseEntity getCourseById(Long courseId) {
         return repository.findById(courseId)
                 .orElseThrow(() -> new EntityNotFoundException("course", "Course with id: " + courseId + " does not exist!"));
+    }
+
+    public Page<CourseEntityDTO> getAllCoursesPageable(){
+        return super
+                .getAllSortedPageable(repository, "dateFrom", false)
+                .map(CourseEntity::toDTO);
     }
 
     public List<CourseFilteredDTO> getCoursesByFilters(CourseFiltersDTO filters) {

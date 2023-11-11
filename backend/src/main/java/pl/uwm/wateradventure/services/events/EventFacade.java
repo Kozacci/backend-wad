@@ -1,6 +1,7 @@
 package pl.uwm.wateradventure.services.events;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.models.events.EventEntity;
 import pl.uwm.wateradventure.models.events.dtos.EventCreateUpdateDTO;
@@ -23,6 +24,10 @@ public class EventFacade {
 
     public EventEntity getEventById(Long eventId) {
         return eventCRUDService.getEventById(eventId);
+    }
+
+    public Page<EventEntityDTO> getAllEventsPageable() {
+        return eventCRUDService.getAllEventsPageable();
     }
 
     public List<EventFilteredDTO> getEventsByFilers(EventFiltersDTO filters) {

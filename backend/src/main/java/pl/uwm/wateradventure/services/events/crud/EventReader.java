@@ -3,12 +3,15 @@ package pl.uwm.wateradventure.services.events.crud;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.exceptions.custom_exceptions.EntityNotFoundException;
 import pl.uwm.wateradventure.models.events.EventEntity;
+import pl.uwm.wateradventure.models.events.dtos.EventEntityDTO;
 import pl.uwm.wateradventure.models.events.dtos.EventFilteredDTO;
 import pl.uwm.wateradventure.models.events.dtos.EventFiltersDTO;
 import pl.uwm.wateradventure.models.participant_events.ParticipantEventEntity;
+import pl.uwm.wateradventure.services.global.PageReader;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,7 +21,7 @@ import static pl.uwm.wateradventure.services.events.crud.EventCBHelper.*;
 
 @Component
 @RequiredArgsConstructor
-class EventReader {
+class EventReader extends PageReader<EventEntity> {
 
     private final EventRepository repository;
     private final EntityManager em;
@@ -27,6 +30,12 @@ class EventReader {
     public EventEntity getEventById(Long eventId) {
         return repository.findById(eventId)
                 .orElseThrow(() -> new EntityNotFoundException("event", "Event with id: " + eventId + " does not exist!"));
+    }
+
+    public Page<EventEntityDTO> getAllEventsPageable() {
+        return super
+                .getAllSortedPageable(repository, "date", false)
+                .map(EventEntity::toDTO);
     }
 
     public List<EventFilteredDTO> getEventsByFilters(EventFiltersDTO filters) {

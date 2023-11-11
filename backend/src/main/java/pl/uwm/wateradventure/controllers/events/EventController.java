@@ -1,6 +1,7 @@
 package pl.uwm.wateradventure.controllers.events;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +38,13 @@ class EventController {
         return eventFacade.getEventById(eventId).toDTO();
     }
 
-    @GetMapping()
+    @GetMapping("")
+    @ResponseStatus(HttpStatus.OK)
+    Page<EventEntityDTO> getAllEventsPageable() {
+        return eventFacade.getAllEventsPageable();
+    }
+
+    @GetMapping("/filter-by")
     ResponseEntity<List<EventFilteredDTO>> getEventsByFilters(@RequestParam(required = false) EventType type,
                                               @RequestParam(required = false) EventCity city,
                                               @RequestParam(required = false) String clientLastName,
