@@ -12,13 +12,13 @@ public record QuestionCreateUpdateDTO(@NotBlank(message = "Pole 'Treść pytania
                                       @Category
                                       String category,
                                       @NotBlank(message = "Pole 'Odpowiedź A' nie może być puste.")
-                                      @Size(max = 60, message = "Odpowiedź może liczyć więcej niż 60 znaków.")
+                                      @Size(max = 60, message = "Odpowiedź nie może liczyć więcej niż 60 znaków.")
                                       String firstAnswer,
                                       @NotBlank(message = "Pole 'Odpowiedź B' nie może być puste.")
-                                      @Size(max = 60, message = "Odpowiedź może liczyć więcej niż 60 znaków.")
+                                      @Size(max = 60, message = "Odpowiedź nie może liczyć więcej niż 60 znaków.")
                                       String secondAnswer,
                                       @NotBlank(message = "Pole 'Odpowiedź C' nie może być puste.")
-                                      @Size(max = 60, message = "Odpowiedź może liczyć więcej niż 60 znaków.")
+                                      @Size(max = 60, message = "Odpowiedź nie może liczyć więcej niż 60 znaków.")
                                       String thirdAnswer,
                                       @NotNull(message = "Proszę wskazać poprawną odpowiedź.")
                                       @CorrectAnswer

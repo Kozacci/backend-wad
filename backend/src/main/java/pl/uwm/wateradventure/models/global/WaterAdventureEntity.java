@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+/** Global abstract super class with automatically genereted id (sequence)
+ */
 @MappedSuperclass
 @Getter
 @Setter
