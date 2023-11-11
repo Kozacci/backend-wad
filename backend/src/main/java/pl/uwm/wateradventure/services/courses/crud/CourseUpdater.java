@@ -2,6 +2,8 @@ package pl.uwm.wateradventure.services.courses.crud;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import pl.uwm.wateradventure.models.courses.CourseCity;
+import pl.uwm.wateradventure.models.courses.CourseType;
 import pl.uwm.wateradventure.models.courses.dtos.CourseCreateUpdateDTO;
 import pl.uwm.wateradventure.models.courses.dtos.CourseEntityDTO;
 
@@ -14,10 +16,10 @@ class CourseUpdater {
 
     protected CourseEntityDTO updateCourse(Long courseId, CourseCreateUpdateDTO courseUpdateDTO) {
         var courseToUpdate = courseReader.getCourseById(courseId);
-        courseToUpdate.setType(courseUpdateDTO.courseType());
+        courseToUpdate.setType(CourseType.getCourseType(courseUpdateDTO.courseType()));
         courseToUpdate.setDateFrom(courseUpdateDTO.dateFrom());
         courseToUpdate.setDateTo(courseUpdateDTO.dateTo());
-        courseToUpdate.setCity(courseUpdateDTO.city());
+        courseToUpdate.setCity(CourseCity.getCourseCity(courseUpdateDTO.city()));
         courseToUpdate.setMaxParticipantsNumber(courseUpdateDTO.maxParticipantsNumber());
         courseRepository.saveAndFlush(courseToUpdate);
         return courseToUpdate.toDTO();

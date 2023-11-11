@@ -46,7 +46,7 @@ public class ExceptionsHandler {
     @ExceptionHandler(value = InvalidCourseTypeException.class)
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
     public ErrorMessage invalidCourseTypeException(InvalidCourseTypeException exception) {
-        return new ErrorMessage("type", exception.getMessage());
+        return new ErrorMessage("courseType", exception.getMessage());
     }
 
     @ExceptionHandler(value = InvalidCourseStatusException.class)
@@ -76,12 +76,12 @@ public class ExceptionsHandler {
     @ExceptionHandler(value = InvalidQuestionCategoryException.class)
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
     public ErrorMessage invalidQuestionCategoryException(InvalidQuestionCategoryException exception) {
-        return new ErrorMessage("Question category", exception.getMessage());
+        return new ErrorMessage("category", exception.getMessage());
     }
 
     @ExceptionHandler(value = InvalidQuestionCorrectAnswerException.class)
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
     public ErrorMessage invalidQuestionCorrectAnswerException(InvalidQuestionCorrectAnswerException exception) {
-        return new ErrorMessage("Correct answer", exception.getMessage());
+        return new ErrorMessage("correctAnswer", exception.getMessage());
     }
 }

@@ -1,15 +1,13 @@
 package pl.uwm.wateradventure.models.courses.dtos;
 
 import lombok.Builder;
-import pl.uwm.wateradventure.models.courses.CourseCity;
-import pl.uwm.wateradventure.models.courses.CourseType;
 
 import java.time.LocalDate;
 
-public record CourseCreateUpdateDTO(CourseType courseType,
+public record CourseCreateUpdateDTO(String courseType,
                                     LocalDate dateFrom,
                                     LocalDate dateTo,
-                                    CourseCity city,
+                                    String city,
                                     Integer maxParticipantsNumber) {
 
     @Builder
