@@ -14,13 +14,17 @@ class QuestionCreator {
 
     private final QuestionRepository repository;
 
-    public QuestionEntityDTO addQuestion(QuestionCreateUpdateDTO dto) {
+    public QuestionEntityDTO addQuestion(QuestionCreateUpdateDTO questionCreateDTO) {
         var questionEntity = repository.saveAndFlush(
                 new QuestionEntity(
-                    dto.content(), Category.getCategory(dto.category()),
-                    dto.firstAnswer(), dto.secondAnswer(),
-                    dto.thirdAnswer(), CorrectAnswer.getCorrectAnswer(dto.correctAnswer()),
-                    dto.explanation(), dto.image())
+                    questionCreateDTO.content(),
+                    Category.getCategory(questionCreateDTO.category()),
+                    questionCreateDTO.firstAnswer(),
+                    questionCreateDTO.secondAnswer(),
+                    questionCreateDTO.thirdAnswer(),
+                    CorrectAnswer.getCorrectAnswer(questionCreateDTO.correctAnswer()),
+                    questionCreateDTO.explanation(),
+                    questionCreateDTO.image())
         );
         return questionEntity.toDTO();
     }
