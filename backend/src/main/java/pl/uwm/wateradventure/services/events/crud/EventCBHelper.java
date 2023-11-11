@@ -4,18 +4,19 @@ import jakarta.persistence.criteria.*;
 import pl.uwm.wateradventure.models.events.EventCity;
 import pl.uwm.wateradventure.models.events.EventEntity;
 import pl.uwm.wateradventure.models.events.EventType;
-import pl.uwm.wateradventure.models.events.dtos.EventFilteredDTO;
+import pl.uwm.wateradventure.models.events.dtos.EventFilterDTO;
 import pl.uwm.wateradventure.models.participant_events.ParticipantEventEntity;
 
 import java.util.List;
 
+// TODO -- maybe create root CBHelper to inherit it in EntityCBHelper ?
 /**
  * Class created in the needs of EventReader class
  */
 class EventCBHelper {
 
 
-    public static void addSortBy(String sort, CriteriaQuery<EventFilteredDTO> query,
+    public static void addSortBy(String sort, CriteriaQuery<EventFilterDTO> query,
                                  CriteriaBuilder cb, Root<EventEntity> event,
                                  Join<EventEntity, ParticipantEventEntity> joinParticipantEvents
                                  ) {

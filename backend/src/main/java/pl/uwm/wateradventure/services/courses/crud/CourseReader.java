@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.exceptions.custom_exceptions.EntityNotFoundException;
 import pl.uwm.wateradventure.models.courses.CourseEntity;
 import pl.uwm.wateradventure.models.courses.dtos.CourseEntityDTO;
-import pl.uwm.wateradventure.models.courses.dtos.CourseFilteredDTO;
+import pl.uwm.wateradventure.models.courses.dtos.CourseFilterDTO;
 import pl.uwm.wateradventure.models.courses.dtos.CourseFiltersDTO;
 import pl.uwm.wateradventure.services.global.PageReader;
 
@@ -36,9 +36,9 @@ class CourseReader extends PageReader<CourseEntity> {
                 .map(CourseEntity::toDTO);
     }
 
-    public List<CourseFilteredDTO> getCoursesByFilters(CourseFiltersDTO filters) {
+    public List<CourseFilterDTO> getCoursesByFilters(CourseFiltersDTO filters) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<CourseFilteredDTO> query = cb.createQuery(CourseFilteredDTO.class);
+        CriteriaQuery<CourseFilterDTO> query = cb.createQuery(CourseFilterDTO.class);
         Root<CourseEntity> course = query.from(CourseEntity.class);
 
         List<Predicate> predicates = new ArrayList<>();
@@ -51,7 +51,7 @@ class CourseReader extends PageReader<CourseEntity> {
         addParticipantsLimitPredicate(cb, course, predicates, filters.participantsLimit());
 
         query.select(cb.construct(
-                CourseFilteredDTO.class,
+                CourseFilterDTO.class,
                 toSelection(course, query, cb).toArray(new Selection<?>[0])));
 
         query.where(predicates.toArray(new Predicate[predicates.size()]));
@@ -62,7 +62,7 @@ class CourseReader extends PageReader<CourseEntity> {
     }
 
     private List<Selection<?>> toSelection(Root<CourseEntity> root,
-                                           CriteriaQuery<CourseFilteredDTO> cq,
+                                           CriteriaQuery<CourseFilterDTO> cq,
                                            CriteriaBuilder cb) {
         return Arrays.asList(
                 root.get("id"),

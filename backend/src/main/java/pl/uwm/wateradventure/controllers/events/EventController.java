@@ -9,7 +9,7 @@ import pl.uwm.wateradventure.models.events.EventCity;
 import pl.uwm.wateradventure.models.events.EventType;
 import pl.uwm.wateradventure.models.events.dtos.EventCreateUpdateDTO;
 import pl.uwm.wateradventure.models.events.dtos.EventEntityDTO;
-import pl.uwm.wateradventure.models.events.dtos.EventFilteredDTO;
+import pl.uwm.wateradventure.models.events.dtos.EventFilterDTO;
 import pl.uwm.wateradventure.models.events.dtos.EventFiltersDTO;
 import pl.uwm.wateradventure.services.events.EventFacade;
 
@@ -45,14 +45,14 @@ class EventController {
     }
 
     @GetMapping("/filter-by")
-    ResponseEntity<List<EventFilteredDTO>> getEventsByFilters(@RequestParam(required = false) EventType type,
-                                              @RequestParam(required = false) EventCity city,
-                                              @RequestParam(required = false) String clientLastName,
-                                              @RequestParam(required = false) String clientEmail,
-                                              @RequestParam(required = false) String sortBy
+    ResponseEntity<List<EventFilterDTO>> getEventsByFilters(@RequestParam(required = false) EventType type,
+                                                            @RequestParam(required = false) EventCity city,
+                                                            @RequestParam(required = false) String clientLastName,
+                                                            @RequestParam(required = false) String clientEmail,
+                                                            @RequestParam(required = false) String sortBy
                                               ) {
         var filters = new EventFiltersDTO(type, city, clientLastName, clientEmail, sortBy);
-        List<EventFilteredDTO> filteredEvents = eventFacade.getEventsByFilers(filters);
+        List<EventFilterDTO> filteredEvents = eventFacade.getEventsByFilers(filters);
         return !filteredEvents.isEmpty() ? ResponseEntity.ok(filteredEvents) : ResponseEntity.noContent().build();
     }
 

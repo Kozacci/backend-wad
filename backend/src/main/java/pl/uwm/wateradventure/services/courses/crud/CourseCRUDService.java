@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import pl.uwm.wateradventure.models.courses.CourseEntity;
 import pl.uwm.wateradventure.models.courses.dtos.CourseCreateUpdateDTO;
 import pl.uwm.wateradventure.models.courses.dtos.CourseEntityDTO;
-import pl.uwm.wateradventure.models.courses.dtos.CourseFilteredDTO;
+import pl.uwm.wateradventure.models.courses.dtos.CourseFilterDTO;
 import pl.uwm.wateradventure.models.courses.dtos.CourseFiltersDTO;
 
 import java.util.List;
@@ -43,7 +43,7 @@ public class CourseCRUDService {
         deleter.deleteCourse(course);
     }
 
-    public List<CourseFilteredDTO> getCoursesByFilters(CourseFiltersDTO filters) {
+    public List<CourseFilterDTO> getCoursesByFilters(CourseFiltersDTO filters) {
         return reader.getCoursesByFilters(filters);
     }
 }

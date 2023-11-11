@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import pl.uwm.wateradventure.models.events.EventEntity;
 import pl.uwm.wateradventure.models.events.dtos.EventCreateUpdateDTO;
 import pl.uwm.wateradventure.models.events.dtos.EventEntityDTO;
-import pl.uwm.wateradventure.models.events.dtos.EventFilteredDTO;
+import pl.uwm.wateradventure.models.events.dtos.EventFilterDTO;
 import pl.uwm.wateradventure.models.events.dtos.EventFiltersDTO;
 
 import java.util.List;
@@ -32,7 +32,7 @@ public class EventCRUDService {
         return reader.getAllEventsPageable();
     }
 
-    public List<EventFilteredDTO> getEventsByFilters(EventFiltersDTO filters) {
+    public List<EventFilterDTO> getEventsByFilters(EventFiltersDTO filters) {
         return reader.getEventsByFilters(filters);
     }
 

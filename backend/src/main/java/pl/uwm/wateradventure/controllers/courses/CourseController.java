@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.uwm.wateradventure.models.courses.dtos.CourseCreateUpdateDTO;
 import pl.uwm.wateradventure.models.courses.dtos.CourseEntityDTO;
-import pl.uwm.wateradventure.models.courses.dtos.CourseFilteredDTO;
+import pl.uwm.wateradventure.models.courses.dtos.CourseFilterDTO;
 import pl.uwm.wateradventure.models.courses.dtos.CourseFiltersDTO;
 import pl.uwm.wateradventure.services.courses.CourseFacade;
 
@@ -44,17 +44,17 @@ class CourseController {
     }
 
     @GetMapping("/filter-by")
-    ResponseEntity<List<CourseFilteredDTO>> getCoursesByFilters(@RequestParam(required = false) String courseType,
-                                                                @RequestParam(required = false) String courseStatus,
-                                                                @RequestParam(required = false) String courseCity,
-                                                                @RequestParam(required = false) LocalDate dateFrom,
-                                                                @RequestParam(required = false) LocalDate dateTo,
-                                                                @RequestParam(required = false) Integer registeredParticipants,
-                                                                @RequestParam(required = false) Integer participantsLimit,
-                                                                @RequestParam(required = false) String sortBy) {
+    ResponseEntity<List<CourseFilterDTO>> getCoursesByFilters(@RequestParam(required = false) String courseType,
+                                                              @RequestParam(required = false) String courseStatus,
+                                                              @RequestParam(required = false) String courseCity,
+                                                              @RequestParam(required = false) LocalDate dateFrom,
+                                                              @RequestParam(required = false) LocalDate dateTo,
+                                                              @RequestParam(required = false) Integer registeredParticipants,
+                                                              @RequestParam(required = false) Integer participantsLimit,
+                                                              @RequestParam(required = false) String sortBy) {
         var filters = new CourseFiltersDTO(courseType, courseStatus, courseCity, dateFrom, dateTo,
                             registeredParticipants, participantsLimit, sortBy);
-        List<CourseFilteredDTO> filteredCourses = courseFacade.getCoursesByFilters(filters);
+        List<CourseFilterDTO> filteredCourses = courseFacade.getCoursesByFilters(filters);
         return !filteredCourses.isEmpty() ? ResponseEntity.ok(filteredCourses) : ResponseEntity.noContent().build();
     }
 

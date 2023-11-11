@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.models.events.EventEntity;
 import pl.uwm.wateradventure.models.events.dtos.EventCreateUpdateDTO;
 import pl.uwm.wateradventure.models.events.dtos.EventEntityDTO;
-import pl.uwm.wateradventure.models.events.dtos.EventFilteredDTO;
+import pl.uwm.wateradventure.models.events.dtos.EventFilterDTO;
 import pl.uwm.wateradventure.models.events.dtos.EventFiltersDTO;
 import pl.uwm.wateradventure.services.events.crud.EventCRUDService;
 
@@ -30,7 +30,7 @@ public class EventFacade {
         return eventCRUDService.getAllEventsPageable();
     }
 
-    public List<EventFilteredDTO> getEventsByFilers(EventFiltersDTO filters) {
+    public List<EventFilterDTO> getEventsByFilers(EventFiltersDTO filters) {
         return eventCRUDService.getEventsByFilters(filters);
     }
 

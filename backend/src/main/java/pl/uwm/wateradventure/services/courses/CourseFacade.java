@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.models.courses.CourseEntity;
 import pl.uwm.wateradventure.models.courses.dtos.CourseCreateUpdateDTO;
 import pl.uwm.wateradventure.models.courses.dtos.CourseEntityDTO;
-import pl.uwm.wateradventure.models.courses.dtos.CourseFilteredDTO;
+import pl.uwm.wateradventure.models.courses.dtos.CourseFilterDTO;
 import pl.uwm.wateradventure.models.courses.dtos.CourseFiltersDTO;
 import pl.uwm.wateradventure.services.courses.crud.CourseCRUDService;
 
@@ -30,7 +30,7 @@ public class CourseFacade {
         return courseCRUDService.getAllCoursesPageable();
     }
 
-    public List<CourseFilteredDTO> getCoursesByFilters(CourseFiltersDTO filters) {
+    public List<CourseFilterDTO> getCoursesByFilters(CourseFiltersDTO filters) {
         return courseCRUDService.getCoursesByFilters(filters);
     }
 

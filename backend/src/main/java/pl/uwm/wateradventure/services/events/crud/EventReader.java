@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.exceptions.custom_exceptions.EntityNotFoundException;
 import pl.uwm.wateradventure.models.events.EventEntity;
 import pl.uwm.wateradventure.models.events.dtos.EventEntityDTO;
-import pl.uwm.wateradventure.models.events.dtos.EventFilteredDTO;
+import pl.uwm.wateradventure.models.events.dtos.EventFilterDTO;
 import pl.uwm.wateradventure.models.events.dtos.EventFiltersDTO;
 import pl.uwm.wateradventure.models.participant_events.ParticipantEventEntity;
 import pl.uwm.wateradventure.services.global.PageReader;
@@ -38,9 +38,9 @@ class EventReader extends PageReader<EventEntity> {
                 .map(EventEntity::toDTO);
     }
 
-    public List<EventFilteredDTO> getEventsByFilters(EventFiltersDTO filters) {
+    public List<EventFilterDTO> getEventsByFilters(EventFiltersDTO filters) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<EventFilteredDTO> query = cb.createQuery(EventFilteredDTO.class);
+        CriteriaQuery<EventFilterDTO> query = cb.createQuery(EventFilterDTO.class);
         Root<EventEntity> event = query.from(EventEntity.class);
         joinParticipantEvents = event.join("participantEvents");
         List<Predicate> predicates = new ArrayList<>();
@@ -52,7 +52,7 @@ class EventReader extends PageReader<EventEntity> {
 
         query.select(
                 cb.construct(
-                    EventFilteredDTO.class,
+                    EventFilterDTO.class,
                     toSelection(event).toArray(new Selection<?>[0])
                 )
         );
