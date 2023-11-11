@@ -1,6 +1,6 @@
 package pl.uwm.wateradventure.models.learning.category;
 
-import pl.uwm.wateradventure.exceptions.custom_exceptions.InvalidQuestionCategoryException;
+import pl.uwm.wateradventure.exceptions.value_objects_exceptions.InvalidQuestionCategoryException;
 
 import java.util.stream.Stream;
 

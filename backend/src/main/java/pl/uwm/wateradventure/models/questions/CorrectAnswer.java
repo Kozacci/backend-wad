@@ -1,6 +1,6 @@
 package pl.uwm.wateradventure.models.questions;
 
-import pl.uwm.wateradventure.exceptions.custom_exceptions.InvalidQuestionCorrectAnswerException;
+import pl.uwm.wateradventure.exceptions.value_objects_exceptions.InvalidQuestionCorrectAnswerException;
 
 import java.util.stream.Stream;
 

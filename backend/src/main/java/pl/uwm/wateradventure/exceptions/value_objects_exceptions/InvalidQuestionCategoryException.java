@@ -1,4 +1,4 @@
-package pl.uwm.wateradventure.exceptions.custom_exceptions;
+package pl.uwm.wateradventure.exceptions.value_objects_exceptions;
 
 import static pl.uwm.wateradventure.models.learning.category.Category.*;
 
