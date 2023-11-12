@@ -84,4 +84,10 @@ public class ExceptionsHandler {
     public ErrorMessage invalidQuestionCorrectAnswerException(InvalidQuestionCorrectAnswerException exception) {
         return new ErrorMessage("correctAnswer", exception.getMessage());
     }
+
+    @ExceptionHandler(value = InvalidRoleException.class)
+    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+    public ErrorMessage invalidRoleException(InvalidRoleException exception) {
+        return new ErrorMessage("role", exception.getMessage());
+    }
 }
