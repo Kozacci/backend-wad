@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import pl.uwm.wateradventure.models.global.WaterAdventureChangeMetricEntity;
 import pl.uwm.wateradventure.models.participant_courses.ParticipantCourseEntity;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -40,7 +41,21 @@ public class ParticipantEntity extends WaterAdventureChangeMetricEntity implemen
     @Enumerated(EnumType.STRING)
     private Role role;
 
-//    UserDetails override methods for Security Auth
+    public ParticipantEntity(String firstName,
+                             String lastName,
+                             String email,
+                             String password,
+                             String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.participantCourses = new ArrayList<>();
+        this.role = Role.CLIENT;
+    }
+
+    //    UserDetails override methods for Security Auth
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.enumValue));
