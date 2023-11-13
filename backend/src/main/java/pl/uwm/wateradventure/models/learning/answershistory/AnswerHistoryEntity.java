@@ -13,6 +13,7 @@ import pl.uwm.wateradventure.models.learning.general.GeneralLearningEntity;
 import pl.uwm.wateradventure.models.learning.trial_exams.TrialExamEntity;
 import pl.uwm.wateradventure.models.participant_courses.ParticipantCourseEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,16 +23,23 @@ import java.util.List;
 @NoArgsConstructor
 public class AnswerHistoryEntity extends WaterAdventureEntity {
 
-    @OneToMany(mappedBy = "answerHistory")
-    private List<GeneralLearningEntity> generalLearningList;
+    @OneToOne(mappedBy = "answerHistory")
+    private GeneralLearningEntity generalLearning;
 
     @OneToMany(mappedBy = "answerHistory")
     private List<CategoryLearningEntity> categoryLearningList;
 
-    @OneToMany(mappedBy = "answerHistory")
-    private List<TrialExamEntity> trialExamsList;
+    @OneToOne(mappedBy = "answerHistory")
+    private TrialExamEntity trialExam;
 
-    @OneToOne(mappedBy ="answerHistory")
-    private ParticipantCourseEntity participantCourseId;
+    @OneToOne(mappedBy = "answerHistory")
+    private ParticipantCourseEntity participantCourse;
+
+    public AnswerHistoryEntity(ParticipantCourseEntity participantCourse) {
+        this.participantCourse = participantCourse;
+        this.generalLearning = new GeneralLearningEntity(this);
+        this.categoryLearningList = new ArrayList<CategoryLearningEntity>();
+        this.trialExam = new TrialExamEntity(this);
+    }
 
 }
