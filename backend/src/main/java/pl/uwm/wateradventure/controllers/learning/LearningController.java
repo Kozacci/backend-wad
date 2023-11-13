@@ -8,6 +8,8 @@ import pl.uwm.wateradventure.models.learning.category.CategoryLearningDTO;
 import pl.uwm.wateradventure.models.learning.category.CategoryLearningUpdateDTO;
 import pl.uwm.wateradventure.models.learning.general.dtos.GeneralLearningDTO;
 import pl.uwm.wateradventure.models.learning.general.dtos.GeneralLearningUpdateDTO;
+import pl.uwm.wateradventure.models.learning.trial_exams.dtos.TrialExamDTO;
+import pl.uwm.wateradventure.models.learning.trial_exams.dtos.TrialExamUpdateDTO;
 import pl.uwm.wateradventure.services.learning.LearningFacade;
 
 /** REST Controller created in the needs of Create, Read, Update, Delete
@@ -32,10 +34,20 @@ class LearningController {
 
     @PutMapping("/{participantCourseId}/category-learning")
     @ResponseStatus(HttpStatus.OK)
-    CategoryLearningDTO updateParticipantCategoryLearning(@PathVariable Long participantCourseId,
+    CategoryLearningDTO updateParticipantCategoryLearning(
+                                                          @PathVariable Long participantCourseId,
                                                           @Valid
                                                           @RequestBody CategoryLearningUpdateDTO dto) {
         return learningFacade.updateCategoryLearning(participantCourseId, dto).toDTO();
+    }
+
+    @PutMapping("/{participantCourseId}/trial-exam")
+    @ResponseStatus(HttpStatus.OK)
+    TrialExamDTO updateTrialExamLearning(
+                                         @PathVariable Long participantCourseId,
+                                         @Valid
+                                         @RequestBody TrialExamUpdateDTO dto) {
+        return learningFacade.updateTrialExamLearning(participantCourseId, dto).toDTO();
     }
 
 
