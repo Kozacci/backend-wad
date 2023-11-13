@@ -37,7 +37,7 @@ public class JWTConfig {
      */
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(1); // Strength of encoding
+        return new BCryptPasswordEncoder();
     }
 
     /**
