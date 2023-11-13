@@ -6,9 +6,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -18,9 +20,9 @@ import java.io.IOException;
  * Component that does filtering of every single HTTP request from backend server
  *
  */
-@Service // it may be just @Component
+@Service
 @RequiredArgsConstructor
-public class JWTAuthFilter extends OncePerRequestFilter {
+public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
     private final JWTService jsonWebTokenService;
     private final UserDetailsService userDetailsService;
@@ -45,11 +47,27 @@ public class JWTAuthFilter extends OncePerRequestFilter {
         }
         jsonWebToken = authorizationHeader.substring(7); // extracting jwt token, skipping the bearer prefix
          email = jsonWebTokenService.extractEmail(jsonWebToken);
-         // if user is already authenticated
+         // if user is present, but hes not already authenticated
          if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+             // then we get our participant (as UserDetails) from database (our participant extends userDetails so its possible)
              UserDetails userDetails = this.userDetailsService.loadUserByUsername(email);
-
+             // then we are checking if token for user is valid then update context and send it to dispatcher servlet, so he can use rest
+             if(jsonWebTokenService.isJsonWebTokenValid(jsonWebToken, userDetails)) {
+                 // If user and token are both valid, then we are able
+                 // to create authentication token with its details(+ details from request) and authorities
+                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                         userDetails,
+                         null,
+                         userDetails.getAuthorities()
+                 );
+                 authenticationToken.setDetails(
+                         new WebAuthenticationDetailsSource().buildDetails(request)
+                 );
+                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+             }
          }
+         // After one filtering, we always need to pass the methods to call another filter in chain
+         filterChain.doFilter(request, response);
 
 
     }
