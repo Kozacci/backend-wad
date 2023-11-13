@@ -9,5 +9,5 @@ public record CategoryLearningDTO(Long id,
                                   ) {
 
     @Builder
-    public CategoryLearningDTO {};
+    public CategoryLearningDTO {}
 }

@@ -7,5 +7,5 @@ public record TrialExamDTO(Long id,
                            Integer passed,
                            Integer failed) {
 
-    @Builder public TrialExamDTO {};
+    @Builder public TrialExamDTO {}
 }

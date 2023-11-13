@@ -8,5 +8,5 @@ public record GeneralLearningDTO(Long id,
                                  Long answerHistoryId) {
 
     @Builder
-    public GeneralLearningDTO {};
+    public GeneralLearningDTO {}
 }
