@@ -1,17 +1,19 @@
 package pl.uwm.wateradventure.services.learning.trial_exams;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.models.learning.trial_exams.TrialExamEntity;
 import pl.uwm.wateradventure.models.learning.trial_exams.dtos.TrialExamUpdateDTO;
 
-@Service
+@Component
 @RequiredArgsConstructor
-public class TrialExamCRUDService {
+class TrialExamUpdater {
 
-    private final TrialExamUpdater updater;
+    private final TrialExamRepository repository;
 
     public TrialExamEntity update(TrialExamEntity trialExamToChange, TrialExamUpdateDTO dto) {
-        return updater.update(trialExamToChange, dto);
+        trialExamToChange.incrementTotal();
+        trialExamToChange.incrementPassedOrFailed(dto.isPassed());
+        return repository.saveAndFlush(trialExamToChange);
     }
 }

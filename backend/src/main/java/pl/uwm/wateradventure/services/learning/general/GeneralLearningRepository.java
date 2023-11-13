@@ -1,4 +1,4 @@
-package pl.uwm.wateradventure.services.learning.general.crud;
+package pl.uwm.wateradventure.services.learning.general;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
