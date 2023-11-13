@@ -1,17 +1,20 @@
 package pl.uwm.wateradventure.services.learning.catergory;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.models.learning.category.CategoryLearningEntity;
 import pl.uwm.wateradventure.models.learning.category.CategoryLearningUpdateDTO;
 
-@Service
+@Component
 @RequiredArgsConstructor
-public class CategoryLearningCRUDService {
+class CategoryLearningUpdater {
 
-    private final CategoryLearningUpdater updater;
+    private final CategoryLearningRepository repository;
 
     public CategoryLearningEntity update(CategoryLearningEntity categoryLearningToChange, CategoryLearningUpdateDTO dto) {
-        return updater.update(categoryLearningToChange, dto);
+        categoryLearningToChange.addCorrectAnswers(dto.correctAnswers());
+        categoryLearningToChange.addQuestionsAnswered(dto.questionsAnswered());
+        return repository.saveAndFlush(categoryLearningToChange);
     }
+
 }

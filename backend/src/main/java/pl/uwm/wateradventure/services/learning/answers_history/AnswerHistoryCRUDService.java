@@ -19,8 +19,9 @@ public class AnswerHistoryCRUDService {
         return answerHistory.getGeneralLearning();
     }
 
-    // if CategoryLearningEntity with such given category doesn't exist on AnswerHistoryEntity connected to
-    public CategoryLearningEntity getCategoryLearningByParticipantCourseIdAndCategory(ParticipantCourseEntity participantCourse, Category category) {
+    // if CategoryLearningEntity with such given category doesn't exist on AnswerHistoryEntity connected to it,
+    // it will create a new one
+    public CategoryLearningEntity getCategoryLearningByParticipantCourseAndCategory(ParticipantCourseEntity participantCourse, Category category) {
         var answerHistory = reader.getAnswerHistoryByParticipantCourse(participantCourse);
         return answerHistory.getCategoryLearningList().stream()
                 .filter(categoryLearningEntity -> categoryLearningEntity.getCategory().equals(category))
@@ -28,7 +29,7 @@ public class AnswerHistoryCRUDService {
                 .orElse(new CategoryLearningEntity(category, answerHistory));
     }
 
-    public TrialExamEntity getTrialExamByParticipantCourseId(ParticipantCourseEntity participantCourse) {
+    public TrialExamEntity getTrialExamByParticipantCourse(ParticipantCourseEntity participantCourse) {
         var answerHistory = reader.getAnswerHistoryByParticipantCourse(participantCourse);
         return answerHistory.getTrialExam();
     }
