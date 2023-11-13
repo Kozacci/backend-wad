@@ -2,6 +2,7 @@ package pl.uwm.wateradventure.services.learning;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import pl.uwm.wateradventure.models.learning.EntireLearningDTO;
 import pl.uwm.wateradventure.models.learning.category.Category;
 import pl.uwm.wateradventure.models.learning.category.CategoryLearningEntity;
 import pl.uwm.wateradventure.models.learning.category.CategoryLearningUpdateDTO;
@@ -24,6 +25,7 @@ public class LearningFacade {
     private final AnswerHistoryCRUDService answerHistoryCRUDService;
     private final CategoryLearningCRUDService categoryLearningCRUDService;
     private final TrialExamCRUDService trialExamCRUDService;
+    private final LearningCounter counter;
 
     public GeneralLearningEntity updateGeneralLearning(Long participantCourseId, GeneralLearningUpdateDTO dto) {
         var participantCourse = participantCourseCRUDService.getParticipantCourseById(participantCourseId);
@@ -41,6 +43,13 @@ public class LearningFacade {
         var participantCourse = participantCourseCRUDService.getParticipantCourseById(participantCourseId);
         var trialExamToChange = answerHistoryCRUDService.getTrialExamByParticipantCourse(participantCourse);
         return trialExamCRUDService.update(trialExamToChange, dto);
+    }
+
+    // later might need to add ParticipantId for security purposes - to check if person who sends request is a
+    // participant who wants to check his LearningHistory
+    public EntireLearningDTO getAnswerHistoryByParticipantCourseId(Long participantCourseId) {
+        var participantCourse = participantCourseCRUDService.getParticipantCourseById(participantCourseId);
+        return counter.countAllAnswers(participantCourse.getAnswerHistory());
     }
 
 }

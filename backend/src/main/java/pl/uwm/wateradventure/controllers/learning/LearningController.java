@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import pl.uwm.wateradventure.models.learning.EntireLearningDTO;
 import pl.uwm.wateradventure.models.learning.category.CategoryLearningDTO;
 import pl.uwm.wateradventure.models.learning.category.CategoryLearningUpdateDTO;
 import pl.uwm.wateradventure.models.learning.general.dtos.GeneralLearningDTO;
@@ -48,6 +49,14 @@ class LearningController {
                                          @Valid
                                          @RequestBody TrialExamUpdateDTO dto) {
         return learningFacade.updateTrialExamLearning(participantCourseId, dto).toDTO();
+    }
+
+    // later might need to add ParticipantId for security purposes - to check if person who sends request is a
+    // participant who wants to check his AnswerHistory
+    @GetMapping("/{participantCourseId}/answer-history")
+    @ResponseStatus(HttpStatus.OK)
+    EntireLearningDTO getAnswerHistoryByParticipantCourseId(@PathVariable Long participantCourseId) {
+        return learningFacade.getAnswerHistoryByParticipantCourseId(participantCourseId);
     }
 
 
