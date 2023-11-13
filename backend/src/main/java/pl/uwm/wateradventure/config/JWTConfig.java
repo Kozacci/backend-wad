@@ -8,9 +8,10 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import pl.uwm.wateradventure.services.participants.ParticipantFacade;
+import pl.uwm.wateradventure.services.participants.crud.ParticipantRepository;
 
 /**
  * Configuration class for JWT Authentication
@@ -20,34 +21,20 @@ import pl.uwm.wateradventure.services.participants.ParticipantFacade;
 @RequiredArgsConstructor
 public class JWTConfig {
 
-    private final ParticipantFacade participantFacade;
+    private final ParticipantRepository participantRepository;
 
     /**
      * Gets specific participant by email
-     * @return Participant entity
+     * @return UserDetailsService
      */
     @Bean
     public UserDetailsService userDetailsService() {
-        return participantFacade::getParticipantByEmail;
-    }
-
-    /**
-     * Creates new encoder (BCrypt) with specific strength pattern
-     * @return Encoder
-     */
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    /**
-     * Gets authentication manager from authentication config parameter
-     * @param: AuthenticationConfiguration
-     * @return Authentication Manager
-     */
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
+        return username ->
+                participantRepository
+                .findByEmail(username)
+                .orElseThrow(
+                        () -> new UsernameNotFoundException("User not found")
+                );
     }
 
     /**
@@ -61,6 +48,26 @@ public class JWTConfig {
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
     }
+
+    /**
+     * Gets authentication manager from authentication config parameter
+     * @param: AuthenticationConfiguration
+     * @return Authentication Manager
+     */
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+
+    /**
+     * Creates new encoder (BCrypt) with specific strength pattern
+     * @return Encoder
+     */
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
 
 
 }

@@ -35,6 +35,10 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
                                     //       of filters before it reaches controller method
                                     @NonNull FilterChain filterChain) throws ServletException, IOException {
 
+        if (request.getServletPath().contains("/api/auth/login")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
     // In each request there should be JWT Token in http Header ( it's in authorization tab )
         final String authorizationHeader = request.getHeader("Authorization");
         final String jsonWebToken;
@@ -46,7 +50,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
         jsonWebToken = authorizationHeader.substring(7); // extracting jwt token, skipping the bearer prefix
-         email = jsonWebTokenService.extractEmail(jsonWebToken);
+        email = jsonWebTokenService.extractUsername(jsonWebToken);
          // if user is present, but hes not already authenticated
          if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
              // then we get our participant (as UserDetails) from database (our participant extends userDetails so its possible)
@@ -57,7 +61,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
                  // to create authentication token with its details(+ details from request) and authorities
                  UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                          userDetails,
-                         null,
+                         null, // TODO                          userDetails.getUsername(),                          userDetails.getPassword(),
                          userDetails.getAuthorities()
                  );
                  authenticationToken.setDetails(

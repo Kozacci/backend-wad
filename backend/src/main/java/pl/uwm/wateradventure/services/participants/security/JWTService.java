@@ -19,7 +19,8 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class JWTService {
 
-    private static final String JSON_KEY = "nep/Y3Vd9Lfx5BtC5NJr1mtoMjboAoPTejdBvZ980WUcsVhEYQZZnfm4EOChG0Wy+2Ak9uj5yu6bp5DvgWH1mkoMZwkBSH6bTjBjo7VAzNa+4uxP93l7+cx6qTfts8+01K2m5+l9WDLjkVYFE31DFdAl670a94tjtDmNjF8e/5mvh9TBoaPBFQKMojkFQX9UQywihgdK/hUEJGlxE/UsISPaCySCCcFjISTzfqUJpHpb6ofG06pPsduRheO9eVvXApzYtYGPp1M8HYjl0R9VNWk5NJs+WZA0XJFOdWOU8claw4kKXDqWVnHsW2CFJ9VjPuOAv2Gwp9F4mxH7qJfnyfZv2MpUb2ZuhbPt5yYL9aqbWFRT1Ejti7vASCPDOS3Uni/xPMCDJeniVrzFmbNW0SvKppDrK+JRqrzvEmLnmXdSxrwXouQJoTIEetfpkB4F4or9+N2j3BH2PgMOIH22Op0Or3jqYspT6wNaFRsuxABYwj7AIzSU1XFJ5qy8dQiZZqrChoaaGbHJZJSq8viJja2XwyqxIHnAjLh8CZdU9cPg5jbxTQjANH1t/DTmJlL7cI9O3g0vK9Ea5qLOl0WJ1ZLuyoN3tATnORsKao286uuI9KByzEVgLRSlOJj+wm7Mvj2pMRm78zCJNPN1eokJov+JKXcrAvigjH7eOKs1TJlPiC7Du14JKzsqDfJ5FswH";
+    // TODO -- generate another one (256/512bit)
+    private static final String JSON_KEY = "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970";
 
 
     // Extracts specific claim from token, for example expiration date of token
@@ -43,7 +44,7 @@ public class JWTService {
     }
 
     /**
-     * It generates JWT Token without claims, just based on user details
+     * It generates JWT Token without claims, just based on user details (method for registration)
      * @param: userDetails
      * @return string as jwt token
      */
@@ -76,7 +77,7 @@ public class JWTService {
      * @return true or false
      */
     public Boolean isJsonWebTokenValid(String jsonWebToken, UserDetails userDetails) {
-        final String email = extractEmail(jsonWebToken);
+        final String email = extractUsername(jsonWebToken);
         return (email.equals(userDetails.getUsername()) & !isJsonWebTokenExpired(jsonWebToken));
     }
 
@@ -103,7 +104,7 @@ public class JWTService {
      * @param: jsonWebToken
      * @return email of user with jwt token
      */
-    public String extractEmail(String jsonWebToken) {
+    public String extractUsername(String jsonWebToken) {
         return extractClaim(jsonWebToken, Claims::getSubject);
     }
 
