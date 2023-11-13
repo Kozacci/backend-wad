@@ -7,7 +7,7 @@ import pl.uwm.wateradventure.models.learning.general.dtos.GeneralLearningUpdateD
 
 @Component
 @RequiredArgsConstructor
-public class GeneralLearningUpdater {
+class GeneralLearningUpdater {
 
     private final GeneralLearningRepository repository;
 
