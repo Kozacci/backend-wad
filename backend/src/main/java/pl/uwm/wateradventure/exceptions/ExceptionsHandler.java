@@ -90,4 +90,11 @@ public class ExceptionsHandler {
     public ErrorMessage invalidRoleException(InvalidRoleException exception) {
         return new ErrorMessage("role", exception.getMessage());
     }
+
+    @ExceptionHandler(value = InvalidSortByValueException.class)
+    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+    public ErrorMessage invalidSortByValueException(InvalidSortByValueException exception) {
+        return new ErrorMessage("sortBy", exception.getMessage());
+    }
+
 }
