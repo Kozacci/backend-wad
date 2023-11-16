@@ -6,8 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.uwm.wateradventure.models.courses.dtos.CourseEntityDTO;
 import pl.uwm.wateradventure.models.global.WaterAdventureChangeMetricEntity;
+import pl.uwm.wateradventure.models.participant_courses.ParticipantCourseEntity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "courses")
@@ -35,6 +37,9 @@ public class CourseEntity extends WaterAdventureChangeMetricEntity {
 
     @Column(name = "max_participants_number")
     private Integer maxParticipantsNumber;
+
+    @OneToMany(mappedBy = "course")
+    private List<ParticipantCourseEntity> participants;
 
     public CourseEntity(CourseType courseType, LocalDate dateFrom,
                         LocalDate dateTo, CourseCity city,

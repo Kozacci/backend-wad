@@ -1,6 +1,7 @@
 package pl.uwm.wateradventure.services.courses.crud;
 
 import jakarta.persistence.criteria.*;
+import pl.uwm.wateradventure.exceptions.value_objects_exceptions.InvalidSortByValueException;
 import pl.uwm.wateradventure.models.courses.CourseCity;
 import pl.uwm.wateradventure.models.courses.CourseEntity;
 import pl.uwm.wateradventure.models.courses.CourseStatus;
@@ -8,7 +9,9 @@ import pl.uwm.wateradventure.models.courses.CourseType;
 import pl.uwm.wateradventure.models.courses.dtos.CourseFilterDTO;
 import pl.uwm.wateradventure.models.participant_courses.ParticipantCourseEntity;
 
+import java.lang.reflect.Field;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,10 +20,25 @@ import java.util.Objects;
 /**
  * Class created in the needs of CourseReader class
  */
-class CourseCBHelper {
+public class CourseCBHelper {
+
+    // could be method in EntityCBHelper if it will ever be created
+    private static void checkSortByValue(String sortBy) {
+        if (sortBy == null) return;
+        Field[] courseEntityFields = CourseEntity.class.getDeclaredFields();
+
+        var isSortByValueEqualToOneOfCourseEntityField =
+                Arrays.stream(courseEntityFields)
+                .anyMatch(field -> field.getName().equals(sortBy));
+
+        if (!isSortByValueEqualToOneOfCourseEntityField) {
+            throw new InvalidSortByValueException("Given sortBy value doesn't match any CourseEntity field.");
+        }
+    }
 
     public static void addSortBy(String sort, CriteriaQuery<CourseFilterDTO> query,
                                  CriteriaBuilder cb, Root<CourseEntity> course) {
+        checkSortByValue(sort);
         query.orderBy(cb.asc(course.get(Objects.requireNonNullElse(sort, "dateFrom"))));
     }
 
