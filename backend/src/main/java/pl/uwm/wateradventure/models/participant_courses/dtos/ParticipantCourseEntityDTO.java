@@ -1,20 +1,22 @@
 package pl.uwm.wateradventure.models.participant_courses.dtos;
 
 import lombok.Builder;
-import pl.uwm.wateradventure.models.courses.dtos.CourseEntityDTO;
-import pl.uwm.wateradventure.models.learning.answershistory.AnswerHistoryEntity;
-import pl.uwm.wateradventure.models.participants.dtos.ParticipantEntityDTO;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-public record ParticipantCourseEntityDTO(Date accessDate,
+public record ParticipantCourseEntityDTO(Long courseId,
+                                         String courseType,
+                                         LocalDate courseDateFrom,
+                                         LocalDate courseDateTo,
+                                         LocalDateTime accessDate,
+                                         String participantEmail,
+                                         String participantLastName,
                                          Boolean isPassed,
                                          Boolean isPaid,
-                                         Boolean onlinePayment,
-                                         CourseEntityDTO course,
-                                         ParticipantEntityDTO participant,
-                                         AnswerHistoryEntity answerHistory) {
+                                         Boolean onlinePayment
+                                         ) {
 
     @Builder
-    public ParticipantCourseEntityDTO{};
+    public ParticipantCourseEntityDTO{}
 }

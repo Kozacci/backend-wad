@@ -7,9 +7,10 @@ import lombok.Setter;
 import pl.uwm.wateradventure.models.courses.CourseEntity;
 import pl.uwm.wateradventure.models.global.WaterAdventureChangeMetricEntity;
 import pl.uwm.wateradventure.models.learning.answershistory.AnswerHistoryEntity;
+import pl.uwm.wateradventure.models.participant_courses.dtos.ParticipantCourseEntityDTO;
 import pl.uwm.wateradventure.models.participants.ParticipantEntity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "participant_courses")
@@ -20,7 +21,7 @@ public class ParticipantCourseEntity extends WaterAdventureChangeMetricEntity {
 
     @Column(name = "access_date")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date accessDate;
+    private LocalDateTime accessDate;
 
     @Column(name = "is_passed")
     private Boolean isPassed;
@@ -42,5 +43,20 @@ public class ParticipantCourseEntity extends WaterAdventureChangeMetricEntity {
     @OneToOne
     @JoinColumn(name = "answers_history_id", referencedColumnName = "id")
     private AnswerHistoryEntity answerHistory;
+
+    public ParticipantCourseEntityDTO toDTO() {
+        return ParticipantCourseEntityDTO.builder()
+                .courseId(this.course.getId())
+                .courseType(this.course.getType().enumValue)
+                .courseDateFrom(this.course.getDateFrom())
+                .courseDateTo(this.course.getDateTo())
+                .accessDate(this.accessDate)
+                .participantEmail(this.participant.getEmail())
+                .participantLastName(this.participant.getLastName())
+                .isPassed(this.isPassed)
+                .isPaid(this.isPaid)
+                .onlinePayment(this.onlinePayment)
+                .build();
+    }
 
 }
