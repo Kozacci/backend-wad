@@ -1,12 +1,14 @@
 package pl.uwm.wateradventure.services.participants.crud;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.exceptions.custom_exceptions.EntityNotFoundException;
 import pl.uwm.wateradventure.models.participants.ParticipantEntity;
-import pl.uwm.wateradventure.models.participants.security.AuthenticationResponse;
 import pl.uwm.wateradventure.models.participants.security.dtos.ParticipantLoginDTO;
 import pl.uwm.wateradventure.services.participants.security.JWTService;
 
@@ -28,7 +30,7 @@ class ParticipantReader {
                 );
     }
 
-    public AuthenticationResponse login(ParticipantLoginDTO participantLoginDTO) {
+    public ResponseEntity<?> login(ParticipantLoginDTO participantLoginDTO, HttpServletResponse response) {
         // Authenticate user
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -39,10 +41,10 @@ class ParticipantReader {
         // If authentication was successful then find the user and generate jwt for him + return it
         var loggingParticipant = getParticipantByEmail(participantLoginDTO.email());
         var jsonWebToken = jwtService.generateJsonWebToken(loggingParticipant);
-        return AuthenticationResponse
-                .builder()
-                .token(jsonWebToken)
-                .build();
+        Cookie jwtCookie = jwtService.createJwtCookie(jsonWebToken);
+
+        response.addCookie(jwtCookie);
+        return ResponseEntity.ok().build();
     }
 
 }
