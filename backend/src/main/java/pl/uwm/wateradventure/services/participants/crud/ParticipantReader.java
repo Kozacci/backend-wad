@@ -47,4 +47,12 @@ class ParticipantReader {
         return ResponseEntity.ok().build();
     }
 
+    public ResponseEntity<?> logout(HttpServletResponse response) {
+        Cookie jwtCookie = new Cookie("JWT", null);
+        jwtCookie.setPath("/");
+        jwtCookie.setMaxAge(0);
+        response.addCookie(jwtCookie);
+        return ResponseEntity.ok().build();
+    }
+
 }

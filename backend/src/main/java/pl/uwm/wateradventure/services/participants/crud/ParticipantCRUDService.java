@@ -25,4 +25,8 @@ public class ParticipantCRUDService {
         return reader.login(participantLoginDTO, response);
     }
 
+    public ResponseEntity<?> logout(HttpServletResponse response) {
+        return reader.logout(response);
+    }
+
 }

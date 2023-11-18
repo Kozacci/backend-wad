@@ -29,6 +29,10 @@ public class ParticipantFacade {
         return participantCRUDService.login(participantLoginDTO, response);
     }
 
+    public ResponseEntity<?> logout(HttpServletResponse response) {
+        return participantCRUDService.logout(response);
+    }
+
     public List<CourseFilterDTO> getCoursesByParticipant(ParticipantCourseFiltersDTO filters) {
         return participantCoursesCriteriaBuilder.getParticipantCoursesByFilters(filters);
     }

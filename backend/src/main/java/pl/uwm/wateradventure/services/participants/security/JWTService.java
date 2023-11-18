@@ -116,8 +116,7 @@ public class JWTService {
         // Cookie can be used from any URL
         jwtCookie.setPath("/");
         // For more secured HTTPS sites
-        // jwtCookie.setSecure(true);
-//        response.addCookie(jwtCookie);
+         jwtCookie.setSecure(true);
         return jwtCookie;
     }
 

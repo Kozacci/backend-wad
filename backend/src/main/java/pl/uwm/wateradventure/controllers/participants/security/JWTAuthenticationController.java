@@ -28,4 +28,10 @@ public class JWTAuthenticationController {
     public ResponseEntity<?> login(@RequestBody ParticipantLoginDTO participantLoginDTO, HttpServletResponse response) {
         return participantFacade.login(participantLoginDTO, response);
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletResponse response) {
+        return participantFacade.logout(response);
+    }
+
 }
