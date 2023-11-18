@@ -18,7 +18,6 @@ import java.io.IOException;
 
 /**
  * Component that does filtering of every single HTTP request from backend server
- *
  */
 @Service
 @RequiredArgsConstructor
@@ -61,7 +60,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
                  // to create authentication token with its details(+ details from request) and authorities
                  UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                          userDetails,
-                         null, // TODO                          userDetails.getUsername(),                          userDetails.getPassword(),
+                         null, // TODO userDetails.getUsername(), userDetails.getPassword(),
                          userDetails.getAuthorities()
                  );
                  authenticationToken.setDetails(

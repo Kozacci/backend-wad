@@ -20,7 +20,9 @@ import java.util.function.Function;
 public class JWTService {
 
     // TODO -- generate another one (256/512bit)
-    private static final String JSON_KEY = "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970";
+    // TODO -- on remote server set this as hidden variable (it should not be public)
+    // TODO -- and before that, change value of JSON_KEY...
+    private static final String JSON_KEY = "3odLKRxLr5nMe4NtkjQ+S/YSU2hjGyIQD0fNZtUWPpjtr8DT2pANt/BXilcI7/e6JmEokwi73o0TK0jmS+FOmBvs0hqE3/B/7Xug7/y+cSTFfV981EdFVJMtOLM2HCCMzamea8RohXL58m9+nCkBa2VupqGaoQEzcTZXVt6JGZuDCqYdTyapwOfrbV0VfuCjF/ppAA4A8v3x1zcG8F60hEe6FjFs+b6IVAiZrb6FOrwH/jZyQLm1DkLifru6CTa4hQ9PUJzlwB4vdfBNG0buKXBIsrrR09iIXyzbBKMcKxN1T2iNE8wM3hys9/zfjLkt6JypLRbz8ufvuCu0VfPb8gR2EaTMzKFIOWKlpDGmFSI=";
 
 
     // Extracts specific claim from token, for example expiration date of token
