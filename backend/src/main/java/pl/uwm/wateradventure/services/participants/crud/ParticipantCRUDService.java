@@ -21,7 +21,8 @@ public class ParticipantCRUDService {
         return creator.register(participantRegisterDTO);
     }
 
-    public ResponseEntity<?> login(ParticipantLoginDTO participantLoginDTO, HttpServletResponse response) {
+    public ResponseEntity<?> login(ParticipantLoginDTO participantLoginDTO,
+                                   HttpServletResponse response) {
         return reader.login(participantLoginDTO, response);
     }
 

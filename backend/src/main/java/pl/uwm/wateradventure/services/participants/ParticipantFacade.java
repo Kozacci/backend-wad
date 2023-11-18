@@ -25,7 +25,8 @@ public class ParticipantFacade {
         return participantCRUDService.register(participantRegisterDTO);
     }
 
-    public ResponseEntity<?> login(ParticipantLoginDTO participantLoginDTO, HttpServletResponse response) {
+    public ResponseEntity<?> login(ParticipantLoginDTO participantLoginDTO,
+                                   HttpServletResponse response) {
         return participantCRUDService.login(participantLoginDTO, response);
     }
 
