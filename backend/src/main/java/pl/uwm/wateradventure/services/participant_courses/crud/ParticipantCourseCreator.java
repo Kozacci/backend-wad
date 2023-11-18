@@ -9,7 +9,6 @@ import pl.uwm.wateradventure.models.courses.CourseStatus;
 import pl.uwm.wateradventure.models.participant_courses.ParticipantCourseEntity;
 import pl.uwm.wateradventure.models.participants.ParticipantEntity;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Component

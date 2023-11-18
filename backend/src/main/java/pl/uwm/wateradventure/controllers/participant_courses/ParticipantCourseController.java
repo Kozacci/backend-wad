@@ -3,7 +3,6 @@ package pl.uwm.wateradventure.controllers.participant_courses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.uwm.wateradventure.models.participant_courses.ParticipantCourseEntity;
 import pl.uwm.wateradventure.models.participant_courses.dtos.ParticipantCourseEntityDTO;
 import pl.uwm.wateradventure.services.participant_courses.ParticipantCourseFacade;
 
