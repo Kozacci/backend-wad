@@ -12,4 +12,8 @@ public class InvalidCourseStatusException extends RuntimeException {
             super(String.format(MESSAGE));
         }
 
+    public InvalidCourseStatusException(String message) {
+        super(message);
+    }
+
 }

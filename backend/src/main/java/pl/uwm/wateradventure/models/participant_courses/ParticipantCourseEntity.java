@@ -44,6 +44,18 @@ public class ParticipantCourseEntity extends WaterAdventureChangeMetricEntity {
     @JoinColumn(name = "answers_history_id", referencedColumnName = "id")
     private AnswerHistoryEntity answerHistory;
 
+    public ParticipantCourseEntity(CourseEntity course, ParticipantEntity participant) {
+        // I used some default date here just not to use null value
+        this.accessDate = LocalDateTime.of(2000, 1, 1, 12, 0);
+        this.isPassed = false;
+        this.isPaid = false;
+        // online payment will not be possible in engineering work
+        this.onlinePayment = false;
+        this.course = course;
+        this.participant = participant;
+        this.answerHistory = new AnswerHistoryEntity(this);
+    }
+
     public ParticipantCourseEntityDTO toDTO() {
         return ParticipantCourseEntityDTO.builder()
                 .courseId(this.course.getId())
@@ -51,6 +63,7 @@ public class ParticipantCourseEntity extends WaterAdventureChangeMetricEntity {
                 .courseDateFrom(this.course.getDateFrom())
                 .courseDateTo(this.course.getDateTo())
                 .accessDate(this.accessDate)
+                .participantId(this.participant.getId())
                 .participantEmail(this.participant.getEmail())
                 .participantLastName(this.participant.getLastName())
                 .isPassed(this.isPassed)

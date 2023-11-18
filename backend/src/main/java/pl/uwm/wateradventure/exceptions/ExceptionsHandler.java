@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import pl.uwm.wateradventure.exceptions.custom_exceptions.EntityNotFoundException;
+import pl.uwm.wateradventure.exceptions.custom_exceptions.MaxParticipantsNumberExceededException;
 import pl.uwm.wateradventure.exceptions.value_objects_exceptions.*;
 
 import java.util.List;
@@ -95,6 +96,12 @@ public class ExceptionsHandler {
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
     public ErrorMessage invalidSortByValueException(InvalidSortByValueException exception) {
         return new ErrorMessage("sortBy", exception.getMessage());
+    }
+
+    @ExceptionHandler(value = MaxParticipantsNumberExceededException.class)
+    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+    public ErrorMessage maxParticipantsNumberExceededException(MaxParticipantsNumberExceededException exception) {
+        return new ErrorMessage("course", exception.getMessage());
     }
 
 }

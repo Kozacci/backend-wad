@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import pl.uwm.wateradventure.models.participants.ParticipantEntity;
 import pl.uwm.wateradventure.models.participants.dtos.ParticipantEntityDTO;
 import pl.uwm.wateradventure.models.participants.security.dtos.ParticipantLoginDTO;
 import pl.uwm.wateradventure.models.participants.security.dtos.ParticipantRegisterDTO;
@@ -17,6 +18,10 @@ public class ParticipantCRUDService {
     private final ParticipantDeleter deleter;
     private final ParticipantUpdater updater;
 
+    public ParticipantEntity getParticipantById(Long participantId) {
+        return reader.getParticipantById(participantId);
+    }
+
     public ParticipantEntityDTO register(ParticipantRegisterDTO participantRegisterDTO) {
         return creator.register(participantRegisterDTO);
     }
@@ -29,5 +34,4 @@ public class ParticipantCRUDService {
     public ResponseEntity<?> logout(HttpServletResponse response) {
         return reader.logout(response);
     }
-
 }

@@ -21,6 +21,11 @@ class ParticipantReader {
     private final AuthenticationManager authenticationManager;
     private final JWTService jwtService;
 
+    public ParticipantEntity getParticipantById(Long participantId) {
+        return participantRepository.findById(participantId)
+                .orElseThrow(() -> new EntityNotFoundException("participant", "Participant with id: " + participantId + "does not exist!"));
+    }
+
     public ParticipantEntity getParticipantByEmail(String email) {
         return participantRepository
                 .findByEmail(email)
@@ -58,5 +63,4 @@ class ParticipantReader {
         SecurityContextHolder.clearContext();
         return ResponseEntity.ok().build();
     }
-
 }
