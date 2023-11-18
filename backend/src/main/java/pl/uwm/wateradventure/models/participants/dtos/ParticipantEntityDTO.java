@@ -1,5 +1,6 @@
 package pl.uwm.wateradventure.models.participants.dtos;
 
+import lombok.Builder;
 import pl.uwm.wateradventure.models.participant_courses.dtos.ParticipantCourseEntityDTO;
 import pl.uwm.wateradventure.models.participants.Role;
 
@@ -12,4 +13,7 @@ public record ParticipantEntityDTO(String firstName,
                                    String phoneNumber,
                                    List<ParticipantCourseEntityDTO> courses,
                                    Role role) {
+
+    @Builder
+    public ParticipantEntityDTO {};
 }

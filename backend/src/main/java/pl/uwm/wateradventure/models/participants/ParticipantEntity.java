@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.uwm.wateradventure.models.global.WaterAdventureChangeMetricEntity;
 import pl.uwm.wateradventure.models.participant_courses.ParticipantCourseEntity;
+import pl.uwm.wateradventure.models.participants.dtos.ParticipantEntityDTO;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -53,6 +54,18 @@ public class ParticipantEntity extends WaterAdventureChangeMetricEntity implemen
         this.phoneNumber = phoneNumber;
         this.participantCourses = new ArrayList<>();
         this.role = Role.CLIENT;
+    }
+
+    public ParticipantEntityDTO toDto() {
+        return ParticipantEntityDTO
+                .builder()
+                .firstName(this.firstName)
+                .lastName(this.lastName)
+                .email(this.email)
+                .password(this.password)
+                .phoneNumber(this.phoneNumber)
+                .role(this.role)
+                .build();
     }
 
     //    UserDetails override methods for Security Auth
