@@ -5,14 +5,14 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 @Service
@@ -110,5 +110,25 @@ public class JWTService {
         return extractClaim(jsonWebToken, Claims::getSubject);
     }
 
+    public Cookie createJwtCookie(String jwt) {
+        Cookie jwtCookie = new Cookie("JWT", jwt);
+        jwtCookie.setHttpOnly(true);
+        // Cookie can be used from any URL
+        jwtCookie.setPath("/");
+        // For more secured HTTPS sites
+        // jwtCookie.setSecure(true);
+//        response.addCookie(jwtCookie);
+        return jwtCookie;
+    }
+
+    public Optional<String> getJwtFromCookies(HttpServletRequest request) {
+        if (request.getCookies() == null) {
+            return Optional.empty();
+        }
+        return Arrays.stream(request.getCookies())
+                .filter(cookie -> "JWT".equals(cookie.getName()))
+                .map(Cookie::getValue)
+                .findFirst();
+    }
 
 }

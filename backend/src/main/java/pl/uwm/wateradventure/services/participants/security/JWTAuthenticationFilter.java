@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * Component that does filtering of every single HTTP request from backend server
@@ -38,40 +39,34 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
-    // In each request there should be JWT Token in http Header ( it's in authorization tab )
-        final String authorizationHeader = request.getHeader("Authorization");
-        final String jsonWebToken;
-        final String email;
-        // If there is no auth header / it does not start with "Bearer " then do filtering and end authorization
-        if(authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
-            filterChain.doFilter(request, response);
-            // end method
-            return;
-        }
-        jsonWebToken = authorizationHeader.substring(7); // extracting jwt token, skipping the bearer prefix
-        email = jsonWebTokenService.extractUsername(jsonWebToken);
-         // if user is present, but hes not already authenticated
-         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-             // then we get our participant (as UserDetails) from database (our participant extends userDetails so its possible)
-             UserDetails userDetails = this.userDetailsService.loadUserByUsername(email);
-             // then we are checking if token for user is valid then update context and send it to dispatcher servlet, so he can use rest
-             if(jsonWebTokenService.isJsonWebTokenValid(jsonWebToken, userDetails)) {
-                 // If user and token are both valid, then we are able
-                 // to create authentication token with its details(+ details from request) and authorities
-                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                         userDetails,
-                         null, // TODO userDetails.getUsername(), userDetails.getPassword(),
-                         userDetails.getAuthorities()
-                 );
-                 authenticationToken.setDetails(
-                         new WebAuthenticationDetailsSource().buildDetails(request)
-                 );
-                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-             }
+
+        // Getting JWT Token from Cookies
+        Optional<String> jsonWebTokenFromCookies = jsonWebTokenService.getJwtFromCookies(request);
+
+        // In each request there should be JWT Token in Cookies
+        if (jsonWebTokenFromCookies.isPresent()) {
+            String email = jsonWebTokenService.extractUsername(jsonWebTokenFromCookies.get());
+            // if user is present, but he is not yet authenticated
+            if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                UserDetails userDetails = this.userDetailsService.loadUserByUsername(email);
+                // If token is valid, put authorization into the context of application
+                if (jsonWebTokenService.isJsonWebTokenValid(jsonWebTokenFromCookies.get(), userDetails)) {
+                    // If user and token are both valid, then we are able
+                    // to create authentication token with its details(+ details from request) and authorities
+                    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                            userDetails,
+                            null, // TODO userDetails.getUsername(), userDetails.getPassword(),
+                            userDetails.getAuthorities() // admin/client
+                    );
+                    authenticationToken.setDetails(
+                            new WebAuthenticationDetailsSource().buildDetails(request)
+                    );
+                    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                }
+            }
          }
          // After one filtering, we always need to pass the methods to call another filter in chain
          filterChain.doFilter(request, response);
-
-
     }
+
 }
