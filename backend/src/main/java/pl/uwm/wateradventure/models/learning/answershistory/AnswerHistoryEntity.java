@@ -1,9 +1,6 @@
 package pl.uwm.wateradventure.models.learning.answershistory;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,13 +20,16 @@ import java.util.List;
 @NoArgsConstructor
 public class AnswerHistoryEntity extends WaterAdventureEntity {
 
-    @OneToOne(mappedBy = "answerHistory")
+    @OneToOne(mappedBy = "answerHistory",
+              cascade = CascadeType.ALL)
     private GeneralLearningEntity generalLearning;
 
-    @OneToMany(mappedBy = "answerHistory")
+    @OneToMany(mappedBy = "answerHistory",
+              cascade = CascadeType.ALL)
     private List<CategoryLearningEntity> categoryLearningList;
 
-    @OneToOne(mappedBy = "answerHistory")
+    @OneToOne(mappedBy = "answerHistory",
+              cascade = CascadeType.ALL)
     private TrialExamEntity trialExam;
 
     @OneToOne(mappedBy = "answerHistory")

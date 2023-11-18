@@ -40,7 +40,7 @@ public class ParticipantCourseEntity extends WaterAdventureChangeMetricEntity {
     @JoinColumn(name = "participant_id", referencedColumnName = "id")
     private ParticipantEntity participant;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "answers_history_id", referencedColumnName = "id")
     private AnswerHistoryEntity answerHistory;
 
