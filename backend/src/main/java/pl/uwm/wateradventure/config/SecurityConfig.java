@@ -23,7 +23,8 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 public class SecurityConfig {
 
     private static final String AUTH_URL = "api/auth/**";
-    private static final String[] CLIENT_URLS = {"api/courses/**", "api/events/**", "api/questions/**"};
+    private static final String[] CLIENT_URLS = {"api/courses/**", "api/events/**",
+            "api/questions/**", "api/participant-courses/**", "/api/learning/**"};
     private static final String[] ADMIN_URLS = {"api/admin/**" + Arrays.toString(CLIENT_URLS)};
 
     private final JWTAuthenticationFilter jwtAuthenticationFilter;
