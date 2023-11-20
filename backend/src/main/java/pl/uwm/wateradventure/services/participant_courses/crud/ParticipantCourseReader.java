@@ -4,6 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.exceptions.custom_exceptions.EntityNotFoundException;
 import pl.uwm.wateradventure.models.participant_courses.ParticipantCourseEntity;
+import pl.uwm.wateradventure.models.participant_courses.dtos.ParticipantCourseEntityDTO;
+
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -18,4 +21,7 @@ class ParticipantCourseReader {
                 ));
     }
 
+    public List<ParticipantCourseEntityDTO> getParticipantCoursesByParticipantId(Long participantId) {
+        return repository.getParticipantCoursesByParticipantId(participantId);
+    }
 }
