@@ -5,11 +5,14 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Builder;
 import pl.uwm.wateradventure.models.validators.EventCity;
+import pl.uwm.wateradventure.models.validators.EventType;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public record EventCreateUpdateDTO(String type,
+public record EventCreateUpdateDTO(
+                                   @NotNull(message = "'Type' field must be filled.")
+                                   @EventType String type,
                                    @NotNull(message = "'Cost' field must be filled.")
                                    @Positive(message = "'Cost' must be higher than zero.")
                                    Double cost,
