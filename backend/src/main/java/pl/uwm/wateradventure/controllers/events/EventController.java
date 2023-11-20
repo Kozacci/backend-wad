@@ -1,5 +1,6 @@
 package pl.uwm.wateradventure.controllers.events;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ class EventController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    EventEntityDTO addEvent(@RequestBody EventCreateUpdateDTO eventCreateDTO) {
+    EventEntityDTO addEvent(@RequestBody @Valid EventCreateUpdateDTO eventCreateDTO) {
         return eventFacade.addEvent(eventCreateDTO);
     }
 

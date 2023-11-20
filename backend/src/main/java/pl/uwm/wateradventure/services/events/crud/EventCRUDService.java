@@ -37,7 +37,8 @@ public class EventCRUDService {
     }
 
     public EventEntityDTO updateEvent(Long eventId, EventCreateUpdateDTO eventUpdateDTO) {
-        return updater.updateEvent(eventId, eventUpdateDTO);
+        var eventToUpdate = reader.getEventById(eventId);
+        return updater.updateEvent(eventToUpdate, eventUpdateDTO);
     }
 
     public void deleteEventById(Long eventId) {
