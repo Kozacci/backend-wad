@@ -9,7 +9,6 @@ import pl.uwm.wateradventure.models.learning.category.CategoryLearningUpdateDTO;
 import pl.uwm.wateradventure.models.learning.general.GeneralLearningEntity;
 import pl.uwm.wateradventure.models.learning.general.dtos.GeneralLearningUpdateDTO;
 import pl.uwm.wateradventure.models.learning.trial_exams.TrialExamEntity;
-import pl.uwm.wateradventure.models.learning.trial_exams.dtos.TrialExamUpdateDTO;
 import pl.uwm.wateradventure.services.learning.answers_history.AnswerHistoryCRUDService;
 import pl.uwm.wateradventure.services.learning.catergory.CategoryLearningCRUDService;
 import pl.uwm.wateradventure.services.learning.general.GeneralLearningCRUDService;
@@ -39,10 +38,10 @@ public class LearningFacade {
         return categoryLearningCRUDService.update(categoryLearningToChange, dto);
     }
 
-    public TrialExamEntity updateTrialExamLearning(Long participantCourseId, TrialExamUpdateDTO dto) {
+    public TrialExamEntity updateTrialExamLearning(Long participantCourseId, Boolean isPassed) {
         var participantCourse = participantCourseCRUDService.getParticipantCourseById(participantCourseId);
         var trialExamToChange = answerHistoryCRUDService.getTrialExamByParticipantCourse(participantCourse);
-        return trialExamCRUDService.update(trialExamToChange, dto);
+        return trialExamCRUDService.update(trialExamToChange, isPassed);
     }
 
     // later might need to add ParticipantId for security purposes - to check if person who sends request is a

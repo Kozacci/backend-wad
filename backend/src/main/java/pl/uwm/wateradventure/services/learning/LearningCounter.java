@@ -20,7 +20,9 @@ class LearningCounter {
         var entitiesGroupedByCategory = groupByCategories(categoryLearningEntities);
         var categoryLearningDTOs = sumByCategories(entitiesGroupedByCategory);
 
-        return new EntireLearningDTO(categoryLearningDTOs,
+        return new EntireLearningDTO(
+                answerHistory.getId(),
+                categoryLearningDTOs,
                 answerHistory.getTrialExam().toDTO(),
                 answerHistory.getGeneralLearning().toDTO());
     }

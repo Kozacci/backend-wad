@@ -10,7 +10,6 @@ import pl.uwm.wateradventure.models.learning.category.CategoryLearningUpdateDTO;
 import pl.uwm.wateradventure.models.learning.general.dtos.GeneralLearningDTO;
 import pl.uwm.wateradventure.models.learning.general.dtos.GeneralLearningUpdateDTO;
 import pl.uwm.wateradventure.models.learning.trial_exams.dtos.TrialExamDTO;
-import pl.uwm.wateradventure.models.learning.trial_exams.dtos.TrialExamUpdateDTO;
 import pl.uwm.wateradventure.services.learning.LearningFacade;
 
 /** REST Controller created in the needs of Create, Read, Update, Delete
@@ -46,9 +45,8 @@ class LearningController {
     @ResponseStatus(HttpStatus.OK)
     TrialExamDTO updateTrialExamLearning(
                                          @PathVariable Long participantCourseId,
-                                         @Valid
-                                         @RequestBody TrialExamUpdateDTO dto) {
-        return learningFacade.updateTrialExamLearning(participantCourseId, dto).toDTO();
+                                         @RequestParam boolean isPassed) {
+        return learningFacade.updateTrialExamLearning(participantCourseId, isPassed).toDTO();
     }
 
     // later might need to add ParticipantId for security purposes - to check if person who sends request is a

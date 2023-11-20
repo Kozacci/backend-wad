@@ -7,7 +7,8 @@ import pl.uwm.wateradventure.models.learning.trial_exams.dtos.TrialExamDTO;
 
 import java.util.List;
 
-public record EntireLearningDTO(List<CategoryLearningDTO> categoryLearningDTO,
+public record EntireLearningDTO(Long answerHistoryId,
+                                List<CategoryLearningDTO> categoryLearningDTO,
                                 TrialExamDTO trialExamDTO,
                                 GeneralLearningDTO generalLearningDTO) {
 

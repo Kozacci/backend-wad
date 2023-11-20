@@ -4,8 +4,7 @@ import lombok.Builder;
 
 public record GeneralLearningDTO(Long id,
                                  Integer questionsAnswered,
-                                 Integer correctAnswers,
-                                 Long answerHistoryId) {
+                                 Integer correctAnswers) {
 
     @Builder
     public GeneralLearningDTO {}

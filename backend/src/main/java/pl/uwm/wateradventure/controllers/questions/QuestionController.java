@@ -26,7 +26,7 @@ class QuestionController {
 
     private final QuestionFacade questionFacade;
 
-    @PostMapping("/admin")
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public QuestionEntityDTO addQuestion(@Valid @RequestBody QuestionCreateUpdateDTO questionCreateDTO) {
         return questionFacade.addQuestion(questionCreateDTO);
@@ -56,15 +56,15 @@ class QuestionController {
         return !filteredQuestions.isEmpty() ? ResponseEntity.ok(filteredQuestions) : ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/admin/{questionId}")
+    @PutMapping("/{questionId}")
     @ResponseStatus(HttpStatus.OK)
-    public QuestionEntityDTO updateQuestion(@PathVariable Long questionId, @RequestBody QuestionCreateUpdateDTO questionUpdateDTO) {
+    public QuestionEntityDTO updateQuestion(@PathVariable Long questionId, @Valid @RequestBody QuestionCreateUpdateDTO questionUpdateDTO) {
         return questionFacade.updateQuestion(questionId, questionUpdateDTO);
     }
 
     @DeleteMapping("/{questionId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void deleteEventById(@PathVariable Long questionId) {
+    void deleteQuestionById(@PathVariable Long questionId) {
         questionFacade.deleteQuestionById(questionId);
     }
 

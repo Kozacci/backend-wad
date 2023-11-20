@@ -5,13 +5,13 @@ import jakarta.validation.constraints.PositiveOrZero;
 import pl.uwm.wateradventure.models.validators.Category;
 
 public record CategoryLearningUpdateDTO(
-                                        @NotNull(message = "Pole 'udzielonych odpowiedzi' nie może być puste.")
-                                        @PositiveOrZero(message = "Pole 'udzielonych odpowiedzi' musi być większe od zera.")
+                                        @NotNull(message = "'Questions answered' field must be filled.")
+                                        @PositiveOrZero(message = "'Questions answered' field must be higher than zero.")
                                         Integer questionsAnswered,
-                                        @NotNull(message = "Pole 'poprawnych odpowiedzi' nie może być puste.")
-                                        @PositiveOrZero(message = "Pole 'poprawnych odpowiedzi' musi być większe od zera.")
+                                        @NotNull(message = "'Correct answers' field must be filled.")
+                                        @PositiveOrZero(message = "'Correct answers' field must be higher than zero.")
                                         Integer correctAnswers,
-                                        @NotNull(message = "Pole 'kategoria' nie może być puste.")
+                                        @NotNull(message = "'Category' field must be filled.")
                                         @Category
                                         String category) {
 }

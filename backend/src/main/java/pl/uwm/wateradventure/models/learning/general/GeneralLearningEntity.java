@@ -36,7 +36,6 @@ public class GeneralLearningEntity extends WaterAdventureEntity {
                 .id(this.id)
                 .questionsAnswered(this.questionsAnswered)
                 .correctAnswers(this.correctAnswers)
-                .answerHistoryId(this.answerHistory.getId())
                 .build();
     }
 

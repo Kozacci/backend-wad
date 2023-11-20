@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CorrectAnswer {
 
-    String message() default "Poprawna odpowiedź musi być jednym z pól: 'Odpowiedź A', 'Odpowiedź B', 'Odpowiedź C'";
+    String message() default "Correct answer must be one of: 'Odpowiedź A', 'Odpowiedź B', 'Odpowiedź C'";
 
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
