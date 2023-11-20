@@ -4,7 +4,6 @@ import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Builder;
-import pl.uwm.wateradventure.models.validators.CourseCity;
 import pl.uwm.wateradventure.models.validators.EventCity;
 
 import java.time.LocalDateTime;
