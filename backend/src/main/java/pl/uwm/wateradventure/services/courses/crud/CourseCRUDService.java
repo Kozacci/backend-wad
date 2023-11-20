@@ -20,8 +20,6 @@ public class CourseCRUDService {
     private final CourseUpdater updater;
     private final CourseDeleter deleter;
 
-
-
     public CourseEntityDTO addCourse(CourseCreateUpdateDTO courseCreateDTO) {
         return creator.addCourse(courseCreateDTO);
     }
@@ -35,7 +33,8 @@ public class CourseCRUDService {
     }
 
     public CourseEntityDTO updateCourse(Long courseId, CourseCreateUpdateDTO courseUpdateDTO) {
-        return updater.updateCourse(courseId, courseUpdateDTO);
+        var courseToUpdate = reader.getCourseById(courseId);
+        return updater.updateCourse(courseToUpdate, courseUpdateDTO);
     }
 
     public void deleteCourseById(Long courseId) {

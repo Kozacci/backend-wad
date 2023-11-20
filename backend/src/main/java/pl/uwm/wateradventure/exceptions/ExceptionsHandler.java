@@ -111,4 +111,16 @@ public class ExceptionsHandler {
         return new ErrorMessage("course", exception.getMessage());
     }
 
+    @ExceptionHandler(value = InvalidDateException.class)
+    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+    public ErrorMessage invalidDateException(InvalidDateException exception) {
+        return new ErrorMessage(exception.fieldName, exception.getMessage());
+    }
+
+    @ExceptionHandler(value = InvalidMaxParticipantsValueException.class)
+    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+    public ErrorMessage invalidMaxParticipantsValueException(InvalidMaxParticipantsValueException exception) {
+        return new ErrorMessage("maxParticipantsNumber", exception.getMessage());
+    }
+
 }
