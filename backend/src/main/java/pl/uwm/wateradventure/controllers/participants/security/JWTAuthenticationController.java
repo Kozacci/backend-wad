@@ -2,6 +2,7 @@ package pl.uwm.wateradventure.controllers.participants.security;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +23,12 @@ public class JWTAuthenticationController {
     private final LogoutService logoutService;
 
     @PostMapping("/register")
-    public ResponseEntity<ParticipantEntityDTO> register(@RequestBody ParticipantRegisterDTO participantRegisterDTO) {
+    public ResponseEntity<ParticipantEntityDTO> register(@RequestBody @Valid ParticipantRegisterDTO participantRegisterDTO) {
         return ResponseEntity.ok(participantFacade.register(participantRegisterDTO));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody ParticipantLoginDTO participantLoginDTO,
+    public ResponseEntity<?> login(@RequestBody @Valid ParticipantLoginDTO participantLoginDTO,
                                    HttpServletResponse response) {
         return participantFacade.login(participantLoginDTO, response);
     }

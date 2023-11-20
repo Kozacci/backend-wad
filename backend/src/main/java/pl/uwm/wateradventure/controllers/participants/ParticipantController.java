@@ -20,7 +20,7 @@ class ParticipantController {
 
     private final ParticipantFacade participantFacade;
 
-    @GetMapping("/{participantId}/courses")
+    @GetMapping("/admin/{participantId}/courses")
     ResponseEntity<List<CourseFilterDTO>> getCoursesByParticipantIdAndFilters(@PathVariable Long participantId,
                                                                     @RequestParam(required = false) String courseType,
                                                                     @RequestParam(required = false) String courseStatus,
