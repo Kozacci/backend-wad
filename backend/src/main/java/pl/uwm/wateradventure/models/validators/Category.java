@@ -17,7 +17,7 @@ public @interface Category {
             "'Wiadomości z zakresu meteorologii', 'Podstawy budowy jachtów motorowodnych', " +
             "'Silniki i układy napędowe', 'Wiadomości z zakresu ratownictwa wodnego'," +
             "'Pomoce nawigacyjne', 'Ochrona wód przed zanieczyszczeniem', " +
-            "'Podstawowe przepisy prawa drogi na morskich i śródlądowych drogach wodnych', 'Teoria żeglowania'";
+            "'Podstawowe przepisy prawa drogi na morskich i śródlądowych drogach wodnych', 'Teoria żeglowania'.";
 
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};

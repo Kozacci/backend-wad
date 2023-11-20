@@ -1,5 +1,6 @@
 package pl.uwm.wateradventure.controllers.courses;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,7 @@ class CourseController {
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    CourseEntityDTO addCourse(@RequestBody CourseCreateUpdateDTO courseCreateDTO) {
+    CourseEntityDTO addCourse(@RequestBody @Valid CourseCreateUpdateDTO courseCreateDTO) {
         return courseFacade.addCourse(courseCreateDTO);
     }
 
