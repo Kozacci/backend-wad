@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Category {
 
-    String message() default "Kategoria pytania musi być jednym z pól: 'Przepisy', 'Podstawy locji', " +
+    String message() default "The question category must be one of the fields: 'Przepisy', 'Podstawy locji', " +
             "'Wiadomości z zakresu meteorologii', 'Podstawy budowy jachtów motorowodnych', " +
             "'Silniki i układy napędowe', 'Wiadomości z zakresu ratownictwa wodnego'," +
             "'Pomoce nawigacyjne', 'Ochrona wód przed zanieczyszczeniem', " +

@@ -6,21 +6,21 @@ import jakarta.validation.constraints.Size;
 import pl.uwm.wateradventure.models.validators.Category;
 import pl.uwm.wateradventure.models.validators.CorrectAnswer;
 
-public record QuestionCreateUpdateDTO(@NotBlank(message = "Pole 'Treść pytania' nie może być puste.")
+public record QuestionCreateUpdateDTO(@NotBlank(message = "'Content' field must be filled.")
                                       String content,
-                                      @NotNull(message = "Proszę wskazać dział, do którego należy pytanie.")
+                                      @NotNull(message = "Please indicate the section to which the question belongs.")
                                       @Category
                                       String category,
-                                      @NotBlank(message = "Pole 'Odpowiedź A' nie może być puste.")
-                                      @Size(max = 60, message = "Odpowiedź nie może liczyć więcej niż 60 znaków.")
+                                      @NotBlank(message = "'Answer A' field must be filled.")
+                                      @Size(max = 60, message = "The answer cannot exceed 60 characters.")
                                       String firstAnswer,
-                                      @NotBlank(message = "Pole 'Odpowiedź B' nie może być puste.")
-                                      @Size(max = 60, message = "Odpowiedź nie może liczyć więcej niż 60 znaków.")
+                                      @NotBlank(message = "'Answer B' field must be filled.")
+                                      @Size(max = 60, message = "The answer cannot exceed 60 characters.")
                                       String secondAnswer,
-                                      @NotBlank(message = "Pole 'Odpowiedź C' nie może być puste.")
-                                      @Size(max = 60, message = "Odpowiedź nie może liczyć więcej niż 60 znaków.")
+                                      @NotBlank(message = "'Answer C' field must be filled.")
+                                      @Size(max = 60, message = "The answer cannot exceed 60 characters.")
                                       String thirdAnswer,
-                                      @NotNull(message = "Proszę wskazać poprawną odpowiedź.")
+                                      @NotNull(message = "Please select correct answer.")
                                       @CorrectAnswer
                                       String correctAnswer,
                                       String explanation,
