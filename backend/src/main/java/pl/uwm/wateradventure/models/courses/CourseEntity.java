@@ -9,6 +9,7 @@ import pl.uwm.wateradventure.models.global.WaterAdventureChangeMetricEntity;
 import pl.uwm.wateradventure.models.participant_courses.ParticipantCourseEntity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -38,7 +39,7 @@ public class CourseEntity extends WaterAdventureChangeMetricEntity {
     @Column(name = "max_participants_number")
     private Integer maxParticipantsNumber;
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course", orphanRemoval = true)
     private List<ParticipantCourseEntity> participants;
 
     public CourseEntity(CourseType courseType, LocalDate dateFrom,
@@ -50,6 +51,7 @@ public class CourseEntity extends WaterAdventureChangeMetricEntity {
         this.city = city;
         this.maxParticipantsNumber = maxParticipantsNumber;
         this.status = CourseStatus.NIEROZPOCZETY;
+        this.participants = new ArrayList<>();
     }
 
     public CourseEntityDTO toDTO() {
@@ -61,6 +63,7 @@ public class CourseEntity extends WaterAdventureChangeMetricEntity {
                 .courseStatus(this.status.enumValue)
                 .maxParticipantsNumber(this.maxParticipantsNumber)
                 .city(this.city.enumValue)
+                .assignedParticipantsNumber(this.getParticipants().size())
                 .build();
     }
 

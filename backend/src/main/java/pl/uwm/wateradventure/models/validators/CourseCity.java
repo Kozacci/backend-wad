@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CourseCity {
 
-    String message() default "Miasto kursu musi być jednym z pól: 'Sopot' lub 'Olecko'.";
+    String message() default "Course city must be one of: 'Sopot' or 'Olecko'.";
 
     Class<?>[] groups() default {};
 

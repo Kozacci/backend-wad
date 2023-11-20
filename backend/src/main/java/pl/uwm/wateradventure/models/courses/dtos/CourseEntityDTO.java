@@ -10,6 +10,7 @@ public record CourseEntityDTO(Long id,
                               LocalDate dateTo,
                               String courseStatus,
                               Integer maxParticipantsNumber,
+                              Integer assignedParticipantsNumber,
                               String city) {
 
     @Builder

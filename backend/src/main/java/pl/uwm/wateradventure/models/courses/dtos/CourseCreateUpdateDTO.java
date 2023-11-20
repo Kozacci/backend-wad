@@ -9,20 +9,20 @@ import pl.uwm.wateradventure.models.validators.CourseType;
 
 import java.time.LocalDate;
 
-public record CourseCreateUpdateDTO(@NotNull(message = "Pole 'typ kursu' nie może być puste.")
+public record CourseCreateUpdateDTO(@NotNull(message = "'Course type' field must be filled.")
                                     @CourseType
                                     String courseType,
-                                    @NotNull(message = "Pole 'data od' nie może być puste.")
-                                    @Future(message = "Pole 'data od' nie może zawierać daty przeszłej.")
+                                    @NotNull(message = "'Date from' field must be filled.")
+                                    @Future(message = "'Date from' can't contain past date.")
                                     LocalDate dateFrom,
-                                    @NotNull(message = "Pole 'data do' nie może być puste.")
-                                    @Future(message = "Pole 'data do' nie może zawierać daty przeszłej.")
+                                    @NotNull(message = "'Date to' field must be filled.'")
+                                    @Future(message = "'Date to' can't contain past date.'")
                                     LocalDate dateTo,
-                                    @NotNull(message = "Pole 'miasto' nie może być puste.")
+                                    @NotNull(message = "'City' field must be filled.")
                                     @CourseCity
                                     String city,
-                                    @NotNull(message = "Pole 'maksymalna liczba kursantów' nie może być puste.")
-                                    @PositiveOrZero(message = "Pole 'maksymalna liczba kursantów' musi być większe od zera.")
+                                    @NotNull(message = "'Maximum participants number' field must be filled.")
+                                    @PositiveOrZero(message = "'Maximum participants number' field must be higher than zero.")
                                     Integer maxParticipantsNumber) {
 
     @Builder

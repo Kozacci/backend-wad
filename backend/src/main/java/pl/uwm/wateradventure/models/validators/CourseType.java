@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CourseType {
 
-    String message() default "Typ kursu musi być jednym z pól: 'Sternik motorowodny', " +
+    String message() default "Course type must be one of: 'Sternik motorowodny', " +
             "'Motorowodny sternik morski', 'Holowanie narciarza i obiektow nawodnych', " +
             "'Żeglarz jachtowy', 'Jachtowy sternik morski'.";
 
