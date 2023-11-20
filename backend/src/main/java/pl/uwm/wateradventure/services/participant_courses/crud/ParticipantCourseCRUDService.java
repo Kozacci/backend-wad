@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.uwm.wateradventure.models.courses.CourseEntity;
 import pl.uwm.wateradventure.models.participant_courses.ParticipantCourseEntity;
-import pl.uwm.wateradventure.models.participant_courses.dtos.ParticipantCourseEntityDTO;
 import pl.uwm.wateradventure.models.participants.ParticipantEntity;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +27,4 @@ public class ParticipantCourseCRUDService {
         return creator.signIn(participant, course);
     }
 
-    public List<ParticipantCourseEntityDTO> getParticipantCoursesByParticipantId(Long participantId) {
-        return reader.getParticipantCoursesByParticipantId(participantId);
-    }
 }

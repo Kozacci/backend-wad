@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import pl.uwm.wateradventure.models.participant_courses.dtos.ParticipantCourseEntityDTO;
 import pl.uwm.wateradventure.services.participant_courses.ParticipantCourseFacade;
 
-import java.util.List;
-
 /** REST Controller created in the needs of Create, Read, Update, Delete
  * and more complex operations for Participant Courses Entity
  * @Endpoint: participant-courses
@@ -34,13 +32,6 @@ class ParticipantCourseController {
     ParticipantCourseEntityDTO signIn(@PathVariable Long participantId,
                                       @PathVariable Long courseId) {
         return participantCourseFacade.signIn(participantId, courseId).toDTO();
-    }
-
-
-    @GetMapping("/{participantId}")
-    @ResponseStatus(HttpStatus.OK)
-    List<ParticipantCourseEntityDTO> getParticipantCoursesByParticipantId(@PathVariable Long participantId) {
-        return participantCourseFacade.getParticipantCoursesByParticipantId(participantId);
     }
 
 }

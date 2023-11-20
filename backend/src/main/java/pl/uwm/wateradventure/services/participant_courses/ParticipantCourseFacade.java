@@ -3,12 +3,9 @@ package pl.uwm.wateradventure.services.participant_courses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.models.participant_courses.ParticipantCourseEntity;
-import pl.uwm.wateradventure.models.participant_courses.dtos.ParticipantCourseEntityDTO;
 import pl.uwm.wateradventure.services.courses.crud.CourseCRUDService;
 import pl.uwm.wateradventure.services.participant_courses.crud.ParticipantCourseCRUDService;
 import pl.uwm.wateradventure.services.participants.crud.ParticipantCRUDService;
-
-import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -28,7 +25,4 @@ public class ParticipantCourseFacade {
         return participantCourseCRUDService.signIn(participant, course);
     }
 
-    public List<ParticipantCourseEntityDTO> getParticipantCoursesByParticipantId(Long participantId) {
-        return participantCourseCRUDService.getParticipantCoursesByParticipantId(participantId);
-    }
 }
