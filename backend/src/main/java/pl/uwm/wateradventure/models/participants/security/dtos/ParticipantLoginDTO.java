@@ -12,5 +12,5 @@ public record ParticipantLoginDTO(@NotBlank(message = "'Email' field must be fil
                                   String password) {
 
     @Builder
-    public ParticipantLoginDTO {};
+    public ParticipantLoginDTO {}
 }

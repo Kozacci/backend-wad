@@ -27,5 +27,5 @@ public record ParticipantRegisterDTO(@NotBlank(message = "'First name' field mus
                                      String phoneNumber) {
 
     @Builder
-    public ParticipantRegisterDTO {};
+    public ParticipantRegisterDTO {}
 }
