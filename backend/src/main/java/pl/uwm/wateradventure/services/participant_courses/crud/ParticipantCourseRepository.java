@@ -3,7 +3,6 @@ package pl.uwm.wateradventure.services.participant_courses.crud;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.PathVariable;
 import pl.uwm.wateradventure.models.participant_courses.ParticipantCourseEntity;
 import pl.uwm.wateradventure.models.participant_courses.dtos.ParticipantCourseEntityDTO;
 
