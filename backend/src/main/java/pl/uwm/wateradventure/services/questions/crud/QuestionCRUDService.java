@@ -36,7 +36,8 @@ public class QuestionCRUDService {
     }
 
     public QuestionEntityDTO updateQuestion(Long questionId, QuestionCreateUpdateDTO questionUpdateDTO) {
-        return updater.updateQuestion(questionId, questionUpdateDTO);
+        var questionToUpdate = reader.getQuestionById(questionId);
+        return updater.updateQuestion(questionToUpdate, questionUpdateDTO);
     }
 
     public void deleteQuestionById(Long questionId) {

@@ -123,4 +123,10 @@ public class ExceptionsHandler {
         return new ErrorMessage("maxParticipantsNumber", exception.getMessage());
     }
 
+    @ExceptionHandler(value = VarLengthExceededException.class)
+    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+    public ErrorMessage varLengthExceededException(VarLengthExceededException exception) {
+        return new ErrorMessage(exception.fieldName, exception.getMessage());
+    }
+
 }

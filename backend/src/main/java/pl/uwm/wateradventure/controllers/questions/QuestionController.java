@@ -26,7 +26,7 @@ class QuestionController {
 
     private final QuestionFacade questionFacade;
 
-    @PostMapping("")
+    @PostMapping("/admin")
     @ResponseStatus(HttpStatus.CREATED)
     public QuestionEntityDTO addQuestion(@Valid @RequestBody QuestionCreateUpdateDTO questionCreateDTO) {
         return questionFacade.addQuestion(questionCreateDTO);
@@ -56,7 +56,7 @@ class QuestionController {
         return !filteredQuestions.isEmpty() ? ResponseEntity.ok(filteredQuestions) : ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{questionId}")
+    @PutMapping("/admin/{questionId}")
     @ResponseStatus(HttpStatus.OK)
     public QuestionEntityDTO updateQuestion(@PathVariable Long questionId, @RequestBody QuestionCreateUpdateDTO questionUpdateDTO) {
         return questionFacade.updateQuestion(questionId, questionUpdateDTO);
