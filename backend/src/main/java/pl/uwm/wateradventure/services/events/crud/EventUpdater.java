@@ -75,9 +75,13 @@ class EventUpdater {
     private void checkMaxParticipantNumber(EventEntity event, Integer maxParticipantNumber) {
         if (maxParticipantNumber == null) return;
 
-        var amountOfAssignedParticipants = event.getParticipantEvents().size();
+        var amountOfAssignedParticipants = event.getEventParticipants().size();
 
-        if (amountOfAssignedParticipants < maxParticipantNumber) {
+        if (maxParticipantNumber <= 0) {
+            throw new InvalidMaxParticipantsValueException("Maximum participants number must be higher than zero.");
+        }
+
+        if (amountOfAssignedParticipants >= maxParticipantNumber) {
             throw new InvalidMaxParticipantsValueException(
                     "You can't change number of maximum participants for " + maxParticipantNumber +
                             ", because there are already " + amountOfAssignedParticipants + " " +

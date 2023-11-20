@@ -10,6 +10,7 @@ import pl.uwm.wateradventure.models.participant_events.ParticipantEventEntity;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -37,8 +38,8 @@ public class EventEntity extends WaterAdventureChangeMetricEntity {
     @Column(name = "max_participants_number")
     private Integer maxParticipantsNumber;
 
-    @OneToMany(mappedBy = "event")
-    private List<ParticipantEventEntity> participantEvents;
+    @OneToMany(mappedBy = "event", orphanRemoval = true)
+    private List<ParticipantEventEntity> eventParticipants;
 
     public EventEntity(EventType type, Double cost,
                        LocalDateTime date, EventCity city,
@@ -50,6 +51,7 @@ public class EventEntity extends WaterAdventureChangeMetricEntity {
         this.city = city;
         this.duration = duration;
         this.maxParticipantsNumber = maxParticipantsNumber;
+        this.eventParticipants = new ArrayList<>();
     }
 
 
