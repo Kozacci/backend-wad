@@ -5,7 +5,9 @@ import lombok.Builder;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public record EventEntityDTO(String type,
+public record EventEntityDTO(
+                             Long id,
+                             String type,
                              Double cost,
                              LocalDateTime date,
                              String city,

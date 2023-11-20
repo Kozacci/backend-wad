@@ -55,6 +55,7 @@ public class EventEntity extends WaterAdventureChangeMetricEntity {
 
     public EventEntityDTO toDTO() {
         return EventEntityDTO.builder()
+                .id(this.id)
                 .type(this.type.enumValue)
                 .cost(this.cost)
                 .date(this.date)

@@ -42,7 +42,7 @@ class EventReader extends PageReader<EventEntity> {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<EventFilterDTO> query = cb.createQuery(EventFilterDTO.class);
         Root<EventEntity> event = query.from(EventEntity.class);
-        joinParticipantEvents = event.join("participantEvents");
+        joinParticipantEvents = event.join("participantEvents", JoinType.LEFT);
         List<Predicate> predicates = new ArrayList<>();
 
         addTypePredicate(cb, event, predicates, filters.type());
