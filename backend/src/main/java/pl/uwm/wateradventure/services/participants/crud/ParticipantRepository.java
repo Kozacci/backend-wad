@@ -4,6 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import pl.uwm.wateradventure.models.participants.ParticipantEntity;
 
+import java.util.Optional;
+
 @Repository
-interface ParticipantRepository extends JpaRepository<ParticipantEntity, Long> {
+public interface ParticipantRepository extends JpaRepository<ParticipantEntity, Long> {
+
+    Optional<ParticipantEntity> findByEmail(String email);
 }
