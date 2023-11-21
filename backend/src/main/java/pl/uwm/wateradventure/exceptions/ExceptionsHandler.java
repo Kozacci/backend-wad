@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import pl.uwm.wateradventure.exceptions.custom_exceptions.EntityNotFoundException;
 import pl.uwm.wateradventure.exceptions.custom_exceptions.MaxParticipantsNumberExceededException;
+import pl.uwm.wateradventure.exceptions.custom_exceptions.NotEnoughSeatsForEventException;
 import pl.uwm.wateradventure.exceptions.custom_exceptions.ParticipantAlreadySignedInException;
 import pl.uwm.wateradventure.exceptions.value_objects_exceptions.*;
 
@@ -127,6 +128,12 @@ public class ExceptionsHandler {
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
     public ErrorMessage varLengthExceededException(VarLengthExceededException exception) {
         return new ErrorMessage(exception.fieldName, exception.getMessage());
+    }
+
+    @ExceptionHandler(value = NotEnoughSeatsForEventException.class)
+    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+    public ErrorMessage notEnoughSeatsForEventException(NotEnoughSeatsForEventException exception) {
+        return new ErrorMessage("participantsNumber", exception.getMessage());
     }
 
 }

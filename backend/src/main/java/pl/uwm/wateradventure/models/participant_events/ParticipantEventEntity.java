@@ -37,25 +37,32 @@ public class ParticipantEventEntity extends WaterAdventureChangeMetricEntity {
     @JoinColumn(name = "event_id", referencedColumnName = "id")
     private EventEntity event;
 
-    public ParticipantEventEntity(String ordererEmail, String ordererFirstName,
+    public ParticipantEventEntity(EventEntity event, String ordererEmail, String ordererFirstName,
                                   String ordererLastName, String ordererPhoneNumber,
-                                  Integer participantsNumber, Boolean isPaid) {
+                                  Integer participantsNumber) {
+        this.event = event;
         this.ordererEmail = ordererEmail;
         this.ordererFirstName = ordererFirstName;
         this.ordererLastName = ordererLastName;
         this.ordererPhoneNumber = ordererPhoneNumber;
         this.participantsNumber = participantsNumber;
-        this.isPaid = isPaid;
+        this.isPaid = false;
     }
 
     public ParticipantEventEntityDTO toDTO() {
         return ParticipantEventEntityDTO.builder()
+                .participantEventId(this.id)
                 .ordererEmail(this.ordererEmail)
                 .ordererFirstName(this.ordererEmail)
                 .ordererLastName(this.ordererEmail)
                 .ordererPhoneNumber(this.ordererEmail)
                 .participantsNumber(this.participantsNumber)
                 .isPaid(this.isPaid)
+                .eventDate(this.event.getDate())
+                .eventCity(this.event.getCity().enumValue)
+                .eventDuration(this.event.getDuration())
+                .eventMaxParticipantsNumber(this.event.getMaxParticipantsNumber())
+                .assignedParticipantsNumber(this.event.getAmountOfAssignedParticipants())
                 .build();
     }
 }

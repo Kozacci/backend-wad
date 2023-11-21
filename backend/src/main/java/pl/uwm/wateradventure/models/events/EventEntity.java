@@ -67,5 +67,11 @@ public class EventEntity extends WaterAdventureChangeMetricEntity {
                 .build();
     }
 
+    public Integer getAmountOfAssignedParticipants() {
+        return this.getEventParticipants().stream()
+                .mapToInt(ParticipantEventEntity::getParticipantsNumber)
+                .sum();
+    }
+
 
 }
