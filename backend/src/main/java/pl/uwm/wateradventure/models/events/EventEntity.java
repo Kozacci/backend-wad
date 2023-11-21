@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.uwm.wateradventure.global.WaterAdventureChangeMetricEntity;
+import pl.uwm.wateradventure.models.global.WaterAdventureChangeMetricEntity;
 
 import java.time.LocalDateTime;
 
@@ -26,7 +26,7 @@ public class EventEntity extends WaterAdventureChangeMetricEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime date;
 
-    private String city;
+    private String address;
 
     @Column(name = "orderer_email")
     private String ordererEmail;

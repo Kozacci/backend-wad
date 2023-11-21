@@ -4,12 +4,12 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.uwm.wateradventure.global.WaterAdventureChangeMetricEntity;
+import pl.uwm.wateradventure.models.global.WaterAdventureChangeMetricEntity;
 
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "courses", schema = "wateradventure")
+@Table(name = "courses")
 @Getter
 @Setter
 @NoArgsConstructor
