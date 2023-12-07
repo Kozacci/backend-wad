@@ -4,6 +4,7 @@ import {AdminHomeComponent} from './admin-home/admin-home.component';
 import {RouterModule, Routes} from "@angular/router";
 import {AdminNavbarComponent} from './admin-navbar/admin-navbar.component';
 import {SharedModule} from "../shared/shared.module";
+import { AdminLayoutComponent } from './admin-layout.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
   declarations: [
     AdminHomeComponent,
     AdminNavbarComponent,
+    AdminLayoutComponent,
+  ],
+  exports: [
+    AdminLayoutComponent
   ],
   imports: [
     CommonModule,

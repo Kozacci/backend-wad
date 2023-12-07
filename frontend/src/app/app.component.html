@@ -1,1 +1,2 @@
-<router-outlet></router-outlet>
+<app-user-layout *ngIf="!isAdminPath"></app-user-layout>
+<app-admin-layout *ngIf="isAdminPath"></app-admin-layout>
