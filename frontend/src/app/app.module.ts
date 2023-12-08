@@ -4,7 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {UserModule} from "./user/user.module";
+import {ClientModule} from "./client/client.module";
 import {AdminModule} from "./admin/admin.module";
 
 @NgModule({
@@ -12,11 +12,11 @@ import {AdminModule} from "./admin/admin.module";
     AppComponent
   ],
   imports: [
+    ClientModule,
+    AdminModule,
+    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
-    UserModule,
-    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]
