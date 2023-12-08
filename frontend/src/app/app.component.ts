@@ -7,7 +7,7 @@ import {PathService} from "./shared/services/path.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'water adventure';
 
   isAdminPath: boolean = false;
 
