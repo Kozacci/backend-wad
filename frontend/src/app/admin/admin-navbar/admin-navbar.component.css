@@ -1,11 +1,27 @@
 .sidebar {
-  position: fixed;
+  position: absolute;
   top:0;
   left: 0;
-  height: 100%;
-  width: 250px;
+  height: 100vh;
+  /*width: 230px;*/
+  background: #053742;
+  color: #FFFFFF;
+  padding: 10px 14px;
+  font-size: 2em;
+}
+
+.content {
+  height:inherit;
   display: flex;
   flex-direction: column;
-  align-content: center;
-  align-items: center;
+  align-content: space-between;
+}
+
+.middle-section {
+  flex-grow: 1;
+  flex-shrink: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
 }

@@ -1,22 +1,53 @@
 
-<div class="sidebar">
+<div class="sidebar" [style.width]="getNavBarWidth()">
 
-  <p-button (click)="changeIsExtended()" icon="pi pi-arrow-right"></p-button>
+  <div class="content">
 
-  <text-icon [text]="'Pytania'" [iconClass]="'pi pi-comments'"></text-icon>
+    <div class="first-section">
 
-  <text-icon [text]="'Kursy'" [iconClass]="'pi pi-check-square'"></text-icon>
+      <button (click)="changeIsExtended()"
+              type="button"
+              class="btn btn-outline-primary rounded-circle">
+        <i class="{{getIconClass()}}"></i>
+      </button>
 
-  <text-icon [text]="'Eventy'" [iconClass]="'pi pi-ticket'"></text-icon>
+    </div>
 
-  <text-icon [text]="'Zaliczenia'" [iconClass]="'pi pi-book'"></text-icon>
-  <!--Eksport-->
-  <text-icon [text]="'Dostępy'" [iconClass]="'pi pi-plus-circle'"></text-icon>
+    <div class="middle-section">
 
-  <text-icon [text]="'Kalendarz'" [iconClass]="'pi pi-calendar'"></text-icon>
+      <a [routerLink]="'/admin'" (click)="doNothing()">
+      <text-icon [text]="'Pytania'" [iconClass]="'pi pi-comments'" [textVisible]="isExtended"></text-icon>
+      </a>
 
-  <p-divider></p-divider>
+      <a [routerLink]="''">
+      <text-icon [text]="'Kursy'" [iconClass]="'pi pi-check-square'" [textVisible]="isExtended"></text-icon>
+      </a>
 
-  <text-icon [text]="'Wyloguj'" [iconClass]="'pi pi-sign-out'"></text-icon>
+      <a [routerLink]="''">
+      <text-icon [text]="'Eventy'" [iconClass]="'pi pi-ticket'" [textVisible]="isExtended"></text-icon>
+      </a>
+
+      <a [routerLink]="''">
+      <text-icon [text]="'Zaliczenia'" [iconClass]="'pi pi-book'" [textVisible]="isExtended"></text-icon>
+      </a>
+
+      <a [routerLink]="''">
+      <text-icon [text]="'Dostępy'" [iconClass]="'pi pi-plus-circle'" [textVisible]="isExtended"></text-icon>
+      </a>
+
+      <a [routerLink]="''">
+      <text-icon [text]="'Kalendarz'" [iconClass]="'pi pi-calendar'" [textVisible]="isExtended"></text-icon>
+      </a>
+
+    </div>
+
+    <div class="last-section">
+      <p-divider></p-divider>
+
+      <text-icon [text]="'Wyloguj'" [iconClass]="'pi pi-sign-out'" [textVisible]="isExtended"></text-icon>
+    </div>
+
+
+  </div>
 
 </div>

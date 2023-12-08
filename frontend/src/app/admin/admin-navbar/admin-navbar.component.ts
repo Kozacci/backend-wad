@@ -13,5 +13,17 @@ export class AdminNavbarComponent {
     this.isExtended = !this.isExtended;
   }
 
+  getIconClass(): string {
+    return this.isExtended ? "pi pi-arrow-right" : "pi pi-arrow-left";
+  }
+
+  getNavBarWidth(): string {
+    return this.isExtended ? "230px" : "75px";
+  }
+
+  doNothing(): void {
+    console.log("clicked");
+  }
+
 
 }
