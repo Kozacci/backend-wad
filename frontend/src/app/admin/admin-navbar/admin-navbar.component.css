@@ -8,10 +8,11 @@
   color: #FFFFFF;
   padding: 10px 14px;
   font-size: 2em;
+  transition: all 0.3s ease-out;
 }
 
 .content {
-  height:inherit;
+  height:98%;
   display: flex;
   flex-direction: column;
   align-content: space-between;
