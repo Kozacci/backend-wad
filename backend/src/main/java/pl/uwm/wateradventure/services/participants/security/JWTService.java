@@ -69,7 +69,7 @@ public class JWTService {
                 .claim("authorities", userDetails.getAuthorities())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 // we can configure below how long the token expires
-                .setExpiration(new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(2))) // Token expires in 2 hours time
+                .setExpiration(new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(24))) // Token expires in 2 hours time
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
