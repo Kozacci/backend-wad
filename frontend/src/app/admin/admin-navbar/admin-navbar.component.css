@@ -11,8 +11,8 @@
   background: #053742;
   color: #FFFFFF;
   padding: 10px 14px;
-  font-size: 2em;
   transition: all 0.3s ease-out;
+  box-shadow: 10px 10px 20px #053742;
 }
 
 .content {
