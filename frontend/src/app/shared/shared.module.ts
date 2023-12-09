@@ -6,6 +6,8 @@ import {SidebarModule} from "primeng/sidebar";
 import {DividerModule} from "primeng/divider";
 import { PrimaryButtonComponent } from './primary-button/primary-button.component';
 import { SecondaryButtonComponent } from './secondary-button/secondary-button.component';
+import {ToastModule} from "primeng/toast";
+import {MenubarModule} from "primeng/menubar";
 
 
 @NgModule({
@@ -25,7 +27,12 @@ import { SecondaryButtonComponent } from './secondary-button/secondary-button.co
     DividerModule,
     TextIconComponent,
     PrimaryButtonComponent,
-    SecondaryButtonComponent
+    SecondaryButtonComponent,
+    CommonModule,
+    ButtonModule,
+    SidebarModule,
+    ToastModule,
+    MenubarModule,
   ]
 })
 export class SharedModule { }
