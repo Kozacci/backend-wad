@@ -11,3 +11,8 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+.responsive-img {
+  max-width: 80%;
+  height: auto;
+}
