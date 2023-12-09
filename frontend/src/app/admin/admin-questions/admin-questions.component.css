@@ -1,0 +1,12 @@
+.content {
+  background-color: #22719B;
+  height: 100vh;
+  width: calc(100vw - 75px);
+  color: #FFF;
+}
+
+@media (max-width: 575px) {
+  .custom-justify-start {
+    justify-content: start !important;
+  }
+}

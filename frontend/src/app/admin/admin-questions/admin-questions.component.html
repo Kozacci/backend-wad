@@ -1,1 +1,61 @@
-<p>admin-questions works!</p>
+<div class="content">
+
+  <div class="container">
+
+    <div class="row justify-content-center">
+      <div class="col-xl-8 d-flex justify-content-center align-items-center">
+        <text-icon [text]="'Baza Pytań'" [iconClass]="'pi pi-comments'" [fontSize]="'3em'"></text-icon>
+      </div>
+      <p-divider></p-divider>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-md-3">
+        <div class="mb-3">
+          <label for="" class="form-label">Numer pytania (ID)</label>
+          <input type="number" class="form-control" id="" placeholder="101">
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="mb-3">
+          <label for="" class="form-label">Treść pytania</label>
+          <input type="text" class="form-control" id="" placeholder="Który znak...">
+         </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="mb-3">
+          <label for="" class="form-label">Dział</label>
+          <select class="form-select">
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <label for="" class="form-label">Sortowanie po:</label>
+        <select class="form-select">
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mt-5 justify-content-end align-items-center">
+      <div class="col-sm-2 d-flex justify-content-end custom-justify-start pe-2" id="first-button">
+        <primary-button [label]="'Wyszukaj'" (onClick)="consoleLoguj()"></primary-button>
+      </div>
+
+      <div class="col-sm-2 d-flex justify-content-start ps-2">
+        <secondary-button [label]="'Dodaj pytanie'"></secondary-button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+

@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AdminQuestionsComponent {
 
+  consoleLoguj(): void {
+    console.log("działa :D ");
+  }
 }
