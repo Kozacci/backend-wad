@@ -9,7 +9,7 @@
       <p-divider></p-divider>
     </div>
 
-    <div class="row mt-5">
+    <div class="row mt-2">
       <div class="col-md-3">
         <div class="mb-3">
           <label for="" class="form-label">Numer pytania (ID)</label>
@@ -55,13 +55,13 @@
       </div>
     </div>
 
-    <div class="row mt-5">
+    <div class="row mt-3">
       <p-table
         [value]="questions"
         styleClass="p-datatable-gridlines p-datatable-resizable"
         [tableStyle]="{'min-width': '50rem' }"
         [rowHover]="true"
-        [resizableColumns]>
+        [resizableColumns]="true">
 
         <ng-template pTemplate="header">
           <tr>
@@ -76,7 +76,10 @@
         </ng-template>
         <ng-template pTemplate="body" let-question>
           <tr>
-            <td class="d-flex justify-content-center"><p-button icon="pi pi-heart" [rounded]="true" [outlined]="true" (onClick)="selectQuestion(question)"></p-button> </td>
+            <td class="d-flex justify-content-center">
+              <p-button icon="pi pi-heart" (onClick)="selectQuestion(question)">
+
+              </p-button> </td>
             <td>{{question.id}}</td>
             <td>{{question.content}}</td>
             <td>{{question.category}}</td>
