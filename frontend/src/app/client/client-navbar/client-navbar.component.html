@@ -1,80 +1,82 @@
-<nav class="navbar-up">
-  <div class="container-fluid d-flex justify-content-between">
-    <div class="container" style="margin-left: 0.5rem">
-      <a class="navbar-brand" href="tel:123454121"><i class="pi pi-phone"></i> Tel.123 454 121</a>
-      <a class="navbar-brand" href="mailto:wadventure@gmail.com"><i class="pi pi-envelope"></i> wadventure@gmail.com</a>
-    </div>
-    <div class="container-end" style="margin-left: -2rem" *ngIf="authService.isLogged(); else notLogged">
-      <a class="navbar-brand" href="/wyloguj"><i class="pi pi-undo"></i> Wyloguj się</a>
-      <a class="navbar-brand" href="/profil"><i class="pi pi-user"></i> Mój profil</a>
-    </div>
-    <ng-template #notLogged>
-      <div class="container-end" style="margin-left: -2rem" >
-          <a class="navbar-brand" href="/zaloguj"><i class="pi pi-users"></i> Zaloguj się</a>
-          <a class="navbar-brand" href="/zarejestruj"><i class="pi pi-user-plus"></i> Zarejestruj</a>
+<nav class="navbar-main">
+  <nav class="navbar-up">
+    <div class="container-fluid d-flex justify-content-between">
+      <div class="container" style="margin-left: 0.5rem">
+        <a class="navbar-brand" href="tel:123454121"><i class="pi pi-phone"></i> Tel.123 454 121</a>
+        <a class="navbar-brand" href="mailto:wadventure@gmail.com"><i class="pi pi-envelope"></i> wadventure@gmail.com</a>
       </div>
-    </ng-template>
-  </div>
-</nav>
-
-<nav class="navbar navbar-expand-lg navbar-light navbar-down bg-light">
-  <div class="container-fluid d-flex justify-content-between">
-    <a class="navbar-brand" style="margin-left: 4rem" href="/" type="button">
-      <img src="assets/logos/LOGO-CLIENT.png"
-           height="45"
-           alt="LOGO">
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-around w-75">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Start</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="navbarDropdownOferta" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Oferta
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownOferta">
-            <li><a class="dropdown-item" href="/kursy">Kursy</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/eventy">Eventy</a></li>
-          </ul>
-        </li>
-        <ng-container class="container-end" *ngIf="authService.isLogged(); else notLogged2">
-          <li class="nav-item">
-            <a class="nav-link active" href="/nauka">E-learning</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="/moje-kursy">Moje kursy</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="/moje-eventy">Moje eventy</a>
-          </li>
-        </ng-container>
-        <ng-template #notLogged2>
-          <li class="nav-item">
-            <a class="nav-link disabled" tabindex="-1" aria-disabled="true">E-learning</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" tabindex="-1" aria-disabled="true">Moje kursy</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" tabindex="-1" aria-disabled="true">Moje eventy</a>
-          </li>
-        </ng-template>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="navbarDropdownFirma" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            O firmie
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownFirma">
-            <li><a class="dropdown-item" href="/kontakt">Kontakt</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/faq">Najczęściej zadawane pytania</a></li>
-          </ul>
-        </li>
-      </ul>
+      <div class="container-end container-right" *ngIf="authService.isLogged(); else notLogged">
+        <a class="navbar-brand" href="/wyloguj"><i class="pi pi-undo"></i> Wyloguj się</a>
+        <a class="navbar-brand" href="/profil"><i class="pi pi-user"></i> Mój profil</a>
+      </div>
+      <ng-template #notLogged>
+        <div class="container-end container-right">
+            <a class="navbar-brand" href="/zaloguj"><i class="pi pi-users"></i> Zaloguj się</a>
+            <a class="navbar-brand" href="/zarejestruj"><i class="pi pi-user-plus"></i> Zarejestruj</a>
+        </div>
+      </ng-template>
     </div>
-  </div>
+  </nav>
+
+  <nav class="navbar navbar-expand-lg navbar-light navbar-down bg-light">
+    <div class="container-fluid d-flex justify-content-between">
+      <a class="navbar-brand" style="margin-left: 4rem" href="/" type="button">
+        <img src="assets/logos/LOGO-CLIENT.png"
+             height="45"
+             alt="LOGO">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-around w-75">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Start</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownOferta" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Oferta
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownOferta">
+              <li><a class="dropdown-item" href="/kursy">Kursy</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/eventy">Eventy</a></li>
+            </ul>
+          </li>
+          <ng-container class="container-end" *ngIf="authService.isLogged(); else notLogged2">
+            <li class="nav-item">
+              <a class="nav-link active" href="/nauka">E-learning</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/moje-kursy">Moje kursy</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/moje-eventy">Moje eventy</a>
+            </li>
+          </ng-container>
+          <ng-template #notLogged2>
+            <li class="nav-item">
+              <a class="nav-link disabled" tabindex="-1" aria-disabled="true">E-learning</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" tabindex="-1" aria-disabled="true">Moje kursy</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" tabindex="-1" aria-disabled="true">Moje eventy</a>
+            </li>
+          </ng-template>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownFirma" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              O firmie
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownFirma">
+              <li><a class="dropdown-item" href="/kontakt">Kontakt</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/faq">Najczęściej zadawane pytania</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 </nav>
