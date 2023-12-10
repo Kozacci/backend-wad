@@ -1,0 +1,9 @@
+.wallpaper {
+  width: 100%;
+}
+
+/* Dla przeglądarek opartych na WebKit/Blink jak Chrome, Safari, nowsze wersje Edge */
+::-webkit-scrollbar {
+  display: none;
+}
+
