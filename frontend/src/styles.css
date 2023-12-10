@@ -1,6 +1,18 @@
 @import "primeicons/primeicons.css";
 @import "~node_modules/bootstrap/dist/css/bootstrap.css";
 
+:root {
+  /** client **/
+  --white-grey: #E8F0F2;
+  --white-blue: #A2DBFA;
+  --grey-blue: #80B3CB;
+  --blue: #39A2DB;
+  --dark-blue: #053742;
+  /** admin **/
+  --admin-header: #22719B;
+  --primary-button-color: #51DE79;
+}
+
 *, html, body {
   box-sizing: border-box;
   margin: 0;
