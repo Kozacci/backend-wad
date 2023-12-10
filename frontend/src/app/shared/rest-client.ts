@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {ParticipantEntityDTO, ParticipantLoginDTO, ParticipantRegisterDTO} from "./dto";
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {Category, ParticipantEntityDTO, ParticipantLoginDTO, ParticipantRegisterDTO, QuestionFilterDTO} from "./dto";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -8,7 +8,7 @@ import {Observable} from "rxjs";
 })
 export class RestClient {
 
-  apiUrl = 'http://localhost:8080';
+  apiUrl = 'http://localhost:8080/api';
 
   constructor(
     private readonly http: HttpClient
@@ -27,4 +27,30 @@ export class RestClient {
     return this.http.post<void>(`${this.apiUrl}/auth/logout`, {});
   }
 
+  getQuestionsByFilters(id: number, content: string, category: Category, sortBy: string): Observable<QuestionFilterDTO[]> {
+    let params = new HttpParams();
+    if (this.walidacjaUtilsNiePusty(id)) {
+      params = params.append('id', id);
+    }
+    params = params.append('id', 100);
+    if (this.walidacjaUtilsNiePusty(content)) {
+      params = params.append('content', content);
+    }
+    if (this.walidacjaUtilsNiePusty(category)) {
+      params = params.append('category', category);
+    }
+    if (this.walidacjaUtilsNiePusty(sortBy)) {
+      params = params.append('sortBy', sortBy);
+    }
+    return this.http.get<QuestionFilterDTO[]>(`${this.apiUrl}/questions/filter-by`, {params} );
+  }
+
+
+  private walidacjaUtilsNiePusty(value: any): boolean {
+    return !this.pusty(value);
+  }
+
+  private pusty(value: any): boolean {
+    return value == null || value === undefined;
+  }
 }
