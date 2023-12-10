@@ -11,11 +11,7 @@
   }
 }
 
-th, td {
-  padding: 6px;
-}
-
 th {
-  height: 5vh;
+  background-color: #E8F0F2;
 }
 
