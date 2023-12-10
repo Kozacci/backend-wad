@@ -11,6 +11,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import pl.uwm.wateradventure.services.participants.security.JWTAuthenticationFilter;
 
 import java.util.Arrays;
@@ -41,6 +44,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity
+                .cors(cors -> cors.configurationSource(corsConfiguration()))
                 .csrf(AbstractHttpConfigurer::disable)
                 // whitelist
                 .authorizeHttpRequests(
@@ -62,6 +66,40 @@ public class SecurityConfig {
                                 )
                 );
         return httpSecurity.build();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfiguration() {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.setAllowCredentials(true);
+        corsConfiguration.setAllowedOrigins(
+                Arrays.asList(
+                        "http://localhost:4200",
+                        "http://localhost:4200/login")
+        );
+        corsConfiguration.setAllowedHeaders(
+                Arrays.asList(
+                        "Origin", "Access-Control-Allow-Origin", "Content-Type",
+                        "Accept", "Authorization", "Origin, Accept", "X-Requested-With",
+                        "Access-Control-Request-Method", "Access-Control-Request-Headers")
+        );
+        corsConfiguration.setExposedHeaders(
+                Arrays.asList(
+                        "Origin", "Content-Type", "Accept", "Authorization",
+                        "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials")
+        );
+        corsConfiguration.setAllowedMethods(
+                Arrays.asList(
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "DELETE",
+                        "OPTIONS",
+                        "PATCH")
+        );
+        UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
+        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
+        return urlBasedCorsConfigurationSource;
     }
 
 }
