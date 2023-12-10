@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {Category, QuestionFilterDTO} from "../../shared/dto";
+import {Category, ParticipantLoginDTO, QuestionFilterDTO} from "../../shared/dto";
+import {RestClient} from "../../shared/rest-client";
 
 @Component({
   selector: 'app-admin-questions',
@@ -7,6 +8,34 @@ import {Category, QuestionFilterDTO} from "../../shared/dto";
   styleUrls: ['./admin-questions.component.css']
 })
 export class AdminQuestionsComponent {
+
+  id!: number;
+  content!: string;
+  category!: Category;
+  sortBy!: string;
+
+  constructor(private restClient: RestClient) {
+  }
+
+  selectQuestion(question: any): void {
+    console.log(question);
+  }
+
+  findQuestions(): void {
+    this.restClient.getQuestionsByFilters(this.id, this.content, this.category, this.sortBy)
+      .subscribe((val) => {
+        console.log("consoleLoguje:" + val)
+        this.questions = val;
+      });
+  }
+
+  logowanieDoWywalenia(): void {
+    let parti : ParticipantLoginDTO = <ParticipantLoginDTO> {
+      email: 'admin@email.com',
+      password: 'admin123'
+    }
+    this.restClient.login(parti).subscribe((response) => console.log(response));
+  }
 
   questions: QuestionFilterDTO[] = [
     {
@@ -58,13 +87,5 @@ export class AdminQuestionsComponent {
       thirdAnswer: "Odpowiedź C"
     },
   ];
-
-  consoleLoguj(): void {
-    console.log("działa :D ");
-  }
-
-  selectQuestion(question: any): void {
-    console.log(question);
-  }
 
 }
