@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AdminNavbarComponent {
 
-  isExtended: boolean = true;
+  isExtended: boolean = false;
 
   changeIsExtended() {
     this.isExtended = !this.isExtended;

@@ -94,3 +94,12 @@ export interface ParticipantRegisterDTO {
   password: string,
   phoneNumber: string
 }
+
+export interface QuestionFilterDTO {
+  id: number,
+  content: string,
+  category: Category,
+  firstAnswer: string,
+  secondAnswer: string,
+  thirdAnswer: string
+}

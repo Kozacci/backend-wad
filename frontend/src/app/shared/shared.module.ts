@@ -9,6 +9,9 @@ import {SecondaryButtonComponent} from './secondary-button/secondary-button.comp
 import {ToastModule} from "primeng/toast";
 import {MenubarModule} from "primeng/menubar";
 import {HttpClientModule} from "@angular/common/http";
+import {TableModule} from "primeng/table";
+import {StyleClassModule} from "primeng/styleclass";
+import {RippleModule} from "primeng/ripple";
 
 
 @NgModule({
@@ -35,6 +38,9 @@ import {HttpClientModule} from "@angular/common/http";
     ToastModule,
     MenubarModule,
     HttpClientModule,
+    TableModule,
+    StyleClassModule,
+    RippleModule,
   ]
 })
 export class SharedModule { }

@@ -13,7 +13,7 @@
       <div class="col-md-3">
         <div class="mb-3">
           <label for="" class="form-label">Numer pytania (ID)</label>
-          <input type="number" class="form-control" id="" placeholder="101">
+          <input type="text" class="form-control" id="" placeholder="101">
         </div>
       </div>
 
@@ -53,6 +53,39 @@
       <div class="col-sm-2 d-flex justify-content-start ps-2">
         <secondary-button [label]="'Dodaj pytanie'"></secondary-button>
       </div>
+    </div>
+
+    <div class="row mt-5">
+      <p-table
+        [value]="questions"
+        styleClass="p-datatable-gridlines p-datatable-resizable"
+        [tableStyle]="{'min-width': '50rem' }"
+        [rowHover]="true"
+        [resizableColumns]>
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th></th>
+            <th>Numer pytania</th>
+            <th>Treść pytania</th>
+            <th>Dział</th>
+            <th>Odp A</th>
+            <th>Odp B</th>
+            <th>Odp C</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-question>
+          <tr>
+            <td class="d-flex justify-content-center"><p-button icon="pi pi-heart" [rounded]="true" [outlined]="true" (onClick)="selectQuestion(question)"></p-button> </td>
+            <td>{{question.id}}</td>
+            <td>{{question.content}}</td>
+            <td>{{question.category}}</td>
+            <td>{{question.firstAnswer}}</td>
+            <td>{{question.secondAnswer}}</td>
+            <td>{{question.thirdAnswer}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
 
   </div>

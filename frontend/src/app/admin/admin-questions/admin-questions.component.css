@@ -10,3 +10,12 @@
     justify-content: start !important;
   }
 }
+
+th, td {
+  padding: 6px;
+}
+
+th {
+  height: 5vh;
+}
+
