@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {MenuItem} from "primeng/api";
 import {AuthService} from "../../shared/services/auth/auth.service";
+import {PathService} from "../../shared/services/path.service";
 
 @Component({
   selector: 'app-client-navbar',
@@ -10,7 +10,8 @@ import {AuthService} from "../../shared/services/auth/auth.service";
 export class ClientNavbarComponent implements OnInit {
 
   constructor(
-    public authService: AuthService
+    public authService: AuthService,
+    public readonly pathService: PathService
   ) {}
 
   ngOnInit(): void {
