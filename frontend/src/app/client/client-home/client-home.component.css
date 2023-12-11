@@ -1,3 +1,7 @@
+body {
+  background-color: var(--white-grey);
+}
+
 .wallpaper {
   width: 100%;
   position: relative;
@@ -112,4 +116,53 @@
   to {
     transform: translateX(0);
   }
+}
+
+
+.course-item {
+  position: relative;
+}
+
+.course-item-link:hover .course-item .course-info {
+  background-color: rgba(5, 55, 65, 0.85);
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.course-image {
+  height: 26rem;
+  display: block;
+}
+
+.course-info {
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 70%;
+  background-color: white;
+  color: rgba(5, 55, 65, 0.80);
+  padding: 1rem;
+}
+
+.course-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.course-price {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #94dc94;
+}
+
+.carousel-courses {
+  margin: 0 8rem;
+  max-width: calc(100% - 16rem);
+}
+
+.learn-more {
+  margin-top: -1.5rem;
+  margin-left: 13rem;
+  position: absolute;
+  font-size: 0.8rem;
 }

@@ -1,21 +1,87 @@
 <app-client-navbar></app-client-navbar>
-<img class="wallpaper" src="assets/images/client/overlay/Main-Wallpaper.jpg" alt="Wallpaper">
 
-<div class="on-background">
-  <div class="left-side">
-    <div class="line-left"></div>
-    <div class="text-left">
-      <h1 class="h1-left">Kursy<br> żeglarskie</h1>
-      <p>Otrzymaj<br>patent żeglarski</p>
-      <button type="button" class="btn btn-info button-left">Kursy</button>
+<body>
+  <img class="wallpaper" src="assets/images/client/overlay/Main-Wallpaper.jpg" alt="Wallpaper">
+
+  <div class="on-background">
+    <div class="left-side">
+      <div class="line-left"></div>
+      <div class="text-left">
+        <h1 class="h1-left">Kursy<br> żeglarskie</h1>
+        <p>Otrzymaj<br>patent żeglarski</p>
+        <button type="button" class="btn btn-dark button-left">Kursy</button>
+      </div>
+    </div>
+    <div class="right-side">
+      <div class="text-right">
+        <h1 class="h1-right">Organizacja<br> rejsów</h1>
+        <p>Przeżyj<br>niesamowite chwile</p>
+        <button type="button" class="btn btn-info button-right">Eventy</button>
+      </div>
+      <div class="line-right"></div>
     </div>
   </div>
-  <div class="right-side">
-    <div class="text-right">
-      <h1 class="h1-right">Organizacja<br> rejsów</h1>
-      <p>Przeżyj<br>niesamowite chwile</p>
-      <button type="button" class="btn btn-info button-right">Eventy</button>
-    </div>
-    <div class="line-right"></div>
+
+  <div style="text-align: center">
+    <br>
+    <h1>Dostępne kursy</h1>
+    <br>
   </div>
-</div>
+
+  <div class="carousel-courses">
+    <p-carousel
+      class="p-carousel"
+      [value]="courses"
+      [numVisible]="3"
+      [numScroll]="1"
+      [circular]="true"
+      [autoplayInterval]=4000
+      [responsiveOptions]="responsiveOptionsForCarousel">
+      <ng-template pTemplate="item" let-course>
+        <a routerLink="{{ course.url }}" class="course-item-link">
+        <div class="course-item">
+          <img src="{{ course.image }}" alt="{{ course.name }}" class="course-image"/>
+            <div class="course-info">
+              <div class="course-title">{{ course.name }}</div>
+              <div class="course-price">{{ course.cost }}</div>
+              <div class="course-status">{{ course.status }}</div>
+              <div class="learn-more"><i class="pi pi-info-circle"></i> Dowiedz się więcej</div>
+            </div>
+        </div>
+        </a>
+      </ng-template>
+    </p-carousel>
+  </div>
+
+  <div style="text-align: center">
+    <br>
+    <h1>Dostępne eventy</h1>
+    <br>
+  </div>
+
+  <div class="carousel-courses">
+    <p-carousel
+      class="p-carousel"
+      [value]="events"
+      [numVisible]="3"
+      [numScroll]="1"
+      [circular]="true"
+      [autoplayInterval]=4000
+      [responsiveOptions]="responsiveOptionsForCarousel">
+      <ng-template pTemplate="item" let-event>
+        <a routerLink="{{ event.url }}" class="course-item-link">
+          <div class="course-item">
+            <img src="{{ event.image }}" alt="{{ event.name }}" class="course-image"/>
+            <div class="course-info">
+              <div class="course-title">{{ event.name }}</div>
+              <div class="course-price">{{ event.cost }}</div>
+              <div class="course-status">{{ event.status }}</div>
+              <div class="learn-more"><i class="pi pi-info-circle"></i> Dowiedz się więcej</div>
+            </div>
+          </div>
+        </a>
+      </ng-template>
+    </p-carousel>
+  </div>
+
+</body>
