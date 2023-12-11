@@ -5,6 +5,10 @@ import {ClientHomeComponent} from './client-home/client-home.component';
 import {ClientNavbarComponent} from './client-navbar/client-navbar.component';
 import {SharedModule} from "../shared/shared.module";
 import {AnimateModule} from "primeng/animate";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatButtonModule} from "@angular/material/button";
+import {CarouselModule} from "primeng/carousel";
+
 @NgModule({
   declarations: [
     ClientLayoutComponent,
@@ -15,10 +19,14 @@ import {AnimateModule} from "primeng/animate";
     ClientLayoutComponent,
   ],
     imports: [
-        SharedModule,
-        CommonModule,
-        NgOptimizedImage,
-        AnimateModule,
+      SharedModule,
+      CommonModule,
+      NgOptimizedImage,
+      AnimateModule,
+      MatMenuModule,
+      MatButtonModule,
+      CarouselModule,
+
     ]
 })
 export class ClientModule { }
