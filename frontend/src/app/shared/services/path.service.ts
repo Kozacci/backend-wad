@@ -17,4 +17,9 @@ export class PathService {
   getCurrentPath(): Observable<string> {
     return this.currentPath.asObservable();
   }
+
+  navigate(url: string): void {
+    this.router.navigateByUrl(url);
+  }
+
 }
