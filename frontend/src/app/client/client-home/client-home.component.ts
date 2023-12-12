@@ -100,11 +100,6 @@ export class ClientHomeComponent implements OnInit {
 
   responsiveOptionsForCarousel: any = [
     {
-      breakpoint: '1400px',
-      numVisible: 3,
-      numScroll: 3
-    },
-    {
       breakpoint: '1220px',
       numVisible: 2,
       numScroll: 2

@@ -9,14 +9,14 @@
       <div class="text-left">
         <h1 class="h1-left">Kursy<br> żeglarskie</h1>
         <p>Otrzymaj<br>patent żeglarski</p>
-        <button type="button" class="btn btn-dark button-left">Kursy</button>
+        <button type="button" class="btn btn-light button-left">Kursy</button>
       </div>
     </div>
     <div class="right-side">
       <div class="text-right">
         <h1 class="h1-right">Organizacja<br> rejsów</h1>
         <p>Przeżyj<br>niesamowite chwile</p>
-        <button type="button" class="btn btn-info button-right">Eventy</button>
+        <button type="button" class="btn btn-light button-right">Eventy</button>
       </div>
       <div class="line-right"></div>
     </div>
@@ -40,7 +40,7 @@
       <ng-template pTemplate="item" let-course>
         <a routerLink="{{ course.url }}" class="course-item-link">
         <div class="course-item">
-          <img src="{{ course.image }}" alt="{{ course.name }}" class="course-image"/>
+          <img src="{{ course.image }}" alt="{{ course.name }}" class="responsive-img" style="min-width: 180px;"/>
             <div class="course-info">
               <div class="course-title">{{ course.name }}</div>
               <div class="course-price">{{ course.cost }}</div>
@@ -71,7 +71,7 @@
       <ng-template pTemplate="item" let-event>
         <a routerLink="{{ event.url }}" class="course-item-link">
           <div class="course-item">
-            <img src="{{ event.image }}" alt="{{ event.name }}" class="course-image"/>
+            <img src="{{ event.image }}" alt="{{ event.name }}" class="responsive-img"/>
             <div class="course-info">
               <div class="course-title">{{ event.name }}</div>
               <div class="course-price">{{ event.cost }}</div>

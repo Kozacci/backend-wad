@@ -92,7 +92,6 @@ body {
 
 .button-left:hover {
   background-color: var(--blue);
-  color: var(--dark-blue);
 }
 
 .button-right:hover {
@@ -124,9 +123,9 @@ body {
 }
 
 .course-item-link:hover .course-item .course-info {
-  background-color: rgba(5, 55, 65, 0.85);
+  background-color: rgba(5, 55, 65, 0.92);
   color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
 .course-image {
@@ -138,7 +137,7 @@ body {
   position: absolute;
   bottom: 0;
   left: 10%;
-  width: 70%;
+  width: 85%;
   background-color: white;
   color: rgba(5, 55, 65, 0.80);
   padding: 1rem;
@@ -161,8 +160,85 @@ body {
 }
 
 .learn-more {
-  margin-top: -1.5rem;
-  margin-left: 13rem;
+  margin-top: -1rem;
+  margin-left: 10rem;
   position: absolute;
   font-size: 0.8rem;
+}
+
+@media (max-width: 1440px) {
+  .learn-more {
+    margin-left: 6rem;
+  }
+}
+
+@media (max-width: 1000px) {
+  .on-background .left-side .line-left, .text-left h1, p {
+    display: none;
+  }
+  .on-background .right-side .line-right, .text-right h1, p {
+    display: none;
+  }
+  .on-background .button-left, .button-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+    width: 5rem;
+    height: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-courses p-carousel::ng-deep {
+    height: 375px;
+  }
+  .course-item .course-image::ng-deep {
+    height: 14rem;
+    width: 100%;
+    object-fit: cover;
+  }
+  .course-item .course-info::ng-deep {
+    left: 0;
+    min-width: 80%;
+    padding: 0.3rem;
+    font-size: 0.6rem;
+  }
+  .course-title, .course-price, .course-status {
+    font-size: 0.5rem;
+  }
+  .learn-more::ng-deep {
+    display: none;
+  }
+  .p-carousel::ng-deep {
+    display: block;
+    align-items: center;
+    justify-content: center;
+    min-width: 350px;
+  }
+  .course-item {
+    margin-right: 10px;
+    margin-left: 30px;
+  }
+}
+
+@media (max-width: 550px) {
+  .p-carousel::ng-deep {
+    margin-left: -4rem;
+    margin-bottom: -5rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .p-carousel::ng-deep {
+    margin-left: -5rem;
+    margin-bottom: -6rem;
+  }
+}
+
+  @media (max-width: 400px) {
+    .p-carousel::ng-deep {
+      margin-left: -7rem;
+      margin-bottom: -7rem;
+    }
 }
