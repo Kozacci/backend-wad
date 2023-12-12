@@ -32,9 +32,9 @@ public class SecurityConfig {
                     "api/events/**",
                     "api/questions/**",
                     "api/participant-courses/**",
-                    "/api/learning/**"
+                    "api/learning/**"
             };
-    private static final String[] ADMIN_URLS = { "api/admin/**" + Arrays.toString(CLIENT_URLS) };
+    private static final String[] ADMIN_URLS = { "api/admin/**" + Arrays.toString(CLIENT_URLS) }; // TODO add api/admin for admin's rests
 
     private final JWTAuthenticationFilter jwtAuthenticationFilter;
     private final AuthenticationProvider authenticationProvider;
