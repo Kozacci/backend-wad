@@ -322,8 +322,56 @@ body {
   margin-bottom: 10px;
 }
 
+
 @media (max-width: 500px) {
+  .why-wadventure-left-side, .why-wadventure-right-side {
+    margin-top: 2rem;
+  }
   .why-wadventure-left-line, .why-wadventure-right-line {
     display: none;
   }
+}
+
+.learn-from {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--blue);
+  padding: 30px;
+}
+
+.learn-from-left {
+  color: white;
+  text-align: center;
+  width: 45%;
+}
+
+.learn-from-right {
+  width: 70%;
+}
+
+.learn-from-img {
+  border-radius: 50%;
+  width: 25vh;
+  height: 25vh;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.learn-from-right h1 {
+  color: white;
+  font-size: xx-large;
+  margin-top: -4rem;
+  margin-bottom: 4rem;
+}
+
+.learn-from-right p {
+  color: white;
+  margin-bottom: 20px;
+}
+
+.learn-from-more {
+  background-color: white;
+  color: var(--dark-blue);
+  text-align: right;
 }
