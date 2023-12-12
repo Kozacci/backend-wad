@@ -18,7 +18,7 @@ export class ClientHomeComponent implements OnInit {
     },
     {
       name: 'Jachtowy sternik morski',
-      image: 'assets/images/client/overlay/courses/course-4.png',
+      image: 'assets/images/client/overlay/courses/course-2.png',
       cost: 'od 850 zł za osobę',
       status: 'Nowość',
       url: '/kursy/2'
@@ -32,21 +32,21 @@ export class ClientHomeComponent implements OnInit {
     },
     {
       name: 'Żeglarz jachtowy',
-      image: 'assets/images/client/overlay/courses/course-5.png',
+      image: 'assets/images/client/overlay/courses/course-4.png',
       cost: 'od 650 zł za osobę',
       status: 'Popularne',
       url: '/kursy/4'
     },
     {
       name: 'Warsztaty nawigacyjne',
-      image: 'assets/images/client/overlay/courses/course-6.png',
+      image: 'assets/images/client/overlay/courses/course-5.png',
       cost: 'od 350 zł za osobę',
       status: 'Warsztat',
       url: '/kursy/5'
     },
     {
       name: 'Rejsy stażowe',
-      image: 'assets/images/client/overlay/courses/course-7.png',
+      image: 'assets/images/client/overlay/courses/course-6.png',
       cost: 'od 450 zł za osobę',
       status: 'Staż',
       url: '/kursy/6'
@@ -56,42 +56,42 @@ export class ClientHomeComponent implements OnInit {
   events = [
     {
       name: 'Wieczór panieński',
-      image: 'assets/images/client/overlay/courses/course-2.png',
+      image: 'assets/images/client/overlay/events/event-1.png',
       cost: 'od 350 zł za osobę',
       status: 'Popularne',
       url: '/eventy/1'
     },
     {
       name: 'Rejs o zachodzie słońca',
-      image: 'assets/images/client/overlay/courses/course-2.png',
+      image: 'assets/images/client/overlay/events/event-2.png',
       cost: 'od 150 zł za osobę',
       status: 'Nowość',
       url: '/eventy/2'
     },
     {
       name: 'Wieczór kawalerski',
-      image: 'assets/images/client/overlay/courses/course-2.png',
+      image: 'assets/images/client/overlay/events/event-3.png',
       cost: 'od 350 zł za osobę',
       status: 'Nowość',
       url: '/eventy/3'
     },
     {
       name: 'Rejs widokowy',
-      image: 'assets/images/client/overlay/courses/course-2.png',
+      image: 'assets/images/client/overlay/events/event-x.jpg',
       cost: 'od 250 zł za osobę',
       status: 'Popularne',
       url: '/eventy/4'
     },
     {
       name: 'Event dla firmy',
-      image: 'assets/images/client/overlay/courses/course-2.png',
+      image: 'assets/images/client/overlay/events/event-5.png',
       cost: 'od 350 zł za osobę',
       status: 'Warsztat',
       url: '/eventy/5'
     },
     {
       name: 'Wynajem skutera',
-      image: 'assets/images/client/overlay/courses/course-2.png',
+      image: 'assets/images/client/overlay/events/event-6.png',
       cost: 'od 200 zł za osobę',
       status: 'Najem',
       url: '/eventy/6'
