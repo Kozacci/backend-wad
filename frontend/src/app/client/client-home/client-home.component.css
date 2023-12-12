@@ -117,7 +117,6 @@ body {
   }
 }
 
-
 .course-item {
   position: relative;
 }
@@ -222,7 +221,7 @@ body {
   }
   .learn-more i {
     display: flex;
-    align-items: end;
+    align-items: flex-end;
     margin-left: 3rem;
     font-size: 1rem;
   }
@@ -258,12 +257,73 @@ body {
   }
 }
 
-  @media (max-width: 400px) {
-    .p-carousel {
-      margin-left: -7rem;
-      margin-bottom: -7rem;
-    }
-    .course-info {
-      width: 85%;
-    }
+@media (max-width: 400px) {
+  .p-carousel {
+    margin-left: -7rem;
+    margin-bottom: -7rem;
+  }
+  .course-info {
+    width: 85%;
+  }
+}
+
+.why-wadventure {
+  width: 100%;
+  height: 50vh;
+  background-color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.why-wadventure-logo img {
+  max-width: 100px;
+  margin-bottom: 0.6rem;
+}
+
+.why-wadventure h1 {
+  font-weight: bold;
+  margin-bottom: -2rem;
+}
+
+.why-wadventure-content {
+  display: flex;
+  justify-content: space-around;
+}
+
+.why-wadventure-left-side, .why-wadventure-right-side {
+  margin-top: 6rem;
+  display: flex;
+  align-items: center;
+  color: var(--dark-blue);
+}
+
+.why-wadventure-right-side {
+  color: var(--blue);
+}
+
+.why-wadventure-left-line, .why-wadventure-right-line {
+  border-left: 3px solid var(--dark-blue);
+  height: 145px;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.why-wadventure-right-line {
+  border-left: 3px solid var(--blue);
+}
+
+.why-wadventure-points {
+  text-align: left;
+  padding: 0;
+  margin-left: 1rem;
+}
+
+.why-wadventure-points li {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 500px) {
+  .why-wadventure-left-line, .why-wadventure-right-line {
+    display: none;
+  }
 }
