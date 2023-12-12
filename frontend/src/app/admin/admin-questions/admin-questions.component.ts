@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Category, ParticipantLoginDTO, QuestionFilterDTO} from "../../shared/dto";
 import {RestClient} from "../../shared/rest-client";
+import {AuthService} from "../../shared/services/auth/auth.service";
 
 @Component({
   selector: 'app-admin-questions',
@@ -14,7 +15,7 @@ export class AdminQuestionsComponent {
   category!: Category;
   sortBy!: string;
 
-  constructor(private restClient: RestClient) {
+  constructor(private restClient: RestClient, private authService: AuthService) {
   }
 
   selectQuestion(question: any): void {
@@ -34,7 +35,7 @@ export class AdminQuestionsComponent {
       email: 'admin@email.com',
       password: 'admin123'
     }
-    this.restClient.login(parti).subscribe((response) => console.log(response));
+    this.authService.login(parti);
   }
 
   questions: QuestionFilterDTO[] = [
