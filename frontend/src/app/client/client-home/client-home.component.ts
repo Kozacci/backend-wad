@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../shared/services/auth/auth.service";
+import {PathService} from "../../shared/services/path.service";
 
 @Component({
   selector: 'app-client-home',
@@ -111,7 +112,9 @@ export class ClientHomeComponent implements OnInit {
     }
   ];
 
-  constructor(private readonly authService: AuthService)
+  constructor(
+    private readonly authService: AuthService,
+    public readonly pathService: PathService)
   {}
 
   ngOnInit() {

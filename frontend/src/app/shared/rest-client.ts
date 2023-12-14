@@ -20,11 +20,15 @@ export class RestClient {
   }
 
   login(participantLoginDTO: ParticipantLoginDTO): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/auth/login`, participantLoginDTO, { observe: 'response' });
+    return this.http.post<any>(`${this.apiUrl}/auth/login`, participantLoginDTO, { withCredentials: true });
   }
 
   logout(): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/auth/logout`, {});
+  }
+
+  getCourses(): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/courses`, {}, { withCredentials: true });
   }
 
   getQuestionsByFilters(id: number, content: string, category: Category, sortBy: string): Observable<QuestionFilterDTO[]> {
@@ -42,7 +46,7 @@ export class RestClient {
     if (this.walidacjaUtilsNiePusty(sortBy)) {
       params = params.append('sortBy', sortBy);
     }
-    return this.http.get<QuestionFilterDTO[]>(`${this.apiUrl}/questions/filter-by`, {params} );
+    return this.http.get<QuestionFilterDTO[]>(`${this.apiUrl}/questions/filter-by`, {params, withCredentials: true } );
   }
 
 

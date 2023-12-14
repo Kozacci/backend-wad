@@ -122,6 +122,7 @@ body {
 }
 
 .course-item-link:hover .course-item .course-info {
+  transition: background-color 0.2s;
   background-color: rgba(5, 55, 65, 0.92);
   color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
@@ -322,8 +323,135 @@ body {
   margin-bottom: 10px;
 }
 
+
 @media (max-width: 500px) {
+  .why-wadventure-left-side, .why-wadventure-right-side {
+    margin-top: 2rem;
+    font-size: small;
+  }
   .why-wadventure-left-line, .why-wadventure-right-line {
     display: none;
+  }
+}
+
+.learn-from {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--blue);
+  padding: 30px;
+}
+
+.learn-from-left {
+  color: white;
+  text-align: center;
+  width: 45%;
+}
+
+.learn-from-right {
+  width: 70%;
+}
+
+.learn-from-img {
+  border-radius: 50%;
+  width: 25vh;
+  height: 25vh;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.learn-from-right h1 {
+  color: white;
+  font-size: xx-large;
+  margin-top: -4rem;
+  margin-bottom: 4rem;
+}
+
+.learn-from-right p {
+  color: white;
+  width: 75%;
+  margin-left: 0;
+  margin-bottom: 20px;
+}
+
+.learn-from-more {
+  background-color: white;
+  color: var(--dark-blue);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: auto;
+}
+
+@media(max-width: 600px) {
+  .learn-from-img {
+    width: 15vh;
+    height: 15vh;
+  }
+  .learn-from-right h1 {
+    font-size: large;
+  }
+  .learn-from-left h2 {
+    font-size: large;
+  }
+}
+
+.locations-title {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.locations-flex {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.location {
+  width: 45%;
+  margin-left: 25.0vh;
+  margin-bottom: 3rem;
+  margin-top: 0.5rem;
+}
+
+.location-content {
+  display: flex;
+  align-items: stretch;
+}
+
+.location-img {
+  transition: opacity 0.3s;
+  width: 40%;
+  height: 40%;
+}
+
+.location-info {
+  transition: background-color 0.3s;
+  background-color: white;
+  text-align: left;
+  padding: 1rem;
+  margin: 0 10px;
+}
+
+.location-content:hover .location-img,
+.location-content:hover .location-info {
+  opacity: 0.6;
+}
+
+.location h3 {
+  font-size: large;
+  font-weight: bolder;
+}
+
+.location h3, p {
+  margin-left: 1rem;
+}
+
+@media(max-width: 1000px) {
+  .location {
+    margin: 0 2.5%;
   }
 }
