@@ -10,12 +10,14 @@ import {MatButtonModule} from "@angular/material/button";
 import {CarouselModule} from "primeng/carousel";
 import {RatingModule} from "primeng/rating";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { ClientFooterComponent } from './client-footer/client-footer.component';
 
 @NgModule({
   declarations: [
     ClientLayoutComponent,
     ClientHomeComponent,
-    ClientNavbarComponent
+    ClientNavbarComponent,
+    ClientFooterComponent
   ],
   exports: [
     ClientLayoutComponent,

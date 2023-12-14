@@ -1,4 +1,4 @@
-/* TODO - create media mobile variable for smaller devices*/
+/* TODO - create media mobile variable for smaller devices */
 body {
   background-color: var(--white-grey);
 }
@@ -538,9 +538,4 @@ body {
 .reviews-disclaimer {
   font-size: 0.75em;
   color: #666;
-  /*position: absolute;*/
-  /*right: 0;*/
-  /*bottom: 0;*/
-  /*padding-right: 10px;*/
-  /*padding-bottom: 10px;*/
 }
