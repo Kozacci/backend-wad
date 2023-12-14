@@ -350,7 +350,7 @@ body {
 }
 
 .learn-from:hover {
-  background-color: rgba(57, 162, 219, 0.7);
+  background-color: rgba(25, 101, 143, 0.7);
 }
 
 .learn-from-left {
@@ -374,7 +374,7 @@ body {
 .learn-from-right h1 {
   color: white;
   font-size: xx-large;
-  margin-top: -4rem;
+  margin-top: -2rem;
   margin-bottom: 4rem;
 }
 
