@@ -159,4 +159,28 @@
     </div>
   </div>
 
+  <div class="reviews-carousel">
+    <h2>Sprawdź opinie naszych usług</h2>
+    <p-carousel [value]="reviews"
+                [numVisible]="3"
+                [numScroll]="1"
+                [circular]="true"
+                [autoplayInterval]=3000
+                [responsiveOptions]="responsiveOptionsForCarousel">
+      <ng-template let-review pTemplate="item">
+        <div class="review-item">
+            <p-rating [(ngModel)]="review.stars" [stars]=5 [readonly]="true" [cancel]="false"></p-rating>
+            <h3>{{ review.name }}</h3>
+            <p class="review-date">{{ review.date }}</p>
+            <p class="review-content">{{ review.content }}</p>
+        </div>
+      </ng-template>
+    </p-carousel>
+    <p class="reviews-disclaimer">
+      * Wszystkie opinie pochodzą ze strony firmy Water Adventure w serwisie facebook.com
+    </p>
+  </div>
+
+<app-client-footer></app-client-footer>
+
 </body>
