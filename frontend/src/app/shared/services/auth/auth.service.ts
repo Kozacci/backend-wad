@@ -3,6 +3,7 @@ import {CookieService} from "ngx-cookie-service";
 import {MessageService} from "primeng/api";
 import {RestClient} from "../../rest-client";
 import {ParticipantLoginDTO, ParticipantRegisterDTO} from "../../dto";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,8 @@ export class AuthService {
   }
 
    // TODO
-  login(loginUser: ParticipantLoginDTO) {
-    this.restClient.login(loginUser);
+  login(loginUser: ParticipantLoginDTO): Observable<any> {
+    return this.restClient.login(loginUser);
   }
 
   // TODO

@@ -31,30 +31,21 @@ export class RestClient {
     return this.http.post<void>(`${this.apiUrl}/courses`, {}, { withCredentials: true });
   }
 
-  getQuestionsByFilters(id: number, content: string, category: Category, sortBy: string): Observable<QuestionFilterDTO[]> {
+  getQuestionsByFilters(id: number | null, content: string | null,
+                        category: string | undefined, sortBy: string | undefined): Observable<QuestionFilterDTO[]> {
     let params = new HttpParams();
-    if (this.walidacjaUtilsNiePusty(id)) {
+    if (id !== null) {
       params = params.append('id', id);
     }
-    params = params.append('id', 100);
-    if (this.walidacjaUtilsNiePusty(content)) {
+    if (content !== null  && content !== "") {
       params = params.append('content', content);
     }
-    if (this.walidacjaUtilsNiePusty(category)) {
+    if (category !== null && category !== undefined) {
       params = params.append('category', category);
     }
-    if (this.walidacjaUtilsNiePusty(sortBy)) {
+    if (sortBy !== null && sortBy !== undefined) {
       params = params.append('sortBy', sortBy);
     }
     return this.http.get<QuestionFilterDTO[]>(`${this.apiUrl}/questions/filter-by`, {params, withCredentials: true } );
-  }
-
-
-  private walidacjaUtilsNiePusty(value: any): boolean {
-    return !this.pusty(value);
-  }
-
-  private pusty(value: any): boolean {
-    return value == null || value === undefined;
   }
 }
