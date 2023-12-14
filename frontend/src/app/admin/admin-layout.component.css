@@ -11,3 +11,10 @@
   height: inherit;
   width: auto;
 }
+
+@media (max-width: 770px) {
+  .site {
+    left: 0;
+    width: 100vw;
+  }
+}

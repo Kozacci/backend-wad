@@ -30,3 +30,9 @@
   justify-content: center;
   align-items: start;
 }
+
+@media (max-width: 770px) {
+  .sidebar {
+    display: none;
+  }
+}

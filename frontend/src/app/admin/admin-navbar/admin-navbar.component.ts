@@ -21,9 +21,4 @@ export class AdminNavbarComponent {
     return this.isExtended ? "230px" : "75px";
   }
 
-  doNothing(): void {
-    console.log("clicked");
-  }
-
-
 }
