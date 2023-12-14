@@ -11,13 +11,17 @@ import {CarouselModule} from "primeng/carousel";
 import {RatingModule} from "primeng/rating";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ClientFooterComponent } from './client-footer/client-footer.component';
+import { Client404Component } from './client-404/client-404.component';
+import { ClientLoginComponent } from './client-login/client-login.component';
 
 @NgModule({
   declarations: [
     ClientLayoutComponent,
     ClientHomeComponent,
     ClientNavbarComponent,
-    ClientFooterComponent
+    ClientFooterComponent,
+    Client404Component,
+    ClientLoginComponent
   ],
   exports: [
     ClientLayoutComponent,
