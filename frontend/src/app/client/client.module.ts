@@ -8,6 +8,8 @@ import {AnimateModule} from "primeng/animate";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatButtonModule} from "@angular/material/button";
 import {CarouselModule} from "primeng/carousel";
+import {RatingModule} from "primeng/rating";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -18,15 +20,17 @@ import {CarouselModule} from "primeng/carousel";
   exports: [
     ClientLayoutComponent,
   ],
-    imports: [
-      SharedModule,
-      CommonModule,
-      NgOptimizedImage,
-      AnimateModule,
-      MatMenuModule,
-      MatButtonModule,
-      CarouselModule,
-
-    ]
+  imports: [
+    SharedModule,
+    CommonModule,
+    NgOptimizedImage,
+    AnimateModule,
+    MatMenuModule,
+    MatButtonModule,
+    CarouselModule,
+    RatingModule,
+    ReactiveFormsModule,
+    FormsModule,
+  ]
 })
 export class ClientModule { }
