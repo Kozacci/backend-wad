@@ -15,3 +15,35 @@ th {
   background-color: #E8F0F2;
 }
 
+:host ::ng-deep .p-dropdown {
+  width: 15vw;
+  max-width: 15vw;
+}
+
+@media (max-width: 575px) {
+  :host ::ng-deep .p-dropdown {
+    width: 70vw;
+    max-width: 70vw;
+  }
+}
+
+@media (max-width: 767px) {
+  :host ::ng-deep .p-dropdown {
+    width: 70vw;
+    max-width: 70vw;
+  }
+  .content {
+    width: 100vw;
+  }
+}
+
+.input {
+  width: 250px;
+}
+
+.to-input-end {
+  position: relative;
+  left: 12.5em;
+  bottom: -3.5em;
+  color: black;
+}

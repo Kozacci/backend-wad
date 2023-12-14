@@ -10,10 +10,10 @@ import {AuthService} from "../../shared/services/auth/auth.service";
 })
 export class AdminQuestionsComponent {
 
-  id!: number;
-  content!: string;
-  category!: Category;
-  sortBy!: string;
+  id: number | null = null;
+  content: string | null = null;
+  category: {name: string, value: string} | null = null;
+  sortBy: {name: string, value: string} | null = null;
 
   constructor(private restClient: RestClient, private authService: AuthService) {
   }
@@ -23,20 +23,34 @@ export class AdminQuestionsComponent {
   }
 
   findQuestions(): void {
-    this.restClient.getQuestionsByFilters(this.id, this.content, this.category, this.sortBy)
+    console.log("categoria: ", this.category)
+    this.restClient.getQuestionsByFilters(this.id, this.content, this.category?.name, this.sortBy?.value)
       .subscribe((val) => {
-        console.log("consoleLoguje:" + val)
         this.questions = val;
       });
   }
 
-  logowanieDoWywalenia(): void {
-    let parti : ParticipantLoginDTO = <ParticipantLoginDTO> {
-      email: 'admin@email.com',
-      password: 'admin123'
-    }
-    this.authService.login(parti);
-  }
+  categories = [
+    { name: "PRZEPISY", value: "Przepisy"},
+    { name: "PODSTAWY_LOCJI", value: "Podstawy locji"},
+    { name: "WIADOMOSCI_Z_METEOROLOGII", value: "Wiadomości z zakresu meteorologii"},
+    { name: "PODSTAWY_BUDOWY_JACHTOW", value: "Podstawy budowy jachtów motorowodnych"},
+    { name: "SILNIKI_I_UKLADY_NAPEDOWE", value: "Silniki i układy napędowe"},
+    { name: "WIADOMOSCI_Z_RATOWNICTWA_WODNEGO", value: "Wiadomości z zakresu ratownictwa wodnego"},
+    { name: "POMOCE_NAWIGACYJNE", value: "Pomoce nawigacyjne"},
+    { name: "OCHRONA_WOD_PRZED_ZANIECZYSZCZENIEM", value: "Ochrona wód przed zanieczyszczeniem"},
+    { name: "PODSTAWOWE_PRZEPISY_PRAWA", value: "Podstawowe przepisy prawa drogi na morskich i śródlądowych drogach wodnych"},
+    { name: "TEORIA_ZEGLOWANIA", value: "Teoria żeglowania"}
+  ];
+
+  sortByValues = [
+    { name: "Numer", value: "id"},
+    { name: "Treść", value: "content"},
+    { name: "Dział", value: "category"},
+    { name: "Odpowiedź A", value: "firstAnswer"},
+    { name: "Odpowiedź B", value: "secondAnswer"},
+    { name: "Odpowiedź C", value: "thirdAnswer"},
+  ]
 
   questions: QuestionFilterDTO[] = [
     {
