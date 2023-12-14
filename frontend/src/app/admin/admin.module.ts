@@ -11,6 +11,8 @@ import {AdminPassingComponent} from './admin-passing/admin-passing.component';
 import {AdminAccesesComponent} from './admin-acceses/admin-acceses.component';
 import {AdminCalendarComponent} from './admin-calendar/admin-calendar.component';
 import {FormsModule} from "@angular/forms";
+import {DropdownModule} from "primeng/dropdown";
+
 @NgModule({
   declarations: [
     AdminHomeComponent,
@@ -30,6 +32,7 @@ import {FormsModule} from "@angular/forms";
     CommonModule,
     SharedModule,
     FormsModule,
+    DropdownModule,
   ]
 })
 export class AdminModule { }
