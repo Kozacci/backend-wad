@@ -1,3 +1,4 @@
+/* TODO - create media mobile variable for smaller devices*/
 body {
   background-color: var(--white-grey);
 }
@@ -436,6 +437,33 @@ body {
   margin: 0 10px;
 }
 
+@media(max-width: 800px) {
+  .locations-flex {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .location-content {
+    margin-bottom: 1rem;
+  }
+  .location-content .location-info h3 {
+    font-size: medium;
+    font-weight: 400;
+    margin: 0;
+  }
+  .location-img {
+    border-radius: 5%;
+    width: 60%;
+    height: 60%;
+  }
+  .location-info {
+    background-color: var(--white-grey);
+  }
+  .location:last-child {
+    margin-bottom: -0.5rem;
+  }
+}
+
 .location-content:hover .location-img,
 .location-content:hover .location-info {
   opacity: 0.6;
@@ -453,5 +481,46 @@ body {
 @media(max-width: 1000px) {
   .location {
     margin: 0 2.5%;
+  }
+}
+
+.reviews-carousel {
+  text-align: center;
+}
+
+.review-item {
+  min-height: 13rem;
+  background-color: white;
+  padding: 1rem;
+  margin: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: background-color 0.3s;
+}
+
+.review-item:hover {
+  opacity: 0.7;
+}
+
+.review-date {
+  margin: 0 auto;
+  font-size: 0.8em;
+  color: #777;
+}
+
+.review-content {
+  font-size: 1em;
+  color: #555;
+}
+
+@media(max-width: 1000px) {
+  .review-content {
+    display: block;
+    font-size: 0.8rem;
+  }
+}
+
+@media(max-width: 800px) {
+  .reviews-carousel {
+    margin-top: 2rem;
   }
 }

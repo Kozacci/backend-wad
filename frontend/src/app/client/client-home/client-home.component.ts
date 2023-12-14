@@ -112,6 +112,39 @@ export class ClientHomeComponent implements OnInit {
     }
   ];
 
+  reviews = [
+    {
+      stars: 5,
+      name: "Paweł Żytnowski",
+      date: "19/07/2021",
+      content: "Super profesjonalne podejście, na luzie ale konkretnie. Zdecydowanie polecam Huberta i jego Team! 🚤🚤"
+    },
+    {
+      stars: 5,
+      name: "Mikołaj Graczyk",
+      date: "25/10/2020",
+      content: "Bardzo dobra firma , dobrze szkolą i przygotowują na kurs sternika motorowodnego , a ja sie ciesze z zdanego egzaminu (25.10.2020)"
+    },
+    {
+      stars: 5,
+      name: "Marcin Frej",
+      date: "21/07/2019",
+      content: "Świeżo po ukończeniu kursu sternika motorowodnego (19/21-07-2019) Z całego serca polecam kurs i instruktora"
+    },
+    {
+      stars: 5,
+      name: "Andrzej Szewczak",
+      date: "25/08/2018",
+      content: "Co tu dużo pisać 🙂 zapisywać się!!! Najlepsze kursy w Polsce 😉"
+    },
+    {
+      stars: 5,
+      name: "Milena Hołdyńska",
+      date: "25/08/2018",
+      content: "Bardzo solidnie i rzetelnie przekazana wiedza, kurs odbył się szybko i bezproblemowo. Kontakt z kursantem na wysokim poziomie a na każde z pytań pojawiała się jasna odpowiedź."
+    }
+  ];
+
   constructor(
     private readonly authService: AuthService,
     public readonly pathService: PathService)
