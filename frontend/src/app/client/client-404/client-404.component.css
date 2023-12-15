@@ -67,7 +67,6 @@
   color: var(--blue);
   font-size: 1rem;
   display: flex;
-  align-items: center;
 }
 
 .error-back-link i {
