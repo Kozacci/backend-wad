@@ -1,6 +1,6 @@
 .content {
   background-color: #22719B;
-  height: 100vh;
+  height: 100%;
   width: calc(100vw - 75px);
   color: #FFF;
 }
@@ -41,9 +41,12 @@ th {
   width: 250px;
 }
 
-.to-input-end {
-  position: relative;
-  left: 12.5em;
-  bottom: -3.5em;
-  color: black;
+@media (min-width: 770px) {
+  .sticky-to-bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin-top: 1000px;
+  }
 }
+

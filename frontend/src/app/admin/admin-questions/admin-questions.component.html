@@ -1,6 +1,6 @@
 <div class="content">
 
-  <div class="container">
+  <div class="container d-flex flex-column justify-content-between justify-content-md-between">
 
     <div class="row justify-content-center">
       <div class="col-xl-8 d-flex justify-content-center align-items-center">
@@ -55,45 +55,44 @@
       </div>
     </div>
 
-    <div class="row mt-3">
-      <p-table
-        [value]="questions"
-        styleClass="p-datatable-gridlines p-datatable-resizable"
-        [tableStyle]="{'witdth': '100%' }"
-        [rowHover]="true"
-        [resizableColumns]="true"
-        [scrollable]="true"
-        scrollHeight="500px">
-
-        <ng-template pTemplate="header">
-          <tr>
-            <th></th>
-            <th>Numer pytania</th>
-            <th>Treść pytania</th>
-            <th>Dział</th>
-            <th>Odp A</th>
-            <th>Odp B</th>
-            <th>Odp C</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-question>
-          <tr>
-            <td class="d-flex justify-content-center">
-              <p-button icon="pi pi-heart" (onClick)="selectQuestion(question)">
-
-              </p-button> </td>
-            <td>{{question.id}}</td>
-            <td>{{question.content}}</td>
-            <td>{{question.category}}</td>
-            <td>{{question.firstAnswer}}</td>
-            <td>{{question.secondAnswer}}</td>
-            <td>{{question.thirdAnswer}}</td>
-          </tr>
-        </ng-template>
-      </p-table>
-    </div>
-
   </div>
+
+  <p-table
+    [value]="questions"
+    styleClass="p-datatable-gridlines p-datatable-resizable"
+    [tableStyle]="{'witdth': '100%' }"
+    [rowHover]="true"
+    [resizableColumns]="true"
+    [scrollable]="true"
+    scrollHeight="500px"
+    class="sticky-to-bottom mt-5">
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th></th>
+        <th>Numer pytania</th>
+        <th>Treść pytania</th>
+        <th>Dział</th>
+        <th>Odp A</th>
+        <th>Odp B</th>
+        <th>Odp C</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-question>
+      <tr>
+        <td class="d-flex justify-content-center">
+          <p-button icon="pi pi-heart" (onClick)="selectQuestion(question)">
+
+          </p-button> </td>
+        <td>{{question.id}}</td>
+        <td>{{question.content}}</td>
+        <td>{{question.category}}</td>
+        <td>{{question.firstAnswer}}</td>
+        <td>{{question.secondAnswer}}</td>
+        <td>{{question.thirdAnswer}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
 
 </div>
 
