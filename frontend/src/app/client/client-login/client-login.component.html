@@ -1,0 +1,43 @@
+<div class="login-page-container">
+  <div class="login-form-container">
+    <div class="login-logo">
+      <img src="assets/logos/LOGO-FULL.png" alt="Water Adventure Logo"/>
+    </div>
+    <div class="login-form">
+      <h2>Logowanie</h2>
+      <form>
+        <mat-form-field appearance="outline">
+          <mat-label>E-mail</mat-label>
+          <input matInput placeholder="Wprowadź e-mail" type="email" [formControl]="email" required>
+          <mat-error *ngIf="email.invalid">{{ getEmailErrorMessage(email) }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Hasło</mat-label>
+          <input matInput placeholder="Wprowadź hasło" [type]="passwordHide ? 'password' : 'text'" [formControl]="password" required>
+          <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="passwordHide">
+            <mat-icon>{{ passwordHide ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="password.invalid">{{ getInputErrorMessage(password) }}</mat-error>
+        </mat-form-field>
+
+        <a href="/kontakt" class="forgot-password-link">Zapomniałeś hasła?</a>
+
+        <button mat-raised-button color="primary" class="login-button">Zaloguj</button>
+
+        <div class="register-link-container">
+          <span>Nie masz jeszcze konta?</span>
+          <a href="/rejestracja" class="register-link">Zarejestruj się</a>
+        </div>
+      </form>
+    </div>
+    <div class="login-bottom">
+      <a href="/" class="back-to-home-link">
+        <i class="pi pi-angle-left"></i> Wróć do strony głównej
+      </a>
+    </div>
+  </div>
+  <div class="login-image-container">
+    <img src="assets/images/client/additional/login-panel.png" alt="Login Wallpaper" class="login-wallpaper" />
+  </div>
+</div>
