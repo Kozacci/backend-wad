@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {Router} from "@angular/router";
+import {AuthService} from "../../shared/services/auth/auth.service";
 
 @Component({
   selector: 'app-admin-navbar',
@@ -8,17 +10,43 @@ import { Component } from '@angular/core';
 export class AdminNavbarComponent {
 
   isExtended: boolean = false;
+  extendHideIcon: string = 'pi pi-arrow-left';
+
+  constructor(private router: Router,
+              protected authService: AuthService) {
+  }
 
   changeIsExtended() {
     this.isExtended = !this.isExtended;
-  }
-
-  getIconClass(): string {
-    return this.isExtended ? "pi pi-arrow-right" : "pi pi-arrow-left";
+    this.extendHideIcon = this.isExtended ? "pi pi-arrow-right" : "pi pi-arrow-left";
   }
 
   getNavBarWidth(): string {
     return this.isExtended ? "230px" : "75px";
+  }
+
+  navigateToQuestions(): void {
+    this.router.navigate(['/admin/questions']);
+  }
+
+  navigateToCourses(): void {
+    this.router.navigate(['/admin/courses']);
+  }
+
+  navigateToEvents(): void {
+    this.router.navigate(['/admin/events']);
+  }
+
+  navigateToPassing(): void {
+    this.router.navigate(['/admin/passing'])
+  }
+
+  navigateToAccesses(): void {
+    this.router.navigate(['/admin/accesses'])
+  }
+
+  navigateToCalendar(): void {
+    this.router.navigate(['/admin/calendar'])
   }
 
 }
