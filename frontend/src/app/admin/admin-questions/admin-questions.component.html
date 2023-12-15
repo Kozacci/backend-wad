@@ -9,18 +9,18 @@
       <p-divider></p-divider>
     </div>
 
-    <div class="row mt-2 align-items-start">
-      <div class="col-md-3 mb-3 d-flex flex-column align-items-start">
+    <div class="row mt-2 align-items-center">
+      <div class="col-md-3 mb-3 d-flex flex-column align-items-center">
         <label class="form-label">Numer pytania (ID)</label>
         <input [(ngModel)]="id" type="text" class="form-control" id="id" placeholder="101">
       </div>
 
-      <div class="col-md-3 mb-3 d-flex flex-column align-items-start">
+      <div class="col-md-3 mb-3 d-flex flex-column align-items-center">
         <label class="form-label">Treść pytania</label>
         <input [(ngModel)]="content" type="text" class="form-control" id="content" placeholder="Który znak...">
       </div>
 
-      <div class="col-md-3 mb-3 d-flex flex-column align-items-start">
+      <div class="col-md-3 mb-3 d-flex flex-column align-items-center">
         <label class="form-label">Dział:</label>
         <p-dropdown
           [options]="categories"
@@ -31,7 +31,7 @@
         </p-dropdown>
       </div>
 
-      <div class="col-md-3 mb-3 d-flex flex-column align-items-start">
+      <div class="col-md-3 mb-3 d-flex flex-column align-items-center">
         <label class="form-label">Sortowanie po:</label>
         <p-dropdown
           [options]="sortByValues"

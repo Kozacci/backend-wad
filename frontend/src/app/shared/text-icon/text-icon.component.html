@@ -1,7 +1,10 @@
 
 <div class="panel">
-  <span>
+  <span [ngStyle]="isClickable ? {'cursor':'pointer'} : {'cursor':'default'}" (click)="onClickButton($event)">
     <i class="{{iconClass}}"></i>
   </span>
-  <p *ngIf="textVisible" [style.font-size]="fontSize">{{text}}</p>
+  <p *ngIf="textVisible"
+     [style.font-size]="fontSize"
+     [ngStyle]="isClickable ? {'cursor':'pointer'} : {'cursor':'default'}"
+     (click)="onClickButton($event)">{{text}}</p>
 </div>
