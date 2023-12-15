@@ -1,0 +1,62 @@
+<div class="register-page-container">
+  <div class="register-form-container">
+    <div class="register-logo">
+      <img src="assets/logos/LOGO-FULL.png" alt="Water Adventure Logo"/>
+    </div>
+    <div class="register-form">
+      <h2>Rejestracja</h2>
+      <form>
+        <mat-form-field appearance="outline">
+          <mat-label>Imię i nazwisko</mat-label>
+          <input matInput placeholder="Wprowadź imie i nazwisko" type="firstName" [formControl]="name" required>
+          <mat-error *ngIf="name.invalid">{{ getInputErrorMessage(name) }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>E-mail</mat-label>
+          <input matInput placeholder="Wprowadź e-mail" type="email" [formControl]="email" required>
+          <mat-error *ngIf="email.invalid">{{ getEmailErrorMessage(email) }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Hasło</mat-label>
+          <input matInput placeholder="Wprowadź hasło" [type]="passwordHide ? 'password' : 'text'" [formControl]="password" required>
+          <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="passwordHide">
+            <mat-icon>{{ passwordHide ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="password.invalid">{{ getInputErrorMessage(password) }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Powtórz hasło</mat-label>
+          <input matInput placeholder="Wprowadź ponownie hasło" [type]="passwordHide ? 'password' : 'text'" [formControl]="passwordRepeat" required>
+          <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="passwordHide">
+            <mat-icon>{{ passwordHide ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="passwordRepeat.invalid">{{ getPasswordRepeatErrorMessage(passwordRepeat) }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Numer telefonu</mat-label>
+          <input matInput placeholder="Wprowadź nr. telefonu" type="phoneNumber" [maxlength]="9" [formControl]="phoneNumber" required>
+          <mat-error *ngIf="phoneNumber.invalid">{{ getInputErrorMessage(phoneNumber) }}</mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" class="register-button">Zarejestruj się</button>
+
+        <div class="register-link-container">
+          <span>Masz już konto?</span>
+          <a href="/zaloguj" class="register-link">Zaloguj się</a>
+        </div>
+      </form>
+    </div>
+    <div class="register-bottom">
+      <a href="/" class="back-to-home-link">
+        <i class="pi pi-angle-left"></i> Wróć do strony głównej
+      </a>
+    </div>
+  </div>
+  <div class="register-image-container">
+    <img src="assets/images/client/additional/register-panel.png" alt="register Wallpaper" class="register-wallpaper" />
+  </div>
+</div>
