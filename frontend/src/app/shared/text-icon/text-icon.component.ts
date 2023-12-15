@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'text-icon',
@@ -15,4 +15,13 @@ export class TextIconComponent {
   iconClass: string = "pi-prime";
   @Input()
   fontSize: string = "2em";
+  @Output()
+  onClick: EventEmitter<any> = new EventEmitter<MouseEvent>();
+  @Input()
+  isClickable: boolean = false;
+
+  onClickButton(event: MouseEvent) {
+    this.onClick.emit(event);
+  }
+
 }
