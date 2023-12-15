@@ -59,6 +59,11 @@
 
   <p-table
     [value]="questions"
+    [paginator]="true"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[5, 10, 15]"
+    currentPageReportTemplate="{first} Pytań z {totalRecords}"
     styleClass="p-datatable-gridlines p-datatable-resizable"
     [tableStyle]="{'witdth': '100%' }"
     [rowHover]="true"
