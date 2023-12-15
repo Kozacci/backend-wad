@@ -114,8 +114,9 @@ public class JWTService {
 
     public Cookie createJwtCookie(String jwt) {
         Cookie jwtCookie = new Cookie("JWT", jwt);
-        jwtCookie.setHttpOnly(true);
-        // Cookie can be used from any URL
+        // With HttpOnly attribute set on, javascript cannot consume the cookie
+        // jwtCookie.setHttpOnly(true);
+        // Cookie can be used from any URL on the domain
         jwtCookie.setPath("/");
         // For more secured HTTPS sites
          jwtCookie.setSecure(true);
