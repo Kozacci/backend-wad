@@ -13,6 +13,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ClientFooterComponent } from './client-footer/client-footer.component';
 import { Client404Component } from './client-404/client-404.component';
 import { ClientLoginComponent } from './client-login/client-login.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatIconModule} from "@angular/material/icon";
+import {MatInputModule} from "@angular/material/input";
+import { ClientRegisterComponent } from './client-register/client-register.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,8 @@ import { ClientLoginComponent } from './client-login/client-login.component';
     ClientNavbarComponent,
     ClientFooterComponent,
     Client404Component,
-    ClientLoginComponent
+    ClientLoginComponent,
+    ClientRegisterComponent
   ],
   exports: [
     ClientLayoutComponent,
@@ -37,6 +42,9 @@ import { ClientLoginComponent } from './client-login/client-login.component';
     RatingModule,
     ReactiveFormsModule,
     FormsModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
   ]
 })
 export class ClientModule { }
