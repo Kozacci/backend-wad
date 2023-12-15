@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 import {AuthService} from "../../shared/services/auth/auth.service";
-import {ParticipantLoginDTO} from "../../shared/dto";
+import {FormService} from "../../shared/services/form/form.service";
+import {RestClient} from "../../shared/rest-client";
+import {PathService} from "../../shared/services/path.service";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-client-login',
@@ -30,31 +33,32 @@ export class ClientLoginComponent {
     );
 
 
-  constructor(public readonly authService: AuthService)
+  constructor(
+    public readonly authService: AuthService,
+    public readonly formService: FormService,
+    private restClient: RestClient,
+    private readonly pathService: PathService,
+    public readonly messageService: MessageService
+  )
   { }
 
-  login(participantLoginDTO: ParticipantLoginDTO) { // TODO
-  }
-
-  // Todo - Create component for input labels and create error messages system for them
-  getInputErrorMessage(input: FormControl<string | null>) {
-    if (input.hasError('required')) {
-      return 'Musisz wypełnić pole!';
+  login() {
+    if(this.email.valid && this.password.valid) {
+      const participantToLogin = {
+        email: this.email.value?? '',
+        password: this.password.value?? '',
+      }
+      this.restClient.login(participantToLogin)
+        .subscribe(
+          (response) => {
+            this.pathService.navigate('/')
+            this.messageService.add({life:5000, severity:'success', summary:'Logowanie', detail:"Pomyślnie zalogowano!"})
+          },
+          (error) => {
+            this.messageService.add({life:4000, severity:'error', summary:'Logowanie', detail:"Niepoprawne dane!"})
+            console.error('Błąd logowania', error);
+          })
     }
-    else if (input.hasError('minlength')) {
-      const requiredLength = input.getError('minlength').requiredLength;
-      return 'Pole musi zawierać min. ' + requiredLength + ' znaków!';
-    }
-    else {
-      return 'Niepoprawne pole';
-    }
-  }
-
-  getEmailErrorMessage(input: FormControl<string | null>) {
-    if (input.hasError('required')) {
-      return 'Musisz wypełnić email!';
-    }
-    return this.email.hasError('email') ? 'Niepoprawny email' : '';
   }
 
 }
