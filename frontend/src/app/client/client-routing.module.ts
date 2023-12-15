@@ -13,8 +13,6 @@ const routes: Routes = [
   },
   { path: 'zaloguj', component: ClientLoginComponent },
   { path: 'rejestracja', component: ClientRegisterComponent },
-  { path: '404', component: Client404Component },
-  { path: '**', redirectTo: '/404' }
 ];
 
 @NgModule({
