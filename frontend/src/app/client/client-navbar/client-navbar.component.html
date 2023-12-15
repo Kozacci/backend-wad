@@ -6,7 +6,7 @@
         <a class="navbar-brand" href="mailto:wadventure@gmail.com"><i class="pi pi-envelope"></i> wadventure@gmail.com</a>
       </div>
       <div class="container-end container-right" *ngIf="authService.isLogged(); else notLogged">
-        <a class="navbar-brand" href="/wyloguj"><i class="pi pi-undo"></i> Wyloguj się</a>
+        <a class="navbar-brand" href="#" (click)="authService.logout()"><i class="pi pi-undo"></i> Wyloguj się</a>
         <a class="navbar-brand" href="/profil"><i class="pi pi-user"></i> Mój profil</a>
       </div>
       <ng-template #notLogged>
