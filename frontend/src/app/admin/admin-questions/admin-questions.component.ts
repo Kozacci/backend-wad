@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {Category, ParticipantLoginDTO, QuestionFilterDTO} from "../../shared/dto";
+import {Category, CorrectAnswer, QuestionCreateUpdateDTO, QuestionFilterDTO} from "../../shared/dto";
 import {RestClient} from "../../shared/rest-client";
-import {AuthService} from "../../shared/services/auth/auth.service";
+import {FormControl, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-admin-questions',
@@ -14,8 +14,42 @@ export class AdminQuestionsComponent {
   content: string | null = null;
   category: {name: string, value: string} | null = null;
   sortBy: {name: string, value: string} | null = null;
+  questionToAdd: QuestionCreateUpdateDTO = <QuestionCreateUpdateDTO><unknown>{
+    category: null, content: null, correctAnswer: null,
+    firstAnswer: null, thirdAnswer: null, secondAnswer: null
+  };
+  modalVisible: boolean = false;
+  categoryToAdd: FormControl<Category | null>  = new FormControl(this.questionToAdd.category,
+    [Validators.required]);
+  contentToAdd= new FormControl(this.questionToAdd.content,
+    [Validators.required]);
+  correctAnswer: FormControl<CorrectAnswer | null> = new FormControl(this.questionToAdd.correctAnswer,
+    [Validators.required]);
+  firstAnswerToAdd = new FormControl(this.questionToAdd.firstAnswer,
+    [Validators.required]);
+  secondAnswerToAdd = new FormControl(this.questionToAdd.secondAnswer,
+    [Validators.required]);
+  thirdAnswerToAdd = new FormControl(this.questionToAdd.thirdAnswer,
+    [Validators.required]);
 
-  constructor(private restClient: RestClient, private authService: AuthService) {
+  constructor(private restClient: RestClient) {
+  }
+
+  getInputErrorMessage(input: FormControl<any | null>) {
+    if (input.hasError('required')) {
+      return 'Musisz wypełnić pole!';
+    }
+    else if (input.hasError('minlength')) {
+      const maxRequiredLength = input.getError('minlength').requiredLength;
+      return 'Pole musi zawierać min. ' + maxRequiredLength + ' znaków!';
+    }
+    else if (input.hasError('maxlength')) {
+      const minRequiredLength = input.getError('maxlength').requiredLength;
+      return 'Pole musi zawierać max. ' + minRequiredLength + ' znaków!';
+    }
+    else {
+      return 'Niepoprawne pole';
+    }
   }
 
   selectQuestion(question: any): void {
@@ -23,11 +57,24 @@ export class AdminQuestionsComponent {
   }
 
   findQuestions(): void {
-    console.log("categoria: ", this.category)
     this.restClient.getQuestionsByFilters(this.id, this.content, this.category?.name, this.sortBy?.value)
       .subscribe((val) => {
         this.questions = val;
       });
+  }
+
+  addQuestion(): void {
+    this.restClient.addQuestion(this.questionToAdd).subscribe(val => {
+      console.log(val)
+    });
+  }
+
+  showModal(): void {
+    this.modalVisible = true;
+  }
+
+  closeModal(): void {
+    this.modalVisible = false;
   }
 
   categories = [

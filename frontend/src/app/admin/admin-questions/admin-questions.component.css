@@ -50,3 +50,13 @@ th {
   }
 }
 
+/* ========= modal styles =========== */
+
+:host ::ng-deep .p-dialog .p-dialog-header{
+  background-color: var(--dark-blue);
+  color: #FFF;
+}
+
+:host ::ng-deep p.dialog .p-dialog-content {
+  background-color: var(--white-grey);
+}
