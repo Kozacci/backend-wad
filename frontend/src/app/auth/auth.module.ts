@@ -1,8 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
-import {ClientLayoutComponent} from './client-layout.component';
-import {ClientHomeComponent} from './client-home/client-home.component';
-import {ClientNavbarComponent} from './client-navbar/client-navbar.component';
 import {SharedModule} from "../shared/shared.module";
 import {AnimateModule} from "primeng/animate";
 import {MatMenuModule} from "@angular/material/menu";
@@ -10,23 +7,22 @@ import {MatButtonModule} from "@angular/material/button";
 import {CarouselModule} from "primeng/carousel";
 import {RatingModule} from "primeng/rating";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {ClientFooterComponent} from './client-footer/client-footer.component';
+import {Error404Component} from './error-404/error-404.component';
+import {LoginComponent} from './login/login.component';
+import {RegisterComponent} from './register/register.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
-import {ClientCoursesComponent} from './client-courses/client-courses.component';
+import {AuthLayoutComponent} from './auth-layout.component';
 
 @NgModule({
   declarations: [
-    ClientLayoutComponent,
-    ClientHomeComponent,
-    ClientNavbarComponent,
-    ClientFooterComponent,
-    ClientCoursesComponent
+    Error404Component,
+    LoginComponent,
+    RegisterComponent,
+    AuthLayoutComponent,
   ],
-  exports: [
-    ClientLayoutComponent,
-  ],
+  exports: [AuthLayoutComponent],
   imports: [
     SharedModule,
     CommonModule,
@@ -43,4 +39,4 @@ import {ClientCoursesComponent} from './client-courses/client-courses.component'
     MatInputModule,
   ]
 })
-export class ClientModule { }
+export class AuthModule { }

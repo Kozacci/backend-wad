@@ -7,10 +7,10 @@ import {PathService} from "../../shared/services/path.service";
 
 @Component({
   selector: 'app-client-register',
-  templateUrl: './client-register.component.html',
-  styleUrls: ['./client-register.component.css']
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class ClientRegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
   passwordHide: boolean = true;
 
@@ -102,7 +102,7 @@ export class ClientRegisterComponent implements OnInit {
       this.restClient.register(participantToRegister)
         .subscribe(
           (response) => {
-            this.pathService.navigate('zaloguj')
+            this.pathService.navigate('autoryzacja/logowanie')
             this.messageService.add({life:5000, severity:'success', summary:'Rejestracja', detail:"Teraz możesz się zalogować"})
           },
           (error) => {

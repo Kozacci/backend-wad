@@ -8,6 +8,8 @@ import {AdminModule} from "./admin/admin.module";
 import {MessageService} from "primeng/api";
 import {ClientRoutingModule} from "./client/client-routing.module";
 import {AdminRoutingModule} from "./admin/admin-routing.module";
+import {AuthModule} from "./auth/auth.module";
+import {AuthRoutingModule} from "./auth/auth-routing.module";
 
 @NgModule({
   declarations: [
@@ -16,9 +18,11 @@ import {AdminRoutingModule} from "./admin/admin-routing.module";
   imports: [
     ClientModule,
     AdminModule,
+    AuthModule,
     AppRoutingModule,
     ClientRoutingModule,
     AdminRoutingModule,
+    AuthRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
   ],

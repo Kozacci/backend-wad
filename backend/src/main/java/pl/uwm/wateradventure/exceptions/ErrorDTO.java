@@ -2,7 +2,7 @@ package pl.uwm.wateradventure.exceptions;
 
 import jakarta.validation.ConstraintViolation;
 
-public record ErrorMessage(String fieldName, String error) {
+public record ErrorDTO(String fieldName, String message) {
 
     static String extractFieldName(ConstraintViolation<?> violation) {
         var entireMessage = violation.getMessage();

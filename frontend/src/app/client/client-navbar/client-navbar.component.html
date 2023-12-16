@@ -11,8 +11,8 @@
       </div>
       <ng-template #notLogged>
         <div class="container-end container-right">
-            <a class="navbar-brand" href="/zaloguj"><i class="pi pi-users"></i> Zaloguj się</a>
-            <a class="navbar-brand" href="/rejestracja"><i class="pi pi-user-plus"></i> Zarejestruj</a>
+            <a class="navbar-brand" href="/autoryzacja/logowanie"><i class="pi pi-users"></i> Zaloguj się</a>
+            <a class="navbar-brand" href="/autoryzacja/rejestracja"><i class="pi pi-user-plus"></i> Zarejestruj</a>
         </div>
       </ng-template>
     </div>
@@ -36,19 +36,19 @@
           <li class="nav-item dropdown">
             <button mat-button [matMenuTriggerFor]="menuOferta">Oferta</button>
             <mat-menu #menuOferta="matMenu">
-              <button mat-menu-item (click)="pathService.navigate('kursy')">Kursy</button>
-              <button mat-menu-item (click)="pathService.navigate('eventy')">Eventy</button>
+              <button mat-menu-item (click)="pathService.navigate('oferta/kursy')">Kursy</button>
+              <button mat-menu-item (click)="pathService.navigate('oferta/eventy')">Eventy</button>
             </mat-menu>
           </li>
           <ng-container class="container-end" *ngIf="authService.isLogged(); else notLogged2">
             <li class="nav-item">
-              <button mat-button (click)="pathService.navigate('/e-learning')">E-Learning</button>
+              <button mat-button (click)="pathService.navigate('nauka/e-learning')">E-Learning</button>
             </li>
             <li class="nav-item">
-              <button mat-button (click)="pathService.navigate('/moje-kursy')">Moje kursy</button>
+              <button mat-button (click)="pathService.navigate('profil/moje-kursy')">Moje kursy</button>
             </li>
             <li class="nav-item">
-              <button mat-button (click)="pathService.navigate('/moje-eventy')">Moje eventy</button>
+              <button mat-button (click)="pathService.navigate('profil/moje-eventy')">Moje eventy</button>
             </li>
           </ng-container>
           <ng-template #notLogged2>
