@@ -107,79 +107,102 @@
   [draggable]="false"
   [style]="{ width: '50rem' }"
   [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  [contentStyle]="{maxheight: '80%'}"
+
   >
 
   <ng-template pTemplate="header">
     <text-icon
       text="Dodanie pytania"
       [textVisible]="true"
-      [iconClass]="'pi pi-comments'" [fontSize]="'1.8em'">
+      [iconClass]="'pi pi-comments'">
     </text-icon>
   </ng-template>
 
-  <div class="container d-flex flex-row pt-3 justify-content-between" >
+  <div class="container d-flex flex-column pt-3 justify-content-between" >
     <div class="row d-flex flex-column">
+
+      <div class="row-cols-md-2 d-flex flex-column flex-md-row">
+
+        <div class="col ps-1 mb-3 d-flex flex-column align-items-center">
+          <label class="form-label">Dział:</label>
+          <p-dropdown
+            [options]="categories"
+            [(ngModel)]="questionToAdd.category"
+            optionLabel="value"
+            placeholder="Dział"
+            [showClear]="true">
+          </p-dropdown>
+        </div>
+
+        <div class="col ps-1 d-flex flex-column align-items-center">
+          <label class="form-label">Poprawna odpowiedź:</label>
+          <p-dropdown
+            [options]="correctAnswerValues"
+            [(ngModel)]="questionToAdd.correctAnswer"
+            optionLabel="name"
+            placeholder="Poprawna odpowiedź"
+            [showClear]="true">
+          </p-dropdown>
+        </div>
+
+      </div>
 
       <mat-form-field appearance="outline">
         <mat-label>Treść pytania</mat-label>
-        <input matInput placeholder="Treść pytania" type="text" [formControl]="contentToAdd" required>
-        <mat-error *ngIf="contentToAdd.invalid">{{ getInputErrorMessage(contentToAdd) }}</mat-error>
+        <input matInput placeholder="Treść pytania"
+               type="text"
+               [formControl]="formGroup.controls.contentToAdd" required>
+        <mat-error *ngIf="formGroup.controls.contentToAdd.invalid">
+          {{ getInputErrorMessage(formGroup.controls.contentToAdd) }}
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Odpowiedź A</mat-label>
-        <input matInput placeholder="Odpowiedź A" type="text" [formControl]="firstAnswerToAdd" required>
-        <mat-error *ngIf="firstAnswerToAdd.invalid">{{ getInputErrorMessage(firstAnswerToAdd) }}</mat-error>
+        <input matInput placeholder="Odpowiedź A"
+               type="text"
+               [formControl]="formGroup.controls.firstAnswerToAdd" required>
+        <mat-error *ngIf="formGroup.controls.firstAnswerToAdd.invalid">
+          {{ getInputErrorMessage(formGroup.controls.firstAnswerToAdd) }}
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Odpowiedź B</mat-label>
-        <input matInput placeholder="Odpowiedź B" type="text" [formControl]="secondAnswerToAdd" required>
-        <mat-error *ngIf="secondAnswerToAdd.invalid">{{ getInputErrorMessage(secondAnswerToAdd) }}</mat-error>
+        <input matInput placeholder="Odpowiedź B"
+               type="text"
+               [formControl]="formGroup.controls.secondAnswerToAdd" required>
+        <mat-error *ngIf="formGroup.controls.secondAnswerToAdd.invalid">
+          {{ getInputErrorMessage(formGroup.controls.secondAnswerToAdd) }}
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Odpowiedź C</mat-label>
-        <input matInput placeholder="Odpowiedź C" type="text" [formControl]="thirdAnswerToAdd" required>
-        <mat-error *ngIf="thirdAnswerToAdd.invalid">{{ getInputErrorMessage(thirdAnswerToAdd) }}</mat-error>
+        <input matInput placeholder="Odpowiedź C"
+               type="text"
+               [formControl]="formGroup.controls.thirdAnswerToAdd" required>
+        <mat-error *ngIf="formGroup.controls.thirdAnswerToAdd.invalid">
+          {{ getInputErrorMessage(formGroup.controls.thirdAnswerToAdd) }}
+        </mat-error>
       </mat-form-field>
-
-      <div class="col d-flex flex-row">
-        <mat-form-field appearance="outline">
-          <mat-label>Dział</mat-label>
-          <mat-select>
-            <mat-option value="">1 opcja</mat-option>
-            <mat-option value="">2 opcja</mat-option>
-            <mat-option value="">3 opcja</mat-option>
-          </mat-select>
-          <input matInput placeholder="Dział" type="text" [formControl]="categoryToAdd" required>
-          <mat-error *ngIf="categoryToAdd.invalid">{{ getInputErrorMessage(categoryToAdd) }}</mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Wskaż poprawną odpowiedź</mat-label>
-          <mat-select>
-            <mat-option value="">1 opcja</mat-option>
-            <mat-option value="">2 opcja</mat-option>
-            <mat-option value="">3 opcja</mat-option>
-          </mat-select>
-          <input matInput placeholder="Dział" type="text" [formControl]="correctAnswer" required>
-          <mat-error *ngIf="correctAnswer.invalid">{{ getInputErrorMessage(correctAnswer) }}</mat-error>
-        </mat-form-field>
-      </div>
 
     </div>
 
-    <div class="row d-flex flex-column justify-content-between">
-      <primary-button
-        [label]="'Dodaj'"
-        (onClick)="addQuestion()">
-      </primary-button>
-      <secondary-button
-        [label]="'Anuluj'"
-        (onClick)="closeModal()"
-        [bordered]="true">
-      </secondary-button>
+    <div class="row">
+      <div class="col-xl-12 d-flex justify-content-between">
+        <primary-button
+          [label]="'Dodaj'"
+          (onClick)="addQuestion()">
+        </primary-button>
+        <secondary-button
+          [label]="'Anuluj'"
+          (onClick)="closeModal()"
+          [bordered]="true">
+        </secondary-button>
+      </div>
+
     </div>
   </div>
 
