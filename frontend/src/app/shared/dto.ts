@@ -106,11 +106,11 @@ export interface QuestionFilterDTO {
 
 export interface QuestionCreateUpdateDTO {
   content: string,
-  category: Category,
+  category: string,
   firstAnswer: string,
   secondAnswer: string,
   thirdAnswer: string,
-  correctAnswer: CorrectAnswer
+  correctAnswer: string
 }
 
 export interface QuestionEntityDTO {
@@ -128,4 +128,10 @@ export interface QuestionEntityDTO {
 export interface ErrorDTO {
   fieldName: string,
   message: string
+}
+
+// Exist only on frontend, created for showing validation error below input fields
+export interface GroupedErrorDTO {
+  fieldName: string,
+  messages: string[]
 }
