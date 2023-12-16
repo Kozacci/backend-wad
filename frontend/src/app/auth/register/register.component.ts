@@ -106,7 +106,7 @@ export class RegisterComponent implements OnInit {
             this.messageService.add({life:5000, severity:'success', summary:'Rejestracja', detail:"Teraz możesz się zalogować"})
           },
           (error) => {
-            this.messageService.add({life:4000, severity:'error', summary:'Rejestracja', detail:error})
+            this.messageService.add({life:4000, severity:'error', summary:'Rejestracja', detail: 'Pole ' + error.error[0].fieldName + ' ' + error.error[0].message})
             console.error('Błąd rejestracji', error);
           })
     }
