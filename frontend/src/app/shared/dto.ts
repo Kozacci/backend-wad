@@ -124,3 +124,8 @@ export interface QuestionEntityDTO {
   explanation?: string,
   image?: string
 }
+
+export interface ErrorDTO {
+  fieldName: string,
+  message: string
+}

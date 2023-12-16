@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
-import {Category, CorrectAnswer, QuestionCreateUpdateDTO, QuestionFilterDTO} from "../../shared/dto";
+import {QuestionCreateUpdateDTO, QuestionFilterDTO} from "../../shared/dto";
 import {RestClient} from "../../shared/rest-client";
-import {FormControl, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {ErrorHandlerService} from "../../shared/error-handler.component";
 
 @Component({
   selector: 'app-admin-questions',
@@ -19,20 +20,25 @@ export class AdminQuestionsComponent {
     firstAnswer: null, thirdAnswer: null, secondAnswer: null
   };
   modalVisible: boolean = false;
-  categoryToAdd: FormControl<Category | null>  = new FormControl(this.questionToAdd.category,
-    [Validators.required]);
-  contentToAdd= new FormControl(this.questionToAdd.content,
-    [Validators.required]);
-  correctAnswer: FormControl<CorrectAnswer | null> = new FormControl(this.questionToAdd.correctAnswer,
-    [Validators.required]);
-  firstAnswerToAdd = new FormControl(this.questionToAdd.firstAnswer,
-    [Validators.required]);
-  secondAnswerToAdd = new FormControl(this.questionToAdd.secondAnswer,
-    [Validators.required]);
-  thirdAnswerToAdd = new FormControl(this.questionToAdd.thirdAnswer,
-    [Validators.required]);
 
-  constructor(private restClient: RestClient) {
+  formGroup = new FormGroup({
+    categoryToAdd: new FormControl(this.questionToAdd.category,
+      [Validators.required]),
+    contentToAdd: new FormControl(this.questionToAdd.content,
+      [Validators.required]),
+    correctAnswer: new FormControl(this.questionToAdd.correctAnswer,
+      [Validators.required]),
+    firstAnswerToAdd: new FormControl(this.questionToAdd.firstAnswer,
+      [Validators.required]),
+    secondAnswerToAdd: new FormControl(this.questionToAdd.secondAnswer,
+      [Validators.required]),
+    thirdAnswerToAdd: new FormControl(this.questionToAdd.thirdAnswer,
+      [Validators.required]),
+  })
+
+
+  constructor(private restClient: RestClient,
+              private errorHandlerService: ErrorHandlerService) {
   }
 
   getInputErrorMessage(input: FormControl<any | null>) {
@@ -64,8 +70,10 @@ export class AdminQuestionsComponent {
   }
 
   addQuestion(): void {
-    this.restClient.addQuestion(this.questionToAdd).subscribe(val => {
-      console.log(val)
+    this.restClient.addQuestion(this.questionToAdd).subscribe(response => {
+      console.log(response)
+    }, error => {
+      this.errorHandlerService.handleErrorsPToasts(error);
     });
   }
 
@@ -97,6 +105,13 @@ export class AdminQuestionsComponent {
     { name: "Odpowiedź A", value: "firstAnswer"},
     { name: "Odpowiedź B", value: "secondAnswer"},
     { name: "Odpowiedź C", value: "thirdAnswer"},
+  ]
+
+  correctAnswerValues = [
+    {name: "Odpowiedź A", value: "FIRST_ANSWER"},
+    {name: "Odpowiedź B", value: "SECOND_ANSWER"},
+    {name: "Odpowiedź C", value: "THIRD_ANSWER"},
+
   ]
 
   questions: QuestionFilterDTO[] = [

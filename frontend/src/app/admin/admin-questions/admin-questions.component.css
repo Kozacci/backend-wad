@@ -20,6 +20,11 @@ th {
   max-width: 15vw;
 }
 
+::ng-deep p-dialog .ui-dialog {
+  overflow: scroll;
+  max-height: 100%;
+}
+
 @media (max-width: 575px) {
   :host ::ng-deep .p-dropdown {
     width: 70vw;
