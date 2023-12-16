@@ -103,3 +103,24 @@ export interface QuestionFilterDTO {
   secondAnswer: string,
   thirdAnswer: string
 }
+
+export interface QuestionCreateUpdateDTO {
+  content: string,
+  category: Category,
+  firstAnswer: string,
+  secondAnswer: string,
+  thirdAnswer: string,
+  correctAnswer: CorrectAnswer
+}
+
+export interface QuestionEntityDTO {
+  questionId: number,
+  content: string,
+  category: string,
+  firstAnswer: string,
+  secondAnswer: string,
+  thirdAnswer: string,
+  correctAnswer: string,
+  explanation?: string,
+  image?: string
+}

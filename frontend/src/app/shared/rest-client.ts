@@ -1,6 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {ParticipantEntityDTO, ParticipantLoginDTO, ParticipantRegisterDTO, QuestionFilterDTO} from "./dto";
+import {
+  ParticipantEntityDTO,
+  ParticipantLoginDTO,
+  ParticipantRegisterDTO,
+  QuestionCreateUpdateDTO, QuestionEntityDTO,
+  QuestionFilterDTO
+} from "./dto";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -47,5 +53,9 @@ export class RestClient {
       params = params.append('sortBy', sortBy);
     }
     return this.http.get<QuestionFilterDTO[]>(`${this.apiUrl}/questions/filter-by`, {params, withCredentials: true } );
+  }
+
+  addQuestion(questionToAdd: QuestionCreateUpdateDTO): Observable<QuestionEntityDTO> {
+    return this.http.post<QuestionEntityDTO>(`${this.apiUrl}/questions`,questionToAdd, {withCredentials: true});
   }
 }
