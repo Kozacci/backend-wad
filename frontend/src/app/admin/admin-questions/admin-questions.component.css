@@ -58,5 +58,5 @@ th {
 }
 
 :host ::ng-deep p.dialog .p-dialog-content {
-  background-color: var(--white-grey);
+  background-color: var(--white-grey-admin);
 }
