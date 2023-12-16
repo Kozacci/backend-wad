@@ -12,7 +12,7 @@ export class TextIconComponent {
   @Input()
   text: string = "default";
   @Input()
-  iconClass: string = "pi-prime";
+  iconClass: string = "pi pi-prime";
   @Input()
   fontSize: string = "2em";
   @Output()

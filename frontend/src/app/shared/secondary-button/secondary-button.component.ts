@@ -11,6 +11,8 @@ export class SecondaryButtonComponent {
   label: string = "Default";
   @Output()
   onClick: EventEmitter<any> = new EventEmitter<MouseEvent>();
+  @Input()
+  bordered: boolean = false;
 
   onClickButton(event: MouseEvent) {
     this.onClick.emit(event);
