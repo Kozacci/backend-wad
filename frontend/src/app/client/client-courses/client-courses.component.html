@@ -1,1 +1,16 @@
-<p>client-courses works!</p>
+<div class="courses-container">
+  <div *ngFor="let course of courses" class="course-card">
+    <img [src]="course.image" alt="{{ course.title }}" class="course-image"/>
+    <div class="course-details">
+      <h3 class="course-title">{{ course.title }}</h3>
+      <p class="course-location">{{ course.location }}</p>
+      <ul class="course-includes">
+        <li *ngFor="let item of course.includes">{{ item }}</li>
+      </ul>
+    </div>
+    <div class="course-cta">
+      <p class="course-price">{{ course.price }}</p>
+      <button (click)="goToDetails(course)" class="details-button">ZOBACZ WIĘCEJ</button>
+    </div>
+  </div>
+</div>
