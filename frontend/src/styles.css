@@ -3,6 +3,8 @@
 @import "@fortawesome/fontawesome-free/css/all.min.css";
 @import "~node_modules/bootstrap/dist/css/bootstrap.css";
 
+/* TODO - create media mobile variable for smaller devices */
+
 :root {
   /** client **/
   --white-grey: #E8F0F2;
@@ -11,7 +13,7 @@
   --blue: #39A2DB;
   --dark-blue: #053742;
   /** admin **/
-  --white-grey-admin: #2a5f6e;
+  --dark-blue-admin: #2a5f6e;
   --admin-header: #22719B;
   --primary-button-color: #51DE79;
 }

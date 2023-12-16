@@ -1,2 +1,4 @@
-<app-client-layout *ngIf="!isAdminPath"></app-client-layout>
-<app-admin-layout *ngIf="isAdminPath"></app-admin-layout>
+<app-client-layout *ngIf="!isAdminPath && !isAuthPath"></app-client-layout>
+<app-admin-layout *ngIf="isAdminPath && !isAuthPath"></app-admin-layout>
+<app-auth-layout *ngIf="isAuthPath"></app-auth-layout>
+
