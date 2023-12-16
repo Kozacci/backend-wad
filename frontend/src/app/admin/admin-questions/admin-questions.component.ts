@@ -1,8 +1,10 @@
 import {Component} from '@angular/core';
-import {QuestionCreateUpdateDTO, QuestionFilterDTO} from "../../shared/dto";
+import {GroupedErrorDTO, QuestionCreateUpdateDTO, QuestionFilterDTO} from "../../shared/dto";
 import {RestClient} from "../../shared/rest-client";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ErrorHandlerService} from "../../shared/error-handler.component";
+import {HttpResponseHandlerService} from "../../shared/services/http-response-handler.service";
+import {FormService} from "../../shared/services/form/form.service";
+
 
 @Component({
   selector: 'app-admin-questions',
@@ -20,6 +22,8 @@ export class AdminQuestionsComponent {
     firstAnswer: null, thirdAnswer: null, secondAnswer: null
   };
   modalVisible: boolean = false;
+  categoryToAdd: {name: string, value: string} | null = null;
+  correctAnswerToAdd: {name: string, value: string} | null = null;
 
   formGroup = new FormGroup({
     categoryToAdd: new FormControl(this.questionToAdd.category,
@@ -36,26 +40,11 @@ export class AdminQuestionsComponent {
       [Validators.required]),
   })
 
+  groupedErrors: GroupedErrorDTO[] = [];
 
   constructor(private restClient: RestClient,
-              private errorHandlerService: ErrorHandlerService) {
-  }
-
-  getInputErrorMessage(input: FormControl<any | null>) {
-    if (input.hasError('required')) {
-      return 'Musisz wypełnić pole!';
-    }
-    else if (input.hasError('minlength')) {
-      const maxRequiredLength = input.getError('minlength').requiredLength;
-      return 'Pole musi zawierać min. ' + maxRequiredLength + ' znaków!';
-    }
-    else if (input.hasError('maxlength')) {
-      const minRequiredLength = input.getError('maxlength').requiredLength;
-      return 'Pole musi zawierać max. ' + minRequiredLength + ' znaków!';
-    }
-    else {
-      return 'Niepoprawne pole';
-    }
+              protected responseHandlerService: HttpResponseHandlerService,
+              protected formService: FormService) {
   }
 
   selectQuestion(question: any): void {
@@ -70,10 +59,16 @@ export class AdminQuestionsComponent {
   }
 
   addQuestion(): void {
+    this.questionToAdd.category = <string>this.categoryToAdd?.value;
+    this.questionToAdd.correctAnswer = <string>this.correctAnswerToAdd?.name;
+    this.questionToAdd.content = <string>this.formGroup.value.contentToAdd;
+    this.questionToAdd.firstAnswer = <string>this.formGroup.value.firstAnswerToAdd;
+    this.questionToAdd.secondAnswer = <string>this.formGroup.value.secondAnswerToAdd;
+    this.questionToAdd.thirdAnswer = <string>this.formGroup.value.thirdAnswerToAdd;
     this.restClient.addQuestion(this.questionToAdd).subscribe(response => {
-      console.log(response)
+      this.responseHandlerService.showSuccessPToast("Dodanie pytania", "Pytanie numer: " + response.questionId +  " zostało dodane.");
     }, error => {
-      this.errorHandlerService.handleErrorsPToasts(error);
+      this.groupedErrors = this.responseHandlerService.getErrorsBelowInputs(error)
     });
   }
 
@@ -111,7 +106,6 @@ export class AdminQuestionsComponent {
     {name: "Odpowiedź A", value: "FIRST_ANSWER"},
     {name: "Odpowiedź B", value: "SECOND_ANSWER"},
     {name: "Odpowiedź C", value: "THIRD_ANSWER"},
-
   ]
 
   questions: QuestionFilterDTO[] = [

@@ -128,22 +128,28 @@
           <label class="form-label">Dział:</label>
           <p-dropdown
             [options]="categories"
-            [(ngModel)]="questionToAdd.category"
+            [(ngModel)]="categoryToAdd"
             optionLabel="value"
             placeholder="Dział"
             [showClear]="true">
           </p-dropdown>
+          <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'category')">
+            {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'category')}}
+          </mat-error>
         </div>
 
         <div class="col ps-1 d-flex flex-column align-items-center">
           <label class="form-label">Poprawna odpowiedź:</label>
           <p-dropdown
             [options]="correctAnswerValues"
-            [(ngModel)]="questionToAdd.correctAnswer"
+            [(ngModel)]="correctAnswerToAdd"
             optionLabel="name"
             placeholder="Poprawna odpowiedź"
             [showClear]="true">
           </p-dropdown>
+          <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'correctAnswer')">
+            {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'correctAnswer')}}
+          </mat-error>
         </div>
 
       </div>
@@ -153,8 +159,11 @@
         <input matInput placeholder="Treść pytania"
                type="text"
                [formControl]="formGroup.controls.contentToAdd" required>
-        <mat-error *ngIf="formGroup.controls.contentToAdd.invalid">
-          {{ getInputErrorMessage(formGroup.controls.contentToAdd) }}
+        <mat-error *ngIf="formGroup.controls.contentToAdd.invalid ">
+          {{ formService.getInputErrorMessage(formGroup.controls.contentToAdd) }}
+        </mat-error>
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'content')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'content')}}
         </mat-error>
       </mat-form-field>
 
@@ -164,7 +173,10 @@
                type="text"
                [formControl]="formGroup.controls.firstAnswerToAdd" required>
         <mat-error *ngIf="formGroup.controls.firstAnswerToAdd.invalid">
-          {{ getInputErrorMessage(formGroup.controls.firstAnswerToAdd) }}
+          {{ formService.getInputErrorMessage(formGroup.controls.firstAnswerToAdd) }}
+        </mat-error>
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'firstAnswer')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'firstAnswer')}}
         </mat-error>
       </mat-form-field>
 
@@ -174,7 +186,11 @@
                type="text"
                [formControl]="formGroup.controls.secondAnswerToAdd" required>
         <mat-error *ngIf="formGroup.controls.secondAnswerToAdd.invalid">
-          {{ getInputErrorMessage(formGroup.controls.secondAnswerToAdd) }}
+          {{ formService.getInputErrorMessage(formGroup.controls.secondAnswerToAdd) }}
+        </mat-error>
+
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'secondAnswer')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'secondAnswer')}}
         </mat-error>
       </mat-form-field>
 
@@ -184,7 +200,10 @@
                type="text"
                [formControl]="formGroup.controls.thirdAnswerToAdd" required>
         <mat-error *ngIf="formGroup.controls.thirdAnswerToAdd.invalid">
-          {{ getInputErrorMessage(formGroup.controls.thirdAnswerToAdd) }}
+          {{ formService.getInputErrorMessage(formGroup.controls.thirdAnswerToAdd) }}
+        </mat-error>
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'thirdAnswer')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'thirdAnswer')}}
         </mat-error>
       </mat-form-field>
 
