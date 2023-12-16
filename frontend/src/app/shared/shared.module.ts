@@ -12,6 +12,13 @@ import {HttpClientModule} from "@angular/common/http";
 import {TableModule} from "primeng/table";
 import {StyleClassModule} from "primeng/styleclass";
 import {RippleModule} from "primeng/ripple";
+import {DialogModule} from "primeng/dialog";
+import {MatButtonModule} from "@angular/material/button";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatIconModule} from "@angular/material/icon";
+import {MatInputModule} from "@angular/material/input";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatSelectModule} from "@angular/material/select";
 
 
 @NgModule({
@@ -41,6 +48,13 @@ import {RippleModule} from "primeng/ripple";
     TableModule,
     StyleClassModule,
     RippleModule,
+    DialogModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatSelectModule
   ]
 })
 export class SharedModule { }
