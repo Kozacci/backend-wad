@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: start;
+  align-items: flex-start;
   background-color: white;
   transition: background-color 0.3s;
   animation: 0.6s ease-out 0.4s 1 slideInFromLeft; /* TODO LAZY LOADIN IMAGE - UNTIL PAGE STARTS, FINISH RENDERIN OF IMAGE */

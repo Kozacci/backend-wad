@@ -1,95 +1,118 @@
-import { Component } from '@angular/core';
-import {FormControl, Validators} from "@angular/forms";
-import {AuthService} from "../../shared/services/auth/auth.service";
-import {ParticipantRegisterDTO} from "../../shared/dto";
+import {Component, OnInit} from '@angular/core';
+import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
+import {FormService} from "../../shared/services/form/form.service";
+import {RestClient} from "../../shared/rest-client";
+import {MessageService} from "primeng/api";
+import {PathService} from "../../shared/services/path.service";
 
 @Component({
   selector: 'app-client-register',
   templateUrl: './client-register.component.html',
   styleUrls: ['./client-register.component.css']
 })
-export class ClientRegisterComponent {
+export class ClientRegisterComponent implements OnInit {
 
   passwordHide: boolean = true;
-  name =
-    new FormControl(
-      '',
-      [
-        Validators.required,
-        Validators.minLength(4)
-      ]
-    );
-  email =
-    new FormControl(
-      '',
-      [
-        Validators.required,
-        Validators.email,
-        Validators.minLength(5)
-      ]
-    );
-  password =
-    new FormControl(
-      '',
-      [
-        Validators.required,
-        Validators.minLength(8)
-      ]
-    );
-  passwordRepeat =
-    new FormControl(
-      '',
-      [
-        Validators.required,
-        Validators.minLength(8)
-      ]
-    );
-  phoneNumber =
-    new FormControl(
-      '',
-      [
-        Validators.required,
-        Validators.maxLength(9)
-      ]
-    );
 
-
-  constructor(public readonly authService: AuthService)
-  { }
-
-  register(participantRegisterDTO: ParticipantRegisterDTO) { // TODO
+  passwordMatchValidator(passwordKey: string, confirmPasswordKey: string): ValidatorFn {
+    return (input: AbstractControl): { [key: string]: any } | null => {
+      const password = input.get(passwordKey);
+      const confirmPassword = input.get(confirmPasswordKey);
+      if (password && confirmPassword && password.value !== confirmPassword.value) {
+        input.get(confirmPasswordKey)?.setErrors({ 'passwordMismatch': true });
+        return { 'passwordMismatch': true };
+      }
+      else {
+        // Deleting 'passwordMismatch' flag
+        input.get(confirmPasswordKey)?.setErrors(null);
+        return null;
+      }
+    };
   }
 
-  // Todo - Create component for input labels and create error messages system for them
-  getInputErrorMessage(input: FormControl<string | null>) {
-    if (input.hasError('required')) {
-      return 'Musisz wypełnić pole!';
-    }
-    else if (input.hasError('minlength')) {
-      const maxRequiredLength = input.getError('minlength').requiredLength;
-      return 'Pole musi zawierać min. ' + maxRequiredLength + ' znaków!';
-    }
-    else if (input.hasError('maxlength')) {
-      const minRequiredLength = input.getError('maxlength').requiredLength;
-      return 'Pole musi zawierać max. ' + minRequiredLength + ' znaków!';
-    }
-    else {
-      return 'Niepoprawne pole';
+  formGroup = new FormGroup({
+      firstName:
+        new FormControl(
+          '',
+          [
+            Validators.required,
+            Validators.minLength(2)
+          ]
+        ),
+      lastName:
+        new FormControl(
+          '',
+          [
+            Validators.required,
+            Validators.minLength(2)
+          ]
+        ),
+      email:
+        new FormControl(
+          '',
+          [
+            Validators.required,
+            Validators.minLength(5),
+            Validators.email
+          ]
+        ),
+      password:
+        new FormControl(
+          '',
+          [
+            Validators.required,
+            Validators.minLength(8)
+          ]
+        ),
+      passwordRepeat:
+        new FormControl(
+          '',
+          [
+            Validators.required
+          ]
+        ),
+      phoneNumber:
+        new FormControl(
+          '',
+          [
+            Validators.required,
+            Validators.maxLength(9),
+            Validators.pattern(/^\d{9}$/)
+          ]
+        )
+  }, {validators: this.passwordMatchValidator('password', 'passwordRepeat')
+  });
+
+  constructor(
+    public readonly formService: FormService,
+    public restClient: RestClient,
+    private readonly messageService: MessageService,
+    private readonly pathService: PathService
+  ) {}
+
+  register() {
+    if(this.formGroup.valid) {
+      const participantToRegister = {
+        firstName: this.formGroup.value.firstName ?? '',
+        lastName: this.formGroup.value.lastName?? '',
+        email: this.formGroup.value.email?? '',
+        password: this.formGroup.value.password?? '',
+        phoneNumber: this.formGroup.value.phoneNumber ?? ''
+      }
+      this.restClient.register(participantToRegister)
+        .subscribe(
+          (response) => {
+            this.pathService.navigate('zaloguj')
+            this.messageService.add({life:5000, severity:'success', summary:'Rejestracja', detail:"Teraz możesz się zalogować"})
+          },
+          (error) => {
+            this.messageService.add({life:4000, severity:'error', summary:'Rejestracja', detail:error})
+            console.error('Błąd rejestracji', error);
+          })
     }
   }
 
-  getEmailErrorMessage(input: FormControl<string | null>) {
-    if (input.hasError('required')) {
-      return 'Musisz wypełnić email!';
-    }
-    return this.email.hasError('email') ? 'Niepoprawny email' : '';
-  }
-
-  getPasswordRepeatErrorMessage(input: FormControl<string | null>) {
-    if(this.password != input) {
-      return 'Hasła muszą być takie same!';
-    }
-    return this.getInputErrorMessage(input);
+  ngOnInit() {
   }
 
 }

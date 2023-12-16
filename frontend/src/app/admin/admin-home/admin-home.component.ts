@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import {ParticipantLoginDTO} from "../../shared/dto";
+import {Component} from '@angular/core';
 import {AuthService} from "../../shared/services/auth/auth.service";
 
 @Component({
@@ -10,13 +9,5 @@ import {AuthService} from "../../shared/services/auth/auth.service";
 export class AdminHomeComponent {
 
   constructor(private authService: AuthService) {
-  }
-
-  logowanieDoWywalenia(): void {
-    let parti : ParticipantLoginDTO = <ParticipantLoginDTO> {
-      email: 'admin@email.com',
-      password: 'admin123'
-    }
-    this.authService.login(parti).subscribe(() => console.log("logowanie"));
   }
 }

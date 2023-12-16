@@ -152,7 +152,6 @@ export class ClientHomeComponent implements OnInit {
 
   ngOnInit() {
     this.authService.isLogged();
-    this.authService.messageIfNotLogged();
   }
 
 }
