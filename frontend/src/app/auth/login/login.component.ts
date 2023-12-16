@@ -8,10 +8,10 @@ import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-client-login',
-  templateUrl: './client-login.component.html',
-  styleUrls: ['./client-login.component.css']
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class ClientLoginComponent {
+export class LoginComponent {
 
   passwordHide: boolean = true;
   email =
