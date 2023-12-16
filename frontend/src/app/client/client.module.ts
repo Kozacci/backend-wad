@@ -10,14 +10,11 @@ import {MatButtonModule} from "@angular/material/button";
 import {CarouselModule} from "primeng/carousel";
 import {RatingModule} from "primeng/rating";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { ClientFooterComponent } from './client-footer/client-footer.component';
-import { Client404Component } from './client-404/client-404.component';
-import { ClientLoginComponent } from './client-login/client-login.component';
+import {ClientFooterComponent} from './client-footer/client-footer.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
-import { ClientRegisterComponent } from './client-register/client-register.component';
-import { ClientCoursesComponent } from './client-courses/client-courses.component';
+import {ClientCoursesComponent} from './client-courses/client-courses.component';
 
 @NgModule({
   declarations: [
@@ -25,9 +22,6 @@ import { ClientCoursesComponent } from './client-courses/client-courses.componen
     ClientHomeComponent,
     ClientNavbarComponent,
     ClientFooterComponent,
-    Client404Component,
-    ClientLoginComponent,
-    ClientRegisterComponent,
     ClientCoursesComponent
   ],
   exports: [
