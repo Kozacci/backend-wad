@@ -17,6 +17,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
 import { ClientRegisterComponent } from './client-register/client-register.component';
+import { ClientCoursesComponent } from './client-courses/client-courses.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ClientRegisterComponent } from './client-register/client-register.compo
     ClientFooterComponent,
     Client404Component,
     ClientLoginComponent,
-    ClientRegisterComponent
+    ClientRegisterComponent,
+    ClientCoursesComponent
   ],
   exports: [
     ClientLayoutComponent,
