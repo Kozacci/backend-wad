@@ -65,7 +65,7 @@
     [rowsPerPageOptions]="[5, 10, 15]"
     currentPageReportTemplate="{first} Pytań z {totalRecords}"
     styleClass="p-datatable-gridlines p-datatable-resizable"
-    [tableStyle]="{'witdth': '100%' }"
+    [tableStyle]="{'width': '100%' }"
     [rowHover]="true"
     [resizableColumns]="true"
     [scrollable]="true"
@@ -91,7 +91,7 @@
             [textVisible]="false"
             [isClickable]="true"
             [iconClass]="'pi pi-pencil'"
-            (onClick)="editQuestion(question)"
+            (onClick)="insertDataIntoEditQuestionModal(question)"
           ></text-icon></td>
         <td>{{question.id}}</td>
         <td>{{question.content}}</td>
@@ -163,9 +163,9 @@
         <mat-label>Treść pytania</mat-label>
         <input matInput placeholder="Treść pytania"
                type="text"
-               [formControl]="formGroup.controls.contentToAdd" required>
-        <mat-error *ngIf="formGroup.controls.contentToAdd.invalid ">
-          {{ formService.getInputErrorMessage(formGroup.controls.contentToAdd) }}
+               [formControl]="formGroupAddQuestion.controls.contentToAdd" required>
+        <mat-error *ngIf="formGroupAddQuestion.controls.contentToAdd.invalid ">
+          {{ formService.getInputErrorMessage(formGroupAddQuestion.controls.contentToAdd) }}
         </mat-error>
         <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'content')">
           {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'content')}}
@@ -176,9 +176,9 @@
         <mat-label>Odpowiedź A</mat-label>
         <input matInput placeholder="Odpowiedź A"
                type="text"
-               [formControl]="formGroup.controls.firstAnswerToAdd" required>
-        <mat-error *ngIf="formGroup.controls.firstAnswerToAdd.invalid">
-          {{ formService.getInputErrorMessage(formGroup.controls.firstAnswerToAdd) }}
+               [formControl]="formGroupAddQuestion.controls.firstAnswerToAdd" required>
+        <mat-error *ngIf="formGroupAddQuestion.controls.firstAnswerToAdd.invalid">
+          {{ formService.getInputErrorMessage(formGroupAddQuestion.controls.firstAnswerToAdd) }}
         </mat-error>
         <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'firstAnswer')">
           {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'firstAnswer')}}
@@ -189,9 +189,9 @@
         <mat-label>Odpowiedź B</mat-label>
         <input matInput placeholder="Odpowiedź B"
                type="text"
-               [formControl]="formGroup.controls.secondAnswerToAdd" required>
-        <mat-error *ngIf="formGroup.controls.secondAnswerToAdd.invalid">
-          {{ formService.getInputErrorMessage(formGroup.controls.secondAnswerToAdd) }}
+               [formControl]="formGroupAddQuestion.controls.secondAnswerToAdd" required>
+        <mat-error *ngIf="formGroupAddQuestion.controls.secondAnswerToAdd.invalid">
+          {{ formService.getInputErrorMessage(formGroupAddQuestion.controls.secondAnswerToAdd) }}
         </mat-error>
 
         <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'secondAnswer')">
@@ -203,9 +203,9 @@
         <mat-label>Odpowiedź C</mat-label>
         <input matInput placeholder="Odpowiedź C"
                type="text"
-               [formControl]="formGroup.controls.thirdAnswerToAdd" required>
-        <mat-error *ngIf="formGroup.controls.thirdAnswerToAdd.invalid">
-          {{ formService.getInputErrorMessage(formGroup.controls.thirdAnswerToAdd) }}
+               [formControl]="formGroupAddQuestion.controls.thirdAnswerToAdd" required>
+        <mat-error *ngIf="formGroupAddQuestion.controls.thirdAnswerToAdd.invalid">
+          {{ formService.getInputErrorMessage(formGroupAddQuestion.controls.thirdAnswerToAdd) }}
         </mat-error>
         <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'thirdAnswer')">
           {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'thirdAnswer')}}
@@ -235,7 +235,7 @@
 <!--edit question modal-->
 
 <p-dialog
-  [(visible)]="addQuestionModalVisible"
+  [(visible)]="editQuestionModalVisible"
   [modal]="true"
   [draggable]="false"
   [style]="{ width: '50rem' }"
@@ -245,7 +245,7 @@
 
   <ng-template pTemplate="header">
     <text-icon
-      text="Dodanie pytania"
+      text="Edycja pytania #{{questionToEditId}}"
       [textVisible]="true"
       [iconClass]="'pi pi-comments'">
     </text-icon>
@@ -260,7 +260,7 @@
           <label class="form-label">Dział:</label>
           <p-dropdown
             [options]="categories"
-            [(ngModel)]="categoryToAdd"
+            [(ngModel)]="categoryToEdit"
             optionLabel="value"
             placeholder="Dział"
             [showClear]="true">
@@ -274,10 +274,11 @@
           <label class="form-label">Poprawna odpowiedź:</label>
           <p-dropdown
             [options]="correctAnswerValues"
-            [(ngModel)]="correctAnswerToAdd"
+            [(ngModel)]="correctAnswerToEdit"
             optionLabel="name"
             placeholder="Poprawna odpowiedź"
-            [showClear]="true">
+            [showClear]="true"
+          >
           </p-dropdown>
           <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'correctAnswer')">
             {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'correctAnswer')}}
@@ -290,9 +291,9 @@
         <mat-label>Treść pytania</mat-label>
         <input matInput placeholder="Treść pytania"
                type="text"
-               [formControl]="formGroup.controls.contentToAdd" required>
-        <mat-error *ngIf="formGroup.controls.contentToAdd.invalid ">
-          {{ formService.getInputErrorMessage(formGroup.controls.contentToAdd) }}
+               [formControl]="formGroupEditQuestion.controls.contentToEdit" required>
+        <mat-error *ngIf="formGroupEditQuestion.controls.contentToEdit.invalid ">
+          {{ formService.getInputErrorMessage(formGroupEditQuestion.controls.contentToEdit) }}
         </mat-error>
         <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'content')">
           {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'content')}}
@@ -303,9 +304,9 @@
         <mat-label>Odpowiedź A</mat-label>
         <input matInput placeholder="Odpowiedź A"
                type="text"
-               [formControl]="formGroup.controls.firstAnswerToAdd" required>
-        <mat-error *ngIf="formGroup.controls.firstAnswerToAdd.invalid">
-          {{ formService.getInputErrorMessage(formGroup.controls.firstAnswerToAdd) }}
+               [formControl]="formGroupEditQuestion.controls.firstAnswerToAdd" required>
+        <mat-error *ngIf="formGroupEditQuestion.controls.firstAnswerToAdd.invalid">
+          {{ formService.getInputErrorMessage(formGroupEditQuestion.controls.firstAnswerToAdd) }}
         </mat-error>
         <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'firstAnswer')">
           {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'firstAnswer')}}
@@ -316,9 +317,9 @@
         <mat-label>Odpowiedź B</mat-label>
         <input matInput placeholder="Odpowiedź B"
                type="text"
-               [formControl]="formGroup.controls.secondAnswerToAdd" required>
-        <mat-error *ngIf="formGroup.controls.secondAnswerToAdd.invalid">
-          {{ formService.getInputErrorMessage(formGroup.controls.secondAnswerToAdd) }}
+               [formControl]="formGroupEditQuestion.controls.secondAnswerToAdd" required>
+        <mat-error *ngIf="formGroupEditQuestion.controls.secondAnswerToAdd.invalid">
+          {{ formService.getInputErrorMessage(formGroupEditQuestion.controls.secondAnswerToAdd) }}
         </mat-error>
 
         <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'secondAnswer')">
@@ -330,9 +331,9 @@
         <mat-label>Odpowiedź C</mat-label>
         <input matInput placeholder="Odpowiedź C"
                type="text"
-               [formControl]="formGroup.controls.thirdAnswerToAdd" required>
-        <mat-error *ngIf="formGroup.controls.thirdAnswerToAdd.invalid">
-          {{ formService.getInputErrorMessage(formGroup.controls.thirdAnswerToAdd) }}
+               [formControl]="formGroupEditQuestion.controls.thirdAnswerToAdd" required>
+        <mat-error *ngIf="formGroupEditQuestion.controls.thirdAnswerToAdd.invalid">
+          {{ formService.getInputErrorMessage(formGroupEditQuestion.controls.thirdAnswerToAdd) }}
         </mat-error>
         <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'thirdAnswer')">
           {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'thirdAnswer')}}
@@ -344,12 +345,12 @@
     <div class="row">
       <div class="col-xl-12 d-flex justify-content-between">
         <primary-button
-          [label]="'Dodaj'"
-          (onClick)="addQuestion()">
+          [label]="'Edytuj'"
+          (onClick)="editQuestion()">
         </primary-button>
         <secondary-button
           [label]="'Anuluj'"
-          (onClick)="closeAddQuestionModal()"
+          (onClick)="closeEditQuestionModal()"
           [bordered]="true">
         </secondary-button>
       </div>
