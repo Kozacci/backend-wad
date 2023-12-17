@@ -63,4 +63,9 @@ export class RestClient {
     const url = `${this.apiUrl}/questions/${questionToEditId}`;
     return this.http.put<QuestionEntityDTO>(url, questionToEdit, {withCredentials: true});
   }
+
+  deleteQuestionById(questionToEditId: number | null): Observable<any> {
+    const url = `${this.apiUrl}/questions/${questionToEditId}`;
+    return this.http.delete<QuestionEntityDTO>(url, {withCredentials: true});
+  }
 }
