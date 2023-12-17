@@ -1,0 +1,72 @@
+<div class="course-detail-container">
+  <div class="course-main">
+    <h1 class="course-title">{{ course.title }}</h1>
+    <img class="course-image" [src]="course.image" alt="Zdjęcie kursu">
+    <h2>Korzyści ze szkolenia</h2>
+    <ul class="course-description">
+      <li *ngFor="let profit of course.profits">
+        {{ profit }}
+      </li>
+    </ul>
+    <h2>Warunki przystąpienia do szkolenia</h2>
+    <ul class="course-conditions">
+      <li *ngFor="let condition of course.conditions">
+        {{ condition }}
+      </li>
+    </ul>
+    <h2>Dostępne terminy</h2>
+    <p-table
+      [value]="availableCourses"
+      [paginator]="true"
+      [rows]="3"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="{first} z {totalRecords}"
+      styleClass="p-datatable p-datatable-resizable"
+      [tableStyle]="{'width': '100%' }"
+      [rowHover]="true"
+      [resizableColumns]="true"
+      [scrollable]="true"
+      scrollHeight="300px">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Termin szkolenia</th>
+          <th>Lokalizacja</th>
+          <th>Ilość wolnych miejsc</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-availableCourse>
+        <tr>
+          <td>{{ availableCourse.dateFrom }}  -  {{ availableCourse.dateTo }}</td>
+          <td>{{ availableCourse.city }}</td>
+          <td [ngClass]="{
+              'green-text': availableCourse.maxParticipantsNumber - availableCourse.registeredParticipants >= 5,
+              'orange-text': availableCourse.maxParticipantsNumber - availableCourse.registeredParticipants >= 3,
+              'red-text': availableCourse.maxParticipantsNumber - availableCourse.registeredParticipants >= 0
+              }">
+            {{ availableCourse.maxParticipantsNumber-availableCourse.registeredParticipants }} / {{ availableCourse.maxParticipantsNumber }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <div class="course-info-aside">
+    <div class="course-meta-info">
+      <h2>INFORMACJE</h2>
+      <p><strong>Czas trwania:</strong> {{ course.duration }}</p>
+      <p><strong>Łódź:</strong> Motorówka RIB</p>
+      <p><strong>Lokalizacja:</strong> Sopot lub Olecko</p>
+      <p><strong>Prowadzący:</strong> Hubert Wróblewski-Klimaszewski</p>
+      <p><strong>Dostęp do bazy pytań (e-learning)</strong></p>
+      <p><strong>Dostęp do egzaminów próbnych</strong></p>
+      <p><strong>Po zaliczeniu egzaminu certyfikat ukończenia szkolenia</strong></p>
+    </div>
+
+    <div class="course-enroll-info">
+      <div class="course-price">
+        Cena: {{ course.price }} zł
+      </div>
+      <button mat-button class="enroll-btn" (click)="checkAvailableCourses()"><i class="pi pi-plus"></i>  Zapisz się na kurs</button>
+    </div>
+  </div>
+</div>
