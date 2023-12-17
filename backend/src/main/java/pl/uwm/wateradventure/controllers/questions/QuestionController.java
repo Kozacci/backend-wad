@@ -58,7 +58,7 @@ class QuestionController {
 
     @PutMapping("/{questionId}")
     @ResponseStatus(HttpStatus.OK)
-    public QuestionEntityDTO updateQuestion(@PathVariable Long questionId, @Valid @RequestBody QuestionCreateUpdateDTO questionUpdateDTO) {
+    public QuestionEntityDTO updateQuestion(@PathVariable Long questionId, @RequestBody QuestionCreateUpdateDTO questionUpdateDTO) {
         return questionFacade.updateQuestion(questionId, questionUpdateDTO);
     }
 
