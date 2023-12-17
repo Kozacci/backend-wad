@@ -21,9 +21,11 @@ export class AdminQuestionsComponent {
     category: null, content: null, correctAnswer: null,
     firstAnswer: null, thirdAnswer: null, secondAnswer: null
   };
-  modalVisible: boolean = false;
+  addQuestionModalVisible: boolean = false;
+  editQuestionModalVisible: boolean = false;
   categoryToAdd: {name: string, value: string} | null = null;
   correctAnswerToAdd: {name: string, value: string} | null = null;
+  questionsList: QuestionFilterDTO[] = [];
 
   formGroup = new FormGroup({
     categoryToAdd: new FormControl(this.questionToAdd.category,
@@ -47,14 +49,15 @@ export class AdminQuestionsComponent {
               protected formService: FormService) {
   }
 
-  selectQuestion(question: any): void {
+  editQuestion(question: any): void {
     console.log(question);
   }
 
   findQuestions(): void {
     this.restClient.getQuestionsByFilters(this.id, this.content, this.category?.name, this.sortBy?.value)
       .subscribe((val) => {
-        this.questions = val;
+        console.log(val)
+        this.questionsList = val;
       });
   }
 
@@ -72,12 +75,20 @@ export class AdminQuestionsComponent {
     });
   }
 
-  showModal(): void {
-    this.modalVisible = true;
+  showAddQuestionModal(): void {
+    this.addQuestionModalVisible = true;
   }
 
-  closeModal(): void {
-    this.modalVisible = false;
+  closeAddQuestionModal(): void {
+    this.addQuestionModalVisible = false;
+  }
+
+  showEditQuestionModal(): void {
+    this.editQuestionModalVisible = true;
+  }
+
+  closeEditQuestionModal(): void {
+    this.editQuestionModalVisible = false;
   }
 
   categories = [
@@ -107,88 +118,5 @@ export class AdminQuestionsComponent {
     {name: "Odpowiedź B", value: "SECOND_ANSWER"},
     {name: "Odpowiedź C", value: "THIRD_ANSWER"},
   ]
-
-  questions: QuestionFilterDTO[] = [
-    // {
-    //   id: 1,
-    //   content: "Pierwsze pytanie...",
-    //   category: Category.OCHRONA_WOD_PRZED_ZANIECZYSZCZENIEM,
-    //   firstAnswer: "Odpowiedź A",
-    //   secondAnswer: "Odpowiedź B",
-    //   thirdAnswer: "Odpowiedź C"
-    // },
-    // {
-    //   id: 2,
-    //   content: "Drugie pytanie...",
-    //   category: Category.PODSTAWOWE_PRZEPISY_PRAWA,
-    //   firstAnswer: "Odpowiedź A",
-    //   secondAnswer: "Odpowiedź B",
-    //   thirdAnswer: "Odpowiedź C"
-    // },
-    // {
-    //   id: 3,
-    //   content: "Trzecie pytanie...",
-    //   category: Category.PRZEPISY,
-    //   firstAnswer: "Odpowiedź A",
-    //   secondAnswer: "Odpowiedź B",
-    //   thirdAnswer: "Odpowiedź C"
-    // },
-    // {
-    //   id: 4,
-    //   content: "Czwarte pytanie...",
-    //   category: Category.OCHRONA_WOD_PRZED_ZANIECZYSZCZENIEM,
-    //   firstAnswer: "Odpowiedź A",
-    //   secondAnswer: "Odpowiedź B",
-    //   thirdAnswer: "Odpowiedź C"
-    // },
-    // {
-    //   id: 5,
-    //   content: "Piąte pytanie...",
-    //   category: Category.PODSTAWOWE_PRZEPISY_PRAWA,
-    //   firstAnswer: "Odpowiedź A",
-    //   secondAnswer: "Odpowiedź B",
-    //   thirdAnswer: "Odpowiedź C"
-    // },
-    // {
-    //   id: 6,
-    //   content: "Szóste pytanie...",
-    //   category: Category.PRZEPISY,
-    //   firstAnswer: "Odpowiedź A",
-    //   secondAnswer: "Odpowiedź B",
-    //   thirdAnswer: "Odpowiedź C"
-    // },
-    // {
-    //   id: 6,
-    //   content: "Szóste pytanie...",
-    //   category: Category.PRZEPISY,
-    //   firstAnswer: "Odpowiedź A",
-    //   secondAnswer: "Odpowiedź B",
-    //   thirdAnswer: "Odpowiedź C"
-    // },
-    // {
-    //   id: 6,
-    //   content: "Szóste pytanie...",
-    //   category: Category.PRZEPISY,
-    //   firstAnswer: "Odpowiedź A",
-    //   secondAnswer: "Odpowiedź B",
-    //   thirdAnswer: "Odpowiedź C"
-    // },
-    // {
-    //   id: 6,
-    //   content: "Szóste pytanie...",
-    //   category: Category.PRZEPISY,
-    //   firstAnswer: "Odpowiedź A",
-    //   secondAnswer: "Odpowiedź B",
-    //   thirdAnswer: "Odpowiedź C"
-    // },
-    // {
-    //   id: 6,
-    //   content: "Szóste pytanie...",
-    //   category: Category.PRZEPISY,
-    //   firstAnswer: "Odpowiedź A",
-    //   secondAnswer: "Odpowiedź B",
-    //   thirdAnswer: "Odpowiedź C"
-    // },
-  ];
 
 }
