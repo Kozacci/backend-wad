@@ -7,10 +7,11 @@ import java.util.stream.Stream;
 public enum CourseType {
 
     STERNIK_MOTOROWODNY("Sternik motorowodny"),
+    JACHTOWY_STERNIK_MORSKI("Jachtowy sternik morski"),
     MOTOROWODNY_STERNIK_MORSKI("Motorowodny sternik morski"),
-    HOLOWANIE_NARCIARZA_I_OBIEKTOW_NAWODNYCH("Holowanie narciarza i obiektow nawodnych"),
     ZEGLARZ_JACHTOWY("Żeglarz jachtowy"),
-    JACHTOWY_STERNIK_MORSKI("Jachtowy sternik morski");
+    WARSZTATY_NAWIGACYJNE("Warsztaty nawigacyjne"),
+    REJSY_STAZOWE("Rejsy stażowe");
 
     public final String enumValue;
 
