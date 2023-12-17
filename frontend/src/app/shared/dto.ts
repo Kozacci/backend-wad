@@ -189,6 +189,17 @@ export interface ErrorDTO {
   message: string
 }
 
+export interface CourseFilterDTO {
+  id: number,
+  dateFrom: Date,
+  dateTo: Date,
+  courseStatus: CourseStatus,
+  maxParticipantsNumber: number,
+  city: CourseCity,
+  courseType: CourseType,
+  registeredParticipants: number
+}
+
 // Exist only on frontend, created for showing validation error below input fields
 export interface GroupedErrorDTO {
   fieldName: string,

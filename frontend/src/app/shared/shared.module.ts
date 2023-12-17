@@ -22,6 +22,7 @@ import {MatSelectModule} from "@angular/material/select";
 import { CorrectAnswerPipe } from './pipes/correct-answer.pipe';
 import { CategoryPipe } from './pipes/category.pipe';
 import {DangerButtonComponent} from "./danger-button/danger-button.component";
+import {CalendarModule} from "primeng/calendar";
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import {DangerButtonComponent} from "./danger-button/danger-button.component";
     ReactiveFormsModule,
     MatSelectModule,
     CorrectAnswerPipe,
-    CategoryPipe
+    CategoryPipe,
+    CalendarModule,
   ]
 })
 export class SharedModule { }
