@@ -19,13 +19,17 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
+import { CorrectAnswerPipe } from './pipes/correct-answer.pipe';
+import { CategoryPipe } from './pipes/category.pipe';
 
 
 @NgModule({
   declarations: [
     TextIconComponent,
     PrimaryButtonComponent,
-    SecondaryButtonComponent
+    SecondaryButtonComponent,
+    CorrectAnswerPipe,
+    CategoryPipe,
   ],
   imports: [
     CommonModule,
@@ -54,7 +58,9 @@ import {MatSelectModule} from "@angular/material/select";
     MatIconModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    CorrectAnswerPipe,
+    CategoryPipe
   ]
 })
 export class SharedModule { }
