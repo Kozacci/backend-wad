@@ -58,6 +58,7 @@
   padding-left: 1rem;
   text-align: center;
   font-size: medium;
+  font-weight: 500;
   color: var(--blue);
   margin-bottom: 0.5rem;
 }

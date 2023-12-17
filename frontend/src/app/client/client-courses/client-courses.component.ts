@@ -20,6 +20,7 @@ export class ClientCoursesComponent {
       ],
       price: '750zł / OSOBA',
       image: 'assets/images/client/overlay/courses/course-1.png',
+      url: '/oferta/kursy/sternik-motorowodny'
     },
     {
       title: 'JACHTOWY STERNIK MORSKI',
@@ -32,6 +33,7 @@ export class ClientCoursesComponent {
       ],
       price: '850zł / OSOBA',
       image: 'assets/images/client/overlay/courses/course-2.png',
+      url: '/oferta/kursy/jachtowy-sternik'
     },
     {
       title: 'MORSKI STERNIK MOTOROWODNY',
@@ -44,6 +46,7 @@ export class ClientCoursesComponent {
       ],
       price: '950zł / OSOBA',
       image: 'assets/images/client/overlay/courses/course-3.png',
+      url: '/oferta/kursy/morski-sternik'
     },
     {
       title: 'ŻEGLARZ JACHTOWY',
@@ -56,6 +59,7 @@ export class ClientCoursesComponent {
       ],
       price: '750zł / OSOBA',
       image: 'assets/images/client/overlay/courses/course-4.png',
+      url: '/oferta/kursy/zeglarz-jachtowy'
     },
     {
       title: 'WARSZTATY NAWIGACYJNE',
@@ -66,6 +70,7 @@ export class ClientCoursesComponent {
       ],
       price: '350zł / OSOBA',
       image: 'assets/images/client/overlay/courses/course-5.png',
+      url: '/oferta/kursy/warsztaty-nawigacyjne'
     },
     {
       title: 'REJSY STAŻOWE',
@@ -76,19 +81,17 @@ export class ClientCoursesComponent {
       ],
       price: '450zł / OSOBA',
       image: 'assets/images/client/overlay/courses/course-6.png',
+      url: '/oferta/kursy/rejsy-stazowe'
     },
   ];
 
   constructor(
     private readonly pathService: PathService
-  )
-  {
-  }
+  ) {}
 
 
-  goToCourseDetails(course: any) {
-    // Logika nawigacji do szczegółów kursu, np.:
-    this.pathService.navigate('/courses-top');
+  goToCourseDetails(courseUrl: string) {
+    this.pathService.navigate(courseUrl);
   }
 
 }
