@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {
+  CourseFilterDTO,
   ParticipantEntityDTO,
   ParticipantLoginDTO,
   ParticipantRegisterDTO,
-  QuestionCreateUpdateDTO, QuestionEntityDTO,
+  QuestionCreateUpdateDTO,
+  QuestionEntityDTO,
   QuestionFilterDTO
 } from "./dto";
 import {Observable} from "rxjs";
@@ -67,5 +69,34 @@ export class RestClient {
   deleteQuestionById(questionToEditId: number | null): Observable<any> {
     const url = `${this.apiUrl}/questions/${questionToEditId}`;
     return this.http.delete<QuestionEntityDTO>(url, {withCredentials: true});
+  }
+
+  getCoursesByFilters(courseType: string | undefined, courseStatus: string | undefined,
+                      courseCity: string | undefined, startDate: Date | null, endDate: Date | null,
+                      registeredParticipants: number | null, maxParticipantsNumber: number | null,
+                      value: string | undefined): Observable<CourseFilterDTO[]> {
+    let params = new HttpParams();
+    if (courseType !== null && courseType !== undefined) {
+      params = params.append('courseType', courseType);
+    }
+    if (courseStatus !== null && courseStatus !== undefined) {
+      params = params.append('courseStatus', courseStatus);
+    }
+    if (courseCity !== null && courseCity !== undefined) {
+      params = params.append('courseCity', courseCity);
+    }
+    if (startDate !== null) {
+      params = params.append('startDate', startDate.toString());
+    }
+    if (endDate !== null) {
+      params = params.append('endDate', endDate.toString());
+    }
+    if (registeredParticipants !== null) {
+      params = params.append('registeredParticipants', registeredParticipants);
+    }
+    if (maxParticipantsNumber !== null) {
+      params = params.append('maxParticipantsNumber', maxParticipantsNumber)
+    }
+    return this.http.get<CourseFilterDTO[]>(`${this.apiUrl}/courses/filter-by`, {params, withCredentials: true})
   }
 }
