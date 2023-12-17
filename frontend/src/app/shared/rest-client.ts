@@ -58,4 +58,9 @@ export class RestClient {
   addQuestion(questionToAdd: QuestionCreateUpdateDTO): Observable<QuestionEntityDTO> {
     return this.http.post<QuestionEntityDTO>(`${this.apiUrl}/questions`,questionToAdd, {withCredentials: true});
   }
+
+  editQuestion(questionToEdit: QuestionCreateUpdateDTO, questionToEditId: number):Observable<QuestionEntityDTO> {
+    const url = `${this.apiUrl}/questions/${questionToEditId}`;
+    return this.http.put<QuestionEntityDTO>(url, questionToEdit, {withCredentials: true});
+  }
 }
