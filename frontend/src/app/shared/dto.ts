@@ -17,10 +17,11 @@ export enum CourseCity {
 
 export enum CourseType {
   STERNIK_MOTOROWODNY,
+  JACHTOWY_STERNIK_MORSKI,
   MOTOROWODNY_STERNIK_MORSKI,
-  HOLOWANIE_NARCIARZA_I_OBIEKTOW_NAWODNYCH,
   ZEGLARZ_JACHTOWY,
-  JACHTOWY_STERNIK_MORSKI
+  WARSZTATY_NAWIGACYJNE,
+  REJSY_STAZOWE
 }
 
 export enum EventCity {
@@ -123,6 +124,17 @@ export interface QuestionEntityDTO {
   correctAnswer: string,
   explanation?: string,
   image?: string
+}
+
+export interface CourseFilterDTO {
+  id: number,
+  dateFrom: Date,
+  dateTo: Date,
+  courseStatus: CourseStatus,
+  maxParticipantsNumber: number,
+  city: CourseCity,
+  courseType: CourseType,
+  registeredParticipants: number
 }
 
 export interface ErrorDTO {
