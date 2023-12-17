@@ -15,6 +15,13 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
 import {ClientCoursesComponent} from './client-courses/client-courses.component';
+import { ClientCourseDetailsComponent } from './client-course-details/client-course-details.component';
+import { ClientCourseDetailsSteersmanComponent } from './client-course-details/client-course-details-steersman/client-course-details-steersman.component';
+import { ClientCourseDetailsYachtComponent } from './client-course-details/client-course-details-yacht/client-course-details-yacht.component';
+import { ClientCourseDetailsSeaComponent } from './client-course-details/client-course-details-sea/client-course-details-sea.component';
+import { ClientCourseDetailsSailorComponent } from './client-course-details/client-course-details-sailor/client-course-details-sailor.component';
+import { ClientCourseDetailsWorkshopComponent } from './client-course-details/client-course-details-workshop/client-course-details-workshop.component';
+import { ClientCourseDetailsInternshipComponent } from './client-course-details/client-course-details-internship/client-course-details-internship.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +29,14 @@ import {ClientCoursesComponent} from './client-courses/client-courses.component'
     ClientHomeComponent,
     ClientNavbarComponent,
     ClientFooterComponent,
-    ClientCoursesComponent
+    ClientCoursesComponent,
+    ClientCourseDetailsComponent,
+    ClientCourseDetailsSteersmanComponent,
+    ClientCourseDetailsYachtComponent,
+    ClientCourseDetailsSeaComponent,
+    ClientCourseDetailsSailorComponent,
+    ClientCourseDetailsWorkshopComponent,
+    ClientCourseDetailsInternshipComponent
   ],
   exports: [
     ClientLayoutComponent,
