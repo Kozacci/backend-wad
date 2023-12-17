@@ -83,7 +83,6 @@ export class AdminQuestionsComponent {
   findQuestions(): void {
     this.restClient.getQuestionsByFilters(this.id, this.content, this.category?.name, this.sortBy?.value)
       .subscribe((val) => {
-        console.log(val)
         this.questionsList = val;
       });
   }
