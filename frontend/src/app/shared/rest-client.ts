@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {
+  CourseFilterDTO,
   ParticipantEntityDTO,
   ParticipantLoginDTO,
   ParticipantRegisterDTO,
@@ -37,8 +38,47 @@ export class RestClient {
     return this.http.post<void>(`${this.apiUrl}/courses`, {}, { withCredentials: true });
   }
 
-  getQuestionsByFilters(id: number | null, content: string | null,
-                        category: string | undefined, sortBy: string | undefined): Observable<QuestionFilterDTO[]> {
+  getCoursesByFilters(courseType: string | null,
+                      courseStatus: string | null,
+                      courseCity: string | null,
+                      dateFrom: Date | null,
+                      dateTo: Date | null,
+                      registeredParticipants: number | null,
+                      participantsLimit: number | null,
+                      sortBy: string | null): Observable<CourseFilterDTO[]> {
+    let params = new HttpParams();
+    if (courseType !== null && courseType !== "") {
+      params = params.append('courseType', courseType);
+    }
+    if (courseStatus !== null  && courseStatus !== "") {
+      params = params.append('courseStatus', courseStatus);
+    }
+    if (courseCity !== null && courseCity !== "") {
+      params = params.append('courseCity', courseCity);
+    }
+    if (dateFrom !== null) {
+      params = params.append('dateFrom', dateFrom.toISOString());
+    }
+    if (dateTo !== null) {
+      params = params.append('dateTo', dateTo.toISOString());
+    }
+    if (registeredParticipants !== null) {
+      params = params.append('registeredParticipants', registeredParticipants);
+    }
+    if (participantsLimit !== null) {
+      params = params.append('participantsLimit', participantsLimit);
+    }
+    if (sortBy !== null && sortBy !== undefined) {
+      params = params.append('sortBy', sortBy);
+    }
+    return this.http.get<CourseFilterDTO[]>(`${this.apiUrl}/courses/filter-by`, {params, withCredentials: true } );
+  }
+
+
+  getQuestionsByFilters(id: number | null,
+                        content: string | null,
+                        category: string | undefined,
+                        sortBy: string | undefined): Observable<QuestionFilterDTO[]> {
     let params = new HttpParams();
     if (id !== null) {
       params = params.append('id', id);
