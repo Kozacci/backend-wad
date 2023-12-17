@@ -21,6 +21,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import { CorrectAnswerPipe } from './pipes/correct-answer.pipe';
 import { CategoryPipe } from './pipes/category.pipe';
+import {DangerButtonComponent} from "./danger-button/danger-button.component";
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { CategoryPipe } from './pipes/category.pipe';
     TextIconComponent,
     PrimaryButtonComponent,
     SecondaryButtonComponent,
+    DangerButtonComponent,
     CorrectAnswerPipe,
     CategoryPipe,
   ],
@@ -43,6 +45,7 @@ import { CategoryPipe } from './pipes/category.pipe';
     TextIconComponent,
     PrimaryButtonComponent,
     SecondaryButtonComponent,
+    DangerButtonComponent,
     CommonModule,
     ButtonModule,
     SidebarModule,
