@@ -3,8 +3,10 @@ import {
   Category,
   CorrectAnswer,
   GroupedErrorDTO,
-  mapToCategory, mapToCorrectAnswer,
-  QuestionCreateUpdateDTO, QuestionEntityDTO,
+  mapToCategory,
+  mapToCorrectAnswer,
+  QuestionCreateUpdateDTO,
+  QuestionEntityDTO,
   QuestionFilterDTO
 } from "../../shared/dto";
 import {RestClient} from "../../shared/rest-client";
@@ -154,6 +156,16 @@ export class AdminQuestionsComponent {
     editedQuestion.thirdAnswer = this.questionToEdit.thirdAnswer;
   }
 
+  deleteQuestion(): void {
+    this.restClient.deleteQuestionById(this.questionToEditId).subscribe( () => {
+      this.responseHandlerService.showSuccessPToast("Usunięcie pytania", "Pytanie nr:" + this.questionToEditId + " zostało usunięte.");
+      this.removeQuestionFromTable(this.questionToEditId);
+      this.closeEditQuestionModal();
+    }, error => {
+      this.responseHandlerService.handleErrorsPtoasts(error);
+    })
+  }
+
   showAddQuestionModal(): void {
     this.addQuestionModalVisible = true;
   }
@@ -168,6 +180,13 @@ export class AdminQuestionsComponent {
 
   closeEditQuestionModal(): void {
     this.editQuestionModalVisible = false;
+  }
+
+  removeQuestionFromTable(deletedQuestionId: number | null) {
+    if (deletedQuestionId == null) {
+      return;
+    }
+    this.questionsList = this.questionsList.filter(questions => questions.id !== deletedQuestionId);
   }
 
   categories = [

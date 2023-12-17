@@ -343,17 +343,23 @@
     </div>
 
     <div class="row">
-      <div class="col-xl-12 d-flex justify-content-between">
+      <div class="col-xl-8 d-flex justify-content-between">
         <primary-button
           [label]="'Edytuj'"
           (onClick)="editQuestion()">
         </primary-button>
-        <secondary-button
-          [label]="'Anuluj'"
-          (onClick)="closeEditQuestionModal()"
-          [bordered]="true">
-        </secondary-button>
       </div>
+        <div class="col-xl-4 d-flex justify-content-end">
+          <danger-button
+            [label]="'Usuń'"
+            (onClick)="deleteQuestion()">
+          </danger-button>
+          <secondary-button
+            [label]="'Anuluj'"
+            (onClick)="closeEditQuestionModal()"
+            [bordered]="true">
+          </secondary-button>
+        </div>
 
     </div>
   </div>
