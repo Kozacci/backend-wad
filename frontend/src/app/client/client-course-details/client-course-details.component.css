@@ -56,6 +56,17 @@
   padding: 0.6rem 0.6rem;
 }
 
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr:hover {
+  cursor: pointer;
+}
+
+/* Style for selected(highlighted) row (primeNG after clickin on row creates a new p-highlight class) */
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr.p-highlight {
+  border: 1px solid var(--blue);
+  background-color: var(--white-grey);
+  color: var(--dark-blue);
+}
+
 .orange-text {
   color: #ffbe46;
 }
@@ -107,6 +118,10 @@
   transition: background-color 0.3s;
 }
 
+.course-enroll-info h3{
+  color: #ff6666;
+}
+
 .course-enroll-info:hover {
   background-color: white;
 }
@@ -124,6 +139,54 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
+}
+
+:host ::ng-deep .enroll-btn-disabled {
+  border-radius: 1%;
+  background-color: var(--blue);
+  opacity: 0.4;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+  gap: 10px;
+}
+
+.custom-p-button {
+  border-radius: 1rem;
+  padding: 0.4rem 1.5rem;
+}
+
+.custom-p-button.p-button-rounded.p-button-primary {
+  background-color: var(--blue);
+  transition: background-color 0.3s;
+  border: none;
+  color: white;
+}
+
+.custom-p-button.p-button-rounded.p-button-primary:hover {
+  background-color: #147ab2;
+}
+
+.custom-p-button.p-button-rounded.p-button-outlined.p-button-secondary {
+  transition: background-color 0.3s;
+}
+
+.custom-p-button.p-button-rounded.p-button-outlined.p-button-secondary:hover {
+  background-color: #989898;
+  color: white;
 }
 
 @media (max-width: 768px) {

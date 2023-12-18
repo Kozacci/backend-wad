@@ -20,6 +20,7 @@
       [paginator]="true"
       [rows]="3"
       [showCurrentPageReport]="true"
+      [alwaysShowPaginator]="availableCourses.length > 3"
       currentPageReportTemplate="{first} z {totalRecords}"
       styleClass="p-datatable p-datatable-resizable"
       [tableStyle]="{'width': '100%' }"
@@ -63,11 +64,63 @@
       <p><strong>{{ course.additionalInfo4 }}</strong></p>
     </div>
 
-    <div class="course-enroll-info">
+    <div *ngIf="authService.isLogged()" class="course-enroll-info">
       <div class="course-price">
         Cena: {{ course.price }} zł
       </div>
-      <button mat-button class="enroll-btn" (click)="checkAvailableCourses()"><i class="pi pi-plus"></i>  Zapisz się na kurs</button>
+      <button mat-button class="enroll-btn" (click)="signInOnCourseModal()"><i class="pi pi-plus"></i>  Zapisz się na kurs</button>
+    </div>
+
+    <div *ngIf="!authService.isLogged()" class="course-enroll-info">
+      <div class="course-price">
+        Cena: {{ course.price }} zł
+      </div>
+      <h3>Musisz się najpierw zalogować!</h3>
+      <button mat-button class="enroll-btn-disabled" [disabled]="!authService.isLogged()" (click)="signInOnCourseModal()"><i class="pi pi-plus"></i>  Zapisz się na kurs</button>
     </div>
   </div>
+
 </div>
+
+
+<p-dialog header="Wybierz dostępny termin" [(visible)]="modalVisiblity" [style]="{width: '50vw'}" [modal]="true" [dismissableMask]="true">
+  <p-table [value]="availableCourses"
+           [paginator]="true"
+           [rows]="5"
+           [showCurrentPageReport]="true"
+           [alwaysShowPaginator]="availableCourses.length > 5"
+           currentPageReportTemplate="{first} z {totalRecords}"
+           styleClass="p-datatable p-datatable-resizable"
+           [tableStyle]="{'width': '100%' }"
+           [rowHover]="true"
+           [selectionMode]="'single'"
+           [resizableColumns]="true"
+           [scrollable]="true"
+           scrollHeight="300px">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Termin szkolenia</th>
+        <th>Lokalizacja</th>
+        <th>Ilość wolnych miejsc</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-availableCourse>
+      <tr [pSelectableRow]="availableCourse" (click)="selectAvailableCourse(availableCourse.id)">
+        <td>{{ availableCourse.dateFrom }}  -  {{ availableCourse.dateTo }}</td>
+        <td>{{ availableCourse.city }}</td>
+        <td [ngClass]="{
+              'green-text': availableCourse.maxParticipantsNumber - availableCourse.registeredParticipants >= 5,
+              'orange-text': availableCourse.maxParticipantsNumber - availableCourse.registeredParticipants >= 3,
+              'red-text': availableCourse.maxParticipantsNumber - availableCourse.registeredParticipants >= 0
+              }">
+          {{ availableCourse.maxParticipantsNumber-availableCourse.registeredParticipants }} / {{ availableCourse.maxParticipantsNumber }}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <div class="modal-actions">
+    <button pButton type="button" label="Zatwierdź" class="custom-p-button p-button-rounded p-button-primary" [disabled]="selectedAvailableCourseId==null" (click)="singInOnCourse()"></button>
+    <button pButton type="button" label="Anuluj" class="custom-p-button p-button-rounded p-button-outlined p-button-secondary" (click)="signInOnCourseModalClose()"></button>
+  </div>
+</p-dialog>
