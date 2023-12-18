@@ -32,32 +32,15 @@ export class LoginComponent {
       ]
     );
 
-
   constructor(
     public readonly authService: AuthService,
     public readonly formService: FormService,
-    private restClient: RestClient,
-    private readonly pathService: PathService,
-    public readonly messageService: MessageService
   )
   { }
 
   login() {
     if(this.email.valid && this.password.valid) {
-      const participantToLogin = {
-        email: this.email.value?? '',
-        password: this.password.value?? '',
-      }
-      this.restClient.login(participantToLogin)
-        .subscribe(
-          (response) => {
-            this.pathService.navigate('/')
-            this.messageService.add({life:5000, severity:'success', summary:'Logowanie', detail:"Pomyślnie zalogowano!"})
-          },
-          (error) => {
-            this.messageService.add({life:4000, severity:'error', summary:'Logowanie', detail:"Niepoprawne dane!"})
-            console.error('Błąd logowania', error);
-          })
+      this.authService.login(this.email.value!, this.password.value!)
     }
   }
 

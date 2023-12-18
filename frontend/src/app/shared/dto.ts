@@ -39,7 +39,7 @@ export enum EventType {
 }
 
 export enum Category {
-  PRZEPISY= "PRZEPISY",
+  PRZEPISY = "PRZEPISY",
   PODSTAWY_LOCJI = "PODSTAWY_LOCJI",
   WIADOMOSCI_Z_METEOROLOGII = "WIADOMOSCI_Z_METEOROLOGII",
   PODSTAWY_BUDOWY_JACHTOW = "PODSTAWY_BUDOWY_JACHTOW",
@@ -90,7 +90,6 @@ export function mapToCategory(categoryNameAsString: string): Category {
   }
 }
 
-
 export enum CorrectAnswer {
   FIRST_ANSWER = "FIRST_ANSWER",
   SECOND_ANSWER = "SECOND_ANSWER",
@@ -132,6 +131,7 @@ export interface ParticipantCourseEntityDTO {
 }
 
 export interface ParticipantEntityDTO {
+  id: number,
   firstName: string,
   lastName: string,
   email: string,
