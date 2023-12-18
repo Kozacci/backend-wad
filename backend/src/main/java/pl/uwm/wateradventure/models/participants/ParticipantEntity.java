@@ -59,6 +59,7 @@ public class ParticipantEntity extends WaterAdventureChangeMetricEntity implemen
     public ParticipantEntityDTO toDto() {
         return ParticipantEntityDTO
                 .builder()
+                .id(this.id)
                 .firstName(this.firstName)
                 .lastName(this.lastName)
                 .email(this.email)

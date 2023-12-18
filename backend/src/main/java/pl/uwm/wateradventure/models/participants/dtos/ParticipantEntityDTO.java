@@ -6,7 +6,8 @@ import pl.uwm.wateradventure.models.participants.Role;
 
 import java.util.List;
 
-public record ParticipantEntityDTO(String firstName,
+public record ParticipantEntityDTO(Long id,
+                                   String firstName,
                                    String lastName,
                                    String email,
                                    String password,
