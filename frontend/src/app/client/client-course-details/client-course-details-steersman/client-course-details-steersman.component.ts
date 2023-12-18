@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {CourseType} from "../../../shared/dto";
 import {CourseDetails} from "../client-course-details.component";
 import {ClientCourseDetailsService} from "../client-course-details.service";
 
@@ -34,8 +33,12 @@ export class ClientCourseDetailsSteersmanComponent implements OnInit {
         'Uiszczenie opłaty za egzamin wg. rozporządzenia Ministra Sportu i Turystyki'
       ],
       "3 dni",
-      'Jachtownik 3000',
-      '650'
+      'Nowoczesna Motorówka RiB (2021)',
+      'Dostęp do bazy pytań (e-learning)',
+      'Dostęp do egzaminów próbnych',
+      'Po zaliczeniu egzaminu certyfikat ukończenia szkolenia',
+      'Przy poleceniu jednej osoby 50 zł taniej - Przy dwóch 100zł taniej',
+      '750'
     );
   }
 
