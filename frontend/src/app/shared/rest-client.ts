@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {
-  CourseFilterDTO,
+  CourseFilterDTO, ParticipantCourseEntityDTO,
   ParticipantEntityDTO,
   ParticipantLoginDTO,
   ParticipantRegisterDTO,
@@ -35,8 +35,12 @@ export class RestClient {
     return this.http.post<void>(`${this.apiUrl}/auth/logout`, {}, { withCredentials: true });
   }
 
-  getCourses(): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/courses`, {}, { withCredentials: true });
+  getParticipantByEmail(email: string): Observable<ParticipantEntityDTO> {
+    return this.http.get<ParticipantEntityDTO>(`${this.apiUrl}/participants/${email}`, { withCredentials: true})
+  }
+
+  signInOnCourse(participantId: number, courseId: number) {
+    return this.http.post<ParticipantCourseEntityDTO>(`${this.apiUrl}/participant-courses/${participantId}/sign-in/${courseId}`, null, { withCredentials: true})
   }
 
   getCoursesByFilters(courseType: string | undefined,
