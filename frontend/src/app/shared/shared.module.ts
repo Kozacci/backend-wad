@@ -19,13 +19,20 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
+import { CorrectAnswerPipe } from './pipes/correct-answer.pipe';
+import { CategoryPipe } from './pipes/category.pipe';
+import {DangerButtonComponent} from "./danger-button/danger-button.component";
+import {CalendarModule} from "primeng/calendar";
 
 
 @NgModule({
   declarations: [
     TextIconComponent,
     PrimaryButtonComponent,
-    SecondaryButtonComponent
+    SecondaryButtonComponent,
+    DangerButtonComponent,
+    CorrectAnswerPipe,
+    CategoryPipe,
   ],
   imports: [
     CommonModule,
@@ -39,6 +46,7 @@ import {MatSelectModule} from "@angular/material/select";
     TextIconComponent,
     PrimaryButtonComponent,
     SecondaryButtonComponent,
+    DangerButtonComponent,
     CommonModule,
     ButtonModule,
     SidebarModule,
@@ -54,7 +62,10 @@ import {MatSelectModule} from "@angular/material/select";
     MatIconModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    CorrectAnswerPipe,
+    CategoryPipe,
+    CalendarModule,
   ]
 })
 export class SharedModule { }

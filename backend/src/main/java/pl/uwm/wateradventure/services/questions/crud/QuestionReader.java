@@ -70,7 +70,8 @@ public class QuestionReader extends PageReader<QuestionEntity> {
                 root.get("category"),
                 root.get("firstAnswer"),
                 root.get("secondAnswer"),
-                root.get("thirdAnswer")
+                root.get("thirdAnswer"),
+                root.get("correctAnswer")
         );
     }
 }

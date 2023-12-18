@@ -1,5 +1,14 @@
 import {Component} from '@angular/core';
-import {GroupedErrorDTO, QuestionCreateUpdateDTO, QuestionFilterDTO} from "../../shared/dto";
+import {
+  Category,
+  CorrectAnswer,
+  GroupedErrorDTO,
+  mapToCategory,
+  mapToCorrectAnswer,
+  QuestionCreateUpdateDTO,
+  QuestionEntityDTO,
+  QuestionFilterDTO
+} from "../../shared/dto";
 import {RestClient} from "../../shared/rest-client";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {HttpResponseHandlerService} from "../../shared/services/http-response-handler.service";
@@ -21,11 +30,20 @@ export class AdminQuestionsComponent {
     category: null, content: null, correctAnswer: null,
     firstAnswer: null, thirdAnswer: null, secondAnswer: null
   };
-  modalVisible: boolean = false;
+  questionToEdit: QuestionCreateUpdateDTO = <QuestionCreateUpdateDTO><unknown>{
+    category: null, content: null, correctAnswer: null,
+    firstAnswer: null, thirdAnswer: null, secondAnswer: null
+  }
+  questionToEditId: number | null = null;
+  addQuestionModalVisible: boolean = false;
+  editQuestionModalVisible: boolean = false;
   categoryToAdd: {name: string, value: string} | null = null;
   correctAnswerToAdd: {name: string, value: string} | null = null;
+  questionsList: QuestionFilterDTO[] = [];
+  categoryToEdit: {name: string, value: string} | undefined = undefined;
+  correctAnswerToEdit: {name: string, value: string} | undefined = undefined;
 
-  formGroup = new FormGroup({
+  formGroupAddQuestion = new FormGroup({
     categoryToAdd: new FormControl(this.questionToAdd.category,
       [Validators.required]),
     contentToAdd: new FormControl(this.questionToAdd.content,
@@ -38,7 +56,22 @@ export class AdminQuestionsComponent {
       [Validators.required]),
     thirdAnswerToAdd: new FormControl(this.questionToAdd.thirdAnswer,
       [Validators.required]),
-  })
+  });
+
+  formGroupEditQuestion = new FormGroup({
+    categoryToEdit: new FormControl(this.questionToEdit.category,
+      [Validators.required]),
+    contentToEdit: new FormControl(this.questionToEdit.content,
+      [Validators.required]),
+    correctAnswer: new FormControl(this.questionToEdit.correctAnswer,
+      [Validators.required]),
+    firstAnswerToAdd: new FormControl(this.questionToEdit.firstAnswer,
+      [Validators.required]),
+    secondAnswerToAdd: new FormControl(this.questionToEdit.secondAnswer,
+      [Validators.required]),
+    thirdAnswerToAdd: new FormControl(this.questionToEdit.thirdAnswer,
+      [Validators.required]),
+  });
 
   groupedErrors: GroupedErrorDTO[] = [];
 
@@ -47,37 +80,112 @@ export class AdminQuestionsComponent {
               protected formService: FormService) {
   }
 
-  selectQuestion(question: any): void {
-    console.log(question);
-  }
-
   findQuestions(): void {
     this.restClient.getQuestionsByFilters(this.id, this.content, this.category?.name, this.sortBy?.value)
       .subscribe((val) => {
-        this.questions = val;
+        this.questionsList = val;
       });
   }
 
   addQuestion(): void {
-    this.questionToAdd.category = <string>this.categoryToAdd?.value;
-    this.questionToAdd.correctAnswer = <string>this.correctAnswerToAdd?.name;
-    this.questionToAdd.content = <string>this.formGroup.value.contentToAdd;
-    this.questionToAdd.firstAnswer = <string>this.formGroup.value.firstAnswerToAdd;
-    this.questionToAdd.secondAnswer = <string>this.formGroup.value.secondAnswerToAdd;
-    this.questionToAdd.thirdAnswer = <string>this.formGroup.value.thirdAnswerToAdd;
+    this.questionToAdd.category = <Category>this.categoryToAdd?.value;
+    this.questionToAdd.correctAnswer = <CorrectAnswer>this.correctAnswerToAdd?.name;
+    this.questionToAdd.content = <string>this.formGroupAddQuestion.value.contentToAdd;
+    this.questionToAdd.firstAnswer = <string>this.formGroupAddQuestion.value.firstAnswerToAdd;
+    this.questionToAdd.secondAnswer = <string>this.formGroupAddQuestion.value.secondAnswerToAdd;
+    this.questionToAdd.thirdAnswer = <string>this.formGroupAddQuestion.value.thirdAnswerToAdd;
     this.restClient.addQuestion(this.questionToAdd).subscribe(response => {
       this.responseHandlerService.showSuccessPToast("Dodanie pytania", "Pytanie numer: " + response.questionId +  " zostało dodane.");
+      this.appendAddedQuestionToTable(response);
     }, error => {
       this.groupedErrors = this.responseHandlerService.getErrorsBelowInputs(error)
     });
   }
 
-  showModal(): void {
-    this.modalVisible = true;
+  private appendAddedQuestionToTable(response: QuestionEntityDTO) {
+    this.questionsList = this.questionsList.concat([<QuestionFilterDTO>{
+      id: response.questionId,
+      content: response.content,
+      category: mapToCategory(response.category),
+      firstAnswer: response.firstAnswer,
+      secondAnswer: response.secondAnswer,
+      thirdAnswer: response.thirdAnswer,
+      correctAnswer: mapToCorrectAnswer(response.correctAnswer)
+    }
+    ]);
   }
 
-  closeModal(): void {
-    this.modalVisible = false;
+  insertDataIntoEditQuestionModal(question: QuestionFilterDTO): void {
+    this.categoryToEdit = this.categories.find(cat => cat.name == question.category.toString());
+    this.correctAnswerToEdit = this.correctAnswerValues.find(ca => ca.value == question.correctAnswer.toString());
+    this.questionToEditId = question.id;
+    this.formGroupEditQuestion.controls.contentToEdit.setValue(question.content);
+    this.formGroupEditQuestion.controls.categoryToEdit.setValue(question.category);
+    this.formGroupEditQuestion.controls.firstAnswerToAdd.setValue(question.firstAnswer);
+    this.formGroupEditQuestion.controls.secondAnswerToAdd.setValue(question.secondAnswer);
+    this.formGroupEditQuestion.controls.thirdAnswerToAdd.setValue(question.thirdAnswer);
+    this.formGroupEditQuestion.controls.correctAnswer.setValue(question.correctAnswer);
+    this.showEditQuestionModal();
+    // this.formGroupEditQuestion.reset();
+  }
+
+  editQuestion(): void {
+    this.questionToEdit.category = <Category>this.categoryToEdit?.value;
+    this.questionToEdit.correctAnswer = <CorrectAnswer>this.correctAnswerToEdit?.name;
+    this.questionToEdit.content = <string>this.formGroupEditQuestion.value.contentToEdit;
+    this.questionToEdit.firstAnswer = <string>this.formGroupEditQuestion.value.firstAnswerToAdd;
+    this.questionToEdit.secondAnswer = <string>this.formGroupEditQuestion.value.secondAnswerToAdd;
+    this.questionToEdit.thirdAnswer = <string>this.formGroupEditQuestion.value.thirdAnswerToAdd;
+    console.log("this.questionToEdit= ", this.questionToEdit)
+    this.restClient.editQuestion(this.questionToEdit, this.questionToEditId!).subscribe(response => {
+      this.responseHandlerService.showSuccessPToast("Edycja pytania", "Pytanie numer: " + response.questionId +  " zostało zedytowane.");
+      this.changeEditedQuestionValuesInTable();
+    }, error => {
+      this.responseHandlerService.handleErrorsPtoasts(error);
+    });
+  }
+
+  private changeEditedQuestionValuesInTable() {
+    let editedQuestion = this.questionsList.find(editedQuestion => editedQuestion.id == this.questionToEditId)!;
+    editedQuestion.content = this.questionToEdit.content;
+    editedQuestion.category = mapToCategory(this.questionToEdit.category);
+    editedQuestion.correctAnswer = mapToCorrectAnswer(this.questionToEdit.correctAnswer);
+    editedQuestion.firstAnswer = this.questionToEdit.firstAnswer;
+    editedQuestion.secondAnswer = this.questionToEdit.secondAnswer;
+    editedQuestion.thirdAnswer = this.questionToEdit.thirdAnswer;
+  }
+
+  deleteQuestion(): void {
+    this.restClient.deleteQuestionById(this.questionToEditId).subscribe( () => {
+      this.responseHandlerService.showSuccessPToast("Usunięcie pytania", "Pytanie nr:" + this.questionToEditId + " zostało usunięte.");
+      this.removeQuestionFromTable(this.questionToEditId);
+      this.closeEditQuestionModal();
+    }, error => {
+      this.responseHandlerService.handleErrorsPtoasts(error);
+    })
+  }
+
+  showAddQuestionModal(): void {
+    this.addQuestionModalVisible = true;
+  }
+
+  closeAddQuestionModal(): void {
+    this.addQuestionModalVisible = false;
+  }
+
+  showEditQuestionModal(): void {
+    this.editQuestionModalVisible = true;
+  }
+
+  closeEditQuestionModal(): void {
+    this.editQuestionModalVisible = false;
+  }
+
+  removeQuestionFromTable(deletedQuestionId: number | null) {
+    if (deletedQuestionId == null) {
+      return;
+    }
+    this.questionsList = this.questionsList.filter(questions => questions.id !== deletedQuestionId);
   }
 
   categories = [
@@ -107,88 +215,5 @@ export class AdminQuestionsComponent {
     {name: "Odpowiedź B", value: "SECOND_ANSWER"},
     {name: "Odpowiedź C", value: "THIRD_ANSWER"},
   ]
-
-  questions: QuestionFilterDTO[] = [
-    // {
-    //   id: 1,
-    //   content: "Pierwsze pytanie...",
-    //   category: Category.OCHRONA_WOD_PRZED_ZANIECZYSZCZENIEM,
-    //   firstAnswer: "Odpowiedź A",
-    //   secondAnswer: "Odpowiedź B",
-    //   thirdAnswer: "Odpowiedź C"
-    // },
-    // {
-    //   id: 2,
-    //   content: "Drugie pytanie...",
-    //   category: Category.PODSTAWOWE_PRZEPISY_PRAWA,
-    //   firstAnswer: "Odpowiedź A",
-    //   secondAnswer: "Odpowiedź B",
-    //   thirdAnswer: "Odpowiedź C"
-    // },
-    // {
-    //   id: 3,
-    //   content: "Trzecie pytanie...",
-    //   category: Category.PRZEPISY,
-    //   firstAnswer: "Odpowiedź A",
-    //   secondAnswer: "Odpowiedź B",
-    //   thirdAnswer: "Odpowiedź C"
-    // },
-    // {
-    //   id: 4,
-    //   content: "Czwarte pytanie...",
-    //   category: Category.OCHRONA_WOD_PRZED_ZANIECZYSZCZENIEM,
-    //   firstAnswer: "Odpowiedź A",
-    //   secondAnswer: "Odpowiedź B",
-    //   thirdAnswer: "Odpowiedź C"
-    // },
-    // {
-    //   id: 5,
-    //   content: "Piąte pytanie...",
-    //   category: Category.PODSTAWOWE_PRZEPISY_PRAWA,
-    //   firstAnswer: "Odpowiedź A",
-    //   secondAnswer: "Odpowiedź B",
-    //   thirdAnswer: "Odpowiedź C"
-    // },
-    // {
-    //   id: 6,
-    //   content: "Szóste pytanie...",
-    //   category: Category.PRZEPISY,
-    //   firstAnswer: "Odpowiedź A",
-    //   secondAnswer: "Odpowiedź B",
-    //   thirdAnswer: "Odpowiedź C"
-    // },
-    // {
-    //   id: 6,
-    //   content: "Szóste pytanie...",
-    //   category: Category.PRZEPISY,
-    //   firstAnswer: "Odpowiedź A",
-    //   secondAnswer: "Odpowiedź B",
-    //   thirdAnswer: "Odpowiedź C"
-    // },
-    // {
-    //   id: 6,
-    //   content: "Szóste pytanie...",
-    //   category: Category.PRZEPISY,
-    //   firstAnswer: "Odpowiedź A",
-    //   secondAnswer: "Odpowiedź B",
-    //   thirdAnswer: "Odpowiedź C"
-    // },
-    // {
-    //   id: 6,
-    //   content: "Szóste pytanie...",
-    //   category: Category.PRZEPISY,
-    //   firstAnswer: "Odpowiedź A",
-    //   secondAnswer: "Odpowiedź B",
-    //   thirdAnswer: "Odpowiedź C"
-    // },
-    // {
-    //   id: 6,
-    //   content: "Szóste pytanie...",
-    //   category: Category.PRZEPISY,
-    //   firstAnswer: "Odpowiedź A",
-    //   secondAnswer: "Odpowiedź B",
-    //   thirdAnswer: "Odpowiedź C"
-    // },
-  ];
 
 }
