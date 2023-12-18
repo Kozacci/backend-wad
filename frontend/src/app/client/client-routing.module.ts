@@ -5,6 +5,21 @@ import {ClientCoursesComponent} from "./client-courses/client-courses.component"
 import {
   ClientCourseDetailsSteersmanComponent
 } from "./client-course-details/client-course-details-steersman/client-course-details-steersman.component";
+import {
+  ClientCourseDetailsYachtComponent
+} from "./client-course-details/client-course-details-yacht/client-course-details-yacht.component";
+import {
+  ClientCourseDetailsSeaComponent
+} from "./client-course-details/client-course-details-sea/client-course-details-sea.component";
+import {
+  ClientCourseDetailsSailorComponent
+} from "./client-course-details/client-course-details-sailor/client-course-details-sailor.component";
+import {
+  ClientCourseDetailsWorkshopComponent
+} from "./client-course-details/client-course-details-workshop/client-course-details-workshop.component";
+import {
+  ClientCourseDetailsInternshipComponent
+} from "./client-course-details/client-course-details-internship/client-course-details-internship.component";
 
 const routes: Routes = [
   {
@@ -22,7 +37,31 @@ const routes: Routes = [
     canActivate: undefined,
     component: ClientCourseDetailsSteersmanComponent
   },
-
+  {
+    path: 'oferta/kursy/jachtowy-sternik',
+    canActivate: undefined,
+    component: ClientCourseDetailsYachtComponent
+  },
+  {
+    path: 'oferta/kursy/morski-sternik',
+    canActivate: undefined,
+    component: ClientCourseDetailsSeaComponent
+  },
+  {
+    path: 'oferta/kursy/zeglarz-jachtowy',
+    canActivate: undefined,
+    component: ClientCourseDetailsSailorComponent
+  },
+  {
+    path: 'oferta/kursy/warsztaty-nawigacyjne',
+    canActivate: undefined,
+    component: ClientCourseDetailsWorkshopComponent
+  },
+  {
+    path: 'oferta/kursy/rejsy-stazowe',
+    canActivate: undefined,
+    component: ClientCourseDetailsInternshipComponent
+  },
 
 ];
 
