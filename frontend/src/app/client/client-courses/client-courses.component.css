@@ -66,13 +66,17 @@
 .course-title h3 {
   color: var(--dark-blue);
   font-size: x-large;
-  margin-bottom: 0.5rem;
+  margin-top: 1rem;
 }
 
 .course-includes {
   margin: auto;
   color: var(--blue);
   list-style-type: disc;
+}
+
+.course-includes h2{
+  margin-bottom: 0;
 }
 
 .course-price-cta {
