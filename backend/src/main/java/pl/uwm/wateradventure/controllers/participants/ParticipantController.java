@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.uwm.wateradventure.models.courses.dtos.CourseFilterDTO;
 import pl.uwm.wateradventure.models.participants.dtos.ParticipantCourseFiltersDTO;
+import pl.uwm.wateradventure.models.participants.dtos.ParticipantEntityDTO;
 import pl.uwm.wateradventure.services.participants.ParticipantFacade;
 
 import java.util.List;
@@ -19,6 +20,11 @@ import java.util.List;
 class ParticipantController {
 
     private final ParticipantFacade participantFacade;
+
+    @GetMapping("/{email}")
+    ParticipantEntityDTO getParticipantByEmail(@PathVariable String email) {
+        return participantFacade.getParticipantByEmail(email);
+    }
 
     @GetMapping("/{participantId}/courses")
     ResponseEntity<List<CourseFilterDTO>> getCoursesByParticipantIdAndFilters(@PathVariable Long participantId,

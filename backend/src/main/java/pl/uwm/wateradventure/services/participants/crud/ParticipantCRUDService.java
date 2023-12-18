@@ -15,11 +15,16 @@ public class ParticipantCRUDService {
 
     private final ParticipantCreator creator;
     private final ParticipantReader reader;
+    // TODO - Deleting/Editing from User Profile
     private final ParticipantDeleter deleter;
     private final ParticipantUpdater updater;
 
     public ParticipantEntity getParticipantById(Long participantId) {
         return reader.getParticipantById(participantId);
+    }
+
+    public ParticipantEntity getParticipantByEmail(String email) {
+        return reader.getParticipantByEmail(email);
     }
 
     public ParticipantEntityDTO register(ParticipantRegisterDTO participantRegisterDTO) {
@@ -31,7 +36,4 @@ public class ParticipantCRUDService {
         return reader.login(participantLoginDTO, response);
     }
 
-    public ResponseEntity<?> logout(HttpServletResponse response) {
-        return reader.logout(response);
-    }
 }

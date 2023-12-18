@@ -21,6 +21,9 @@ public class ParticipantFacade {
     private final ParticipantCRUDService participantCRUDService;
     private final ParticipantCoursesCriteriaBuilder participantCoursesCriteriaBuilder;
 
+    public ParticipantEntityDTO getParticipantByEmail(String email) {
+        return participantCRUDService.getParticipantByEmail(email).toDto();
+    }
     public ParticipantEntityDTO register(ParticipantRegisterDTO participantRegisterDTO) {
         return participantCRUDService.register(participantRegisterDTO);
     }
@@ -28,10 +31,6 @@ public class ParticipantFacade {
     public ResponseEntity<?> login(ParticipantLoginDTO participantLoginDTO,
                                    HttpServletResponse response) {
         return participantCRUDService.login(participantLoginDTO, response);
-    }
-
-    public ResponseEntity<?> logout(HttpServletResponse response) {
-        return participantCRUDService.logout(response);
     }
 
     public List<CourseFilterDTO> getCoursesByParticipant(ParticipantCourseFiltersDTO filters) {
