@@ -43,7 +43,7 @@ export class ClientCourseDetailsComponent implements OnInit {
     this.restClient.getCoursesByFilters(
       this.course.type,
       "NIEROZPOCZETY",
-      null,
+      undefined,
       null,
       null,
       null,

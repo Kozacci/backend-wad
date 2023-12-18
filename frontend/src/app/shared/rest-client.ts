@@ -39,29 +39,29 @@ export class RestClient {
     return this.http.post<void>(`${this.apiUrl}/courses`, {}, { withCredentials: true });
   }
 
-  getCoursesByFilters(courseType: string | null,
-                      courseStatus: string | null,
-                      courseCity: string | null,
+  getCoursesByFilters(courseType: string | undefined,
+                      courseStatus: string | undefined,
+                      courseCity: string  | undefined,
                       dateFrom: Date | null,
                       dateTo: Date | null,
                       registeredParticipants: number | null,
                       participantsLimit: number | null,
-                      sortBy: string | null): Observable<CourseFilterDTO[]> {
+                      sortBy: string | undefined): Observable<CourseFilterDTO[]> {
     let params = new HttpParams();
-    if (courseType !== null && courseType !== "") {
+    if (courseType !== null && courseType !== undefined) {
       params = params.append('courseType', courseType);
     }
-    if (courseStatus !== null  && courseStatus !== "") {
+    if (courseStatus !== null  && courseStatus !== undefined) {
       params = params.append('courseStatus', courseStatus);
     }
-    if (courseCity !== null && courseCity !== "") {
+    if (courseCity !== null && courseCity !== undefined) {
       params = params.append('courseCity', courseCity);
     }
     if (dateFrom !== null) {
-      params = params.append('dateFrom', dateFrom.toISOString());
+      params = params.append('dateFrom', dateFrom.toString());
     }
     if (dateTo !== null) {
-      params = params.append('dateTo', dateTo.toISOString());
+      params = params.append('dateTo', dateTo.toString());
     }
     if (registeredParticipants !== null) {
       params = params.append('registeredParticipants', registeredParticipants);
@@ -74,7 +74,6 @@ export class RestClient {
     }
     return this.http.get<CourseFilterDTO[]>(`${this.apiUrl}/courses/filter-by`, {params, withCredentials: true } );
   }
-
 
   getQuestionsByFilters(id: number | null,
                         content: string | null,
