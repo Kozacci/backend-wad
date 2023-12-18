@@ -54,12 +54,13 @@
     <div class="course-meta-info">
       <h2>INFORMACJE</h2>
       <p><strong>Czas trwania:</strong> {{ course.duration }}</p>
-      <p><strong>Łódź:</strong> Motorówka RIB</p>
+      <p><strong>Łódź:</strong> {{ course.yacht }}</p>
       <p><strong>Lokalizacja:</strong> Sopot lub Olecko</p>
       <p><strong>Prowadzący:</strong> Hubert Wróblewski-Klimaszewski</p>
-      <p><strong>Dostęp do bazy pytań (e-learning)</strong></p>
-      <p><strong>Dostęp do egzaminów próbnych</strong></p>
-      <p><strong>Po zaliczeniu egzaminu certyfikat ukończenia szkolenia</strong></p>
+      <p><strong>{{ course.additionalInfo1 }}</strong></p>
+      <p><strong>{{ course.additionalInfo2 }}</strong></p>
+      <p><strong>{{ course.additionalInfo3 }}</strong></p>
+      <p><strong>{{ course.additionalInfo4 }}</strong></p>
     </div>
 
     <div class="course-enroll-info">

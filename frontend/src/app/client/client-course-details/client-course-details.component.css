@@ -65,7 +65,7 @@
 }
 
 .green-text {
-  color: #37ff78;
+  color: #31e76c;
 }
 
 .course-info-aside {
@@ -74,6 +74,8 @@
 }
 
 .course-info-aside > div {
+  margin-top: 2rem;
+  background-color: rgba(230, 240, 240, 0.40);
   border-top: 3px solid var(--dark-blue);
   margin-bottom: 4rem;
   transition: background-color 0.3s;

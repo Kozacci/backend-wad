@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
-import {CourseFilterDTO, CourseType} from "../../shared/dto";
+import {CourseFilterDTO} from "../../shared/dto";
 import {RestClient} from "../../shared/rest-client";
 
 export interface CourseDetails {
@@ -10,6 +10,10 @@ export interface CourseDetails {
   conditions: string[],
   duration: string,
   yacht: string,
+  additionalInfo1: string,
+  additionalInfo2: string,
+  additionalInfo3: string,
+  additionalInfo4: string,
   price: string,
   availableCourses: CourseFilterDTO[];
 }
@@ -34,6 +38,7 @@ export class ClientCourseDetailsComponent implements OnInit {
     this.checkAvailableCourses()
   }
 
+  // TODO - 403 error without loggin' in
   checkAvailableCourses() {
     console.log("KURS PRZEKAZANY DO OGOLNEGO DETAILS : ", this.course)
     this.restClient.getCoursesByFilters(
