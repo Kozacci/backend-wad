@@ -40,7 +40,6 @@ export class ClientCourseDetailsComponent implements OnInit {
 
   // TODO - 403 error without loggin' in
   checkAvailableCourses() {
-    console.log("KURS PRZEKAZANY DO OGOLNEGO DETAILS : ", this.course)
     this.restClient.getCoursesByFilters(
       this.course.type,
       "NIEROZPOCZETY",

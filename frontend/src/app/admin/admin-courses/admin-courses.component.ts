@@ -31,9 +31,9 @@ export class AdminCoursesComponent {
   }
 
   findCourses(): void {
-    this.restClient.getCoursesByFilters(this.courseType?.name, this.courseStatus?.name,
-      this.courseCity?.name, this.startDate, this.endDate, this.registeredParticipants,
-      this.maxParticipantsNumber, this.sortBy?.value)
+    this.restClient.getCoursesByFilters(this.courseType!.name, this.courseStatus!.name,
+      this.courseCity!.name, this.startDate, this.endDate, this.registeredParticipants,
+      this.maxParticipantsNumber, this.sortBy!.value)
       .subscribe( (foundedCourses) => {
         this.coursesList = foundedCourses;
       }, error => {
