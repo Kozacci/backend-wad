@@ -46,8 +46,8 @@ export class RestClient {
   getCoursesByFilters(courseType: string | undefined,
                       courseStatus: string | undefined,
                       courseCity: string  | undefined,
-                      dateFrom: Date | null,
-                      dateTo: Date | null,
+                      dateFrom: string | null,
+                      dateTo: string | null,
                       registeredParticipants: number | null,
                       participantsLimit: number | null,
                       sortBy: string | undefined): Observable<CourseFilterDTO[]> {
@@ -62,10 +62,10 @@ export class RestClient {
       params = params.append('courseCity', courseCity);
     }
     if (dateFrom !== null) {
-      params = params.append('dateFrom', dateFrom.toString());
+      params = params.append('dateFrom', dateFrom);
     }
     if (dateTo !== null) {
-      params = params.append('dateTo', dateTo.toString());
+      params = params.append('dateTo', dateTo);
     }
     if (registeredParticipants !== null) {
       params = params.append('registeredParticipants', registeredParticipants);

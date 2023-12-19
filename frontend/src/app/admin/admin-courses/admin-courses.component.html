@@ -42,7 +42,7 @@
           [options]="courseCities"
           [(ngModel)]="courseCity"
           optionLabel="value"
-          placeholder="Rozpoczęty"
+          placeholder="Olecko"
           [showClear]="true">
         </p-dropdown>
       </div>
@@ -56,24 +56,24 @@
 
     <div class="row mt-2 align-items-center">
 
-      <div class="col-md-3 mb-3 d-flex flex-column align-items-center">
+      <div [formGroup]="dateFormGroup" class="col-md-3 mb-3 d-flex flex-column align-items-center">
         <label class="form-label">Data rozpoczęcia</label>
         <p-calendar
-          formControlName="date"
+          formControlName="startDate"
           [dateFormat]="'dd.mm.yy'"
+          (onSelect)="setStartDate($event)"
           [showIcon]="true"
-          [(ngModel)]="startDate"
           [placeholder]="'01.01.2024'">
         </p-calendar>
       </div>
 
-      <div class="col-md-3 mb-3 d-flex flex-column align-items-center">
+      <div [formGroup]="dateFormGroup" class="col-md-3 mb-3 d-flex flex-column align-items-center">
           <label class="form-label">Data Zakończenia</label>
           <p-calendar
-            formControlName="date"
+            formControlName="endDate"
             [dateFormat]="'dd.mm.yy'"
+            (onSelect)="setEndDate($event)"
             [showIcon]="true"
-            [(ngModel)]="endDate"
             [placeholder]="'01.01.2024'">
           </p-calendar>
         </div>
