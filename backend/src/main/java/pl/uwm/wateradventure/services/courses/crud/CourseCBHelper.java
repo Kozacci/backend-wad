@@ -37,9 +37,16 @@ public class CourseCBHelper {
     }
 
     public static void addSortBy(String sort, CriteriaQuery<CourseFilterDTO> query,
-                                 CriteriaBuilder cb, Root<CourseEntity> course) {
+                                 CriteriaBuilder cb, Root<CourseEntity> course, Join<CourseEntity, ParticipantCourseEntity> participantsJoin) {
         checkSortByValue(sort);
-        query.orderBy(cb.asc(course.get(Objects.requireNonNullElse(sort, "dateFrom"))));
+        if (sort.equals("participants")) {
+            Expression<Long> countParticipants = cb.count(participantsJoin.get("id"));
+            query.groupBy(course.get("id"));
+            query.orderBy(cb.desc(countParticipants));
+        }else {
+            query.orderBy(cb.asc(course.get(Objects.requireNonNullElse(sort, "dateFrom"))));
+        }
+
     }
 
     public static void addTypePredicate(CriteriaBuilder cb, Root<CourseEntity> course,
@@ -74,6 +81,15 @@ public class CourseCBHelper {
                                           List<Predicate> predicates, LocalDate dateTo) {
         if (dateTo != null) {
             predicates.add(cb.lessThanOrEqualTo(course.get("dateTo"), dateTo));
+        }
+    }
+
+    public static void addRegisteredParticipantsPredicate(CriteriaBuilder cb,
+                                                   Root<CourseEntity> course,
+                                                   List<Predicate> predicates,
+                                                   Integer registeredParticipants) {
+        if (registeredParticipants != null) {
+            predicates.add(cb.equal(cb.size(course.get("participants")), registeredParticipants));
         }
     }
 

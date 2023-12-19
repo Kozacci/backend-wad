@@ -27,7 +27,7 @@ public class ParticipantCoursesCriteriaBuilder {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<CourseFilterDTO> query = cb.createQuery(CourseFilterDTO.class);
         Root<CourseEntity> course = query.from(CourseEntity.class);
-        joinParticipantCourse = course.join("participants");
+        joinParticipantCourse = course.join("participants"); // might need to add JoinType.LEFT to obtain results without assigned participants
 
         List<Predicate> predicates = new ArrayList<>();
 
@@ -44,7 +44,7 @@ public class ParticipantCoursesCriteriaBuilder {
 
         query.where(predicates.toArray(new Predicate[predicates.size()]));
 
-        addSortBy(filters.sortBy(), query, cb, course);
+        addSortBy(filters.sortBy(), query, cb, course, joinParticipantCourse);
 
         return em.createQuery(query).getResultList();
     }

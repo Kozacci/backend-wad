@@ -10,6 +10,7 @@ import pl.uwm.wateradventure.models.courses.CourseEntity;
 import pl.uwm.wateradventure.models.courses.dtos.CourseEntityDTO;
 import pl.uwm.wateradventure.models.courses.dtos.CourseFilterDTO;
 import pl.uwm.wateradventure.models.courses.dtos.CourseFiltersDTO;
+import pl.uwm.wateradventure.models.participant_courses.ParticipantCourseEntity;
 import pl.uwm.wateradventure.services.global.PageReader;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ class CourseReader extends PageReader<CourseEntity> {
 
     private final CourseRepository repository;
     private final EntityManager em;
+    private static Join<CourseEntity, ParticipantCourseEntity> joinParticipantCourse;
 
     protected CourseEntity getCourseById(Long courseId) {
         return repository.findById(courseId)
@@ -40,6 +42,7 @@ class CourseReader extends PageReader<CourseEntity> {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<CourseFilterDTO> query = cb.createQuery(CourseFilterDTO.class);
         Root<CourseEntity> course = query.from(CourseEntity.class);
+        joinParticipantCourse = course.join("participants", JoinType.LEFT);
 
         List<Predicate> predicates = new ArrayList<>();
 
@@ -48,6 +51,7 @@ class CourseReader extends PageReader<CourseEntity> {
         addCityPredicate(cb, course, predicates, filters.courseCity());
         addDateFromPredicate(cb, course, predicates, filters.dateFrom());
         addDateToPredicate(cb, course, predicates, filters.dateTo());
+        addRegisteredParticipantsPredicate(cb, course, predicates, filters.registeredParticipants());
         addParticipantsLimitPredicate(cb, course, predicates, filters.participantsLimit());
 
         query.select(cb.construct(
@@ -56,7 +60,7 @@ class CourseReader extends PageReader<CourseEntity> {
 
         query.where(predicates.toArray(new Predicate[predicates.size()]));
 
-        addSortBy(filters.sortBy(), query, cb, course);
+        addSortBy(filters.sortBy(), query, cb, course, joinParticipantCourse);
 
         return em.createQuery(query).getResultList();
     }
