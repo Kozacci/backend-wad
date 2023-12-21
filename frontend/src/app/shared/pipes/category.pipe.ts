@@ -29,7 +29,7 @@ export class CategoryPipe implements PipeTransform {
       case Category.TEORIA_ZEGLOWANIA:
         return 'Teoria żeglowania';
       default:
-        return 'Nie wskazano'
+        return 'Nie wskazano';
     }
   }
 

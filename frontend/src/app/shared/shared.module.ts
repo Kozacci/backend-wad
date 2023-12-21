@@ -23,6 +23,11 @@ import { CorrectAnswerPipe } from './pipes/correct-answer.pipe';
 import { CategoryPipe } from './pipes/category.pipe';
 import {DangerButtonComponent} from "./danger-button/danger-button.component";
 import {CalendarModule} from "primeng/calendar";
+import { CourseTypePipe } from './pipes/course-type.pipe';
+import { CourseStatusPipe } from './pipes/course-status.pipe';
+import { CourseCityPipe } from './pipes/course-city.pipe';
+import { EventCityPipe } from './pipes/event-city.pipe';
+import { EventTypePipe } from './pipes/event-type.pipe';
 
 
 @NgModule({
@@ -33,6 +38,11 @@ import {CalendarModule} from "primeng/calendar";
     DangerButtonComponent,
     CorrectAnswerPipe,
     CategoryPipe,
+    CourseTypePipe,
+    CourseStatusPipe,
+    CourseCityPipe,
+    EventCityPipe,
+    EventTypePipe,
   ],
   imports: [
     CommonModule,
@@ -66,6 +76,11 @@ import {CalendarModule} from "primeng/calendar";
     CorrectAnswerPipe,
     CategoryPipe,
     CalendarModule,
+    CourseTypePipe,
+    CourseStatusPipe,
+    CourseCityPipe,
+    EventCityPipe,
+    EventTypePipe,
   ]
 })
 export class SharedModule { }
