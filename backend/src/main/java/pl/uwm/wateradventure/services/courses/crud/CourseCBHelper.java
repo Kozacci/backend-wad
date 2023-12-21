@@ -39,14 +39,17 @@ public class CourseCBHelper {
     public static void addSortBy(String sort, CriteriaQuery<CourseFilterDTO> query,
                                  CriteriaBuilder cb, Root<CourseEntity> course, Join<CourseEntity, ParticipantCourseEntity> participantsJoin) {
         checkSortByValue(sort);
+        if (sort == null) {
+            query.orderBy(cb.asc(course.get("dateFrom")));
+            return;
+        }
         if (sort.equals("participants")) {
             Expression<Long> countParticipants = cb.count(participantsJoin.get("id"));
             query.groupBy(course.get("id"));
             query.orderBy(cb.desc(countParticipants));
-        }else {
-            query.orderBy(cb.asc(course.get(Objects.requireNonNullElse(sort, "dateFrom"))));
+            return;
         }
-
+        query.orderBy(cb.asc(course.get(sort)));
     }
 
     public static void addTypePredicate(CriteriaBuilder cb, Root<CourseEntity> course,
