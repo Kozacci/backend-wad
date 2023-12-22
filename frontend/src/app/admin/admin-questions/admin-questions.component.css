@@ -54,7 +54,13 @@ th {
     margin-top: 1000px;
   }
 }
+td {
+  height: 55px !important;
+}
 
+td ::ng-deep .panel {
+  min-height: 0;
+}
 /* ========= modal styles =========== */
 
 :host ::ng-deep .p-dialog .p-dialog-header{

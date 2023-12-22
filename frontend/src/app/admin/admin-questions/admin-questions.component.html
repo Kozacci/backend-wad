@@ -136,6 +136,7 @@
             [(ngModel)]="categoryToAdd"
             optionLabel="value"
             placeholder="Dział"
+            appendTo="body"
             [showClear]="true">
           </p-dropdown>
           <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'category')">
@@ -150,6 +151,7 @@
             [(ngModel)]="correctAnswerToAdd"
             optionLabel="name"
             placeholder="Poprawna odpowiedź"
+            appendTo="body"
             [showClear]="true">
           </p-dropdown>
           <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'correctAnswer')">
