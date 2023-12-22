@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {
+  CourseCreateUpdateDTO, CourseEntityDTO,
   CourseFilterDTO, ParticipantCourseEntityDTO,
   ParticipantEntityDTO,
   ParticipantLoginDTO,
@@ -111,5 +112,9 @@ export class RestClient {
   deleteQuestionById(questionToEditId: number | null): Observable<any> {
     const url = `${this.apiUrl}/questions/${questionToEditId}`;
     return this.http.delete<QuestionEntityDTO>(url, {withCredentials: true});
+  }
+
+  addCourse(courseToAdd: CourseCreateUpdateDTO): Observable<CourseEntityDTO> {
+    return this.http.post<CourseEntityDTO>(`${this.apiUrl}/courses`, courseToAdd, {withCredentials: true})
   }
 }
