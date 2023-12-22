@@ -1,8 +1,16 @@
-import { Component } from '@angular/core';
-import {CourseFilterDTO} from "../../shared/dto";
+import {Component} from '@angular/core';
+import {
+  CourseCity,
+  CourseCreateUpdateDTO,
+  CourseEntityDTO,
+  CourseFilterDTO, CourseType,
+  GroupedErrorDTO, mapToCourseCity, mapToCourseStatus, mapToCourseType,
+  NameValueNull
+} from "../../shared/dto";
 import {RestClient} from "../../shared/rest-client";
 import {HttpResponseHandlerService} from "../../shared/services/http-response-handler.service";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormService} from "../../shared/services/form/form.service";
 
 @Component({
   selector: 'app-admin-courses',
@@ -11,37 +19,83 @@ import {FormControl, FormGroup} from "@angular/forms";
 })
 export class AdminCoursesComponent {
 
+  DATE_FROM: string = 'dateFrom';
+  DATE_TO: string = 'dateTo';
   coursesList: CourseFilterDTO[] = [];
-  courseType: {name: string, value: string} | null = null;
-  courseStatus: {name: string, value: string} | null = null;
-  courseCity: {name: string, value: string} | null = null;
+  courseType: NameValueNull | null = null;
+  courseStatus: NameValueNull | null = null;
+  courseCity: NameValueNull | null = null;
+  courseCityToAdd: NameValueNull | null = null;
   registeredParticipants: number | null = null;
   maxParticipantsNumber: number | null = null;
-  sortBy: {name: string, value: string} | null = null;
+  sortBy: NameValueNull = null;
   dateFormGroup: FormGroup = new FormGroup({
-    startDate: new FormControl(),
-    endDate: new FormControl()
+    dateFrom: new FormControl(),
+    dateTo: new FormControl()
+  })
+  dateToAddFormGroup: FormGroup = new FormGroup({
+    dateFrom: new FormControl(),
+    dateTo: new FormControl()
+  })
+  courseTypeToAdd: NameValueNull = null;
+  addCourseModalVisible: boolean = false;
+  editCourseModalVisible: boolean = false;
+  groupedErrors: GroupedErrorDTO[] = [];
+  courseToAdd: CourseCreateUpdateDTO = <CourseCreateUpdateDTO><unknown>{
+    courseType: null, city: null, dateTo: null, dateFrom: null, maxParticipantsNumber: null
+  };
+  formGroupAddCourse = new FormGroup({
+    maxParticipantsNumber: new FormControl(this.courseToAdd.maxParticipantsNumber,
+      [Validators.required])
   })
 
-  // TODO: pipes dla courseType, courseStatus, courseCity
-
-  doNothing() {
-    // do zmiany na showAddCourseModal()
-  }
 
   constructor(private restClient: RestClient,
-              protected responseHandlerService: HttpResponseHandlerService) {
+              protected responseHandlerService: HttpResponseHandlerService,
+              protected formService: FormService) {
   }
 
   findCourses(): void {
     this.restClient.getCoursesByFilters(this.courseType?.name, this.courseStatus?.name,
-      this.courseCity?.name, this.getStartDate(), this.getEndDate(), this.registeredParticipants,
+      this.courseCity?.name, this.getDateFromDate(), this.getDateToDate(), this.registeredParticipants,
       this.maxParticipantsNumber, this.sortBy?.value)
       .subscribe( (foundedCourses) => {
         this.coursesList = foundedCourses;
       }, error => {
         this.responseHandlerService.handleErrorsPtoasts(error);
       });
+  }
+
+  addCourse(): void {
+    this.groupedErrors = [];
+    this.courseToAdd.courseType = <CourseType>this.courseTypeToAdd?.value;
+    this.courseToAdd.city = <CourseCity>this.courseCityToAdd?.value;
+    this.courseToAdd.maxParticipantsNumber = <number>this.formGroupAddCourse.value.maxParticipantsNumber;
+    this.courseToAdd.dateFrom = this.getAddDateFromDate();
+    this.courseToAdd.dateTo = this.getAddDateToDate();
+    this.restClient.addCourse(this.courseToAdd).subscribe(response => {
+      this.responseHandlerService.showSuccessPToast("Dodanie kursu", "Kurs został dodany pomyślnie.");
+      this.appendCourseToTable(response);
+    }, error => {
+      this.groupedErrors = this.responseHandlerService.getErrorsBelowInputs(error);
+    })
+  }
+
+  private appendCourseToTable(response: CourseEntityDTO) {
+    this.coursesList = this.coursesList.concat([<CourseFilterDTO>{
+      id: response.id,
+      courseType: mapToCourseType(response.courseType),
+      dateFrom: response.dateFrom,
+      dateTo: response.dateTo,
+      courseStatus: mapToCourseStatus(response.courseStatus),
+      maxParticipantsNumber: response.maxParticipantsNumber,
+      registeredParticipants: response.assignedParticipantsNumber,
+      city: mapToCourseCity(response.city)
+    }])
+  }
+
+  insertDataIntoEditCourseModal(question: CourseFilterDTO) {
+
   }
 
   formatDateToYYYYMMDD(date: Date): string {
@@ -52,22 +106,60 @@ export class AdminCoursesComponent {
     return `${year}-${month}-${day}`;
   }
 
-  getStartDate(): string | null {
-    const val = this.dateFormGroup.get('startDate')?.value;
+  // getters & setters
+
+  getDateFromDate(): string | null {
+    const val = this.dateFormGroup.get(this.DATE_FROM)?.value;
     return val ? this.formatDateToYYYYMMDD(new Date(val)) : null;
   }
 
-  setStartDate(date: Date): void {
-    this.dateFormGroup.get('startDate')?.setValue(date);
+  setDateFromDate(date: Date): void {
+    this.dateFormGroup.get(this.DATE_FROM)?.setValue(date);
   }
 
-  getEndDate(): string | null {
-    const val = this.dateFormGroup.get('endDate')?.value;
+  getDateToDate(): string | null {
+    const val = this.dateFormGroup.get(this.DATE_TO)?.value;
     return val ? this.formatDateToYYYYMMDD(new Date(val)) : null;
   }
 
-  setEndDate(date: Date): void {
-    this.dateFormGroup.get('endDate')?.setValue(date);
+  setDateToDate(date: Date): void {
+    this.dateFormGroup.get(this.DATE_TO)?.setValue(date);
+  }
+
+  setAddDateFromDate(date: Date): void {
+    this.dateToAddFormGroup.get(this.DATE_FROM)?.setValue(date);
+  }
+
+  getAddDateFromDate(): string | null {
+    const val = this.dateToAddFormGroup.get(this.DATE_FROM)?.value;
+    return val ? this.formatDateToYYYYMMDD(new Date(val)) : null;
+  }
+
+  setAddDateToDate(date: Date): void {
+    this.dateToAddFormGroup.get(this.DATE_TO)?.setValue(date);
+  }
+
+  getAddDateToDate(): string | null {
+    const val = this.dateToAddFormGroup.get(this.DATE_TO)?.value;
+    return val ? this.formatDateToYYYYMMDD(new Date(val)) : null;
+  }
+
+  // show/close modal methods
+
+  showAddCourseModal() {
+    this.addCourseModalVisible = true;
+  }
+
+  closeAddCourseModal() {
+    this.addCourseModalVisible = false
+  }
+
+  showEditCourseModal() {
+    this.editCourseModalVisible = true;
+  }
+
+  closeEditCourseModal() {
+    this.editCourseModalVisible = false;
   }
 
   // select input values
@@ -78,7 +170,7 @@ export class AdminCoursesComponent {
     { name: "Miasto", value: "city"},
     { name: "Data rozpoczęcia", value: "dateFrom"},
     { name: "Data zakończenia", value: "dateTo"},
-    { name: "Zapisanych kursantów", value: "participants"}, // nwm czy to będzie działać, możliwa poprawa na backendzie tego
+    { name: "Zapisanych kursantów", value: "participants"},
     { name: "Maksymalna liczba kursantów", value: "maxParticipantsNumber"}
   ]
 

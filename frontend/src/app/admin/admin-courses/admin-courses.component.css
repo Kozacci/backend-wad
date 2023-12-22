@@ -55,6 +55,13 @@ th {
   }
 }
 
+td {
+  height: 55px !important;
+}
+
+td ::ng-deep .panel {
+  min-height: 0;
+}
 /* ========= modal styles =========== */
 
 :host ::ng-deep .p-dialog .p-dialog-header{
@@ -64,4 +71,15 @@ th {
 
 :host ::ng-deep p.dialog .p-dialog-content {
   background-color: var(--dark-blue-admin);
+}
+
+/*calendar styles*/
+
+::ng-deep .ui-calendar .ui-datepicker {
+  height: 200px;
+  width: 100px;
+}
+
+::ng-deep .ui-datepicker td span, .ui-datepicker td a {
+  padding: 0;
 }
