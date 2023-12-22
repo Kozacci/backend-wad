@@ -68,15 +68,15 @@
 }
 
 .orange-text {
-  color: #ffbe46;
+  color: #c48f2e;
 }
 
 .red-text {
-  color: #ff5454;
+  color: #b93737;
 }
 
 .green-text {
-  color: #31e76c;
+  color: #188039;
 }
 
 .course-info-aside {
@@ -164,27 +164,34 @@
   gap: 10px;
 }
 
-.custom-p-button {
+.sign-on-p-button {
+  width: 75%;
+  height: 3rem;
   border-radius: 1rem;
   padding: 0.4rem 1.5rem;
 }
 
-.custom-p-button.p-button-rounded.p-button-primary {
+.sign-on-p-button.p-button-rounded.p-button-primary, .sign-on-modal-p-button.p-button-rounded.p-button-primary {
   background-color: var(--blue);
   transition: background-color 0.3s;
   border: none;
   color: white;
 }
 
-.custom-p-button.p-button-rounded.p-button-primary:hover {
+.sign-on-p-button.p-button-rounded.p-button-primary:hover, .sign-on-modal-p-button.p-button-rounded.p-button-primary:hover{
   background-color: #147ab2;
 }
 
-.custom-p-button.p-button-rounded.p-button-outlined.p-button-secondary {
+.sign-on-modal-p-button {
+  border-radius: 1rem;
+  padding: 0.4rem 1.5rem;
+}
+
+.sign-on-modal-p-button.p-button-rounded.p-button-outlined.p-button-secondary {
   transition: background-color 0.3s;
 }
 
-.custom-p-button.p-button-rounded.p-button-outlined.p-button-secondary:hover {
+.sign-on-modal-p-button.p-button-rounded.p-button-outlined.p-button-secondary:hover {
   background-color: #989898;
   color: white;
 }
