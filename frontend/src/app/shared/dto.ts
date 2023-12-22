@@ -10,9 +10,42 @@ export enum CourseStatus {
   ZAKONCZONY = "ZAKONCZONY"
 }
 
+export function mapToCourseStatus(statusAsString: string): CourseStatus {
+  console.log("statusAsString:", statusAsString);
+  switch (statusAsString) {
+    case "Nierozpoczęty":
+    case "NIEROZPOCZETY":
+      return CourseStatus.NIEROZPOCZETY;
+    case "Rozpoczęty":
+    case "ROZPOCZETY":
+      return CourseStatus.ROZPOCZETY;
+    case "Zakończony":
+    case "ZAKONCZONY":
+      return CourseStatus.ZAKONCZONY;
+    default:
+      console.error("Nieprawidłowa wartość w statusAsString");
+      return CourseStatus.NIEROZPOCZETY; // Domyślna wartość lub inna akcja
+  }
+}
+
 export enum CourseCity {
   SOPOT = "SOPOT",
   OLECKO = "OLECKO"
+}
+
+export function mapToCourseCity(cityAsString: string): CourseCity {
+  console.log("cityAsString:", cityAsString);
+  switch (cityAsString) {
+    case "Sopot":
+    case "SOPOT":
+      return CourseCity.SOPOT;
+    case "Olecko":
+    case "OLECKO":
+      return CourseCity.OLECKO;
+    default:
+      console.error("Nieprawidłowa wartość w cityAsString");
+      return CourseCity.SOPOT; // Domyślna wartość lub inna akcja
+  }
 }
 
 export enum CourseType {
@@ -22,6 +55,33 @@ export enum CourseType {
   ZEGLARZ_JACHTOWY = "ZEGLARZ_JACHTOWY",
   WARSZTATY_NAWIGACYJNE = "WARSZTATY_NAWIGACYJNE",
   REJSY_STAZOWE = "REJSY_STAZOWE"
+}
+
+export function mapToCourseType(courseNameAsString: string): CourseType {
+  console.log("courseNameAsString:", courseNameAsString);
+  switch (courseNameAsString) {
+    case "Sternik motorowodny":
+    case "STERNIK_MOTOROWODNY":
+      return CourseType.STERNIK_MOTOROWODNY;
+    case "Jachtowy sternik morski":
+    case "JACHTOWY_STERNIK_MORSKI":
+      return CourseType.JACHTOWY_STERNIK_MORSKI;
+    case "Motorowodny sternik morski":
+    case "MOTOROWODNY_STERNIK_MORSKI":
+      return CourseType.MOTOROWODNY_STERNIK_MORSKI;
+    case "Żeglarz jachtowy":
+    case "ZEGLARZ_JACHTOWY":
+      return CourseType.ZEGLARZ_JACHTOWY;
+    case "Warsztaty nawigacyjne":
+    case "WARSZTATY_NAWIGACYJNE":
+      return CourseType.WARSZTATY_NAWIGACYJNE;
+    case "Rejsy stażowe":
+    case "REJSY_STAZOWE":
+      return CourseType.REJSY_STAZOWE;
+    default:
+      console.error("Nieprawidłowa wartość w courseNameAsString");
+      return CourseType.STERNIK_MOTOROWODNY; // Możesz tutaj zdecydować o domyślnej wartości lub innej akcji.
+  }
 }
 
 export enum EventCity {
@@ -212,8 +272,60 @@ export interface CourseFilterDTO {
   registeredParticipants: number
 }
 
-// Exist only on frontend, created for showing validation error below input fields
+export interface CourseCreateUpdateDTO {
+  courseType: CourseType,
+  dateFrom: string | null,
+  dateTo: string | null,
+  city: CourseCity,
+  maxParticipantsNumber: number
+}
+
+export interface CourseEntityDTO {
+  id: number,
+  courseType: string,
+  dateFrom: Date,
+  dateTo: Date,
+  courseStatus: string,
+  maxParticipantsNumber: number,
+  assignedParticipantsNumber: number,
+  city: string
+}
+
+/**  ======== Exist only on frontend ======== **/
+
+// created for showing validation error below input fields
 export interface GroupedErrorDTO {
   fieldName: string,
   messages: string[]
 }
+
+// added to avoid using '{name: string, value: string} | null' everywhere
+export type NameValueNull = {name: string, value: string} | null;
+
+/** if you want to use this type in pDropdown, example here:
+ *
+ * code in example.component.ts:
+  courseTypes = [
+    { name: "STERNIK_MOTOROWODNY", value: "Sternik motorowodny"},
+    { name: "JACHTOWY_STERNIK_MORSKI", value: "Jachtowy sternik morski"},
+    { name: "MOTOROWODNY_STERNIK_MORSKI", value: "Motorowodny sternik morski"},
+    { name: "ZEGLARZ_JACHTOWY", value: "Żeglarz jachtowy"},
+    { name: "WARSZTATY_NAWIGACYJNE", value: "Warsztaty nawigacyjne"},
+    { name: "REJSY_STAZOWE", value: "Rejsy stażowe"},
+  ];
+
+ * code in example.component.html:
+ * <p-dropdown
+ *   [options]="courseTypes"
+ *   [(ngModel)]="courseTypeToAdd"
+ *   optionLabel="value"
+ *   placeholder="Typ kursu"
+ *   [showClear]="true">
+ * </p-dropdown>
+
+ string declared in optionLabel field will be shown at site
+ so in this example options visible at site will be:
+ 1. Sternik motorowodny, 2. Jachtowy sternik morski, 3. Motorowodny sternik morski
+ 4. Żeglarz jachtowy, 5. Warsztaty nawigacyjne, 6. Rejsy stażowe
+
+**/
