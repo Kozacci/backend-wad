@@ -68,7 +68,7 @@
       <div class="course-price">
         Cena: {{ course.price }} zł
       </div>
-      <button mat-button class="enroll-btn" (click)="signInOnCourseModal()"><i class="pi pi-plus"></i>  Zapisz się na kurs</button>
+      <button pButton type="button" label="Zapisz się na kurs" class="sign-on-p-button p-button-rounded p-button-primary" (click)="signInOnCourseModal()"><i class="pi pi-plus"></i></button>
     </div>
 
     <div *ngIf="!authService.isLogged()" class="course-enroll-info">
@@ -76,7 +76,7 @@
         Cena: {{ course.price }} zł
       </div>
       <h3>Musisz się najpierw zalogować!</h3>
-      <button mat-button class="enroll-btn-disabled" [disabled]="!authService.isLogged()" (click)="signInOnCourseModal()"><i class="pi pi-plus"></i>  Zapisz się na kurs</button>
+      <button pButton type="button" label="Zapisz się na kurs" class="sign-on-p-button p-button-rounded p-button-primary" [disabled]="!authService.isLogged()" (click)="signInOnCourseModal()"><i class="pi pi-plus"></i></button>
     </div>
   </div>
 
@@ -120,7 +120,7 @@
   </p-table>
 
   <div class="modal-actions">
-    <button pButton type="button" label="Zatwierdź" class="custom-p-button p-button-rounded p-button-primary" [disabled]="selectedAvailableCourseId==null" (click)="singInOnCourse()"></button>
-    <button pButton type="button" label="Anuluj" class="custom-p-button p-button-rounded p-button-outlined p-button-secondary" (click)="signInOnCourseModalClose()"></button>
+    <button pButton type="button" label="Zatwierdź" class="sign-on-modal-p-button p-button-rounded p-button-primary" [disabled]="selectedAvailableCourseId==null" (click)="singInOnCourse()"></button>
+    <button pButton type="button" label="Anuluj" class="sign-on-modal-p-button p-button-rounded p-button-outlined p-button-secondary" (click)="signInOnCourseModalClose()"></button>
   </div>
 </p-dialog>

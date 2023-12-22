@@ -44,9 +44,9 @@
 
 :host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
   text-align: center;
-  background-color: rgba(170, 225, 255, 0.60);
+  background-color: var(--dark-blue);
   padding: 0.5rem 0.5rem;
-  color: var(--dark-blue);
+  color: var(--white-grey);
   border: solid #272727;
   border-width: 0 0 1.6px 0;
 }
@@ -68,15 +68,15 @@
 }
 
 .orange-text {
-  color: #ffbe46;
+  color: #dca43e;
 }
 
 .red-text {
-  color: #ff5454;
+  color: #cc3d3d;
 }
 
 .green-text {
-  color: #31e76c;
+  color: #27ab50;
 }
 
 .course-info-aside {
@@ -126,37 +126,6 @@
   background-color: white;
 }
 
-:host ::ng-deep .enroll-btn {
-  border-radius: 1%;
-  background-color: var(--blue);
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  cursor: pointer;
-  width: 100%;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
-
-:host ::ng-deep .enroll-btn-disabled {
-  border-radius: 1%;
-  background-color: var(--blue);
-  opacity: 0.4;
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  cursor: pointer;
-  width: 100%;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
-
 .modal-actions {
   display: flex;
   justify-content: center;
@@ -164,27 +133,34 @@
   gap: 10px;
 }
 
-.custom-p-button {
+.sign-on-p-button {
+  width: 75%;
+  height: 3rem;
   border-radius: 1rem;
   padding: 0.4rem 1.5rem;
 }
 
-.custom-p-button.p-button-rounded.p-button-primary {
-  background-color: var(--blue);
+.sign-on-p-button.p-button-rounded.p-button-primary, .sign-on-modal-p-button.p-button-rounded.p-button-primary {
+  background-color: var(--dark-blue);
   transition: background-color 0.3s;
   border: none;
-  color: white;
+  color: var(--white-grey);
 }
 
-.custom-p-button.p-button-rounded.p-button-primary:hover {
-  background-color: #147ab2;
+.sign-on-p-button.p-button-rounded.p-button-primary:hover, .sign-on-modal-p-button.p-button-rounded.p-button-primary:hover{
+  background-color: #126079;
 }
 
-.custom-p-button.p-button-rounded.p-button-outlined.p-button-secondary {
+.sign-on-modal-p-button {
+  border-radius: 1rem;
+  padding: 0.4rem 1.5rem;
+}
+
+.sign-on-modal-p-button.p-button-rounded.p-button-outlined.p-button-secondary {
   transition: background-color 0.3s;
 }
 
-.custom-p-button.p-button-rounded.p-button-outlined.p-button-secondary:hover {
+.sign-on-modal-p-button.p-button-rounded.p-button-outlined.p-button-secondary:hover {
   background-color: #989898;
   color: white;
 }
