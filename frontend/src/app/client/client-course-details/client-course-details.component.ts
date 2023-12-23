@@ -48,10 +48,6 @@ export class ClientCourseDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkAvailableCourses()
-    this.formGroup.get('email')?.patchValue(sessionStorage.getItem('cacheEmail'));
-    this.formGroup.get('firstName')?.patchValue(sessionStorage.getItem('cacheFirstName'));
-    this.formGroup.get('lastName')?.patchValue(sessionStorage.getItem('cacheLastName'));
-    this.formGroup.get('phoneNumber')?.patchValue(sessionStorage.getItem('cachePhoneNumber'));
   }
 
   // Todo - 403 error without loggin' in
@@ -92,74 +88,34 @@ export class ClientCourseDetailsComponent implements OnInit {
     this.selectedAvailableCourseId = id;
   }
 
-  chooseCourseDate() {
-    this.modalDateVisiblity = false;
-    this.modalFormVisiblity = true;
-  }
-
-  formGroup = new FormGroup({
-    firstName:
-      new FormControl(
-        '',
-        [
-          Validators.required,
-          Validators.minLength(2)
-        ]
-      ),
-    lastName:
-      new FormControl(
-        '',
-        [
-          Validators.required,
-          Validators.minLength(2)
-        ]
-      ),
-    phoneNumber:
-      new FormControl(
-        '',
-        [
-          Validators.required,
-          Validators.maxLength(9),
-          Validators.pattern(/^\d{9}$/)
-        ]
-      ),
-    email:
-      new FormControl(
-        '',
-        [
-          Validators.required,
-          Validators.minLength(5),
-          Validators.email
-        ]
-      )
-  });
-
-  signOnCourse() {
-    const participantId = parseInt(sessionStorage.getItem('cacheId')?? '', 10) ;
-    if (this.selectedAvailableCourseId != null) {
-      this.restClient.signInOnCourse(participantId, this.selectedAvailableCourseId)
-        .subscribe( response => {
-          this.messageService.add({
-            life: 4000,
-            severity: 'success',
-            summary: 'Zapis na kurs',
-            detail: "Udało Ci się pomyślnie zapisać na kurs"
-          })
-            this.modalFormVisiblity = false;
-            // Todo navigate to my courses view
-          },
-          error => {
-          this.messageService.add({
-            life: 4000,
-            severity: 'error',
-            summary: 'Zapis na kurs',
-            detail: error.error.message
+  signInOnCourse() {
+      const participantId = parseInt(sessionStorage.getItem('cacheId')?? '', 10) ;
+      if (this.selectedAvailableCourseId != null) {
+        this.restClient.signInOnCourse(participantId, this.selectedAvailableCourseId)
+          .subscribe( response => {
+            this.messageService.add({
+              life: 4000,
+              severity: 'success',
+              summary: 'Zapis na kurs',
+              detail: "Udało Ci się pomyślnie zapisać na kurs"
+            })
+              this.modalDateVisiblity = false;
+              // Todo navigate to my courses view
+            },
+            error => {
+            this.messageService.add({
+              life: 4000,
+              severity: 'error',
+              summary: 'Zapis na kurs',
+              detail: error.error.message
+            });
           });
-          this.modalFormVisiblity = false;
-          this.modalDateVisiblity = true;
-        });
-    }
+      }
   }
 
-  protected readonly sessionStorage = sessionStorage;
+  // TODO form modal with placeholders AFTER ENGINEERING
+  // this.formGroup.get('email')?.patchValue(sessionStorage.getItem('cacheEmail'));
+  // this.formGroup.get('firstName')?.patchValue(sessionStorage.getItem('cacheFirstName'));
+  // this.formGroup.get('lastName')?.patchValue(sessionStorage.getItem('cacheLastName'));
+  // this.formGroup.get('phoneNumber')?.patchValue(sessionStorage.getItem('cachePhoneNumber'));
 }

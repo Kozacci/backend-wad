@@ -120,48 +120,51 @@
   </p-table>
 
   <div class="modal-actions">
-    <button pButton type="button" label="Przejdź dalej" class="date-modal-p-button p-button-rounded p-button-primary" [disabled]="selectedAvailableCourseId==null" (click)="chooseCourseDate()"></button>
+    <button pButton type="button" label="Zapisz się" class="date-modal-p-button p-button-rounded p-button-primary" [disabled]="selectedAvailableCourseId==null" (click)="signInOnCourse()"></button>
     <button pButton type="button" label="Anuluj" class="date-modal-p-button p-button-rounded p-button-outlined p-button-secondary" (click)="this.modalDateVisiblity = false"></button>
   </div>
 </p-dialog>
 
 
-<p-dialog header="Wypełnij formularz" [(visible)]="modalFormVisiblity" [style]="{width: '60vw'}" [modal]="true" [dismissableMask]="true">
+<!-- TODO form modal with placeholders AFTER ENGINEERING -->
+<!--<p-dialog header="Wypełnij formularz" [(visible)]="modalFormVisiblity" [style]="{width: '60vw'}" [modal]="true" [dismissableMask]="true">-->
 
-  <div class="sign-on-form">
-    <form [formGroup]="formGroup">
-      <mat-form-field appearance="outline">
-        <mat-label>Imię</mat-label>
-        <input matInput type="firstName" [formControl]="formGroup.controls.firstName" required>
-        <mat-error *ngIf="formGroup.controls.firstName.invalid">{{ formService.getInputErrorMessage(formGroup.controls.firstName) }}</mat-error>
-      </mat-form-field>
+<!--  <div class="sign-on-content">-->
+<!--    <div class="sign-on-form">-->
+<!--      <form [formGroup]="formGroup">-->
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>Imię</mat-label>-->
+<!--          <input matInput type="firstName" [formControl]="formGroup.controls.firstName" required>-->
+<!--          <mat-error *ngIf="formGroup.controls.firstName.invalid">{{ formService.getInputErrorMessage(formGroup.controls.firstName) }}</mat-error>-->
+<!--        </mat-form-field>-->
 
-      <mat-form-field appearance="outline">
-        <mat-label>Nazwisko</mat-label>
-        <input matInput type="firstName" [formControl]="formGroup.controls.lastName" required>
-        <mat-error *ngIf="formGroup.controls.lastName.invalid">{{ formService.getInputErrorMessage(formGroup.controls.lastName) }}</mat-error>
-      </mat-form-field>
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>Nazwisko</mat-label>-->
+<!--          <input matInput type="firstName" [formControl]="formGroup.controls.lastName" required>-->
+<!--          <mat-error *ngIf="formGroup.controls.lastName.invalid">{{ formService.getInputErrorMessage(formGroup.controls.lastName) }}</mat-error>-->
+<!--        </mat-form-field>-->
 
-      <mat-form-field appearance="outline">
-        <mat-label>Numer telefonu</mat-label>
-        <input matInput type="phoneNumber" [maxlength]="9" [formControl]="formGroup.controls.phoneNumber" required>
-        <mat-error *ngIf="formGroup.controls.phoneNumber.invalid">{{ formService.getInputErrorMessage(formGroup.controls.phoneNumber) }}</mat-error>
-      </mat-form-field>
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>Numer telefonu</mat-label>-->
+<!--          <input matInput type="phoneNumber" [maxlength]="9" [formControl]="formGroup.controls.phoneNumber" required>-->
+<!--          <mat-error *ngIf="formGroup.controls.phoneNumber.invalid">{{ formService.getInputErrorMessage(formGroup.controls.phoneNumber) }}</mat-error>-->
+<!--        </mat-form-field>-->
 
-      <mat-form-field appearance="outline">
-        <mat-label>E-mail</mat-label>
-        <input matInput type="email" [formControl]="formGroup.controls.email" required>
-        <mat-error *ngIf="formGroup.controls.email.invalid">{{ formService.getInputErrorMessage(formGroup.controls.email) }}</mat-error>
-      </mat-form-field>
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>E-mail</mat-label>-->
+<!--          <input matInput type="email" [formControl]="formGroup.controls.email" required>-->
+<!--          <mat-error *ngIf="formGroup.controls.email.invalid">{{ formService.getInputErrorMessage(formGroup.controls.email) }}</mat-error>-->
+<!--        </mat-form-field>-->
 
-      <button mat-raised-button color="primary" class="register-button" (click)="signOnCourse()">Zapisz się</button>
+<!--        <button mat-raised-button color="primary" class="register-button" (click)="signOnCourse()">Zapisz się</button>-->
 
-    </form>
-  </div>
+<!--      </form>-->
+<!--    </div>-->
+<!--  </div>-->
 
-  <div class="modal-actions">
-    <button pButton type="button" label="Zapisz się" class="date-modal-p-button p-button-rounded p-button-primary" [disabled]="selectedAvailableCourseId==null" (click)="signOnCourse()"></button>
-    <button pButton type="button" label="Anuluj" class="date-modal-p-button p-button-rounded p-button-outlined p-button-secondary" (click)="this.modalFormVisiblity = false"></button>
-  </div>
+<!--  <div class="modal-actions">-->
+<!--    <button pButton type="button" label="Zapisz się" class="date-modal-p-button p-button-rounded p-button-primary" [disabled]="selectedAvailableCourseId==null" (click)="signOnCourse()"></button>-->
+<!--    <button pButton type="button" label="Anuluj" class="date-modal-p-button p-button-rounded p-button-outlined p-button-secondary" (click)="this.modalFormVisiblity = false"></button>-->
+<!--  </div>-->
 
-</p-dialog>
+<!--</p-dialog>-->
