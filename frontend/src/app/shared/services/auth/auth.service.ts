@@ -29,8 +29,11 @@ export class AuthService {
             this.restClient.getParticipantByEmail(participantToLogin.email)
               .subscribe(
                 response => {
-                  sessionStorage.setItem('cacheId', response.id.toString())
-                  sessionStorage.setItem('cacheEmail', response.email)
+                  sessionStorage.setItem('cacheId', response.id.toString());
+                  sessionStorage.setItem('cacheEmail', response.email);
+                  sessionStorage.setItem('cacheFirstName', response.firstName);
+                  sessionStorage.setItem('cacheLastName', response.lastName);
+                  sessionStorage.setItem('cachePhoneNumber', response.phoneNumber);
                 }
               )
           },
