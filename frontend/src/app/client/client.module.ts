@@ -22,6 +22,7 @@ import { ClientCourseDetailsSeaComponent } from './client-course-details/client-
 import { ClientCourseDetailsSailorComponent } from './client-course-details/client-course-details-sailor/client-course-details-sailor.component';
 import { ClientCourseDetailsWorkshopComponent } from './client-course-details/client-course-details-workshop/client-course-details-workshop.component';
 import { ClientCourseDetailsInternshipComponent } from './client-course-details/client-course-details-internship/client-course-details-internship.component';
+import { ClientEventsComponent } from './client-events/client-events.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ClientCourseDetailsInternshipComponent } from './client-course-details/
     ClientCourseDetailsSeaComponent,
     ClientCourseDetailsSailorComponent,
     ClientCourseDetailsWorkshopComponent,
-    ClientCourseDetailsInternshipComponent
+    ClientCourseDetailsInternshipComponent,
+    ClientEventsComponent
   ],
   exports: [
     ClientLayoutComponent,

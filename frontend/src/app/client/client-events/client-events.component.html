@@ -1,0 +1,24 @@
+<body>
+<div class="course-list">
+  <div *ngFor="let course of courses" class="course-card">
+    <div class="course-image-container">
+      <img [src]="course.image" alt="{{ course.title }}" class="course-image"/>
+      <span class="course-mode">ONLINE / STACJONARNIE</span>
+    </div>
+    <div class="course-content">
+      <div class="course-title">
+        <h3 class="course-title">{{ course.title }}</h3>
+        {{ course.location }}
+      </div>
+      <ul class="course-includes">
+        <h2>W zestawie:</h2>
+        <li *ngFor="let include of course.includes">{{ include }}</li>
+      </ul>
+    </div>
+    <div class="course-price-cta">
+      <p class="course-price">{{ course.price }}</p>
+      <button (click)="goToCourseDetails(course.url)" class="btn btn-primary">ZOBACZ WIĘCEJ</button>
+    </div>
+  </div>
+</div>
+</body>
