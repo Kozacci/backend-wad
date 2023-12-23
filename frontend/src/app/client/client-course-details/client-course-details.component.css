@@ -140,27 +140,27 @@
   padding: 0.4rem 1.5rem;
 }
 
-.sign-on-p-button.p-button-rounded.p-button-primary, .sign-on-modal-p-button.p-button-rounded.p-button-primary {
+.sign-on-p-button.p-button-rounded.p-button-primary, .date-modal-p-button.p-button-rounded.p-button-primary {
   background-color: var(--dark-blue);
   transition: background-color 0.3s;
   border: none;
   color: var(--white-grey);
 }
 
-.sign-on-p-button.p-button-rounded.p-button-primary:hover, .sign-on-modal-p-button.p-button-rounded.p-button-primary:hover{
+.sign-on-p-button.p-button-rounded.p-button-primary:hover, .date-modal-p-button.p-button-rounded.p-button-primary:hover{
   background-color: #126079;
 }
 
-.sign-on-modal-p-button {
+.date-modal-p-button {
   border-radius: 1rem;
   padding: 0.4rem 1.5rem;
 }
 
-.sign-on-modal-p-button.p-button-rounded.p-button-outlined.p-button-secondary {
+.date-modal-p-button.p-button-rounded.p-button-outlined.p-button-secondary {
   transition: background-color 0.3s;
 }
 
-.sign-on-modal-p-button.p-button-rounded.p-button-outlined.p-button-secondary:hover {
+.date-modal-p-button.p-button-rounded.p-button-outlined.p-button-secondary:hover {
   background-color: #989898;
   color: white;
 }
