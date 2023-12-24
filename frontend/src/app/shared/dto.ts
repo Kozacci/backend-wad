@@ -190,6 +190,15 @@ export interface ParticipantCourseEntityDTO {
   onlinePayment: boolean
 }
 
+export interface ParticipantEventEntityCreateDTO {
+  eventId: number,
+  ordererEmail: string,
+  ordererFirstName: string,
+  ordererLastName: string,
+  ordererPhoneNumber: string,
+  participantsNumber: number
+}
+
 export interface ParticipantEntityDTO {
   id: number,
   firstName: string,
@@ -256,11 +265,6 @@ export interface CourseFilterDTO {
   registeredParticipants: number
 }
 
-export interface ErrorDTO {
-  fieldName: string,
-  message: string
-}
-
 export interface CourseFilterDTO {
   id: number,
   dateFrom: Date,
@@ -291,7 +295,35 @@ export interface CourseEntityDTO {
   city: string
 }
 
-/**  ======== Exist only on frontend ======== **/
+export interface EventEntityDTO {
+  id: number,
+  type: string,
+  cost: number,
+  date: Date,
+  city: string,
+  duration: Date,
+  assignedParticipants: number,
+  maxParticipantsNumber: number
+}
+
+export interface EventFilterDTO {
+  id: number,
+  type: string,
+  city: string,
+  cost: number,
+  assignedParticipants: number,
+  maxParticipantsNumber: number,
+  duration: Date,
+  ordererLastName: string,
+  ordererEmail: string
+}
+
+export interface ErrorDTO {
+  fieldName: string,
+  message: string
+}
+
+/**  ======== ONLY FRONTEND ======== **/
 
 // created for showing validation error below input fields
 export interface GroupedErrorDTO {
