@@ -8,8 +8,6 @@ import {PathService} from "../../../shared/services/path.service";
 })
 export class ClientEventsComponent {
 
-  // TODO - event details general component and specific components
-
   events = [
     {
       title: 'WIECZÓR PANIEŃSKI',
@@ -23,17 +21,6 @@ export class ClientEventsComponent {
       price: '250zł / OSOBA',
       image: 'assets/images/client/overlay/events/event-1.png',
       url: '/oferta/eventy/wieczor-panienski'
-    },
-    {
-      title: 'ZACHÓD SŁOŃCA',
-      location: 'Sopot | Olecko',
-      includes: [
-        'Lampka wina do wyboru',
-        'Katering (żywność)'
-      ],
-      price: '175zł / OSOBA',
-      image: 'assets/images/client/overlay/events/event-2.png',
-      url: '/oferta/eventy/rejs-o-zachodzie'
     },
     {
       title: 'WIECZÓR KAWALERSKI',
