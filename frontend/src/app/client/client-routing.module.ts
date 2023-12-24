@@ -1,25 +1,26 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ClientHomeComponent} from "./client-home/client-home.component";
-import {ClientCoursesComponent} from "./client-courses/client-courses.component";
+import {ClientCoursesComponent} from "./offer/client-courses/client-courses.component";
 import {
   ClientCourseDetailsSteersmanComponent
-} from "./client-course-details/client-course-details-steersman/client-course-details-steersman.component";
+} from "./offer/client-course-details/client-course-details-steersman/client-course-details-steersman.component";
 import {
   ClientCourseDetailsYachtComponent
-} from "./client-course-details/client-course-details-yacht/client-course-details-yacht.component";
+} from "./offer/client-course-details/client-course-details-yacht/client-course-details-yacht.component";
 import {
   ClientCourseDetailsSeaComponent
-} from "./client-course-details/client-course-details-sea/client-course-details-sea.component";
+} from "./offer/client-course-details/client-course-details-sea/client-course-details-sea.component";
 import {
   ClientCourseDetailsSailorComponent
-} from "./client-course-details/client-course-details-sailor/client-course-details-sailor.component";
+} from "./offer/client-course-details/client-course-details-sailor/client-course-details-sailor.component";
 import {
   ClientCourseDetailsWorkshopComponent
-} from "./client-course-details/client-course-details-workshop/client-course-details-workshop.component";
+} from "./offer/client-course-details/client-course-details-workshop/client-course-details-workshop.component";
 import {
   ClientCourseDetailsInternshipComponent
-} from "./client-course-details/client-course-details-internship/client-course-details-internship.component";
+} from "./offer/client-course-details/client-course-details-internship/client-course-details-internship.component";
+import {ClientEventsComponent} from "./offer/client-events/client-events.component";
 
 const routes: Routes = [
   {
@@ -61,6 +62,11 @@ const routes: Routes = [
     path: 'oferta/kursy/rejsy-stazowe',
     canActivate: undefined,
     component: ClientCourseDetailsInternshipComponent
+  },
+  {
+    path: 'oferta/eventy',
+    canActivate: undefined,
+    component: ClientEventsComponent
   },
 
 ];

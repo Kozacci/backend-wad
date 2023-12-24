@@ -1,4 +1,4 @@
-.course-list {
+.event-list {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -7,7 +7,7 @@
   background-color: var(--white-grey);
 }
 
-.course-card {
+.event-card {
   display: grid;
   grid-template-columns: 10rem 1fr auto; /* Grid with 3 columns */
   align-items: center;
@@ -19,18 +19,18 @@
   transition: background-color 0.3s;
 }
 
-.course-card:hover {
+.event-card:hover {
   background-color: var(--white-grey);
 }
 
-.course-image-container {
+.event-image-container {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.course-image {
+.event-image {
   width: 100%;
   height: auto;
   object-fit: cover;
@@ -38,23 +38,23 @@
   transition: backgrond-color 0.5s;
 }
 
-.course-image:hover {
+.event-image:hover {
   opacity: 0.7;
 }
 
-.course-mode {
+.event-mode {
   font-size: 0.8rem;
   color: #6c757d;
   margin-top: 0.5rem;
 }
 
-.course-content {
+.event-content {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
-.course-title {
+.event-title {
   padding-left: 1rem;
   text-align: center;
   font-size: medium;
@@ -63,19 +63,19 @@
   margin-bottom: 0.5rem;
 }
 
-.course-title h3 {
+.event-title h3 {
   color: var(--dark-blue);
   font-size: x-large;
   margin-top: 1rem;
 }
 
-.course-includes {
+.event-includes {
   margin: auto;
   color: var(--blue);
   list-style-type: disc;
 }
 
-.course-includes h2{
+.event-includes h2{
   margin-bottom: 0;
 }
 
@@ -119,7 +119,7 @@
 }
 
 @media (max-width: 1000px) {
-  .course-card {
+  .event-card {
     grid-template-columns: 125px 1fr;
     gap: 4px;
     padding: 1rem;
