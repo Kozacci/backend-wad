@@ -43,9 +43,6 @@ import {
   ClientEventDetailsBachelorComponent
 } from './offer/client-event-details/client-event-details-bachelor/client-event-details-bachelor.component';
 import {
-  ClientEventDetailsSunsetComponent
-} from './offer/client-event-details/client-event-details-sunset/client-event-details-sunset.component';
-import {
   ClientEventDetailsBusinessComponent
 } from './offer/client-event-details/client-event-details-business/client-event-details-business.component';
 import {
@@ -73,7 +70,6 @@ import {
     ClientEventDetailsComponent,
     ClientEventDetailsBacheloretteComponent,
     ClientEventDetailsBachelorComponent,
-    ClientEventDetailsSunsetComponent,
     ClientEventDetailsBusinessComponent,
     ClientEventDetailsSightseeingComponent,
     ClientEventDetailsScooterComponent

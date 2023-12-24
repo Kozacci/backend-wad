@@ -21,6 +21,21 @@ import {
   ClientCourseDetailsInternshipComponent
 } from "./offer/client-course-details/client-course-details-internship/client-course-details-internship.component";
 import {ClientEventsComponent} from "./offer/client-events/client-events.component";
+import {
+  ClientEventDetailsBacheloretteComponent
+} from "./offer/client-event-details/client-event-details-bachelorette/client-event-details-bachelorette.component";
+import {
+  ClientEventDetailsBachelorComponent
+} from "./offer/client-event-details/client-event-details-bachelor/client-event-details-bachelor.component";
+import {
+  ClientEventDetailsBusinessComponent
+} from "./offer/client-event-details/client-event-details-business/client-event-details-business.component";
+import {
+  ClientEventDetailsSightseeingComponent
+} from "./offer/client-event-details/client-event-details-sightseeing/client-event-details-sightseeing.component";
+import {
+  ClientEventDetailsScooterComponent
+} from "./offer/client-event-details/client-event-details-scooter/client-event-details-scooter.component";
 
 const routes: Routes = [
   {
@@ -67,6 +82,31 @@ const routes: Routes = [
     path: 'oferta/eventy',
     canActivate: undefined,
     component: ClientEventsComponent
+  },
+  {
+    path: 'oferta/eventy/wieczor-kawalerski',
+    canActivate: undefined,
+    component: ClientEventDetailsBachelorComponent
+  },
+  {
+    path: 'oferta/eventy/wieczor-panienski',
+    canActivate: undefined,
+    component: ClientEventDetailsBacheloretteComponent
+  },
+  {
+    path: 'oferta/eventy/event-dla-firmy',
+    canActivate: undefined,
+    component: ClientEventDetailsBusinessComponent
+  },
+  {
+    path: 'oferta/eventy/rejs-widokowy',
+    canActivate: undefined,
+    component: ClientEventDetailsSightseeingComponent
+  },
+  {
+    path: 'oferta/eventy/wynajem-skutera',
+    canActivate: undefined,
+    component: ClientEventDetailsScooterComponent
   },
 
 ];

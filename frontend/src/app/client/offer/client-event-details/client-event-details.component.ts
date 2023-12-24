@@ -150,6 +150,7 @@ export class ClientEventDetailsComponent {
   // TODO -- some methods could be used without logging in
   // TODO -- navigation from homepage to offer(courses/events details)
   // TODO -- respons for courses/events signing modals
+  // TODO -- audit/fix for event/courses cost on all sites
   signForEvent() {
     if (this.chosenEvent.id != null && this.formGroup.valid) {
       this.participantEventCreateDTO.eventId = this.chosenEvent.id;
