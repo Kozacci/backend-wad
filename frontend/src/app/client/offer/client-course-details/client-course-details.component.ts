@@ -23,7 +23,7 @@ export interface CourseDetails {
 @Component({
   selector: 'app-client-course-details',
   templateUrl: './client-course-details.component.html',
-  styleUrls: ['./client-course-details.component.css']
+  styleUrls: ['./client-course-event-details.component.css']
 })
 export class ClientCourseDetailsComponent implements OnInit {
 

@@ -1,15 +1,15 @@
-<div class="course-detail-container">
-  <div class="course-main">
-    <h1 class="course-title">{{ course.title }}</h1>
-    <img class="course-image" [src]="course.image" alt="Zdjęcie kursu">
+<div class="item-detail-container">
+  <div class="item-main">
+    <h1 class="item-title">{{ course.title }}</h1>
+    <img class="item-image" [src]="course.image" alt="Zdjęcie kursu">
     <h2>Korzyści ze szkolenia</h2>
-    <ul class="course-description">
+    <ul class="item-description">
       <li *ngFor="let profit of course.profits">
         {{ profit }}
       </li>
     </ul>
     <h2>Warunki przystąpienia do szkolenia</h2>
-    <ul class="course-conditions">
+    <ul class="item-conditions">
       <li *ngFor="let condition of course.conditions">
         {{ condition }}
       </li>
@@ -51,8 +51,8 @@
     </p-table>
   </div>
 
-  <div class="course-info-aside">
-    <div class="course-meta-info">
+  <div class="item-info-aside">
+    <div class="item-meta-info">
       <h2>INFORMACJE</h2>
       <p><strong>Czas trwania:</strong> {{ course.duration }}</p>
       <p><strong>Łódź:</strong> {{ course.yacht }}</p>
@@ -64,34 +64,34 @@
       <p><strong>{{ course.additionalInfo4 }}</strong></p>
     </div>
 
-    <div *ngIf="authService.isLogged() && availableCourses.length > 0" class="course-enroll-info">
-      <div class="course-price">
+    <div *ngIf="authService.isLogged() && availableCourses.length > 0" class="item-enroll-info">
+      <div class="item-price">
         Cena: {{ course.price }} zł
       </div>
-      <button pButton type="button" label="Zapisz się na kurs" class="sign-on-p-button p-button-rounded p-button-primary" (click)="signInOnCourseModal()"><i class="pi pi-plus"></i></button>
+      <button pButton type="button" label="Zapisz się na kurs" class="sign-on-course-p-button p-button-rounded p-button-primary" (click)="signInOnCourseModal()"><i class="pi pi-plus"></i></button>
     </div>
 
-    <div *ngIf="authService.isLogged() && availableCourses.length == 0" class="course-enroll-info">
-      <div class="course-price">
+    <div *ngIf="authService.isLogged() && availableCourses.length == 0" class="item-enroll-info">
+      <div class="item-price">
         Cena: {{ course.price }} zł
       </div>
       <h3>Brak dostępnych terminów!</h3>
-      <button pButton type="button" label="Zapisz się na kurs" class="sign-on-p-button p-button-rounded p-button-primary" [disabled]="availableCourses.length == 0" (click)="signInOnCourseModal()"><i class="pi pi-plus"></i></button>
+      <button pButton type="button" label="Zapisz się na kurs" class="sign-on-course-p-button p-button-rounded p-button-primary" [disabled]="availableCourses.length == 0" (click)="signInOnCourseModal()"><i class="pi pi-plus"></i></button>
     </div>
 
-    <div *ngIf="!authService.isLogged()" class="course-enroll-info">
-      <div class="course-price">
+    <div *ngIf="!authService.isLogged()" class="item-enroll-info">
+      <div class="item-price">
         Cena: {{ course.price }} zł
       </div>
       <h3>Musisz się najpierw zalogować!</h3>
-      <button pButton type="button" label="Zapisz się na kurs" class="sign-on-p-button p-button-rounded p-button-primary" [disabled]="!authService.isLogged()" (click)="signInOnCourseModal()"><i class="pi pi-plus"></i></button>
+      <button pButton type="button" label="Zapisz się na kurs" class="sign-on-course-p-button p-button-rounded p-button-primary" [disabled]="!authService.isLogged()" (click)="signInOnCourseModal()"><i class="pi pi-plus"></i></button>
     </div>
   </div>
 
 </div>
 
 
-<p-dialog header="Wybierz dostępny termin" [(visible)]="modalDateVisiblity" [style]="{width: '50vw'}" [modal]="true" [dismissableMask]="true">
+<p-dialog header="Wybierz dostępny termin" [(visible)]="modalDateVisiblity" [style]="{'min-width': '50vw'}" [modal]="true" [dismissableMask]="true">
   <p-table [value]="availableCourses"
            [paginator]="true"
            [rows]="5"

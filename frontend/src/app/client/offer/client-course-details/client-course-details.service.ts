@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import {CourseDetails} from "./client-course-details.component";
+import {EventDetails} from "../client-event-details/client-event-details.component";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientCourseDetailsService {
 
-  ustawDaneDomyslne(course: CourseDetails,
+  ustawDaneDomyslne(course: CourseDetails | EventDetails,
                     type: string, title:string,
                     image:string, profits: string[],
                     conditions: string[], duration: string,
