@@ -64,11 +64,19 @@
       <p><strong>{{ course.additionalInfo4 }}</strong></p>
     </div>
 
-    <div *ngIf="authService.isLogged()" class="course-enroll-info">
+    <div *ngIf="authService.isLogged() && availableCourses.length > 0" class="course-enroll-info">
       <div class="course-price">
         Cena: {{ course.price }} zł
       </div>
       <button pButton type="button" label="Zapisz się na kurs" class="sign-on-p-button p-button-rounded p-button-primary" (click)="signInOnCourseModal()"><i class="pi pi-plus"></i></button>
+    </div>
+
+    <div *ngIf="authService.isLogged() && availableCourses.length == 0" class="course-enroll-info">
+      <div class="course-price">
+        Cena: {{ course.price }} zł
+      </div>
+      <h3>Brak dostępnych terminów!</h3>
+      <button pButton type="button" label="Zapisz się na kurs" class="sign-on-p-button p-button-rounded p-button-primary" [disabled]="availableCourses.length == 0" (click)="signInOnCourseModal()"><i class="pi pi-plus"></i></button>
     </div>
 
     <div *ngIf="!authService.isLogged()" class="course-enroll-info">

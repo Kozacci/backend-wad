@@ -1,11 +1,8 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
-import {CourseFilterDTO} from "../../shared/dto";
-import {RestClient} from "../../shared/rest-client";
-import {AuthService} from "../../shared/services/auth/auth.service";
+import {Component, Input, OnInit} from '@angular/core';
+import {CourseFilterDTO} from "../../../shared/dto";
+import {RestClient} from "../../../shared/rest-client";
+import {AuthService} from "../../../shared/services/auth/auth.service";
 import {MessageService} from "primeng/api";
-import {HttpResponseHandlerService} from "../../shared/services/http-response-handler.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {FormService} from "../../shared/services/form/form.service";
 
 export interface CourseDetails {
   type: string,
@@ -31,19 +28,15 @@ export interface CourseDetails {
 export class ClientCourseDetailsComponent implements OnInit {
 
   modalDateVisiblity: boolean = false;
-  modalFormVisiblity: boolean = false;
   selectedAvailableCourseId: number | null = null;
   @Input()
   course: CourseDetails = <CourseDetails>{};
-  @Output()
-  availableCourses: CourseFilterDTO[] = <CourseFilterDTO[]>{};
+  availableCourses: CourseFilterDTO[] = <CourseFilterDTO[]>[];
 
   constructor(
     private readonly restClient: RestClient,
     public readonly authService: AuthService,
     private readonly messageService: MessageService,
-    public readonly formService: FormService,
-    private readonly httpResponseHandlerService: HttpResponseHandlerService
   ) {}
 
   ngOnInit(): void {
@@ -66,7 +59,9 @@ export class ClientCourseDetailsComponent implements OnInit {
         response => {
           this.availableCourses = response;
           this.course.availableCourses = response;
-          console.log(response);
+          if(response == null) {
+            this.availableCourses = [];
+          }
         });
   }
 
@@ -99,6 +94,7 @@ export class ClientCourseDetailsComponent implements OnInit {
               summary: 'Zapis na kurs',
               detail: "Udało Ci się pomyślnie zapisać na kurs"
             })
+              this.checkAvailableCourses();
               this.modalDateVisiblity = false;
               // Todo navigate to my courses view
             },
