@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {
   CourseCreateUpdateDTO, CourseEntityDTO,
-  CourseFilterDTO, ParticipantCourseEntityDTO,
-  ParticipantEntityDTO,
+  CourseFilterDTO, EventFilterDTO, ParticipantCourseEntityDTO,
+  ParticipantEntityDTO, ParticipantEventEntityCreateDTO,
   ParticipantLoginDTO,
   ParticipantRegisterDTO,
   QuestionCreateUpdateDTO,
@@ -44,6 +44,10 @@ export class RestClient {
     return this.http.post<ParticipantCourseEntityDTO>(`${this.apiUrl}/participant-courses/${participantId}/sign-in/${courseId}`, null, { withCredentials: true})
   }
 
+  signInOnEvent(participantEventCreateDTO: ParticipantEventEntityCreateDTO) {
+    return this.http.post<ParticipantCourseEntityDTO>(`${this.apiUrl}/participant-events`, participantEventCreateDTO, { withCredentials: true})
+  }
+
   getCoursesByFilters(courseType: string | undefined,
                       courseStatus: string | undefined,
                       courseCity: string  | undefined,
@@ -78,6 +82,30 @@ export class RestClient {
       params = params.append('sortBy', sortBy);
     }
     return this.http.get<CourseFilterDTO[]>(`${this.apiUrl}/courses/filter-by`, {params, withCredentials: true } );
+  }
+
+  getEventsByFilters(type: string | undefined,
+                     city: string  | undefined,
+                     ordererLastName: string  | undefined,
+                     ordererEmail: string  | undefined,
+                     sortBy: string | undefined): Observable<EventFilterDTO[]> {
+    let params = new HttpParams();
+    if (type !== null && type !== undefined) {
+      params = params.append('type', type);
+    }
+    if (city !== null && city !== undefined) {
+      params = params.append('city', city);
+    }
+    if (ordererLastName !== null && ordererLastName !== undefined) {
+      params = params.append('ordererLastName', ordererLastName);
+    }
+    if (ordererEmail !== null && ordererEmail !== undefined) {
+      params = params.append('ordererEmail', ordererEmail);
+    }
+    if (sortBy !== null && sortBy !== undefined) {
+      params = params.append('sortBy', sortBy);
+    }
+    return this.http.get<EventFilterDTO[]>(`${this.apiUrl}/events/filter-by`, {params, withCredentials: true } );
   }
 
   getQuestionsByFilters(id: number | null,
