@@ -15,11 +15,13 @@ import java.util.List;
  */
 class EventCBHelper {
 
-
-    public static void addSortBy(String sort, CriteriaQuery<EventFilterDTO> query,
-                                 CriteriaBuilder cb, Root<EventEntity> event,
-                                 Join<EventEntity, ParticipantEventEntity> joinParticipantEvents
-                                 ) {
+    public static void addSortBy(
+            String sort,
+            CriteriaQuery<EventFilterDTO> query,
+            CriteriaBuilder cb,
+            Root<EventEntity> event,
+            Join<EventEntity, ParticipantEventEntity> joinParticipantEvents
+    ) {
         if (sort == null) { // default sortBy value
             query.orderBy(cb.asc(event.get("date")));
             return;
@@ -34,36 +36,61 @@ class EventCBHelper {
         }
     }
 
-    public static void addTypePredicate(CriteriaBuilder cb, Root<EventEntity> event,
-                                        List<Predicate> predicates, EventType type) {
+    public static void addTypePredicate(
+            CriteriaBuilder cb,
+            Root<EventEntity> event,
+            List<Predicate> predicates,
+            EventType type
+    ) {
         if (type != null) {
             predicates.add(cb.equal(event.get("type"), type));
         }
     }
 
-    public static void addCityPredicate(CriteriaBuilder cb, Root<EventEntity> event,
-                                        List<Predicate> predicates, EventCity city) {
+    public static void addCityPredicate(
+            CriteriaBuilder cb,
+            Root<EventEntity> event,
+            List<Predicate> predicates,
+            EventCity city
+    ) {
         if (city != null) {
             predicates.add(cb.equal(event.get("city"), city));
         }
     }
 
-    public static void addOrdererLastNamePredicate(CriteriaBuilder cb,
-                                                   List<Predicate> predicates,
-                                                   Join<EventEntity, ParticipantEventEntity> joinParticipantEvents,
-                                                   String ordererLastName) {
+    public static void addOrdererLastNamePredicate(
+            CriteriaBuilder cb,
+            List<Predicate> predicates,
+            Join<EventEntity, ParticipantEventEntity> joinParticipantEvents,
+            String ordererLastName
+    ) {
         if (ordererLastName != null) {
            predicates.add(cb.equal(joinParticipantEvents.get("ordererLastName"), ordererLastName));
         }
     }
 
-    public static void addOrdererEmailPredicate(CriteriaBuilder cb,
-                                                List<Predicate> predicates,
-                                                Join<EventEntity, ParticipantEventEntity> joinParticipantEvents,
-                                                String ordererEmail) {
+    public static void addOrdererEmailPredicate(
+            CriteriaBuilder cb,
+            List<Predicate> predicates,
+            Join<EventEntity, ParticipantEventEntity> joinParticipantEvents,
+            String ordererEmail
+    ) {
         if (ordererEmail != null) {
             predicates.add(cb.equal(joinParticipantEvents.get("ordererEmail"), ordererEmail));
         }
+    }
+
+    public static Subquery<Long> addAssignedParticipants(
+            CriteriaBuilder cb,
+            Root<EventEntity> event,
+            CriteriaQuery<EventFilterDTO> query
+    ) {
+        Subquery<Long> subQuery = query.subquery(Long.class);
+        Root<ParticipantEventEntity> subQueryRoot = subQuery.from(ParticipantEventEntity.class);
+        Join<ParticipantEventEntity, EventEntity> join = subQueryRoot.join("event");
+        subQuery.select(cb.count(subQueryRoot.get("id")));
+        subQuery.where(cb.equal(join, event));
+        return subQuery;
     }
 
 }

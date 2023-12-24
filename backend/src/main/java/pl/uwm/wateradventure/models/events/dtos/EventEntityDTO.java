@@ -12,6 +12,7 @@ public record EventEntityDTO(
                              LocalDateTime date,
                              String city,
                              LocalTime duration,
+                             Integer assignedParticipants,
                              Integer maxParticipantsNumber) {
 
     @Builder

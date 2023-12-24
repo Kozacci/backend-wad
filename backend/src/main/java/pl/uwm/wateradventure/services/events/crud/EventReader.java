@@ -42,7 +42,7 @@ class EventReader extends PageReader<EventEntity> {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<EventFilterDTO> query = cb.createQuery(EventFilterDTO.class);
         Root<EventEntity> event = query.from(EventEntity.class);
-        joinParticipantEvents = event.join("participantEvents", JoinType.LEFT);
+        joinParticipantEvents = event.join("eventParticipants", JoinType.LEFT);
         List<Predicate> predicates = new ArrayList<>();
 
         addTypePredicate(cb, event, predicates, filters.type());
@@ -53,7 +53,7 @@ class EventReader extends PageReader<EventEntity> {
         query.select(
                 cb.construct(
                     EventFilterDTO.class,
-                    toSelection(event).toArray(new Selection<?>[0])
+                    toSelection(event, query, cb).toArray(new Selection<?>[0])
                 )
         );
 
@@ -64,12 +64,17 @@ class EventReader extends PageReader<EventEntity> {
         return em.createQuery(query).getResultList();
     }
 
-    private List<Selection<?>> toSelection(Root<EventEntity> root) {
+    private List<Selection<?>> toSelection(Root<EventEntity> root,
+                                           CriteriaQuery<EventFilterDTO> cq,
+                                           CriteriaBuilder cb) {
         return Arrays.asList(
                 root.get("id"),
                 root.get("type"),
                 root.get("city"),
+                root.get("cost"),
+                addAssignedParticipants(cb, root, cq),
                 root.get("maxParticipantsNumber"),
+                root.get("date"),
                 root.get("duration"),
                 joinParticipantEvents.get("ordererLastName"),
                 joinParticipantEvents.get("ordererEmail")
