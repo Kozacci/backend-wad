@@ -38,6 +38,7 @@ class CourseReader extends PageReader<CourseEntity> {
                 .map(CourseEntity::toDTO);
     }
 
+    // TODO - Additional method to get only courses
     public List<CourseFilterDTO> getCoursesByFilters(CourseFiltersDTO filters) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<CourseFilterDTO> query = cb.createQuery(CourseFilterDTO.class);

@@ -7,14 +7,14 @@
       <div class="text-left">
         <h1 class="h1-left">Kursy<br> żeglarskie</h1>
         <p>Otrzymaj<br>patent żeglarski</p>
-        <button type="button" class="btn btn-light button-left">Kursy</button>
+        <button type="button" class="btn btn-light button-left" (click)="pathService.navigate('oferta/kursy')">Kursy</button>
       </div>
     </div>
     <div class="right-side">
       <div class="text-right">
         <h1 class="h1-right">Organizacja<br> rejsów</h1>
         <p>Przeżyj<br>niesamowite chwile</p>
-        <button type="button" class="btn btn-light button-right">Eventy</button>
+        <button type="button" class="btn btn-light button-right" (click)="pathService.navigate('oferta/eventy')">Eventy</button>
       </div>
       <div class="line-right"></div>
     </div>
