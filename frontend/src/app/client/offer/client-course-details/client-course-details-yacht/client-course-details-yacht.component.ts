@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CourseDetails} from "../client-course-details.component";
 import {ClientCourseDetailsService} from "../client-course-details.service";
 
@@ -7,7 +7,7 @@ import {ClientCourseDetailsService} from "../client-course-details.service";
   templateUrl: './client-course-details-yacht.component.html',
   styleUrls: ['./client-course-details-yacht.component.css']
 })
-export class ClientCourseDetailsYachtComponent {
+export class ClientCourseDetailsYachtComponent implements OnInit {
 
   courseYacht: CourseDetails = <CourseDetails>{};
 

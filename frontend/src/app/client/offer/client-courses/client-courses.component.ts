@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {PathService} from "../../shared/services/path.service";
+import {PathService} from "../../../shared/services/path.service";
 
 @Component({
   selector: 'app-client-courses',
