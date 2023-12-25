@@ -79,6 +79,20 @@ class EventCBHelper {
         }
     }
 
+    public static void addMaxParticipantsLimitNotCappedPredicate(
+            CriteriaBuilder cb,
+            Root<EventEntity> event,
+            List<Predicate> predicates,
+            CriteriaQuery<?> query
+    ) {
+        Subquery<Integer> subQuery = query.subquery(Integer.class);
+        Root<ParticipantEventEntity> participantEvent = subQuery.from(ParticipantEventEntity.class);
+        subQuery.select(cb.sum(participantEvent.get("participantsNumber")))
+                .where(cb.equal(participantEvent.get("event"), event));
+        Predicate participantsNotFull = cb.lessThan(subQuery, event.get("maxParticipantsNumber"));
+        predicates.add(participantsNotFull);
+    }
+
     public static Subquery<Integer> addAssignedParticipants(
             CriteriaBuilder cb,
             Root<EventEntity> event,

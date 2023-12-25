@@ -44,6 +44,7 @@ class EventReader extends PageReader<EventEntity> {
 
         addTypePredicate(cb, event, predicates, filters.type());
         addCityPredicate(cb, event, predicates, filters.city());
+        addMaxParticipantsLimitNotCappedPredicate(cb, event, predicates, query);
 
         query.select(
                 cb.construct(
