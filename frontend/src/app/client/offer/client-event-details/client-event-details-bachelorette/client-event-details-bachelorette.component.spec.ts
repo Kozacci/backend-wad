@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ClientEventDetailsBacheloretteComponent } from './client-event-details-bachelorette.component';
+import {ClientEventDetailsBacheloretteComponent} from './client-event-details-bachelorette.component';
 
 describe('ClientEventDetailsBacheloretteComponent', () => {
   let component: ClientEventDetailsBacheloretteComponent;

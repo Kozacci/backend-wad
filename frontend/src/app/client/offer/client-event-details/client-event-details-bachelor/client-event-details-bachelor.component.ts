@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {ClientCourseDetailsService} from "../../client-course-details/client-course-details.service";
 import {EventDetails} from "../client-event-details.component";
 

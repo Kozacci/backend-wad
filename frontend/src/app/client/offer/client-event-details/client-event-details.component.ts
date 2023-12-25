@@ -5,7 +5,6 @@ import {MessageService} from "primeng/api";
 import {EventFilterDTO, ParticipantEventEntityCreateDTO} from "../../../shared/dto";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {FormService} from "../../../shared/services/form/form.service";
-import {animate, style, transition, trigger} from "@angular/animations";
 
 export interface EventDetails {
   type: string,

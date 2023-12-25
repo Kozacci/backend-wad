@@ -4,7 +4,6 @@ import jakarta.persistence.criteria.*;
 import pl.uwm.wateradventure.models.events.EventCity;
 import pl.uwm.wateradventure.models.events.EventEntity;
 import pl.uwm.wateradventure.models.events.EventType;
-import pl.uwm.wateradventure.models.events.dtos.ParticipantEventFilterDTO;
 import pl.uwm.wateradventure.models.participant_events.ParticipantEventEntity;
 
 import java.util.List;
