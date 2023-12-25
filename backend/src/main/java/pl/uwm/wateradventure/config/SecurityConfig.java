@@ -25,13 +25,17 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private static final String AUTH_URL = "api/auth/**";
-    private static final String[] CLIENT_URLS =
+    private static final String[] NO_AUTH_URLS =
             {
+                    "api/auth/**",
                     "api/courses/**",
                     "api/events/**",
+            };
+    private static final String[] CLIENT_URLS =
+            {
                     "api/questions/**",
                     "api/participant-courses/**",
+                    "api/participant-events/**",
                     "api/learning/**"
             };
     private static final String[] ADMIN_URLS = { "api/admin/**" + Arrays.toString(CLIENT_URLS) }; // TODO add api/admin for admin's rests
@@ -48,7 +52,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 // whitelist
                 .authorizeHttpRequests(
-                        request -> request.requestMatchers(AUTH_URL)
+                        request -> request.requestMatchers(NO_AUTH_URLS)
                                 .permitAll()
                                 .requestMatchers(CLIENT_URLS).hasAnyAuthority("Klient", "Admin")
                                 .requestMatchers(ADMIN_URLS).hasAuthority("Admin")
