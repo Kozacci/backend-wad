@@ -23,6 +23,7 @@ public class ParticipantCoursesCriteriaBuilder {
     private final EntityManager em;
     private static Join<CourseEntity, ParticipantCourseEntity> joinParticipantCourse;
 
+    // TODO - move to reader (or move others from reader to cb package)
     public List<CourseFilterDTO> getParticipantCoursesByFilters(ParticipantCourseFiltersDTO filters) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<CourseFilterDTO> query = cb.createQuery(CourseFilterDTO.class);

@@ -23,7 +23,7 @@ import java.util.Objects;
 public class CourseCBHelper {
 
     // could be method in EntityCBHelper if it will ever be created
-    private static void checkSortByValue(String sortBy) {
+    public static void checkSortByValue(String sortBy) {
         if (sortBy == null) return;
         Field[] courseEntityFields = CourseEntity.class.getDeclaredFields();
 
@@ -37,16 +37,10 @@ public class CourseCBHelper {
     }
 
     public static void addSortBy(String sort, CriteriaQuery<CourseFilterDTO> query,
-                                 CriteriaBuilder cb, Root<CourseEntity> course, Join<CourseEntity, ParticipantCourseEntity> participantsJoin) {
+                                 CriteriaBuilder cb, Root<CourseEntity> course) {
         checkSortByValue(sort);
         if (sort == null) {
             query.orderBy(cb.asc(course.get("dateFrom")));
-            return;
-        }
-        if (sort.equals("participants")) {
-            Expression<Long> countParticipants = cb.count(participantsJoin.get("id"));
-            query.groupBy(course.get("id"));
-            query.orderBy(cb.desc(countParticipants));
             return;
         }
         query.orderBy(cb.asc(course.get(sort)));

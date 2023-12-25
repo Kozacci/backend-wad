@@ -38,12 +38,10 @@ class CourseReader extends PageReader<CourseEntity> {
                 .map(CourseEntity::toDTO);
     }
 
-    // TODO - Additional method to get only courses
     public List<CourseFilterDTO> getCoursesByFilters(CourseFiltersDTO filters) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<CourseFilterDTO> query = cb.createQuery(CourseFilterDTO.class);
         Root<CourseEntity> course = query.from(CourseEntity.class);
-        joinParticipantCourse = course.join("participants", JoinType.LEFT);
 
         List<Predicate> predicates = new ArrayList<>();
 
@@ -61,7 +59,7 @@ class CourseReader extends PageReader<CourseEntity> {
 
         query.where(predicates.toArray(new Predicate[predicates.size()]));
 
-        addSortBy(filters.sortBy(), query, cb, course, joinParticipantCourse);
+        addSortBy(filters.sortBy(), query, cb, course);
 
         return em.createQuery(query).getResultList();
     }
