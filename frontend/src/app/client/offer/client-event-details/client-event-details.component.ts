@@ -103,7 +103,6 @@ export class ClientEventDetailsComponent {
     this.checkAvailableEvents()
   }
 
-  // Todo - 403 error without loggin' in
   checkAvailableEvents() {
     this.restClient.getEventsByFilters(
       this.event.type,
