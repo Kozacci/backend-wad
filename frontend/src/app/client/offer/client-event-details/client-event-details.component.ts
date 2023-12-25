@@ -109,8 +109,6 @@ export class ClientEventDetailsComponent {
       this.event.type,
       undefined,
       undefined,
-      undefined,
-      undefined
     )
       .subscribe(
         response => {
@@ -143,9 +141,10 @@ export class ClientEventDetailsComponent {
     this.finalCost = this.participantsNumber * this.chosenEvent.cost;
   }
 
-  // TODO -- update getCourse and getEvents by filters method to get them properly
+  // TODO -- check getCourse and getEvents by filters method to get them properly
   //         we need to check general courses/events and its assignedUsers/maxUsers
 
+  // TODO -- bugfix for assigned users for events (courses are ok)
   // TODO -- e-learning and my-profile
   // TODO -- some methods could be used without logging in
   // TODO -- navigation from homepage to offer(courses/events details)
@@ -179,6 +178,14 @@ export class ClientEventDetailsComponent {
               detail: error.error.message
             });
           });
+    }
+    else {
+      this.messageService.add({
+        life: 4000,
+        severity: 'error',
+        summary: 'Zapis na event',
+        detail: "Wypełnij najpierw formularz"
+      });
     }
   }
 

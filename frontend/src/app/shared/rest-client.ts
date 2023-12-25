@@ -86,6 +86,22 @@ export class RestClient {
 
   getEventsByFilters(type: string | undefined,
                      city: string  | undefined,
+                     sortBy: string | undefined): Observable<EventFilterDTO[]> {
+    let params = new HttpParams();
+    if (type !== null && type !== undefined) {
+      params = params.append('type', type);
+    }
+    if (city !== null && city !== undefined) {
+      params = params.append('city', city);
+    }
+    if (sortBy !== null && sortBy !== undefined) {
+      params = params.append('sortBy', sortBy);
+    }
+    return this.http.get<EventFilterDTO[]>(`${this.apiUrl}/events/events-filter-by`, {params, withCredentials: true } );
+  }
+
+  getParticipantEventsByFilters(type: string | undefined,
+                     city: string  | undefined,
                      ordererLastName: string  | undefined,
                      ordererEmail: string  | undefined,
                      sortBy: string | undefined): Observable<EventFilterDTO[]> {
@@ -105,7 +121,7 @@ export class RestClient {
     if (sortBy !== null && sortBy !== undefined) {
       params = params.append('sortBy', sortBy);
     }
-    return this.http.get<EventFilterDTO[]>(`${this.apiUrl}/events/filter-by`, {params, withCredentials: true } );
+    return this.http.get<EventFilterDTO[]>(`${this.apiUrl}/events/participant-events-filter-by`, {params, withCredentials: true } );
   }
 
   getQuestionsByFilters(id: number | null,
