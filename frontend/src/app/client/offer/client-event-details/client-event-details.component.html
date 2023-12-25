@@ -66,14 +66,14 @@
       <p><strong>{{ event.additionalInfo4 }}</strong></p>
     </div>
 
-    <div *ngIf="authService.isLogged() && availableEvents.length > 0" class="item-enroll-info">
+    <div *ngIf="availableEvents.length > 0" class="item-enroll-info">
       <div class="item-price">
         Cena: {{ event.price }}
       </div>
       <button pButton type="button" label="Wybierz termin" class="sign-on-event-p-button p-button-rounded p-button-primary" (click)="modalDateVisibility = true"><i class="pi pi-plus"></i></button>
     </div>
 
-    <div *ngIf="authService.isLogged() && availableEvents.length == 0" class="item-enroll-info">
+    <div *ngIf="availableEvents.length == 0" class="item-enroll-info">
       <div class="item-price">
         Cena: {{ event.price }} zł
       </div>
@@ -81,14 +81,15 @@
       <button pButton type="button" label="Wybierz termin" class="sign-on-event-p-button p-button-rounded p-button-primary" [disabled]="availableEvents.length == 0" (click)="modalDateVisibility = true"><i class="pi pi-plus"></i></button>
     </div>
 
-    <div *ngIf="!authService.isLogged()" class="item-enroll-info">
-      <div class="item-price">
-        Cena: {{ event.price }} zł
-      </div>
-      <h3>Musisz się najpierw zalogować!</h3>
-      <button pButton type="button" label="Wybierz termin" class="sign-on-event-p-button p-button-rounded p-button-primary" [disabled]="!authService.isLogged()" (click)="modalDateVisibility = true"><i class="pi pi-plus"></i></button>
-    </div>
-  </div>
+<!--    FOR NOW IT IS USABLE EVEN WITHOUT LOGGIN' IN -->
+<!--    <div *ngIf="!authService.isLogged()" class="item-enroll-info">-->
+<!--      <div class="item-price">-->
+<!--        Cena: {{ event.price }} zł-->
+<!--      </div>-->
+<!--      <h3>Musisz się najpierw zalogować!</h3>-->
+<!--      <button pButton type="button" label="Wybierz termin" class="sign-on-event-p-button p-button-rounded p-button-primary" [disabled]="!authService.isLogged()" (click)="modalDateVisibility = true"><i class="pi pi-plus"></i></button>-->
+<!--    </div>-->
+<!--  </div>-->
 
 </div>
 
