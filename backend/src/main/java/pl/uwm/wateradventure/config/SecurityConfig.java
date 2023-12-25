@@ -30,6 +30,7 @@ public class SecurityConfig {
                     "api/auth/**",
                     "api/courses/**",
                     "api/events/**",
+                    "api/participant-events"
             };
     private static final String[] CLIENT_URLS =
             {
