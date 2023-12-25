@@ -4,12 +4,12 @@ import jakarta.persistence.criteria.*;
 import pl.uwm.wateradventure.models.events.EventCity;
 import pl.uwm.wateradventure.models.events.EventEntity;
 import pl.uwm.wateradventure.models.events.EventType;
-import pl.uwm.wateradventure.models.events.dtos.EventFilterDTO;
+import pl.uwm.wateradventure.models.events.dtos.ParticipantEventFilterDTO;
 import pl.uwm.wateradventure.models.participant_events.ParticipantEventEntity;
 
 import java.util.List;
 
-// TODO -- maybe create root CBHelper to inherit it in EntityCBHelper ?
+// TODO -- maybe create generic <?> root CBHelper to inherit it in EntityCBHelper ?
 /**
  * Class created in the needs of EventReader class
  */
@@ -17,7 +17,7 @@ class EventCBHelper {
 
     public static void addSortBy(
             String sort,
-            CriteriaQuery<EventFilterDTO> query,
+            CriteriaQuery<?> query,
             CriteriaBuilder cb,
             Root<EventEntity> event,
             Join<EventEntity, ParticipantEventEntity> joinParticipantEvents
@@ -32,7 +32,6 @@ class EventCBHelper {
         }
         if (sort.equals("ordererLastName") || sort.equals("ordererEmail")) {
             query.orderBy(cb.asc(joinParticipantEvents.get(sort)));
-            return;
         }
     }
 
@@ -83,7 +82,7 @@ class EventCBHelper {
     public static Subquery<Long> addAssignedParticipants(
             CriteriaBuilder cb,
             Root<EventEntity> event,
-            CriteriaQuery<EventFilterDTO> query
+            CriteriaQuery<?> query
     ) {
         Subquery<Long> subQuery = query.subquery(Long.class);
         Root<ParticipantEventEntity> subQueryRoot = subQuery.from(ParticipantEventEntity.class);

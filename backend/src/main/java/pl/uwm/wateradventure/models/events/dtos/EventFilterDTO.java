@@ -13,7 +13,5 @@ public record EventFilterDTO(Long eventId,
                              Long assignedParticipants,
                              Integer maxParticipantsNumber,
                              LocalDateTime date,
-                             LocalTime duration,
-                             String ordererLastName,
-                             String ordererEmail) {
+                             LocalTime duration) {
 }
