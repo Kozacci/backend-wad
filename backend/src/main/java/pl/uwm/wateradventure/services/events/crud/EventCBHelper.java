@@ -79,15 +79,15 @@ class EventCBHelper {
         }
     }
 
-    public static Subquery<Long> addAssignedParticipants(
+    public static Subquery<Integer> addAssignedParticipants(
             CriteriaBuilder cb,
             Root<EventEntity> event,
             CriteriaQuery<?> query
     ) {
-        Subquery<Long> subQuery = query.subquery(Long.class);
+        Subquery<Integer> subQuery = query.subquery(Integer.class);
         Root<ParticipantEventEntity> subQueryRoot = subQuery.from(ParticipantEventEntity.class);
         Join<ParticipantEventEntity, EventEntity> join = subQueryRoot.join("event");
-        subQuery.select(cb.count(subQueryRoot.get("id")));
+        subQuery.select(cb.sum(subQueryRoot.get("participantsNumber")));
         subQuery.where(cb.equal(join, event));
         return subQuery;
     }

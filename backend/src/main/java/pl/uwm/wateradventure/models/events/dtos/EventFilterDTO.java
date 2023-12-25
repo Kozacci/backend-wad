@@ -10,7 +10,7 @@ public record EventFilterDTO(Long eventId,
                              EventType type,
                              EventCity city,
                              Double cost,
-                             Long assignedParticipants,
+                             Integer assignedParticipants,
                              Integer maxParticipantsNumber,
                              LocalDateTime date,
                              LocalTime duration) {
