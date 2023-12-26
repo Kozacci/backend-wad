@@ -110,7 +110,6 @@ export class ClientEventDetailsComponent {
     )
       .subscribe(
         response => {
-          console.log(response);
           this.availableEvents = response;
           this.event.availableEvents = response;
           if(response == null) {
@@ -140,9 +139,6 @@ export class ClientEventDetailsComponent {
   }
 
   // TODO -- e-learning and my-profile
-  // TODO -- navigation from homepage to offer(courses/events details)
-  // TODO -- respons for courses/events signing modals
-  // TODO -- audit/fix for event/courses cost on all sites
   signForEvent() {
     if (this.chosenEvent.id != null && this.formGroup.valid) {
       this.participantEventCreateDTO.eventId = this.chosenEvent.id;
