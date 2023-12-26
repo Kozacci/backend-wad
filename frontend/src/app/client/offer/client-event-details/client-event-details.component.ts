@@ -139,12 +139,7 @@ export class ClientEventDetailsComponent {
     this.finalCost = this.participantsNumber * this.chosenEvent.cost;
   }
 
-  // TODO -- check getCourse and getEvents by filters method to get them properly
-  //         we need to check general courses/events and its assignedUsers/maxUsers
-
-  // TODO -- bugfix for assigned users for events (courses are ok)
   // TODO -- e-learning and my-profile
-  // TODO -- some methods could be used without logging in
   // TODO -- navigation from homepage to offer(courses/events details)
   // TODO -- respons for courses/events signing modals
   // TODO -- audit/fix for event/courses cost on all sites
