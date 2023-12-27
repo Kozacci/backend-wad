@@ -8,6 +8,7 @@ import pl.uwm.wateradventure.models.participants.ParticipantEntity;
 import pl.uwm.wateradventure.models.participants.dtos.ParticipantEntityDTO;
 import pl.uwm.wateradventure.models.participants.security.dtos.ParticipantLoginDTO;
 import pl.uwm.wateradventure.models.participants.security.dtos.ParticipantRegisterDTO;
+import pl.uwm.wateradventure.models.participants.security.dtos.ParticipantUpdateDTO;
 
 @Service
 @RequiredArgsConstructor
@@ -15,9 +16,9 @@ public class ParticipantCRUDService {
 
     private final ParticipantCreator creator;
     private final ParticipantReader reader;
-    // TODO - Deleting/Editing from User Profile
-    private final ParticipantDeleter deleter;
     private final ParticipantUpdater updater;
+    // TODO - Deleting from User Profile
+    private final ParticipantDeleter deleter;
 
     public ParticipantEntity getParticipantById(Long participantId) {
         return reader.getParticipantById(participantId);
@@ -34,6 +35,11 @@ public class ParticipantCRUDService {
     public ResponseEntity<?> login(ParticipantLoginDTO participantLoginDTO,
                                    HttpServletResponse response) {
         return reader.login(participantLoginDTO, response);
+    }
+
+    public ParticipantEntityDTO updateParticipant(Long participantId, ParticipantUpdateDTO participantUpdateDTO) {
+        var participantToUpdate = reader.getParticipantById(participantId);
+        return updater.updateParticipant(participantToUpdate, participantUpdateDTO);
     }
 
 }

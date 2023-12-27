@@ -136,4 +136,10 @@ public class ExceptionsHandler {
         return new ErrorDTO("participantsNumber", exception.getMessage());
     }
 
+    @ExceptionHandler(value = EmailAlreadyExistsException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorDTO emailAlreadyExistsException(EmailAlreadyExistsException exception) {
+        return new ErrorDTO("email", exception.getMessage());
+    }
+
 }

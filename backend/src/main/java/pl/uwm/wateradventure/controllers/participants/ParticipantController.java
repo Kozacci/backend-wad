@@ -1,11 +1,13 @@
 package pl.uwm.wateradventure.controllers.participants;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.uwm.wateradventure.models.courses.dtos.CourseFilterDTO;
 import pl.uwm.wateradventure.models.participants.dtos.ParticipantCourseFiltersDTO;
 import pl.uwm.wateradventure.models.participants.dtos.ParticipantEntityDTO;
+import pl.uwm.wateradventure.models.participants.security.dtos.ParticipantUpdateDTO;
 import pl.uwm.wateradventure.services.participants.ParticipantFacade;
 
 import java.util.List;
@@ -36,6 +38,12 @@ class ParticipantController {
         var filters = new ParticipantCourseFiltersDTO(participantId, courseType, courseStatus, isPaid, isPassed, sortBy);
         var filteredParticipantCourses = participantFacade.getCoursesByParticipant(filters);
         return !filteredParticipantCourses.isEmpty() ? ResponseEntity.ok(filteredParticipantCourses) : ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{participantId}")
+    @ResponseStatus(HttpStatus.OK)
+    public ParticipantEntityDTO updateParticipant(@PathVariable Long participantId, @RequestBody ParticipantUpdateDTO participantUpdateDTO) {
+        return participantFacade.updateParticipant(participantId, participantUpdateDTO);
     }
 
 

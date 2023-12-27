@@ -10,4 +10,7 @@ import java.util.Optional;
 public interface ParticipantRepository extends JpaRepository<ParticipantEntity, Long> {
 
     Optional<ParticipantEntity> findByEmail(String email);
+
+    Boolean existsByEmail(String email);
+
 }
