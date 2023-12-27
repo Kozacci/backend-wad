@@ -161,4 +161,14 @@ export class RestClient {
   addCourse(courseToAdd: CourseCreateUpdateDTO): Observable<CourseEntityDTO> {
     return this.http.post<CourseEntityDTO>(`${this.apiUrl}/courses`, courseToAdd, {withCredentials: true})
   }
+
+  deleteCourseById(courseToEditId: number | null) {
+    const url = `${this.apiUrl}/courses/${courseToEditId}`
+    return this.http.delete(url, {withCredentials: true})
+  }
+
+  editCourse(courseToEdit: CourseCreateUpdateDTO, courseToEditId: number) {
+    const url = `${this.apiUrl}/courses/${courseToEditId}`;
+    return this.http.put<CourseEntityDTO>(url, courseToEdit, {withCredentials: true});
+  }
 }
