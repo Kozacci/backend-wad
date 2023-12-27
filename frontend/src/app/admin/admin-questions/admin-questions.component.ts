@@ -157,7 +157,7 @@ export class AdminQuestionsComponent {
 
   deleteQuestion(): void {
     this.restClient.deleteQuestionById(this.questionToEditId).subscribe( () => {
-      this.responseHandlerService.showSuccessPToast("Usunięcie pytania", "Pytanie nr:" + this.questionToEditId + " zostało usunięte.");
+      this.responseHandlerService.showSuccessPToast("Usunięcie pytania", "Pytanie nr: " + this.questionToEditId + " zostało usunięte.");
       this.removeQuestionFromTable(this.questionToEditId);
       this.closeEditQuestionModal();
     }, error => {

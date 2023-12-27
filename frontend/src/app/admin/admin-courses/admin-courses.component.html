@@ -150,8 +150,8 @@
         <td>{{course.courseType | courseType }}</td>
         <td>{{course.courseStatus | courseStatus}}</td>
         <td>{{course.city  | courseCity}}</td>
-        <td>{{course.dateFrom}}</td>
-        <td>{{course.dateTo}}</td>
+        <td>{{course.dateFrom | date:'yyyy-MM-dd' }}</td>
+        <td>{{course.dateTo | date:'yyyy-MM-dd' }}</td>
         <td>{{course.registeredParticipants}}</td>
         <td>{{course.maxParticipantsNumber}}</td>
       </tr>
@@ -168,6 +168,7 @@
   [style]="{ width: '30rem'}"
   [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
   [contentStyle]="{maxheight: '80%'}"
+  (onHide)="closeAddCourseModal()"
 >
 
   <ng-template pTemplate="header">
@@ -226,7 +227,7 @@
           </mat-error>
         </div>
 
-        <div class="col-md-3 mb-2 d-flex flex-column align-items-start w-100">
+        <div class="col-md-3 mb-3 d-flex flex-column align-items-start w-100">
           <div [formGroup]="dateToAddFormGroup" class="col-md-3 d-flex flex-column align-items-start w-100">
             <label class="form-label">Data zakończenia:</label>
             <p-calendar
@@ -267,6 +268,130 @@
         <secondary-button
           [label]="'Anuluj'"
           (onClick)="closeAddCourseModal()"
+          [bordered]="true">
+        </secondary-button>
+      </div>
+
+    </div>
+  </div>
+
+</p-dialog>
+
+
+<!--edit question modal-->
+<p-dialog
+  [(visible)]="editCourseModalVisible"
+  [modal]="true"
+  [draggable]="false"
+  [style]="{ width: '30rem'}"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  [contentStyle]="{maxheight: '80%'}"
+  (onHide)="closeEditCourseModal()"
+>
+
+  <ng-template pTemplate="header">
+    <text-icon
+      text="Edycja kursu #{{courseToEditId}}"
+      [textVisible]="true"
+      [iconClass]="'pi pi-comments'">
+    </text-icon>
+  </ng-template>
+
+  <div class="container d-flex flex-column pt-3 justify-content-between" >
+    <div class="row d-flex flex-column">
+
+      <div class="col-md-3 mb-1 d-flex flex-column align-items-start w-100">
+        <label class="form-label">Rodzaj kursu:</label>
+        <p-dropdown
+          [options]="courseTypes"
+          [(ngModel)]="courseTypeToEdit"
+          optionLabel="value"
+          placeholder="Sternik motorowodny"
+          [showClear]="true">
+        </p-dropdown>
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'courseType')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'courseType')}}
+        </mat-error>
+      </div>
+
+      <div class="col-md-3 mb-1 d-flex flex-column align-items-start w-100">
+        <label class="form-label">Miasto:</label>
+        <p-dropdown
+          [options]="courseCities"
+          [(ngModel)]="courseCityToEdit"
+          optionLabel="value"
+          placeholder="Olecko"
+          [showClear]="true">
+        </p-dropdown>
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'city')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'city')}}
+        </mat-error>
+      </div>
+
+      <div class="col-md-3 mb-1 d-flex flex-column align-items-start w-100">
+        <div [formGroup]="formGroupEditCourse" class="col-md-3 d-flex flex-column align-items-start w-100">
+          <label class="form-label">Data rozpoczęcia:</label>
+          <p-calendar
+            formControlName="dateFrom"
+            [dateFormat]="'dd.mm.yy'"
+            (onSelect)="setDateFromEditModal($event)"
+            [showIcon]="true"
+            appendTo="body"
+            [placeholder]="'01.01.2024'">
+          </p-calendar>
+        </div>
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'dateFrom')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'dateFrom')}}
+        </mat-error>
+      </div>
+
+      <div class="col-md-3 mb-3 d-flex flex-column align-items-start w-100">
+        <div [formGroup]="formGroupEditCourse" class="col-md-3 d-flex flex-column align-items-start w-100">
+          <label class="form-label">Data zakończenia:</label>
+          <p-calendar
+            formControlName="dateTo"
+            [dateFormat]="'dd.mm.yy'"
+            (onSelect)="setDateToEditModal($event)"
+            [showIcon]="true"
+            appendTo="body"
+            [placeholder]="'01.01.2024'">
+          </p-calendar>
+        </div>
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'dateTo')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'dateTo')}}
+        </mat-error>
+      </div>
+
+      <mat-form-field appearance="outline">
+        <mat-label >Maksymalna liczba uczestników</mat-label>
+        <input matInput placeholder="5"
+               type="text"
+               [formControl]="formGroupEditCourse.controls.maxParticipantsNumber" required class="w-75">
+        <mat-error *ngIf="formGroupEditCourse.controls.maxParticipantsNumber.invalid">
+          {{ formService.getInputErrorMessage(formGroupEditCourse.controls.maxParticipantsNumber) }}
+        </mat-error>
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'maxParticipantsNumber')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'maxParticipantsNumber')}}
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div class="row">
+      <div class="col-xl-8 d-flex justify-content-between">
+        <primary-button
+          [label]="'Edytuj'"
+          (onClick)="editCourse()">
+        </primary-button>
+      </div>
+      <div class="col-xl-4 d-flex justify-content-end">
+        <danger-button
+          [label]="'Usuń'"
+          (onClick)="deleteCourse()">
+        </danger-button>
+        <secondary-button
+          [label]="'Anuluj'"
+          (onClick)="closeEditCourseModal()"
           [bordered]="true">
         </secondary-button>
       </div>

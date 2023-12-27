@@ -44,8 +44,22 @@ export class AdminCoursesComponent {
   courseToAdd: CourseCreateUpdateDTO = <CourseCreateUpdateDTO><unknown>{
     courseType: null, city: null, dateTo: null, dateFrom: null, maxParticipantsNumber: null
   };
+  courseToEdit: CourseCreateUpdateDTO = <CourseCreateUpdateDTO><unknown>{
+    courseType: null, city: null, dateTo: null, dateFrom: null, maxParticipantsNumber: null
+  };
+  courseToEditId: number | null = null;
   formGroupAddCourse = new FormGroup({
     maxParticipantsNumber: new FormControl(this.courseToAdd.maxParticipantsNumber,
+      [Validators.required])
+  })
+  courseTypeToEdit: NameValueNull | undefined = undefined;
+  courseCityToEdit: NameValueNull | undefined = undefined;
+  formGroupEditCourse = new FormGroup({
+    maxParticipantsNumber: new FormControl(this.courseToEdit.maxParticipantsNumber,
+      [Validators.required]),
+    dateFrom: new FormControl(new Date(),
+      [Validators.required]),
+    dateTo: new FormControl(new Date(),
       [Validators.required])
   })
 
@@ -81,6 +95,40 @@ export class AdminCoursesComponent {
     })
   }
 
+  editCourse(): void {
+    this.courseToEdit.courseType = <CourseType>this.courseTypeToEdit?.value;
+    this.courseToEdit.city = <CourseCity>this.courseCityToEdit?.value;
+    this.courseToEdit.dateFrom = <string><unknown>this.formGroupEditCourse.value.dateFrom;
+    this.courseToEdit.dateTo = <string><unknown>this.formGroupEditCourse.value.dateTo;
+    this.courseToEdit.maxParticipantsNumber = <number>this.formGroupEditCourse.value.maxParticipantsNumber;
+    this.restClient.editCourse(this.courseToEdit, this.courseToEditId!).subscribe(response => {
+      this.responseHandlerService.showSuccessPToast("Edycja kursu", "Kurs numer: " + response.id + " został zedytowany.");
+      this.changeEditedCourseValuesInTable();
+    }, error => {
+      this.responseHandlerService.handleErrorsPtoasts(error)
+    })
+  }
+
+  deleteCourse(): void {
+    this.restClient.deleteCourseById(this.courseToEditId).subscribe(() => {
+      this.responseHandlerService.showSuccessPToast("Usunięcie kursu", "Kurs nr: " + this.courseToEditId + " został usunięty.");
+      this.removeCourseFromTable(this.courseToEditId);
+      this.closeEditCourseModal();
+    }, error => {
+      this.responseHandlerService.handleErrorsPtoasts(error);
+    })
+  }
+
+  insertDataIntoEditCourseModal(course: CourseFilterDTO) {
+    this.courseToEditId = course.id;
+    this.courseTypeToEdit = this.courseTypes.find(type => type.name == course.courseType.toString());
+    this.courseCityToEdit = this.courseCities.find(city => city.name == course.city.toString());
+    this.formGroupEditCourse.controls.maxParticipantsNumber.setValue(course.maxParticipantsNumber);
+    this.setDateFromEditModal(course.dateFrom)
+    this.setDateToEditModal(course.dateTo);
+    this.showEditCourseModal();
+  }
+
   private appendCourseToTable(response: CourseEntityDTO) {
     this.coursesList = this.coursesList.concat([<CourseFilterDTO>{
       id: response.id,
@@ -94,11 +142,38 @@ export class AdminCoursesComponent {
     }])
   }
 
-  insertDataIntoEditCourseModal(question: CourseFilterDTO) {
-
+  removeCourseFromTable(deletedCourseId: number | null): void {
+    if (deletedCourseId == null) {
+      return;
+    }
+    this.coursesList = this.coursesList.filter(courses => courses.id !== deletedCourseId);
   }
 
-  formatDateToYYYYMMDD(date: Date): string {
+
+  private changeEditedCourseValuesInTable() {
+    let editedCourse = this.coursesList.find(course => course.id == this.courseToEditId)!;
+    editedCourse.courseType = mapToCourseType(this.courseToEdit.courseType);
+    editedCourse.city = mapToCourseCity(this.courseToEdit.city);
+    editedCourse.dateFrom = new Date(this.courseToEdit.dateFrom!);
+    editedCourse.dateTo = new Date(this.courseToEdit.dateTo!);
+    editedCourse.maxParticipantsNumber = this.courseToEdit.maxParticipantsNumber;
+  }
+
+  formatDateToYYYYMMDD(dateInput: Date): string {
+    let date: Date;
+
+    // check if dateInput is already Date type object
+    if (dateInput instanceof Date) {
+      date = dateInput;
+    } else {
+      // conversion attempt to Date type
+      date = new Date(dateInput);
+    }
+    // check if conversion was correct
+    if (isNaN(date.getTime())) {
+      console.error('Invalid date in formatDateToYYYYMMDD');
+    }
+
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, '0'); // adding 1, because january == 0
     const day = date.getDate().toString().padStart(2, '0');
@@ -144,6 +219,26 @@ export class AdminCoursesComponent {
     return val ? this.formatDateToYYYYMMDD(new Date(val)) : null;
   }
 
+  setDateFromEditModal(date: Date): void {
+    let correctDate = new Date(date);
+    this.formGroupEditCourse.get(this.DATE_FROM)?.setValue(correctDate);
+  }
+
+  getDateFromEditModal(): string | null {
+    const val = this.formGroupEditCourse.get(this.DATE_FROM)?.value;
+    return val ? this.formatDateToYYYYMMDD(new Date(val)) : null;
+  }
+
+  setDateToEditModal(date: Date): void {
+    let correctDate = new Date(date);
+    this.formGroupEditCourse.get(this.DATE_TO)?.setValue(correctDate);
+  }
+
+  getDateToEditModal(): string | null {
+    const val = this.formGroupEditCourse.get(this.DATE_FROM)?.value;
+    return val ? this.formatDateToYYYYMMDD(new Date(val)) : null;
+  }
+
   // show/close modal methods
 
   showAddCourseModal() {
@@ -152,6 +247,7 @@ export class AdminCoursesComponent {
 
   closeAddCourseModal() {
     this.addCourseModalVisible = false
+    this.groupedErrors = [];
   }
 
   showEditCourseModal() {
