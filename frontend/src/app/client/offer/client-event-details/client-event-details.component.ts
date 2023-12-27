@@ -138,10 +138,6 @@ export class ClientEventDetailsComponent {
     this.finalCost = this.participantsNumber * this.chosenEvent.cost;
   }
 
-  // TODO 1 -- my-profile
-  // TODO 2 -- contact
-  // TODO 3 -- my courses + my events + navigate after signing on
-  // TODO 4 -- e-learning
   signForEvent() {
     if (this.chosenEvent.id != null && this.formGroup.valid) {
       this.participantEventCreateDTO.eventId = this.chosenEvent.id;
