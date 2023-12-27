@@ -37,6 +37,8 @@ import {
   ClientEventDetailsScooterComponent
 } from "./offer/client-event-details/client-event-details-scooter/client-event-details-scooter.component";
 import {ClientMyProfileComponent} from "./client-my-profile/client-my-profile.component";
+import {ClientFaqComponent} from "./client-about/client-faq/client-faq.component";
+import {ClientContactComponent} from "./client-about/client-contact/client-contact.component";
 
 const routes: Routes = [
   {
@@ -113,6 +115,16 @@ const routes: Routes = [
     path: 'profil',
     canActivate: undefined,
     component: ClientMyProfileComponent
+  },
+  {
+    path: 'kontakt',
+    canActivate: undefined,
+    component: ClientContactComponent
+  },
+  {
+    path: 'najczesciej-zadawane-pytania',
+    canActivate: undefined,
+    component: ClientFaqComponent
   },
 
 ];

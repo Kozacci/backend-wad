@@ -65,8 +65,8 @@
           <li class="nav-item dropdown">
             <button mat-button [matMenuTriggerFor]="menuOfirmie">O firmie</button>
             <mat-menu #menuOfirmie="matMenu">
-              <button mat-menu-item>Kontakt</button>
-              <button mat-menu-item>Najczęściej zadawane pytania</button>
+              <button mat-menu-item (click)="pathService.navigate('kontakt')">Kontakt</button>
+              <button mat-menu-item (click)="pathService.navigate('najczesciej-zadawane-pytania')">Najczęściej zadawane pytania</button>
             </mat-menu>
           </li>
         </ul>
