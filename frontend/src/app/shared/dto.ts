@@ -224,6 +224,13 @@ export interface ParticipantRegisterDTO {
   phoneNumber: string
 }
 
+export interface ParticipantUpdateDTO {
+  firstName: string | null | undefined,
+  lastName: string | null | undefined,
+  email: string | null | undefined,
+  phoneNumber: string | null | undefined
+}
+
 export interface QuestionFilterDTO {
   id: number,
   content: string,
