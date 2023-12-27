@@ -54,6 +54,7 @@ import {
 import { ClientMyProfileComponent } from './client-my-profile/client-my-profile.component';
 import { ClientContactComponent } from './client-about/client-contact/client-contact.component';
 import { ClientFaqComponent } from './client-about/client-faq/client-faq.component';
+import {MatAccordion, MatExpansionModule} from "@angular/material/expansion";
 
 @NgModule({
   declarations: [
@@ -97,6 +98,7 @@ import { ClientFaqComponent } from './client-about/client-faq/client-faq.compone
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatExpansionModule,
   ]
 })
 export class ClientModule { }

@@ -1,0 +1,22 @@
+.faq-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.faq-accordion {
+  width: 100%;
+  max-width: 800px;
+  margin: 8rem auto 0;
+  padding: 1rem;
+}
+
+.mat-expansion-panel-header {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--dark-blue);
+}
+
+.mat-expansion-panel-header.mat-expanded {
+  color: var(--blue);
+}
