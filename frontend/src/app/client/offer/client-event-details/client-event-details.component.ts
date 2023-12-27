@@ -138,7 +138,10 @@ export class ClientEventDetailsComponent {
     this.finalCost = this.participantsNumber * this.chosenEvent.cost;
   }
 
-  // TODO -- e-learning and my-profile
+  // TODO 1 -- my-profile
+  // TODO 2 -- contact
+  // TODO 3 -- my courses + my events + navigate after signing on
+  // TODO 4 -- e-learning
   signForEvent() {
     if (this.chosenEvent.id != null && this.formGroup.valid) {
       this.participantEventCreateDTO.eventId = this.chosenEvent.id;
@@ -150,14 +153,14 @@ export class ClientEventDetailsComponent {
       this.restClient.signInOnEvent(this.participantEventCreateDTO)
         .subscribe( response => {
             this.messageService.add({
-              life: 4000,
+              life: 6000,
               severity: 'success',
               summary: 'Zapis na event',
-              detail: "Udało Ci się pomyślnie zapisać na event"
+              detail: "Udało Ci się zarezerwować event - skontaktujemy się z Tobą niezwłocznie, aby ustalić szczegóły i płatność"
             })
             this.checkAvailableEvents();
             this.modalFormVisibility = false;
-            // Todo navigate to my events view
+            // Todo navigate to my events view if user is logged
           },
           error => {
             this.messageService.add({

@@ -201,6 +201,7 @@ export interface ParticipantEventEntityCreateDTO {
 
 export interface ParticipantEntityDTO {
   id: number,
+  createdAt: Date,
   firstName: string,
   lastName: string,
   email: string,
