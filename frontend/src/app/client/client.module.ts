@@ -51,6 +51,7 @@ import {
 import {
   ClientEventDetailsScooterComponent
 } from './offer/client-event-details/client-event-details-scooter/client-event-details-scooter.component';
+import { ClientMyProfileComponent } from './client-my-profile/client-my-profile.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import {
     ClientEventDetailsBachelorComponent,
     ClientEventDetailsBusinessComponent,
     ClientEventDetailsSightseeingComponent,
-    ClientEventDetailsScooterComponent
+    ClientEventDetailsScooterComponent,
+    ClientMyProfileComponent
   ],
   exports: [
     ClientLayoutComponent,
