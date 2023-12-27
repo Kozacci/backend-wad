@@ -75,7 +75,7 @@
 
     <div *ngIf="availableEvents.length == 0" class="item-enroll-info">
       <div class="item-price">
-        Cena: {{ event.price }} zł
+        Cena: {{ event.price }}
       </div>
       <h3>Brak dostępnych terminów!</h3>
       <button pButton type="button" label="Wybierz termin" class="sign-on-event-p-button p-button-rounded p-button-primary" [disabled]="availableEvents.length == 0" (click)="modalDateVisibility = true"><i class="pi pi-plus"></i></button>
@@ -139,7 +139,7 @@
 </p-dialog>
 
 
-<p-dialog header="Wypełnij formularz" [(visible)]="modalFormVisibility" [style]="{'min-width': '60vw', 'max-width': '60vw'}" [modal]="true" [dismissableMask]="true">
+<p-dialog header="Wypełnij formularz" class="sign-on-event-modal" [(visible)]="modalFormVisibility" [modal]="true" [dismissableMask]="true">
 
   <div class="sign-on-event-modal-content">
     <div class="sign-on-event-modal-left">

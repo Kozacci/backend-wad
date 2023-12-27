@@ -51,6 +51,11 @@ import {
 import {
   ClientEventDetailsScooterComponent
 } from './offer/client-event-details/client-event-details-scooter/client-event-details-scooter.component';
+import { ClientMyProfileComponent } from './client-my-profile/client-my-profile.component';
+import { ClientContactComponent } from './client-about/client-contact/client-contact.component';
+import { ClientFaqComponent } from './client-about/client-faq/client-faq.component';
+import {MatAccordion, MatExpansionModule} from "@angular/material/expansion";
+import { ClientMyEventsComponent } from './client-my-events/client-my-events.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +77,11 @@ import {
     ClientEventDetailsBachelorComponent,
     ClientEventDetailsBusinessComponent,
     ClientEventDetailsSightseeingComponent,
-    ClientEventDetailsScooterComponent
+    ClientEventDetailsScooterComponent,
+    ClientMyProfileComponent,
+    ClientContactComponent,
+    ClientFaqComponent,
+    ClientMyEventsComponent
   ],
   exports: [
     ClientLayoutComponent,
@@ -91,6 +100,7 @@ import {
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatExpansionModule,
   ]
 })
 export class ClientModule { }

@@ -24,8 +24,9 @@ class ParticipantCreator {
                         passwordEncoder.encode(participantRegisterDTO.password()),
                         participantRegisterDTO.phoneNumber()
                 );
+
         participantRepository.saveAndFlush(newParticipant);
-        return newParticipant.toDto();
+        return newParticipant.toDTO();
     }
 
 }

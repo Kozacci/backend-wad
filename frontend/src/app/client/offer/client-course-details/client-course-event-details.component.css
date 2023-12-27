@@ -235,8 +235,19 @@
   }
 }
 
+:host ::ng-deep .p-dialog {
+  max-width: 60vw;
+}
+
+@media (max-width: 800px) {
+  :host ::ng-deep .p-dialog {
+    max-width: 100vw;
+  }
+}
+
 .sign-on-event-modal-content {
   display: flex;
+  flex-direction: row;
 }
 
 .sign-on-event-form {
@@ -269,52 +280,72 @@
   align-items: center;
 }
 
-.sign-on-event-price-info {
-}
-
 .sign-on-event-modal-image {
-  width: 38%;
-  height: 32%;
+  width: 35%;
+  height: auto;
 }
 
 .sign-on-event-payment-info {
   width: 100%;
   background-color: var(--blue);
-  color: white; /* Biały tekst */
-  padding: 20px; /* Wewnętrzne odstępy */
-  border-radius: 8px; /* Zaokrąglone rogi */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Lekki cień */
-  margin-top: 20px; /* Odstęp od górnego elementu */
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
 }
 
 .sign-on-event-payment-title {
-  margin-bottom: 15px; /* Odstęp między tytułem a kwotą */
+  margin-bottom: 15px;
 }
 
 .sign-on-event-payment-title h2 {
   margin: 0;
-  font-size: 1.5em; /* Rozmiar czcionki dla tytułu */
+  font-size: 1.5em;
 }
 
 .sign-on-event-payment-amount {
   display: flex;
-  justify-content: space-between; /* Wyjustowanie kwoty i tekstu do krawędzi */
-  align-items: center; /* Wyśrodkowanie elementów pionowo */
+  justify-content: space-between;
+  align-items: center;
 }
 
 .sign-on-event-total-cost {
   font-size: 1em;
-  margin: 0; /* Usunięcie domyślnego marginesu */
+  margin: 0;
 }
 
 .sign-on-event-price {
-  font-size: 2em; /* Duży rozmiar czcionki dla kwoty */
-  font-weight: bold; /* Pogrubienie tekstu */
+  font-size: 2em;
+  font-weight: bold;
 }
 
 .sign-on-event-payment-actions {
   display: flex;
-  justify-content: center; /* Wyśrodkowanie przycisków */
-  gap: 10px; /* Odstęp między przyciskami */
-  margin-top: 20px; /* Odstęp od sekcji kwoty */
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
 }
+
+@media (max-width: 768px) {
+  .sign-on-event-modal-content {
+    flex-direction: column;
+  }
+  .sign-on-event-modal-left, .sign-on-event-modal-right {
+    width: 100%;
+  }
+  .sign-on-event-modal-image {
+    width: 100%;
+    height: auto;
+  }
+  .sign-on-event-payment-title h2 {
+    font-size: 1rem;
+  }
+  .sign-on-event-total-cost {
+    font-size: 1rem;
+  }
+  .sign-on-event-price {
+    font-size: 1.2rem;
+  }
+}
+

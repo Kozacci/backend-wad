@@ -1,0 +1,21 @@
+<body>
+  <div *ngIf="events == null"> BRAK EVENTOW </div>
+  <div class="course-list">
+    <div *ngFor="let event of events" class="course-card">
+      <div class="course-image-container">
+        <img [src]="getImage(event)" alt="Event Image" class="course-image"/>
+        <span class="course-mode">ONLINE / STACJONARNIE</span>
+      </div>
+      <div class="course-content">
+        <div class="course-title">
+          <h3 class="course-title">{{ event.type }}</h3>
+          {{ event.city }}
+        </div>
+      </div>
+      <div class="course-price-cta">
+        <p class="course-price">{{ event.cost }} zł</p>
+  <!--      <button (click)="goToCourseDetails(event.url)" class="btn btn-primary">ZOBACZ WIĘCEJ</button>-->
+      </div>
+    </div>
+  </div>
+</body>

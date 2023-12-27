@@ -199,8 +199,22 @@ export interface ParticipantEventEntityCreateDTO {
   participantsNumber: number
 }
 
+export interface ParticipantEventFilterDTO {
+  eventId: number,
+  type: EventType,
+  city: EventCity,
+  cost: number,
+  assignedParticipants: number,
+  maxParticipantsNumber: number,
+  date: Date,
+  duration: Date,
+  ordererLastName: string,
+  ordererEmail: string
+}
+
 export interface ParticipantEntityDTO {
   id: number,
+  createdAt: Date,
   firstName: string,
   lastName: string,
   email: string,
@@ -221,6 +235,13 @@ export interface ParticipantRegisterDTO {
   email: string,
   password: string,
   phoneNumber: string
+}
+
+export interface ParticipantUpdateDTO {
+  firstName: string | null | undefined,
+  lastName: string | null | undefined,
+  email: string | null | undefined,
+  phoneNumber: string | null | undefined
 }
 
 export interface QuestionFilterDTO {

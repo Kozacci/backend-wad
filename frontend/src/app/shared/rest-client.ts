@@ -5,7 +5,7 @@ import {
   CourseFilterDTO, EventFilterDTO, ParticipantCourseEntityDTO,
   ParticipantEntityDTO, ParticipantEventEntityCreateDTO,
   ParticipantLoginDTO,
-  ParticipantRegisterDTO,
+  ParticipantRegisterDTO, ParticipantUpdateDTO,
   QuestionCreateUpdateDTO,
   QuestionEntityDTO,
   QuestionFilterDTO
@@ -34,6 +34,10 @@ export class RestClient {
 
   logout(): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/auth/logout`, {}, { withCredentials: true });
+  }
+
+  updateParticipant(participantId: number, participantUpdateDTO: ParticipantUpdateDTO): Observable<ParticipantEntityDTO> {
+    return this.http.put<ParticipantEntityDTO>(`${this.apiUrl}/participants/${participantId}`, participantUpdateDTO, { withCredentials: true});
   }
 
   getParticipantByEmail(email: string): Observable<ParticipantEntityDTO> {
@@ -102,8 +106,8 @@ export class RestClient {
 
   getParticipantEventsByFilters(type: string | undefined,
                      city: string  | undefined,
-                     ordererLastName: string  | undefined,
-                     ordererEmail: string  | undefined,
+                     clientLastName: string  | undefined,
+                     clientEmail: string  | undefined,
                      sortBy: string | undefined): Observable<EventFilterDTO[]> {
     let params = new HttpParams();
     if (type !== null && type !== undefined) {
@@ -112,11 +116,11 @@ export class RestClient {
     if (city !== null && city !== undefined) {
       params = params.append('city', city);
     }
-    if (ordererLastName !== null && ordererLastName !== undefined) {
-      params = params.append('ordererLastName', ordererLastName);
+    if (clientLastName !== null && clientLastName !== undefined) {
+      params = params.append('clientLastName', clientLastName);
     }
-    if (ordererEmail !== null && ordererEmail !== undefined) {
-      params = params.append('ordererEmail', ordererEmail);
+    if (clientEmail !== null && clientEmail !== undefined) {
+      params = params.append('clientEmail', clientEmail);
     }
     if (sortBy !== null && sortBy !== undefined) {
       params = params.append('sortBy', sortBy);

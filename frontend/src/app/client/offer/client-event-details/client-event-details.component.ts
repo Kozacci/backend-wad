@@ -110,7 +110,6 @@ export class ClientEventDetailsComponent {
     )
       .subscribe(
         response => {
-          console.log(response);
           this.availableEvents = response;
           this.event.availableEvents = response;
           if(response == null) {
@@ -139,15 +138,6 @@ export class ClientEventDetailsComponent {
     this.finalCost = this.participantsNumber * this.chosenEvent.cost;
   }
 
-  // TODO -- check getCourse and getEvents by filters method to get them properly
-  //         we need to check general courses/events and its assignedUsers/maxUsers
-
-  // TODO -- bugfix for assigned users for events (courses are ok)
-  // TODO -- e-learning and my-profile
-  // TODO -- some methods could be used without logging in
-  // TODO -- navigation from homepage to offer(courses/events details)
-  // TODO -- respons for courses/events signing modals
-  // TODO -- audit/fix for event/courses cost on all sites
   signForEvent() {
     if (this.chosenEvent.id != null && this.formGroup.valid) {
       this.participantEventCreateDTO.eventId = this.chosenEvent.id;
@@ -159,14 +149,14 @@ export class ClientEventDetailsComponent {
       this.restClient.signInOnEvent(this.participantEventCreateDTO)
         .subscribe( response => {
             this.messageService.add({
-              life: 4000,
+              life: 6000,
               severity: 'success',
               summary: 'Zapis na event',
-              detail: "Udało Ci się pomyślnie zapisać na event"
+              detail: "Udało Ci się zarezerwować event - skontaktujemy się z Tobą niezwłocznie, aby ustalić szczegóły i płatność"
             })
             this.checkAvailableEvents();
             this.modalFormVisibility = false;
-            // Todo navigate to my events view
+            // Todo navigate to my events view if user is logged
           },
           error => {
             this.messageService.add({

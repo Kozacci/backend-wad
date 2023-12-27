@@ -56,15 +56,17 @@ public class ParticipantEntity extends WaterAdventureChangeMetricEntity implemen
         this.role = Role.CLIENT;
     }
 
-    public ParticipantEntityDTO toDto() {
+    public ParticipantEntityDTO toDTO() {
         return ParticipantEntityDTO
                 .builder()
                 .id(this.id)
+                .createdAt(this.getCreatedAt())
                 .firstName(this.firstName)
                 .lastName(this.lastName)
                 .email(this.email)
                 .password(this.password)
                 .phoneNumber(this.phoneNumber)
+                .courses(this.getParticipantCourses().stream().map(ParticipantCourseEntity::toDTO).toList())
                 .role(this.role)
                 .build();
     }

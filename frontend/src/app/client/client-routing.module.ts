@@ -36,6 +36,10 @@ import {
 import {
   ClientEventDetailsScooterComponent
 } from "./offer/client-event-details/client-event-details-scooter/client-event-details-scooter.component";
+import {ClientMyProfileComponent} from "./client-my-profile/client-my-profile.component";
+import {ClientFaqComponent} from "./client-about/client-faq/client-faq.component";
+import {ClientContactComponent} from "./client-about/client-contact/client-contact.component";
+import {ClientMyEventsComponent} from "./client-my-events/client-my-events.component";
 
 const routes: Routes = [
   {
@@ -107,6 +111,26 @@ const routes: Routes = [
     path: 'oferta/eventy/wynajem-skutera',
     canActivate: undefined,
     component: ClientEventDetailsScooterComponent
+  },
+  {
+    path: 'profil',
+    canActivate: undefined,
+    component: ClientMyProfileComponent
+  },
+  {
+    path: 'kontakt',
+    canActivate: undefined,
+    component: ClientContactComponent
+  },
+  {
+    path: 'najczesciej-zadawane-pytania',
+    canActivate: undefined,
+    component: ClientFaqComponent
+  },
+  {
+    path: 'profil/moje-eventy',
+    canActivate: undefined,
+    component: ClientMyEventsComponent
   },
 
 ];
