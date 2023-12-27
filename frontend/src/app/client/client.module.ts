@@ -55,6 +55,7 @@ import { ClientMyProfileComponent } from './client-my-profile/client-my-profile.
 import { ClientContactComponent } from './client-about/client-contact/client-contact.component';
 import { ClientFaqComponent } from './client-about/client-faq/client-faq.component';
 import {MatAccordion, MatExpansionModule} from "@angular/material/expansion";
+import { ClientMyEventsComponent } from './client-my-events/client-my-events.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import {MatAccordion, MatExpansionModule} from "@angular/material/expansion";
     ClientEventDetailsScooterComponent,
     ClientMyProfileComponent,
     ClientContactComponent,
-    ClientFaqComponent
+    ClientFaqComponent,
+    ClientMyEventsComponent
   ],
   exports: [
     ClientLayoutComponent,
