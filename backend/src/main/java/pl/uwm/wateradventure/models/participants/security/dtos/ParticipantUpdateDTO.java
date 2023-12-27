@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import pl.uwm.wateradventure.models.validators.EmailAlreadyExists;
 
 @Getter
 @Setter
@@ -24,6 +25,7 @@ public class ParticipantUpdateDTO {
     @NotBlank(message = "'Email' field must be filled.")
     @Email(message = "Must be a valid email address.")
     @Size(max = 40, message = "Email must contain less than 40 signs.")
+    @EmailAlreadyExists
     String email;
 
     @NotBlank(message = "'Phone number' field must be filled.")

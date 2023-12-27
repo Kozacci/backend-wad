@@ -11,7 +11,6 @@ import pl.uwm.wateradventure.models.participants.security.dtos.ParticipantUpdate
 class ParticipantUpdater {
 
     private final ParticipantRepository participantRepository;
-    private final ParticipantValidator participantValidator;
 
     public ParticipantEntityDTO updateParticipant(ParticipantEntity participantToUpdate, ParticipantUpdateDTO participantUpdateDTO) {
         if (participantUpdateDTO.getFirstName() != null) {
@@ -21,7 +20,6 @@ class ParticipantUpdater {
             participantToUpdate.setLastName(participantUpdateDTO.getLastName());
         }
         if (participantUpdateDTO.getEmail() != null) {
-            participantValidator.checkIfEmailAlreadyExists(participantUpdateDTO.getEmail());
             participantToUpdate.setEmail(participantUpdateDTO.getEmail());
         }
         if(participantUpdateDTO.getPhoneNumber() != null) {
