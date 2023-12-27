@@ -66,6 +66,7 @@ public class ParticipantEntity extends WaterAdventureChangeMetricEntity implemen
                 .email(this.email)
                 .password(this.password)
                 .phoneNumber(this.phoneNumber)
+                .courses(this.getParticipantCourses().stream().map(ParticipantCourseEntity::toDTO).toList())
                 .role(this.role)
                 .build();
     }
