@@ -75,11 +75,3 @@ td ::ng-deep .panel {
 
 /*calendar styles*/
 
-::ng-deep .ui-calendar .ui-datepicker {
-  height: 200px;
-  width: 100px;
-}
-
-::ng-deep .ui-datepicker td span, .ui-datepicker td a {
-  padding: 0;
-}

@@ -165,7 +165,7 @@
   [(visible)]="addCourseModalVisible"
   [modal]="true"
   [draggable]="false"
-  [style]="{ width: '50rem'}"
+  [style]="{ width: '30rem'}"
   [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
   [contentStyle]="{maxheight: '80%'}"
 >
@@ -181,10 +181,36 @@
   <div class="container d-flex flex-column pt-3 justify-content-between" >
     <div class="row d-flex flex-column">
 
-      <div class="row-cols-sm-6 d-flex flex-column w-50 flex-md-row">
+      <div class="col-md-3 mb-1 d-flex flex-column align-items-start w-100">
+        <label class="form-label">Rodzaj kursu:</label>
+        <p-dropdown
+          [options]="courseTypes"
+          [(ngModel)]="courseTypeToAdd"
+          optionLabel="value"
+          placeholder="Sternik motorowodny"
+          [showClear]="true">
+        </p-dropdown>
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'courseType')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'courseType')}}
+        </mat-error>
+      </div>
 
-        <div class="col-sm-10 ps-1 mb-3 d-flex flex-column align-items-start">
-          <div [formGroup]="dateToAddFormGroup" class="col-md-3 mb-3 d-flex flex-column align-items-center w-100">
+      <div class="col-md-3 mb-1 d-flex flex-column align-items-start w-100">
+        <label class="form-label">Miasto:</label>
+        <p-dropdown
+          [options]="courseCities"
+          [(ngModel)]="courseCityToAdd"
+          optionLabel="value"
+          placeholder="Olecko"
+          [showClear]="true">
+        </p-dropdown>
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'city')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'city')}}
+        </mat-error>
+      </div>
+
+        <div class="col-md-3 mb-1 d-flex flex-column align-items-start w-100">
+          <div [formGroup]="dateToAddFormGroup" class="col-md-3 d-flex flex-column align-items-start w-100">
             <label class="form-label">Data rozpoczęcia:</label>
             <p-calendar
               formControlName="dateFrom"
@@ -200,8 +226,8 @@
           </mat-error>
         </div>
 
-        <div class="col-sm-10 ps-1 mb-3 d-flex flex-column align-items-start">
-          <div [formGroup]="dateToAddFormGroup" class="col-md-3 mb-3 d-flex flex-column align-items-center w-100">
+        <div class="col-md-3 mb-2 d-flex flex-column align-items-start w-100">
+          <div [formGroup]="dateToAddFormGroup" class="col-md-3 d-flex flex-column align-items-start w-100">
             <label class="form-label">Data zakończenia:</label>
             <p-calendar
               formControlName="dateTo"
@@ -217,45 +243,11 @@
           </mat-error>
         </div>
 
-      </div>
-
-      <div class="row-cols-sm-6 d-flex flex-column w-50 flex-md-row align-items-start">
-
-        <div class="col-md-3 mb-3 d-flex flex-column align-items-center w-100">
-          <label class="form-label">Rodzaj kursu:</label>
-          <p-dropdown
-            [options]="courseTypes"
-            [(ngModel)]="courseTypeToAdd"
-            optionLabel="value"
-            placeholder="Sternik motorowodny"
-            [showClear]="true">
-          </p-dropdown>
-          <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'courseType')">
-            {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'courseType')}}
-          </mat-error>
-        </div>
-
-        <div class="col-md-3 mb-3 d-flex flex-column align-items-center w-100">
-          <label class="form-label">Miasto:</label>
-          <p-dropdown
-            [options]="courseCities"
-            [(ngModel)]="courseCityToAdd"
-            optionLabel="value"
-            placeholder="Olecko"
-            [showClear]="true">
-          </p-dropdown>
-          <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'city')">
-            {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'city')}}
-          </mat-error>
-        </div>
-
-      </div>
-
       <mat-form-field appearance="outline">
         <mat-label >Maksymalna liczba uczestników</mat-label>
         <input matInput placeholder="5"
                type="text"
-               [formControl]="formGroupAddCourse.controls.maxParticipantsNumber" required>
+               [formControl]="formGroupAddCourse.controls.maxParticipantsNumber" required class="w-75">
         <mat-error *ngIf="formGroupAddCourse.controls.maxParticipantsNumber.invalid">
           {{ formService.getInputErrorMessage(formGroupAddCourse.controls.maxParticipantsNumber) }}
         </mat-error>
