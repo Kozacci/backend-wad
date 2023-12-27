@@ -199,6 +199,19 @@ export interface ParticipantEventEntityCreateDTO {
   participantsNumber: number
 }
 
+export interface ParticipantEventFilterDTO {
+  eventId: number,
+  type: EventType,
+  city: EventCity,
+  cost: number,
+  assignedParticipants: number,
+  maxParticipantsNumber: number,
+  date: Date,
+  duration: Date,
+  ordererLastName: string,
+  ordererEmail: string
+}
+
 export interface ParticipantEntityDTO {
   id: number,
   createdAt: Date,

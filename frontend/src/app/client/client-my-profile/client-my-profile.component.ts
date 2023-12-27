@@ -53,8 +53,6 @@ export class ClientMyProfileComponent {
     public readonly formService: FormService,
     public restClient: RestClient,
     private readonly messageService: MessageService,
-    private readonly authService: AuthService,
-    private readonly pathService: PathService
   ) {}
 
   calculateDaysFromNow() {
@@ -62,7 +60,7 @@ export class ClientMyProfileComponent {
     if(date != null) {
       const dateInMilisecondsFromString: number = Date.parse(date);
       const currentDateInMiliseconds: number = Date.now();
-      const difference =  Math.floor((currentDateInMiliseconds - dateInMilisecondsFromString) / (1000 * 60 * 60 * 24));
+      const difference =  Math.floor((currentDateInMiliseconds - dateInMilisecondsFromString) / (1000 * 60 * 60 * 24)) + 1;
       if (difference < 10) {
         return difference.toString() + ' dzień';
       }
