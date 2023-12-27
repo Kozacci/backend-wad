@@ -12,6 +12,7 @@ import pl.uwm.wateradventure.models.participants.security.dtos.ParticipantRegist
 class ParticipantCreator {
 
     private final ParticipantRepository participantRepository;
+    private final ParticipantValidator participantValidator;
     private final PasswordEncoder passwordEncoder;
 
     public ParticipantEntityDTO register(ParticipantRegisterDTO participantRegisterDTO) {
@@ -24,8 +25,10 @@ class ParticipantCreator {
                         passwordEncoder.encode(participantRegisterDTO.password()),
                         participantRegisterDTO.phoneNumber()
                 );
+
+        participantValidator.checkIfEmailAlreadyExists(newParticipant.getEmail());
         participantRepository.saveAndFlush(newParticipant);
-        return newParticipant.toDto();
+        return newParticipant.toDTO();
     }
 
 }
