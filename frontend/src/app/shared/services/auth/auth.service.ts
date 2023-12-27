@@ -48,7 +48,6 @@ export class AuthService {
           })
   }
 
-
   logout() {
     this.restClient.logout().subscribe();
     this.pathService.navigate('/');
