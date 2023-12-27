@@ -5,7 +5,7 @@ import {
   CourseFilterDTO, EventFilterDTO, ParticipantCourseEntityDTO,
   ParticipantEntityDTO, ParticipantEventEntityCreateDTO,
   ParticipantLoginDTO,
-  ParticipantRegisterDTO,
+  ParticipantRegisterDTO, ParticipantUpdateDTO,
   QuestionCreateUpdateDTO,
   QuestionEntityDTO,
   QuestionFilterDTO
@@ -34,6 +34,10 @@ export class RestClient {
 
   logout(): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/auth/logout`, {}, { withCredentials: true });
+  }
+
+  updateParticipant(participantId: number, participantUpdateDTO: ParticipantUpdateDTO): Observable<ParticipantEntityDTO> {
+    return this.http.put<ParticipantEntityDTO>(`${this.apiUrl}/participants/${participantId}`, participantUpdateDTO, { withCredentials: true});
   }
 
   getParticipantByEmail(email: string): Observable<ParticipantEntityDTO> {
