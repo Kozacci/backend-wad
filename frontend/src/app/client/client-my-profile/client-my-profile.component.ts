@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {FormService} from "../../shared/services/form/form.service";
 import {RestClient} from "../../shared/rest-client";
 import {MessageService} from "primeng/api";
 import {PathService} from "../../shared/services/path.service";
+import {ParticipantUpdateDTO} from "../../shared/dto";
+import {AuthService} from "../../shared/services/auth/auth.service";
 
 @Component({
   selector: 'app-client-my-profile',
@@ -12,45 +14,35 @@ import {PathService} from "../../shared/services/path.service";
 })
 export class ClientMyProfileComponent {
 
+  protected readonly sessionStorage = sessionStorage;
+
   formGroup = new FormGroup({
     firstName:
       new FormControl(
-        '',
+        null,
         [
-          Validators.required,
           Validators.minLength(2)
         ]
       ),
     lastName:
       new FormControl(
-        '',
+        null,
         [
-          Validators.required,
           Validators.minLength(2)
         ]
       ),
     email:
       new FormControl(
-        '',
+        null,
         [
-          Validators.required,
           Validators.minLength(5),
           Validators.email
         ]
       ),
-    password:
-      new FormControl(
-        '',
-        [
-          Validators.required,
-          Validators.minLength(8)
-        ]
-      ),
     phoneNumber:
       new FormControl(
-        '',
+        null,
         [
-          Validators.required,
           Validators.maxLength(9),
           Validators.pattern(/^\d{9}$/)
         ]
@@ -61,29 +53,67 @@ export class ClientMyProfileComponent {
     public readonly formService: FormService,
     public restClient: RestClient,
     private readonly messageService: MessageService,
+    private readonly authService: AuthService,
     private readonly pathService: PathService
   ) {}
 
-  submitForm() {
-    if(this.formGroup.valid) {
-      const participantToRegister = {
-        firstName: this.formGroup.value.firstName ?? '',
-        lastName: this.formGroup.value.lastName?? '',
-        email: this.formGroup.value.email?? '',
-        password: this.formGroup.value.password?? '',
-        phoneNumber: this.formGroup.value.phoneNumber ?? ''
+  calculateDaysFromNow() {
+    const date = sessionStorage.getItem('cacheCreatedAt')
+    if(date != null) {
+      const dateInMilisecondsFromString: number = Date.parse(date);
+      const currentDateInMiliseconds: number = Date.now();
+      const difference =  Math.floor((currentDateInMiliseconds - dateInMilisecondsFromString) / (1000 * 60 * 60 * 24));
+      if (difference < 10) {
+        return difference.toString() + ' dzień';
       }
-      this.restClient.register(participantToRegister)
-        .subscribe(
-          (response) => {
-            this.pathService.navigate('autoryzacja/logowanie')
-            this.messageService.add({life:5000, severity:'success', summary:'Rejestracja', detail:"Teraz możesz się zalogować"})
-          },
-          (error) => {
-            this.messageService.add({life:4000, severity:'error', summary:'Rejestracja', detail: 'Pole ' + error.error[0].fieldName + ' ' + error.error[0].message})
-            console.error('Błąd rejestracji', error);
-          })
+      else {
+        return difference.toString() + ' dni';
+      }
+    }
+    return '';
+  }
+
+  calculateCoursesNumber() {
+    if(sessionStorage.getItem('cacheParticipantCourses') != null) {
+      return sessionStorage.getItem('cacheParticipantCourses')
+    }
+    else {
+      return '0';
     }
   }
 
+  calculatePassedCoursesNumber() {
+    if(sessionStorage.getItem('cacheParticipantPassedCourses') != null) {
+      return sessionStorage.getItem('cacheParticipantPassedCourses')
+    }
+    else {
+      return '0';
+    }
+  }
+
+  updateParticipant() {
+    if(this.formGroup.valid) {
+      const participantUpdateDTO: ParticipantUpdateDTO = {
+        firstName: this.formGroup.value.firstName,
+        lastName: this.formGroup.value.lastName,
+        email: null, // TODO update of email and password
+        phoneNumber: this.formGroup.value.phoneNumber
+      }
+      this.restClient.updateParticipant(Number(sessionStorage.getItem('cacheId')), participantUpdateDTO)
+        .subscribe(
+          (response) => {
+            this.messageService.add({life:5000, severity:'success', summary:'Edycja', detail:"Udało Ci się poprawnie zmienić dane osobowe"})
+            sessionStorage.setItem('cacheFirstName', response.firstName);
+            sessionStorage.setItem('cacheLastName', response.lastName);
+            sessionStorage.setItem('cachePhoneNumber', response.phoneNumber);
+            // if(participantUpdateDTO.email != null) {
+            //   this.authService.logout();
+            // }
+          },
+          (error) => {
+            this.messageService.add({life:4000, severity:'error', summary:'Edycja', detail: 'Pole ' + error.error[0].fieldName + ' ' + error.error[0].message})
+            console.error('Błąd edycji', error);
+          })
+    }
+  }
 }

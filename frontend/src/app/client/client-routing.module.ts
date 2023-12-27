@@ -36,6 +36,7 @@ import {
 import {
   ClientEventDetailsScooterComponent
 } from "./offer/client-event-details/client-event-details-scooter/client-event-details-scooter.component";
+import {ClientMyProfileComponent} from "./client-my-profile/client-my-profile.component";
 
 const routes: Routes = [
   {
@@ -107,6 +108,11 @@ const routes: Routes = [
     path: 'oferta/eventy/wynajem-skutera',
     canActivate: undefined,
     component: ClientEventDetailsScooterComponent
+  },
+  {
+    path: 'profil',
+    canActivate: undefined,
+    component: ClientMyProfileComponent
   },
 
 ];
