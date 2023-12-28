@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {EventFilterDTO, EventType, ParticipantEventFilterDTO} from "../../shared/dto";
+import {EventType, ParticipantEventFilterDTO} from "../../shared/dto";
 import {RestClient} from "../../shared/rest-client";
 import {PathService} from "../../shared/services/path.service";
 import {MessageService} from "primeng/api";

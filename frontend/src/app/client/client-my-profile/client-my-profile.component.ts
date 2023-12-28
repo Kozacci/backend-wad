@@ -3,9 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {FormService} from "../../shared/services/form/form.service";
 import {RestClient} from "../../shared/rest-client";
 import {MessageService} from "primeng/api";
-import {PathService} from "../../shared/services/path.service";
 import {ParticipantUpdateDTO} from "../../shared/dto";
-import {AuthService} from "../../shared/services/auth/auth.service";
 
 @Component({
   selector: 'app-client-my-profile',
