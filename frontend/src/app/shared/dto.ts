@@ -318,8 +318,8 @@ export interface EventEntityDTO {
 
 export interface EventFilterDTO {
   id: number,
-  type: string,
-  city: string,
+  type: EventType,
+  city: EventCity,
   cost: number,
   assignedParticipants: number,
   maxParticipantsNumber: number,
