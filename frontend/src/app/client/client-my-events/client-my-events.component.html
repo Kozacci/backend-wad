@@ -1,6 +1,18 @@
 <body>
-  <div class="event-list">
-    <div *ngFor="let event of events" class="event-card">
+  <div *ngIf="events.length == 0" class="event-empty-list">
+    <div class="event-empty-list-title">Brak zarezerwowanych rejsów</div>
+  </div>
+  <div *ngIf="events.length != 0" class="event-list">
+    <div *ngFor="let event of events" class="event-card"
+         [ngStyle]="event.isPaid
+         ? {
+         'border': '3px solid #27ab50',
+         'box-shadow': '0 4px 8px rgba(65, 110, 65, 0.3)'
+         }
+         : {
+         'border': '3px solid #ddd',
+         'box-shadow': '0 4px 8px rgba(0, 0, 0, 0.2)'
+         }">
       <div class="event-image-container">
         <img [src]="getImage(event)" alt="Event Image" class="event-image"/>
         <span *ngIf="event.isPaid" class="event-mode" style="color: #27ab50">Opłacony</span>

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {EventFilterDTO, EventType, ParticipantEventFilterDTO} from "../../shared/dto";
 import {RestClient} from "../../shared/rest-client";
 import {PathService} from "../../shared/services/path.service";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-client-my-events',
@@ -13,8 +14,9 @@ export class ClientMyEventsComponent implements OnInit {
   events: ParticipantEventFilterDTO[] = [];
 
   constructor(private readonly restClient: RestClient,
-              private readonly pathService: PathService) {
-  }
+              private readonly pathService: PathService,
+              private readonly messageService: MessageService
+  ) { }
 
   ngOnInit() {
     this.getParticipantEvents();
@@ -25,13 +27,12 @@ export class ClientMyEventsComponent implements OnInit {
     return this.restClient
       .getParticipantEventsByFilters(undefined, undefined, undefined, email!, 'date')
       .subscribe(response => {
-        this.events = response;
-        console.log(response);
+        if(response != null) {
+          this.events = response;
+          console.log(response);
+        }
       })
   }
-
-  // TODO 1 -- my courses + my events + navigate after signing on events/courses
-  // TODO 2 -- e-learning (stats, results, learning with 3 types of it)
 
   getImage(event: ParticipantEventFilterDTO): string {
     switch (event.type) {
@@ -57,11 +58,31 @@ export class ClientMyEventsComponent implements OnInit {
   }
 
   goToEventDetails(event: ParticipantEventFilterDTO) {
-
+    switch (event.type) {
+      case EventType.PANIENSKI:
+        return this.pathService.navigate('/oferta/eventy/wieczor-panienski')
+      case EventType.KAWALERSKI:
+        return this.pathService.navigate('/oferta/eventy/wieczor-kawalerski')
+      case EventType.REJS_WIDOKOWY:
+        return this.pathService.navigate('/oferta/eventy/rejs-widokowy')
+      case EventType.EVENT_DLA_FIRMY:
+        return this.pathService.navigate('/oferta/eventy/event-dla-firmy')
+      default:
+        return this.pathService.navigate('/oferta/eventy/wynajem-skutera')
+    }
   }
 
   cancelParticipantEvent(event: ParticipantEventFilterDTO) {
-
+    this.restClient.deleteAssigningForEvent(event.participantEventId)
+      .subscribe(
+        () => {
+          this.getParticipantEvents();
+          this.messageService.add({life:5000, severity:'success', summary:'Rezygnacja z eventu', detail:"Pomyślnie udało Ci się zrezygnować z eventu"})
+        },
+        (error) => {
+          this.messageService.add({life:4000, severity:'error', summary:'Rezygnacja z eventu', detail: error.error.message})
+          console.error('Błąd rezygnacji z eventu', error);
+        })
   }
 
 }
