@@ -1,1 +1,133 @@
-<p>admin-events works!</p>
+<div class="content">
+
+  <div class="container d-flex flex-column justify-content-between justify-content-md-between">
+
+    <div class="row justify-content-center">
+      <div class="col-xl-8 d-flex justify-content-center align-items-center">
+        <text-icon [text]="'Lista eventów'"
+                   [iconClass]="'pi pi-ticket'"
+                   [fontSize]="'3em'">
+        </text-icon>
+      </div>
+      <p-divider></p-divider>
+    </div>
+
+    <div class="row mt-2 align-items-center">
+
+      <div class="col-md-3 mb-3 d-flex flex-column align-items-center">
+        <label class="form-label">Rodzaj eventu:</label>
+        <p-dropdown
+          [options]="eventTypes"
+          [(ngModel)]="eventType"
+          optionLabel="value"
+          placeholder="Sternik motorowodny"
+          [showClear]="true">
+        </p-dropdown>
+      </div>
+
+      <div class="col-md-3 mb-3 d-flex flex-column align-items-center">
+        <label class="form-label">Miasto:</label>
+        <p-dropdown
+          [options]="eventCities"
+          [(ngModel)]="eventCity"
+          optionLabel="value"
+          placeholder="Rozpoczęty"
+          [showClear]="true">
+        </p-dropdown>
+      </div>
+
+      <div class="col-md-3 mb-3 d-flex flex-column align-items-center">
+        <label class="form-label">Koszt</label>
+        <input [(ngModel)]="cost"
+               type="text"
+               class="form-control"
+               id="cost"
+               placeholder="125.00">
+      </div>
+
+
+      <div class="col-md-3 mb-3 d-flex flex-column align-items-center">
+        <label class="form-label">Max liczba uczestników</label>
+        <input [(ngModel)]="maxParticipantsNumber"
+               type="text"
+               class="form-control"
+               id="participantNumber"
+               placeholder="5">
+      </div>
+
+      <div class="col-md-3 mb-3 d-flex flex-column align-items-center">
+        <label class="form-label">Sortowanie po:</label>
+        <p-dropdown
+          [options]="sortByValues"
+          [(ngModel)]="sortBy"
+          optionLabel="name"
+          placeholder="Sortowanie"
+          [showClear]="true">
+        </p-dropdown>
+      </div>
+
+    </div>
+
+    <div class="row mt-5 justify-content-end align-items-center">
+
+      <div class="col-sm-2 d-flex justify-content-end custom-justify-start pe-2">
+        <primary-button [label]="'Wyszukaj'" (onClick)="findEvents()"></primary-button>
+      </div>
+
+      <div class="col-sm-2 d-flex justify-content-start ps-2">
+        <secondary-button [label]="'Dodaj kurs'" (onClick)="showAddEventModal()"></secondary-button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <p-table
+    [value]="eventsList"
+    [paginator]="true"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[5, 10, 15]"
+    currentPageReportTemplate="{first} Kursów z {totalRecords}"
+    styleClass="p-datatable-gridlines p-datatable-resizable"
+    [tableStyle]="{'width': '100%' }"
+    [rowHover]="true"
+    [resizableColumns]="true"
+    [scrollable]="true"
+    scrollHeight="500px"
+    class="sticky-to-bottom mt-5">
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th></th>
+        <th>Rodzaj eventu</th>
+        <th>Miasto</th>
+        <th>Koszt</th>
+        <th>Zapisanych uczestników</th>
+        <th>Max liczba uczestników</th>
+        <th>Data eventu</th>
+        <th>Długość</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-event>
+      <tr>
+        <td class="d-flex justify-content-center">
+          <text-icon
+            [textVisible]="false"
+            [isClickable]="true"
+            [iconClass]="'pi pi-pencil'"
+            (onClick)="insertDataIntoEditEventModal(event)"
+          ></text-icon>
+        </td>
+        <td>{{event.type | eventType }}</td>
+        <td>{{event.city | eventCity}}</td>
+        <td>{{event.cost }}</td>
+        <td>{{event.assignedParticipants}}</td>
+        <td>{{event.maxParticipantsNumber}}</td>
+        <td>{{event.date | date:'yyyy-MM-dd HH:mm'}}</td>
+        <td>{{event.duration}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+</div>
