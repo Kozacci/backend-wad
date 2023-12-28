@@ -16,5 +16,6 @@ public record ParticipantEventFilterDTO(Long eventId,
                                         LocalTime duration,
                                         Long participantEventId,
                                         String ordererLastName,
-                                        String ordererEmail) {
+                                        String ordererEmail,
+                                        Boolean isPaid) {
 }

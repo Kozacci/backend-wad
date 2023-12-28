@@ -206,6 +206,7 @@ export interface ParticipantEventFilterDTO {
   cost: number,
   assignedParticipants: number,
   maxParticipantsNumber: number,
+  isPaid: boolean,
   date: Date,
   duration: Date,
   participantEventId: number,
@@ -324,9 +325,11 @@ export interface EventFilterDTO {
   cost: number,
   assignedParticipants: number,
   maxParticipantsNumber: number,
+  date: Date,
   duration: Date,
   ordererLastName: string,
-  ordererEmail: string
+  ordererEmail: string,
+  isPaid: boolean
 }
 
 export interface ErrorDTO {

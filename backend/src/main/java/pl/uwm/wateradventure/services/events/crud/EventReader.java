@@ -116,7 +116,8 @@ class EventReader extends PageReader<EventEntity> {
                 root.get("duration"),
                 joinParticipantEvents.get("id"),
                 joinParticipantEvents.get("ordererLastName"),
-                joinParticipantEvents.get("ordererEmail")
+                joinParticipantEvents.get("ordererEmail"),
+                joinParticipantEvents.get("isPaid")
         );
     }
 
