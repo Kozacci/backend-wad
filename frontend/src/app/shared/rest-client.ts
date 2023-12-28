@@ -175,4 +175,9 @@ export class RestClient {
     const url = `${this.apiUrl}/courses/${courseToEditId}`;
     return this.http.put<CourseEntityDTO>(url, courseToEdit, {withCredentials: true});
   }
+
+  deleteAssigningForEvent(participantEventId: number | null) {
+    return this.http.delete(`${this.apiUrl}/participant-events/${participantEventId}`, {withCredentials: true})
+  }
+
 }
