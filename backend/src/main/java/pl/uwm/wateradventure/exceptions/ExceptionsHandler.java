@@ -7,10 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import pl.uwm.wateradventure.exceptions.custom_exceptions.EntityNotFoundException;
-import pl.uwm.wateradventure.exceptions.custom_exceptions.MaxParticipantsNumberExceededException;
-import pl.uwm.wateradventure.exceptions.custom_exceptions.NotEnoughSeatsForEventException;
-import pl.uwm.wateradventure.exceptions.custom_exceptions.ParticipantAlreadySignedInException;
+import pl.uwm.wateradventure.exceptions.custom_exceptions.*;
 import pl.uwm.wateradventure.exceptions.value_objects_exceptions.*;
 
 import java.util.List;
@@ -134,6 +131,18 @@ public class ExceptionsHandler {
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
     public ErrorDTO notEnoughSeatsForEventException(NotEnoughSeatsForEventException exception) {
         return new ErrorDTO("participantsNumber", exception.getMessage());
+    }
+
+    @ExceptionHandler(value = EventCancellationTimeoutException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorDTO eventCancellationTimeoutException(EventCancellationTimeoutException exception) {
+        return new ErrorDTO("date", exception.getMessage());
+    }
+
+    @ExceptionHandler(value = CourseCancellationTimeoutException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorDTO courseCancellationTimeoutException(CourseCancellationTimeoutException exception) {
+        return new ErrorDTO("date", exception.getMessage());
     }
 
 }
