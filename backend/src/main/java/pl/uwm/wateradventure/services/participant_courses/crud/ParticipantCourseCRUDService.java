@@ -10,9 +10,14 @@ import pl.uwm.wateradventure.models.participants.ParticipantEntity;
 @RequiredArgsConstructor
 public class ParticipantCourseCRUDService {
 
+    private final ParticipantCourseCreator creator;
     private final ParticipantCourseReader reader;
     private final ParticipantCourseUpdater updater;
-    private final ParticipantCourseCreator creator;
+    private final ParticipantCourseDeleter deleter;
+
+    public ParticipantCourseEntity signIn(ParticipantEntity participant, CourseEntity course) {
+        return creator.signIn(participant, course);
+    }
 
     public ParticipantCourseEntity getParticipantCourseById(Long participantCourseId) {
         return reader.getParticipantCourseById(participantCourseId);
@@ -23,8 +28,9 @@ public class ParticipantCourseCRUDService {
         return updater.update(participantCourseEntity, isPassed, isPaid);
     }
 
-    public ParticipantCourseEntity signIn(ParticipantEntity participant, CourseEntity course) {
-        return creator.signIn(participant, course);
+    public void deleteAssigningForCourse(Long participantCourseId) {
+        var participantCourseEntity = reader.getParticipantCourseById(participantCourseId);
+        deleter.deleteAssigningForCourse(participantCourseEntity);
     }
 
 }

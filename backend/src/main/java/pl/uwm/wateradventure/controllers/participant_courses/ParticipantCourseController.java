@@ -17,6 +17,13 @@ class ParticipantCourseController {
 
     private final ParticipantCourseFacade participantCourseFacade;
 
+    @PostMapping("/{participantId}/sign-in/{courseId}")
+    @ResponseStatus(HttpStatus.OK)
+    ParticipantCourseEntityDTO signIn(@PathVariable Long participantId,
+                                      @PathVariable Long courseId) {
+        return participantCourseFacade.signIn(participantId, courseId).toDTO();
+    }
+
 //    @AdminOnly
     @PutMapping("/{participantCourseId}")
     @ResponseStatus(HttpStatus.OK)
@@ -27,11 +34,10 @@ class ParticipantCourseController {
         return participantCourseFacade.update(participantCourseId, isPassed, isPaid).toDTO();
     }
 
-    @PostMapping("/{participantId}/sign-in/{courseId}")
-    @ResponseStatus(HttpStatus.OK)
-    ParticipantCourseEntityDTO signIn(@PathVariable Long participantId,
-                                      @PathVariable Long courseId) {
-        return participantCourseFacade.signIn(participantId, courseId).toDTO();
+    @DeleteMapping("/{participantCourseId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deleteAssigningForCourse(@PathVariable Long participantCourseId) {
+        participantCourseFacade.deleteAssigningForCourse(participantCourseId);
     }
 
 }
