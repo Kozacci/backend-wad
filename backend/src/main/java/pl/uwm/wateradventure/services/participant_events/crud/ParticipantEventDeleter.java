@@ -17,7 +17,7 @@ class ParticipantEventDeleter {
     public void deleteAssigningForEvent(ParticipantEventEntity participantEventEntity) {
         LocalDateTime eventDate = participantEventEntity.getEvent().getDate();
         LocalDateTime nowDate = LocalDateTime.now();
-        long differenceInHours = ChronoUnit.HOURS.between(nowDate, eventDate);
+        long differenceInHours = ChronoUnit.HOURS.between(eventDate, nowDate);
         if(differenceInHours < 48) {
             throw new EventCancellationTimeoutException();
         }
