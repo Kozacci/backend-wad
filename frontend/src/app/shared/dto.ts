@@ -208,6 +208,7 @@ export interface ParticipantEventFilterDTO {
   maxParticipantsNumber: number,
   date: Date,
   duration: Date,
+  participantEventId: number,
   ordererLastName: string,
   ordererEmail: string
 }
