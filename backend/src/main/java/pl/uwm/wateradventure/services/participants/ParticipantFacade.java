@@ -4,7 +4,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import pl.uwm.wateradventure.models.courses.dtos.CourseFilterDTO;
+import pl.uwm.wateradventure.models.participants.dtos.ParticipantCourseFilterDTO;
 import pl.uwm.wateradventure.models.participants.dtos.ParticipantCourseFiltersDTO;
 import pl.uwm.wateradventure.models.participants.dtos.ParticipantEntityDTO;
 import pl.uwm.wateradventure.models.participants.security.dtos.ParticipantLoginDTO;
@@ -38,7 +38,7 @@ public class ParticipantFacade {
         return participantCRUDService.updateParticipant(participantId, participantUpdateDTO);
     }
 
-    public List<CourseFilterDTO> getCoursesByParticipant(ParticipantCourseFiltersDTO filters) {
+    public List<ParticipantCourseFilterDTO> getCoursesByParticipant(ParticipantCourseFiltersDTO filters) {
         return participantCoursesCriteriaBuilder.getParticipantCoursesByFilters(filters);
     }
 
