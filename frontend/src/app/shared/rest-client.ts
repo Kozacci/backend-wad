@@ -3,7 +3,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {
   CourseCreateUpdateDTO, CourseEntityDTO,
   CourseFilterDTO, EventFilterDTO, ParticipantCourseEntityDTO,
-  ParticipantEntityDTO, ParticipantEventEntityCreateDTO,
+  ParticipantEntityDTO, ParticipantEventEntityCreateDTO, ParticipantEventFilterDTO,
   ParticipantLoginDTO,
   ParticipantRegisterDTO, ParticipantUpdateDTO,
   QuestionCreateUpdateDTO,
@@ -108,7 +108,7 @@ export class RestClient {
                      city: string  | undefined,
                      clientLastName: string  | undefined,
                      clientEmail: string  | undefined,
-                     sortBy: string | undefined): Observable<EventFilterDTO[]> {
+                     sortBy: string | undefined): Observable<ParticipantEventFilterDTO[]> {
     let params = new HttpParams();
     if (type !== null && type !== undefined) {
       params = params.append('type', type);
@@ -125,7 +125,7 @@ export class RestClient {
     if (sortBy !== null && sortBy !== undefined) {
       params = params.append('sortBy', sortBy);
     }
-    return this.http.get<EventFilterDTO[]>(`${this.apiUrl}/events/participant-events-filter-by`, {params, withCredentials: true } );
+    return this.http.get<ParticipantEventFilterDTO[]>(`${this.apiUrl}/events/participant-events-filter-by`, {params, withCredentials: true } );
   }
 
   getQuestionsByFilters(id: number | null,
