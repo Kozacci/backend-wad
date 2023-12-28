@@ -40,6 +40,7 @@ import {ClientMyProfileComponent} from "./client-my-profile/client-my-profile.co
 import {ClientFaqComponent} from "./client-about/client-faq/client-faq.component";
 import {ClientContactComponent} from "./client-about/client-contact/client-contact.component";
 import {ClientMyEventsComponent} from "./client-my-events/client-my-events.component";
+import {ClientMyCoursesComponent} from "./client-my-courses/client-my-courses.component";
 
 const routes: Routes = [
   {
@@ -132,7 +133,11 @@ const routes: Routes = [
     canActivate: undefined,
     component: ClientMyEventsComponent
   },
-
+  {
+    path: 'profil/moje-kursy',
+    canActivate: undefined,
+    component: ClientMyCoursesComponent
+  },
 ];
 
 @NgModule({
