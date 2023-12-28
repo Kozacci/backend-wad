@@ -63,6 +63,8 @@ public class ParticipantCoursesCriteriaBuilder {
                 root.get("city"),
                 root.get("type"),
                 addRegisteredParticipants(cb, root, cq),
+                joinParticipantCourse.get("id"),
+                joinParticipantCourse.get("participant").get("id"),
                 joinParticipantCourse.get("isPassed"),
                 joinParticipantCourse.get("isPaid")
         );
