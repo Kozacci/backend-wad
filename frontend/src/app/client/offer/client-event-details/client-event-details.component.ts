@@ -107,6 +107,9 @@ export class ClientEventDetailsComponent {
       this.event.type,
       undefined,
       undefined,
+      undefined,
+      undefined,
+      false
     )
       .subscribe(
         response => {

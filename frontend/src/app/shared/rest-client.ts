@@ -1,12 +1,18 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {
-  CourseCreateUpdateDTO, CourseEntityDTO,
-  CourseFilterDTO, EventFilterDTO, ParticipantCourseEntityDTO,
+  CourseCreateUpdateDTO,
+  CourseEntityDTO,
+  CourseFilterDTO,
+  EventFilterDTO,
+  ParticipantCourseEntityDTO,
   ParticipantCourseFilterDTO,
-  ParticipantEntityDTO, ParticipantEventEntityCreateDTO, ParticipantEventFilterDTO,
+  ParticipantEntityDTO,
+  ParticipantEventEntityCreateDTO,
+  ParticipantEventFilterDTO,
   ParticipantLoginDTO,
-  ParticipantRegisterDTO, ParticipantUpdateDTO,
+  ParticipantRegisterDTO,
+  ParticipantUpdateDTO,
   QuestionCreateUpdateDTO,
   QuestionEntityDTO,
   QuestionFilterDTO
@@ -121,7 +127,10 @@ export class RestClient {
   getEventsByFilters(
     type: string | undefined,
     city: string  | undefined,
-    sortBy: string | undefined): Observable<EventFilterDTO[]>
+    cost: number | undefined,
+    maxParticipantsNumber: number | undefined,
+    sortBy: string | undefined,
+    adminSearch: boolean): Observable<EventFilterDTO[]>
   {
     let params = new HttpParams();
     if (type !== null && type !== undefined) {
@@ -130,9 +139,16 @@ export class RestClient {
     if (city !== null && city !== undefined) {
       params = params.append('city', city);
     }
+    if (cost !== null && cost !== undefined) {
+      params = params.append('cost', cost);
+    }
+    if (maxParticipantsNumber !== null && maxParticipantsNumber !== undefined) {
+      params = params.append('maxParticipantsNumber', maxParticipantsNumber);
+    }
     if (sortBy !== null && sortBy !== undefined) {
       params = params.append('sortBy', sortBy);
     }
+    params = params.append('adminSearch', adminSearch);
     return this.http.get<EventFilterDTO[]>(`${this.apiUrl}/events/events-filter-by`, {params, withCredentials: true } );
   }
 
