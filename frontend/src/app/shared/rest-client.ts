@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {
   CourseCreateUpdateDTO, CourseEntityDTO,
   CourseFilterDTO, EventFilterDTO, ParticipantCourseEntityDTO,
+  ParticipantCourseFilterDTO,
   ParticipantEntityDTO, ParticipantEventEntityCreateDTO, ParticipantEventFilterDTO,
   ParticipantLoginDTO,
   ParticipantRegisterDTO, ParticipantUpdateDTO,
@@ -52,14 +53,16 @@ export class RestClient {
     return this.http.post<ParticipantCourseEntityDTO>(`${this.apiUrl}/participant-events`, participantEventCreateDTO, { withCredentials: true})
   }
 
-  getCoursesByFilters(courseType: string | undefined,
-                      courseStatus: string | undefined,
-                      courseCity: string  | undefined,
-                      dateFrom: string | null,
-                      dateTo: string | null,
-                      registeredParticipants: number | null,
-                      participantsLimit: number | null,
-                      sortBy: string | undefined): Observable<CourseFilterDTO[]> {
+  getCoursesByFilters(
+    courseType: string | undefined,
+    courseStatus: string | undefined,
+    courseCity: string  | undefined,
+    dateFrom: string | null,
+    dateTo: string | null,
+    registeredParticipants: number | null,
+    participantsLimit: number | null,
+    sortBy: string | undefined): Observable<CourseFilterDTO[]>
+  {
     let params = new HttpParams();
     if (courseType !== null && courseType !== undefined) {
       params = params.append('courseType', courseType);
@@ -88,9 +91,38 @@ export class RestClient {
     return this.http.get<CourseFilterDTO[]>(`${this.apiUrl}/courses/filter-by`, {params, withCredentials: true } );
   }
 
-  getEventsByFilters(type: string | undefined,
-                     city: string  | undefined,
-                     sortBy: string | undefined): Observable<EventFilterDTO[]> {
+  getCoursesByParticipantIdAndFilters(
+    participantId: number,
+    courseType: string | undefined,
+    courseStatus: string | undefined,
+    isPaid: boolean | null,
+    isPassed: boolean | null,
+    sortBy: string | undefined): Observable<ParticipantCourseFilterDTO[]>
+  {
+    let params = new HttpParams();
+    if (courseType !== null && courseType !== undefined) {
+      params = params.append('courseType', courseType);
+    }
+    if (courseStatus !== null  && courseStatus !== undefined) {
+      params = params.append('courseStatus', courseStatus);
+    }
+    if (isPaid !== null) {
+      params = params.append('isPaid', isPaid);
+    }
+    if (isPassed !== null) {
+      params = params.append('isPassed', isPassed);
+    }
+    if (sortBy !== null && sortBy !== undefined) {
+      params = params.append('sortBy', sortBy);
+    }
+    return this.http.get<ParticipantCourseFilterDTO[]>(`${this.apiUrl}/participants/${participantId}/courses`, {params, withCredentials: true } );
+  }
+
+  getEventsByFilters(
+    type: string | undefined,
+    city: string  | undefined,
+    sortBy: string | undefined): Observable<EventFilterDTO[]>
+  {
     let params = new HttpParams();
     if (type !== null && type !== undefined) {
       params = params.append('type', type);
@@ -104,11 +136,13 @@ export class RestClient {
     return this.http.get<EventFilterDTO[]>(`${this.apiUrl}/events/events-filter-by`, {params, withCredentials: true } );
   }
 
-  getParticipantEventsByFilters(type: string | undefined,
-                     city: string  | undefined,
-                     clientLastName: string  | undefined,
-                     clientEmail: string  | undefined,
-                     sortBy: string | undefined): Observable<ParticipantEventFilterDTO[]> {
+  getParticipantEventsByFilters(
+    type: string | undefined,
+    city: string  | undefined,
+    clientLastName: string  | undefined,
+    clientEmail: string  | undefined,
+    sortBy: string | undefined): Observable<ParticipantEventFilterDTO[]>
+  {
     let params = new HttpParams();
     if (type !== null && type !== undefined) {
       params = params.append('type', type);
@@ -128,10 +162,12 @@ export class RestClient {
     return this.http.get<ParticipantEventFilterDTO[]>(`${this.apiUrl}/events/participant-events-filter-by`, {params, withCredentials: true } );
   }
 
-  getQuestionsByFilters(id: number | null,
-                        content: string | null,
-                        category: string | undefined,
-                        sortBy: string | undefined): Observable<QuestionFilterDTO[]> {
+  getQuestionsByFilters(
+    id: number | null,
+    content: string | null,
+    category: string | undefined,
+    sortBy: string | undefined): Observable<QuestionFilterDTO[]>
+  {
     let params = new HttpParams();
     if (id !== null) {
       params = params.append('id', id);
@@ -178,6 +214,10 @@ export class RestClient {
 
   deleteAssigningForEvent(participantEventId: number | null) {
     return this.http.delete(`${this.apiUrl}/participant-events/${participantEventId}`, {withCredentials: true})
+  }
+
+  deleteAssigningForCourse(participantCourseId: number | null) {
+    return this.http.delete(`${this.apiUrl}/participant-courses/${participantCourseId}`, {withCredentials: true})
   }
 
 }
