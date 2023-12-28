@@ -121,12 +121,12 @@
 }
 
 .p-button-primary {
-  background-color: var(--dark-blue);
+  background-color: var(--blue);
   color: white;
 }
 
 .p-button-primary:hover {
-  background-color: #1b6d80;
+  background-color: #227eb0;
 }
 
 .p-button.p-button-secondary.p-button-outlined:hover {
