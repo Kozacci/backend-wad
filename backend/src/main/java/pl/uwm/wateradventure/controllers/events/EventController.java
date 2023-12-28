@@ -45,9 +45,12 @@ class EventController {
     @GetMapping("/events-filter-by")
     ResponseEntity<List<EventFilterDTO>> getEventsByFilters(@RequestParam(required = false) EventType type,
                                                                        @RequestParam(required = false) EventCity city,
-                                                                       @RequestParam(required = false) String sortBy
+                                                                       @RequestParam(required = false) Double cost,
+                                                                       @RequestParam(required = false) Integer maxParticipantsNumber,
+                                                                       @RequestParam(required = false) String sortBy,
+                                                                       @RequestParam(required = false) Boolean adminSearch
     ) {
-        var filters = new EventFiltersDTO(type, city, sortBy);
+        var filters = new EventFiltersDTO(type, city, cost, maxParticipantsNumber, sortBy, adminSearch);
         List<EventFilterDTO> filteredEvents = eventFacade.getEventsByFilers(filters);
         return !filteredEvents.isEmpty() ? ResponseEntity.ok(filteredEvents) : ResponseEntity.noContent().build();
     }

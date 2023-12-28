@@ -56,6 +56,29 @@ class EventCBHelper {
         }
     }
 
+    public static void addCostPredicate(
+            CriteriaBuilder cb,
+            Root<EventEntity> event,
+            List<Predicate> predicates,
+            Double cost
+    ) {
+        if (cost != null) {
+            predicates.add(cb.equal(event.get("cost"), cost));
+        }
+    }
+
+
+    public static void addMaxParticipantsNumberPredicate(
+            CriteriaBuilder cb,
+            Root<EventEntity> event,
+            List<Predicate> predicates,
+            Integer maxParticipantsNumber
+    ) {
+        if (maxParticipantsNumber != null) {
+            predicates.add(cb.equal(event.get("maxParticipantsNumber"), maxParticipantsNumber));
+        }
+    }
+
     public static void addOrdererLastNamePredicate(
             CriteriaBuilder cb,
             List<Predicate> predicates,
