@@ -90,7 +90,7 @@ public class CourseCBHelper {
     }
 
     public static Subquery<Long> addRegisteredParticipants(CriteriaBuilder cb, Root<CourseEntity> course,
-                                                          CriteriaQuery<CourseFilterDTO> query) {
+                                                          CriteriaQuery<?> query) {
         Subquery<Long> subQuery = query.subquery(Long.class);
         Root<ParticipantCourseEntity> subQueryRoot = subQuery.from(ParticipantCourseEntity.class);
         Join<ParticipantCourseEntity, CourseEntity> join = subQueryRoot.join("course");

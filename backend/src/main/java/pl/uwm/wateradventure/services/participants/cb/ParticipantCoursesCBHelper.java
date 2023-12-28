@@ -2,16 +2,15 @@ package pl.uwm.wateradventure.services.participants.cb;
 
 import jakarta.persistence.criteria.*;
 import pl.uwm.wateradventure.models.courses.CourseEntity;
-import pl.uwm.wateradventure.models.courses.dtos.CourseFilterDTO;
 import pl.uwm.wateradventure.models.participant_courses.ParticipantCourseEntity;
 
 import java.util.List;
 
-import static pl.uwm.wateradventure.services.courses.crud.CourseCBHelper.*;
+import static pl.uwm.wateradventure.services.courses.crud.CourseCBHelper.checkSortByValue;
 
 public class ParticipantCoursesCBHelper {
 
-    public static void addSortBy(String sort, CriteriaQuery<CourseFilterDTO> query,
+    public static void addSortBy(String sort, CriteriaQuery<?> query,
                                  CriteriaBuilder cb, Root<CourseEntity> course, Join<CourseEntity, ParticipantCourseEntity> participantsJoin) {
         checkSortByValue(sort);
         if (sort == null) {
