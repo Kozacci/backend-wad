@@ -1,8 +1,5 @@
-import { Component } from '@angular/core';
-import {
-  CourseType,
-  ParticipantCourseFilterDTO
-} from "../../shared/dto";
+import {Component} from '@angular/core';
+import {CourseType, ParticipantCourseFilterDTO} from "../../shared/dto";
 import {RestClient} from "../../shared/rest-client";
 import {PathService} from "../../shared/services/path.service";
 import {MessageService} from "primeng/api";
