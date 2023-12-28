@@ -7,7 +7,7 @@ import {
   EventFilterDTO,
   ParticipantCourseEntityDTO,
   ParticipantEntityDTO,
-  ParticipantEventEntityCreateDTO,
+  ParticipantEventEntityCreateDTO, ParticipantEventFilterDTO,
   ParticipantLoginDTO,
   ParticipantRegisterDTO,
   ParticipantUpdateDTO,
