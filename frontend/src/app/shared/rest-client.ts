@@ -123,7 +123,7 @@ export class RestClient {
                      city: string  | undefined,
                      clientLastName: string  | undefined,
                      clientEmail: string  | undefined,
-                     sortBy: string | undefined): Observable<EventFilterDTO[]> {
+                     sortBy: string | undefined): Observable<ParticipantEventFilterDTO[]> {
     let params = new HttpParams();
     if (type !== null && type !== undefined) {
       params = params.append('type', type);
@@ -140,7 +140,7 @@ export class RestClient {
     if (sortBy !== null && sortBy !== undefined) {
       params = params.append('sortBy', sortBy);
     }
-    return this.http.get<EventFilterDTO[]>(`${this.apiUrl}/events/participant-events-filter-by`, {params, withCredentials: true } );
+    return this.http.get<ParticipantEventFilterDTO[]>(`${this.apiUrl}/events/participant-events-filter-by`, {params, withCredentials: true } );
   }
 
   getQuestionsByFilters(id: number | null,
@@ -190,4 +190,9 @@ export class RestClient {
     const url = `${this.apiUrl}/courses/${courseToEditId}`;
     return this.http.put<CourseEntityDTO>(url, courseToEdit, {withCredentials: true});
   }
+
+  deleteAssigningForEvent(participantEventId: number | null) {
+    return this.http.delete(`${this.apiUrl}/participant-events/${participantEventId}`, {withCredentials: true})
+  }
+
 }

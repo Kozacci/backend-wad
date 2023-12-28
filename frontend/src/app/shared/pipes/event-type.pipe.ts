@@ -11,9 +11,9 @@ export class EventTypePipe implements PipeTransform {
       case EventType.EVENT_DLA_FIRMY:
         return 'Event dla firmy';
       case EventType.KAWALERSKI:
-        return 'Kawalerski';
+        return 'Wieczór Kawalerski';
       case EventType.PANIENSKI:
-        return 'Panieński';
+        return 'Wieczór Panieński';
       case EventType.REJS_WIDOKOWY:
         return 'Rejs widokowy';
       case EventType.WYNAJEM_SKUTERA:

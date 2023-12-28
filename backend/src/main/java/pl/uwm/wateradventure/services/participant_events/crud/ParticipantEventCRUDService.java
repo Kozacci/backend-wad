@@ -21,12 +21,13 @@ public class ParticipantEventCRUDService {
         return creator.signInForEvent(event, dto);
     }
 
+    public List<ParticipantEventInfoDTO> getAssignedParticipantsForAnEventByEventId(Long eventId) {
+        return reader.getAssignedParticipantsForAnEventByEventId(eventId);
+    }
+
     public void deleteAssigningForEvent(Long participantEventId) {
         var participantEventEntity = reader.getParticipantEventEntityById(participantEventId);
         deleter.deleteAssigningForEvent(participantEventEntity);
     }
 
-    public List<ParticipantEventInfoDTO> getAssignedParticipantsForAnEventByEventId(Long eventId) {
-        return reader.getAssignedParticipantsForAnEventByEventId(eventId);
-    }
 }

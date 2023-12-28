@@ -159,7 +159,6 @@ export class ClientEventDetailsComponent {
             })
             this.checkAvailableEvents();
             this.modalFormVisibility = false;
-            // Todo navigate to my events view if user is logged
           },
           error => {
             this.messageService.add({

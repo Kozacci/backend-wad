@@ -22,11 +22,12 @@ public class ParticipantEventFacade {
         return participantEventCRUDService.signInForEvent(event, dto);
     }
 
+    public List<ParticipantEventInfoDTO> getAssignedParticipantsForAnEventByEventId(Long eventId) {
+        return participantEventCRUDService.getAssignedParticipantsForAnEventByEventId(eventId);
+    }
+
     public void deleteAssigningForEvent(Long participantEventId) {
         participantEventCRUDService.deleteAssigningForEvent(participantEventId);
     }
 
-    public List<ParticipantEventInfoDTO> getAssignedParticipantsForAnEventByEventId(Long eventId) {
-        return participantEventCRUDService.getAssignedParticipantsForAnEventByEventId(eventId);
-    }
 }
