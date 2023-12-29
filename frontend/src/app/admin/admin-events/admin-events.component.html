@@ -126,7 +126,7 @@
         <td>{{event.date | date:'yyyy-MM-dd HH:mm'}}</td>
         <td>{{event.duration}}</td>
         <td>{{event.cost }}</td>
-        <td>{{event.assignedParticipants}}</td>
+        <td>{{event.assignedParticipants != null ? event.assignedParticipants : "0"}}</td>
         <td>{{event.maxParticipantsNumber}}</td>
       </tr>
     </ng-template>
@@ -192,7 +192,6 @@
           <p-calendar
             formControlName="date"
             [dateFormat]="'dd.mm.yy'"
-            (onSelect)="setDateAtEventAddModal($event)"
             [showIcon]="true"
             [showTime]="true"
             [hourFormat]="'24'"
@@ -213,7 +212,6 @@
           <p-calendar
             formControlName="duration"
             [dateFormat]="'dd.mm.yy'"
-            (onSelect)="setDurationAtEventAddModal($event)"
             [showIcon]="true"
             appendTo="body"
             [timeOnly]="true"
@@ -265,6 +263,150 @@
         <secondary-button
           [label]="'Anuluj'"
           (onClick)="closeAddEventModal()"
+          [bordered]="true">
+        </secondary-button>
+      </div>
+
+    </div>
+  </div>
+
+</p-dialog>
+
+<!--edit event modal-->
+
+<p-dialog
+  [(visible)]="editEventModalVisible"
+  [modal]="true"
+  [draggable]="false"
+  [style]="{ width: '30rem'}"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  [contentStyle]="{maxheight: '80%'}"
+  (onHide)="closeEditEventModal()"
+>
+
+  <ng-template pTemplate="header">
+    <text-icon
+      text="Edycja eventu #{{eventToEditId}}"
+      [textVisible]="true"
+      [iconClass]="'pi pi-ticket'">
+    </text-icon>
+  </ng-template>
+
+  <div class="container d-flex flex-column pt-3 justify-content-between" >
+    <div class="row d-flex flex-column">
+
+      <div class="col-md-3 mb-1 d-flex flex-column align-items-start w-100">
+        <label class="form-label">Rodzaj eventu:</label>
+        <p-dropdown
+          [options]="eventTypes"
+          [(ngModel)]="eventTypeToEdit"
+          optionLabel="value"
+          placeholder="Rejs widokowy"
+          appendTo="body"
+          [showClear]="true">
+        </p-dropdown>
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'eventType')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'eventType')}}
+        </mat-error>
+      </div>
+
+      <div class="col-md-3 mb-1 d-flex flex-column align-items-start w-100">
+        <label class="form-label">Miasto:</label>
+        <p-dropdown
+          [options]="eventCities"
+          [(ngModel)]="eventCityToEdit"
+          optionLabel="value"
+          placeholder="Gdańsk"
+          [showClear]="true">
+        </p-dropdown>
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'eventCity')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'eventCity')}}
+        </mat-error>
+      </div>
+
+      <div class="col-md-3 mb-1 d-flex flex-column align-items-start w-100">
+        <div [formGroup]="editEventFormGroup" class="col-md-3 d-flex flex-column align-items-start w-100">
+          <label class="form-label">Data rozpoczęcia:</label>
+          <p-calendar
+            formControlName="date"
+            [dateFormat]="'dd.mm.yy'"
+            [showIcon]="true"
+            [showTime]="true"
+            [hourFormat]="'24'"
+            [timeSeparator]="':'"
+            [stepMinute]="15"
+            appendTo="body"
+            [placeholder]="'01.01.2024'">
+          </p-calendar>
+        </div>
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'dateFrom')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'dateFrom')}}
+        </mat-error>
+      </div>
+
+      <div class="col-md-3 mb-3 d-flex flex-column align-items-start w-100">
+        <div [formGroup]="editEventFormGroup" class="col-md-3 d-flex flex-column align-items-start w-100">
+          <label class="form-label">Długość:</label>
+          <p-calendar
+            formControlName="duration"
+            [dateFormat]="'dd.mm.yy'"
+            [showIcon]="true"
+            appendTo="body"
+            [timeOnly]="true"
+            [hourFormat]="'24'"
+            [timeSeparator]="':'"
+            [stepMinute]="15"
+            [placeholder]="'01:00'">
+          </p-calendar>
+        </div>
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'dateFrom')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'dateFrom')}}
+        </mat-error>
+      </div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Koszt</mat-label>
+        <input matInput placeholder="5"
+               type="text"
+               [formControl]="editEventFormGroup.controls.cost" required class="w-75">
+        <mat-error *ngIf="editEventFormGroup.controls.cost.invalid">
+          {{ formService.getInputErrorMessage(editEventFormGroup.controls.cost) }}
+        </mat-error>
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'cost')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'cost')}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Maksymalna liczba uczestników</mat-label>
+        <input matInput placeholder="5"
+               type="text"
+               [formControl]="editEventFormGroup.controls.maxParticipantsNumber" required class="w-75">
+        <mat-error *ngIf="editEventFormGroup.controls.maxParticipantsNumber.invalid">
+          {{ formService.getInputErrorMessage(editEventFormGroup.controls.maxParticipantsNumber) }}
+        </mat-error>
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'maxParticipantsNumber')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'maxParticipantsNumber')}}
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div class="row">
+      <div class="col-xl-8 d-flex justify-content-between">
+        <primary-button
+          [label]="'Edytuj'"
+          (onClick)="editEvent()">
+        </primary-button>
+      </div>
+        <div class="col-xl-4 d-flex justify-content-end">
+          <danger-button
+            [label]="'Usuń'"
+            (onClick)="deleteEvent()">
+          </danger-button>
+        <secondary-button
+          [label]="'Anuluj'"
+          (onClick)="closeEditEventModal()"
           [bordered]="true">
         </secondary-button>
       </div>
