@@ -3,13 +3,14 @@ import {EventType, ParticipantEventFilterDTO} from "../../shared/dto";
 import {RestClient} from "../../shared/rest-client";
 import {PathService} from "../../shared/services/path.service";
 import {MessageService} from "primeng/api";
+import {switchMap} from "rxjs";
 
 @Component({
   selector: 'app-client-my-events',
   templateUrl: './client-my-events.component.html',
   styleUrls: ['./client-my-events.component.css']
 })
-export class ClientMyEventsComponent implements OnInit {
+export class ClientMyEventsComponent implements OnInit{
 
   events: ParticipantEventFilterDTO[] = [];
 
@@ -29,6 +30,10 @@ export class ClientMyEventsComponent implements OnInit {
       .subscribe(response => {
         if(response != null) {
           this.events = response;
+          console.log(response);
+        }
+        else {
+          this.events = [];
           console.log(response);
         }
       })
@@ -74,9 +79,11 @@ export class ClientMyEventsComponent implements OnInit {
 
   cancelParticipantEvent(event: ParticipantEventFilterDTO) {
     this.restClient.deleteAssigningForEvent(event.participantEventId)
+      .pipe(
+        switchMap(async () => this.getParticipantEvents()) // asynchronic function call due to getParticipantEvents Bug - it was not called after cancellation
+      )
       .subscribe(
         () => {
-          this.getParticipantEvents();
           this.messageService.add({life:5000, severity:'success', summary:'Rezygnacja z eventu', detail:"Pomyślnie udało Ci się zrezygnować z eventu"})
         },
         (error) => {
