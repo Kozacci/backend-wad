@@ -90,12 +90,54 @@ export enum EventCity {
   GDANSK = "GDANSK"
 }
 
+export function mapToEventCity(cityNameAsString: string): EventCity {
+  console.log("cityNameAsString:", cityNameAsString);
+  switch (cityNameAsString) {
+    case "Sopot":
+    case "SOPOT":
+      return EventCity.SOPOT;
+    case "Olecko":
+    case "OLECKO":
+      return EventCity.OLECKO;
+    case "Gdańsk":
+    case "GDANSK":
+      return EventCity.GDANSK;
+    default:
+      console.error("Nieprawidłowa wartość w cityNameAsString");
+      return EventCity.SOPOT; // Domyślna wartość lub inna logika błędu
+  }
+}
+
 export enum EventType {
   REJS_WIDOKOWY = "REJS_WIDOKOWY",
   PANIENSKI = "PANIENSKI",
   KAWALERSKI = "KAWALERSKI",
   WYNAJEM_SKUTERA = "WYNAJEM_SKUTERA",
   EVENT_DLA_FIRMY = "EVENT_DLA_FIRMY"
+}
+
+export function mapToEventType(eventNameAsString: string): EventType {
+  console.log("eventNameAsString:", eventNameAsString);
+  switch (eventNameAsString) {
+    case "Rejs widokowy":
+    case "REJS_WIDOKOWY":
+      return EventType.REJS_WIDOKOWY;
+    case "Wieczór panieński":
+    case "PANIENSKI":
+      return EventType.PANIENSKI;
+    case "Wieczór kawalerski":
+    case "KAWALERSKI":
+      return EventType.KAWALERSKI;
+    case "Wynajem skutera wodnego":
+    case "WYNAJEM_SKUTERA":
+      return EventType.WYNAJEM_SKUTERA;
+    case "Event dla firmy":
+    case "EVENT_DLA_FIRMY":
+      return EventType.EVENT_DLA_FIRMY;
+    default:
+      console.error("Nieprawidłowa wartość w eventNameAsString");
+      return EventType.REJS_WIDOKOWY; // Domyślna wartość lub inna logika błędu
+  }
 }
 
 export enum Category {
@@ -334,7 +376,7 @@ export interface EventEntityDTO {
 }
 
 export interface EventFilterDTO {
-  id: number,
+  eventId: number,
   type: EventType,
   city: EventCity,
   cost: number,

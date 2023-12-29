@@ -122,7 +122,7 @@ export class ClientEventDetailsComponent {
   }
 
   selectAvailableEvent(row: any) {
-    this.chosenEvent.id = row.eventId;
+    this.chosenEvent.eventId = row.eventId;
     this.chosenEvent.type = row.type;
     this.chosenEvent.city = row.city;
     this.chosenEvent.cost = row.cost;
@@ -142,8 +142,8 @@ export class ClientEventDetailsComponent {
   }
 
   signForEvent() {
-    if (this.chosenEvent.id != null && this.formGroup.valid) {
-      this.participantEventCreateDTO.eventId = this.chosenEvent.id;
+    if (this.chosenEvent.eventId != null && this.formGroup.valid) {
+      this.participantEventCreateDTO.eventId = this.chosenEvent.eventId;
       this.participantEventCreateDTO.ordererEmail = this.formGroup.value.ordererEmail?? '';
       this.participantEventCreateDTO.ordererFirstName = this.formGroup.value.ordererFirstName?? '';
       this.participantEventCreateDTO.ordererLastName = this.formGroup.value.ordererLastName?? '';
