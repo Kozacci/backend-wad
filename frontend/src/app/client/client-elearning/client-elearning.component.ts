@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
-import {CourseType, ParticipantCourseFilterDTO} from "../../shared/dto";
-import {RestClient} from "../../shared/rest-client";
-import {PathService} from "../../shared/services/path.service";
+import {Component} from '@angular/core';
+import {ParticipantCourseFilterDTO} from "../../shared/dto";
 import {MessageService} from "primeng/api";
 import {ClientMyCoursesService} from "../client-my-courses/client-my-courses.service";
 
@@ -39,6 +37,9 @@ export class ClientElearningComponent {
       .subscribe(response => {
         if(response != null) {
           this.courses = response;
+        }
+        else {
+          this.courses = [];
         }
       })
   }
