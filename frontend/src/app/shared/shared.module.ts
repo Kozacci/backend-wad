@@ -28,6 +28,7 @@ import { CourseStatusPipe } from './pipes/course-status.pipe';
 import { CourseCityPipe } from './pipes/course-city.pipe';
 import { EventCityPipe } from './pipes/event-city.pipe';
 import { EventTypePipe } from './pipes/event-type.pipe';
+import { IsCoursePassedPipe } from './pipes/is-course-passed.pipe';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { EventTypePipe } from './pipes/event-type.pipe';
     CourseCityPipe,
     EventCityPipe,
     EventTypePipe,
+    IsCoursePassedPipe,
   ],
   imports: [
     CommonModule,
@@ -81,6 +83,7 @@ import { EventTypePipe } from './pipes/event-type.pipe';
     CourseCityPipe,
     EventCityPipe,
     EventTypePipe,
+    IsCoursePassedPipe
   ]
 })
 export class SharedModule { }

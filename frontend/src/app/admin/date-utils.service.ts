@@ -1,4 +1,4 @@
-export function formatDateToYYYYMMDD(dateInput: Date): string {
+export function formatDateToYYYYMMDD(dateInput: Date): string | null {
   let date: Date;
 
   // check if dateInput is already Date type object
@@ -11,6 +11,10 @@ export function formatDateToYYYYMMDD(dateInput: Date): string {
   // check if conversion was correct
   if (isNaN(date.getTime())) {
     console.error('Invalid date in formatDateToYYYYMMDD');
+  }
+  // if default date, we don't want this date
+  if (date.getFullYear() == 1970 && date.getMonth() == 0 && date.getUTCDate() == 1) {
+    return null;
   }
 
   const year = date.getFullYear();
