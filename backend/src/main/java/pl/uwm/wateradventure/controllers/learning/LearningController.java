@@ -49,8 +49,9 @@ class LearningController {
         return learningFacade.updateTrialExamLearning(participantCourseId, isPassed).toDTO();
     }
 
-    // later might need to add ParticipantId for security purposes - to check if person who sends request is a
-    // participant who wants to check his AnswerHistory
+    // TODO -  later might need to add ParticipantId for security purposes -
+    //         to check if person who sends request is a
+    //         participant who wants to check his AnswerHistory
     @GetMapping("/{participantCourseId}/answer-history")
     @ResponseStatus(HttpStatus.OK)
     EntireLearningDTO getAnswerHistoryByParticipantCourseId(@PathVariable Long participantCourseId) {
