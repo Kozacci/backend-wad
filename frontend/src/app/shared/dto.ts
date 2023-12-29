@@ -332,6 +332,15 @@ export interface EventFilterDTO {
   isPaid: boolean
 }
 
+export interface EventCreateUpdateDTO {
+  type: EventType,
+  cost: number,
+  date: Date,
+  city: EventCity,
+  duration: Date | string | null,
+  maxParticipantsNumber: number,
+}
+
 export interface ErrorDTO {
   fieldName: string,
   message: string

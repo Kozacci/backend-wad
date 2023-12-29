@@ -3,7 +3,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {
   CourseCreateUpdateDTO,
   CourseEntityDTO,
-  CourseFilterDTO,
+  CourseFilterDTO, EventCreateUpdateDTO, EventEntityDTO,
   EventFilterDTO,
   ParticipantCourseEntityDTO,
   ParticipantEntityDTO,
@@ -186,13 +186,17 @@ export class RestClient {
     return this.http.delete(url, {withCredentials: true})
   }
 
-  editCourse(courseToEdit: CourseCreateUpdateDTO, courseToEditId: number) {
+  editCourse(courseToEdit: CourseCreateUpdateDTO, courseToEditId: number): Observable<CourseEntityDTO> {
     const url = `${this.apiUrl}/courses/${courseToEditId}`;
     return this.http.put<CourseEntityDTO>(url, courseToEdit, {withCredentials: true});
   }
 
   deleteAssigningForEvent(participantEventId: number | null) {
     return this.http.delete(`${this.apiUrl}/participant-events/${participantEventId}`, {withCredentials: true})
+  }
+
+  addEvent(eventToAdd: EventCreateUpdateDTO): Observable<EventEntityDTO> {
+    return this.http.post<EventEntityDTO>(`${this.apiUrl}/events`, eventToAdd, {withCredentials: true})
   }
 
 }
