@@ -25,7 +25,9 @@ export class ClientMyCoursesComponent {
   getParticipantCourses() {
     const participantId = Number(sessionStorage.getItem('cacheId'));
     return this.restClient
-      .getCoursesByParticipantIdAndFilters(participantId, undefined, undefined, null, null, 'dateFrom')
+      .getCoursesByParticipantIdAndFilters(participantId, undefined, undefined,
+        null, null, 'dateFrom',
+        null, null, null, undefined)
       .subscribe(response => {
         if(response != null) {
           this.courses = response;
