@@ -1,1 +1,38 @@
-<p>client-elearning works!</p>
+<body>
+<div *ngIf="courses.length == 0" class="course-empty-list">
+  <div class="course-empty-list-title">Brak wykupionych kursów</div>
+</div>
+<div *ngIf="courses.length != 0" class="course-list">
+  <div *ngFor="let course of courses" class="course-card"
+       [ngStyle]="course.isPaid
+         ? {
+         'border': '3px solid #27ab50',
+         'box-shadow': '0 4px 8px rgba(65, 110, 65, 0.3)'
+         }
+         : {
+         'border': '3px solid #ddd',
+         'box-shadow': '0 4px 8px rgba(0, 0, 0, 0.2)',
+         'opacity': '0.4',
+         'pointer-events': 'none'
+         }">
+    <div class="course-image-container">
+      <img [src]="clientMyCoursesService.getImage(course)" alt="Course Image" class="course-image"/>
+      <span *ngIf="course.isPaid" class="course-mode" style="color: #27ab50">Opłacony</span>
+      <span *ngIf="!course.isPaid" class="course-mode" style="color: #6c757d">Nieopłacony</span>
+    </div>
+    <div class="course-content">
+      <p-button icon="pi pi-info-circle" styleClass="p-button-rounded p-button-text" class="custom-icon-button" (click)="clientMyCoursesService.goToCourseDetails(course)" [pTooltip]="'Szczegóły kursu'"></p-button>
+      <div class="course-title">
+        <h3 class="course-title">{{ course.courseType | courseType }}</h3>
+        {{ course.city }}
+        <strong><br>Termin od:</strong> {{ course.dateFrom }}
+        <strong><br>Termin do:</strong> {{ course.dateTo }}
+      </div>
+      <p-button icon="pi pi-chart-bar" styleClass="p-button-rounded p-button-text" class="custom-icon-button" (click)="clientMyCoursesService.goToCourseDetails(course)" [pTooltip]="'Statystyki nauki'"></p-button>
+      <p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-text" class="custom-icon-button" (click)="clientMyCoursesService.goToCourseDetails(course)" [pTooltip]="'Nauka ogólna'"></p-button>
+      <p-button icon="pi pi-bars" styleClass="p-button-rounded p-button-text" class="custom-icon-button" (click)="clientMyCoursesService.goToCourseDetails(course)" [pTooltip]="'Nauka działami'"></p-button>
+      <p-button icon="pi pi-check-square" styleClass="p-button-rounded p-button-text" class="custom-icon-button" (click)="clientMyCoursesService.goToCourseDetails(course)" [pTooltip]="'Próbny egzamin'"></p-button>
+    </div>
+  </div>
+</div>
+</body>
