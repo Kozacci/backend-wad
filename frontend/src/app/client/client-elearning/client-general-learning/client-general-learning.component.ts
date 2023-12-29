@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RestClient} from "../../../shared/rest-client";
 import {ActivatedRoute} from "@angular/router";
-import {Category, ParticipantCourseEntityDTO, QuestionEntityDTO} from "../../../shared/dto";
+import {ParticipantCourseEntityDTO, QuestionEntityDTO} from "../../../shared/dto";
 import {ClientElearningService} from "../client-elearning.service";
 
 @Component({

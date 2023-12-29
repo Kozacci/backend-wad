@@ -60,7 +60,9 @@ import {ClientMyCoursesComponent} from './client-my-courses/client-my-courses.co
 import {ClientElearningComponent} from './client-elearning/client-elearning.component';
 import {ButtonModule} from "primeng/button";
 import {TooltipModule} from "primeng/tooltip";
-import { ClientGeneralLearningComponent } from './client-elearning/client-general-learning/client-general-learning.component';
+import {
+  ClientGeneralLearningComponent
+} from './client-elearning/client-general-learning/client-general-learning.component';
 
 @NgModule({
   declarations: [
