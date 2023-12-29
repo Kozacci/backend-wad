@@ -5,7 +5,7 @@ import {
   CourseEntityDTO,
   CourseFilterDTO, EventCreateUpdateDTO, EventEntityDTO,
   EventFilterDTO,
-  ParticipantCourseEntityDTO, ParticipantCourseFilterDTO,
+  ParticipantCourseEntityDTO, ParticipantCourseFilterDTO, ParticipantCourseUpdateDTO,
   ParticipantEntityDTO,
   ParticipantEventEntityCreateDTO, ParticipantEventFilterDTO,
   ParticipantLoginDTO,
@@ -94,14 +94,21 @@ export class RestClient {
   }
 
   getCoursesByParticipantIdAndFilters(
-    participantId: number,
+    participantId: number | undefined,
     courseType: string | undefined,
     courseStatus: string | undefined,
     isPaid: boolean | null,
     isPassed: boolean | null,
-    sortBy: string | undefined): Observable<ParticipantCourseFilterDTO[]>
+    sortBy: string | undefined,
+    participantEmail: string | null,
+    participantLastName: string | null,
+    courseDateFrom: string | null,
+    courseCity: string | undefined): Observable<ParticipantCourseFilterDTO[]>
   {
     let params = new HttpParams();
+    if (participantId !== null && participantId !== undefined) {
+      params = params.append("participantId", participantId);
+    }
     if (courseType !== null && courseType !== undefined) {
       params = params.append('courseType', courseType);
     }
@@ -117,7 +124,19 @@ export class RestClient {
     if (sortBy !== null && sortBy !== undefined) {
       params = params.append('sortBy', sortBy);
     }
-    return this.http.get<ParticipantCourseFilterDTO[]>(`${this.apiUrl}/participants/${participantId}/courses`, {params, withCredentials: true } );
+    if (participantEmail !== null && participantEmail !== undefined && participantEmail !== "") {
+      params = params.append('email', participantEmail);
+    }
+    if (participantLastName !== null && participantLastName !== undefined && participantLastName !== "") {
+      params = params.append('lastName', participantLastName);
+    }
+    if (courseDateFrom !== null && courseDateFrom !== undefined) {
+      params = params.append('dateFrom', courseDateFrom)
+    }
+    if (courseCity !== null && courseCity !== undefined) {
+      params = params.append('courseCity', courseCity);
+    }
+    return this.http.get<ParticipantCourseFilterDTO[]>(`${this.apiUrl}/participants/courses/filter-by`, {params, withCredentials: true } );
   }
 
   getEventsByFilters(
@@ -242,4 +261,7 @@ export class RestClient {
     return this.http.delete(url, {withCredentials: true})
   }
 
+  updateCoursePassing(participantCourseUpdateDTO: ParticipantCourseUpdateDTO): Observable<ParticipantCourseEntityDTO[]> {
+    return this.http.put<ParticipantCourseEntityDTO[]>(`${this.apiUrl}/participant-courses`, participantCourseUpdateDTO, {withCredentials: true});
+  }
 }
