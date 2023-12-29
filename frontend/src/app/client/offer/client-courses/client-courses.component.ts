@@ -10,7 +10,7 @@ export class ClientCoursesComponent {
 
   courses = [
     {
-      title: 'STEROWNIK MOTOROWODNY',
+      title: 'STERNIK MOTOROWODNY',
       location: 'Sopot | Olecko',
       includes: [
         'Szkolenie on-line (e-learning)',
