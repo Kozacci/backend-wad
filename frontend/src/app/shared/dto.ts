@@ -398,6 +398,44 @@ export interface EventCreateUpdateDTO {
   maxParticipantsNumber: number,
 }
 
+export interface EntireLearningDTO {
+  answerHistoryId: number,
+  categoryLearningDTO: CategoryLearningDTO[],
+  trialExamDTO: TrialExamDTO,
+  generalLearningDTO: GeneralLearningDTO
+}
+
+export interface TrialExamDTO {
+  id: number,
+  total: number,
+  passed: number,
+  failed: number
+}
+
+export interface CategoryLearningDTO {
+  id: number,
+  questionsAnswered: number,
+  correctAnswers: number,
+  category: string
+}
+
+export interface CategoryLearningUpdateDTO {
+  questionsAnswered: number,
+  correctAnswers: number,
+  category: string
+}
+
+export interface GeneralLearningDTO {
+  id: number,
+  questionsAnswered: number,
+  correctAnswers: number
+}
+
+export interface GeneralLearningUpdateDTO {
+  questionsAnswered: number,
+  correctAnswers: number
+}
+
 export interface ErrorDTO {
   fieldName: string,
   message: string
