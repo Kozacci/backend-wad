@@ -80,6 +80,9 @@
       <h3>Brak dostępnych terminów!</h3>
       <button pButton type="button" label="Wybierz termin" class="sign-on-event-p-button p-button-rounded p-button-primary" [disabled]="availableEvents.length == 0" (click)="modalDateVisibility = true"><i class="pi pi-plus"></i></button>
     </div>
+  </div>
+
+</div>
 
 <!--    FOR NOW IT IS USABLE EVEN WITHOUT LOGGIN' IN -->
 <!--    <div *ngIf="!authService.isLogged()" class="item-enroll-info">-->
@@ -90,9 +93,6 @@
 <!--      <button pButton type="button" label="Wybierz termin" class="sign-on-event-p-button p-button-rounded p-button-primary" [disabled]="!authService.isLogged()" (click)="modalDateVisibility = true"><i class="pi pi-plus"></i></button>-->
 <!--    </div>-->
 <!--  </div>-->
-
-</div>
-
 
 <p-dialog header="Wybierz dostępny termin" [(visible)]="modalDateVisibility" [style]="{'min-width': '50vw'}" [modal]="true" [dismissableMask]="true">
   <p-table [value]="availableEvents"
