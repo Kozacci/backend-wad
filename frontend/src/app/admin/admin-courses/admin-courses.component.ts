@@ -11,6 +11,7 @@ import {RestClient} from "../../shared/rest-client";
 import {HttpResponseHandlerService} from "../../shared/services/http-response-handler.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {FormService} from "../../shared/services/form/form.service";
+import {formatDateToYYYYMMDD} from "../date-utils.service";
 
 @Component({
   selector: 'app-admin-courses',
@@ -159,33 +160,11 @@ export class AdminCoursesComponent {
     editedCourse.maxParticipantsNumber = this.courseToEdit.maxParticipantsNumber;
   }
 
-  formatDateToYYYYMMDD(dateInput: Date): string {
-    let date: Date;
-
-    // check if dateInput is already Date type object
-    if (dateInput instanceof Date) {
-      date = dateInput;
-    } else {
-      // conversion attempt to Date type
-      date = new Date(dateInput);
-    }
-    // check if conversion was correct
-    if (isNaN(date.getTime())) {
-      console.error('Invalid date in formatDateToYYYYMMDD');
-    }
-
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // adding 1, because january == 0
-    const day = date.getDate().toString().padStart(2, '0');
-
-    return `${year}-${month}-${day}`;
-  }
-
   // getters & setters
 
   getDateFromDate(): string | null {
     const val = this.dateFormGroup.get(this.DATE_FROM)?.value;
-    return val ? this.formatDateToYYYYMMDD(new Date(val)) : null;
+    return val ? formatDateToYYYYMMDD(new Date(val)) : null;
   }
 
   setDateFromDate(date: Date): void { // those setters are probably unnessesary bcs formGroup is setting value by itself
@@ -194,7 +173,7 @@ export class AdminCoursesComponent {
 
   getDateToDate(): string | null {
     const val = this.dateFormGroup.get(this.DATE_TO)?.value;
-    return val ? this.formatDateToYYYYMMDD(new Date(val)) : null;
+    return val ? formatDateToYYYYMMDD(new Date(val)) : null;
   }
 
   setDateToDate(date: Date): void {
@@ -207,7 +186,7 @@ export class AdminCoursesComponent {
 
   getAddDateFromDate(): string | null {
     const val = this.dateToAddFormGroup.get(this.DATE_FROM)?.value;
-    return val ? this.formatDateToYYYYMMDD(new Date(val)) : null;
+    return val ? formatDateToYYYYMMDD(new Date(val)) : null;
   }
 
   setAddDateToDate(date: Date): void {
@@ -216,7 +195,7 @@ export class AdminCoursesComponent {
 
   getAddDateToDate(): string | null {
     const val = this.dateToAddFormGroup.get(this.DATE_TO)?.value;
-    return val ? this.formatDateToYYYYMMDD(new Date(val)) : null;
+    return val ? formatDateToYYYYMMDD(new Date(val)) : null;
   }
 
   setDateFromEditModal(date: Date): void {
@@ -226,7 +205,7 @@ export class AdminCoursesComponent {
 
   getDateFromEditModal(): string | null {
     const val = this.formGroupEditCourse.get(this.DATE_FROM)?.value;
-    return val ? this.formatDateToYYYYMMDD(new Date(val)) : null;
+    return val ? formatDateToYYYYMMDD(new Date(val)) : null;
   }
 
   setDateToEditModal(date: Date): void {
@@ -236,7 +215,7 @@ export class AdminCoursesComponent {
 
   getDateToEditModal(): string | null {
     const val = this.formGroupEditCourse.get(this.DATE_FROM)?.value;
-    return val ? this.formatDateToYYYYMMDD(new Date(val)) : null;
+    return val ? formatDateToYYYYMMDD(new Date(val)) : null;
   }
 
   // show/close modal methods

@@ -63,7 +63,7 @@ export class HttpResponseHandlerService {
   }
 
   showWarningPToast(summary: string, detail: string): void {
-    this.messageService.add({life: 4000, severity: 'warning', summary: summary, detail: detail})
+    this.messageService.add({life: 4000, severity: 'warn', summary: summary, detail: detail})
   }
 
 }

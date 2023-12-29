@@ -219,6 +219,7 @@ export function mapToCorrectAnswer(correctAnswerAsString: string): CorrectAnswer
 /** ---------------------- INTERFACES ---------------------- **/
 
 export interface ParticipantCourseEntityDTO {
+  participantCourseId: number,
   courseId: number,
   courseType: string,
   courseDateFrom: Date,
@@ -342,7 +343,15 @@ export interface ParticipantCourseFilterDTO {
   participantCourseId: number,
   participantId: number,
   isPassed: boolean,
-  isPaid: boolean
+  isPaid: boolean,
+  participantFirstName: string,
+  participantLastName: string,
+  participantEmail: string
+}
+
+export interface ParticipantCourseUpdateDTO {
+  participantCourseIds: number[],
+  isPassed: boolean
 }
 
 export interface CourseCreateUpdateDTO {

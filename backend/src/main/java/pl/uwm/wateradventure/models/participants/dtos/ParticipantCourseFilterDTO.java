@@ -17,5 +17,8 @@ public record ParticipantCourseFilterDTO(Long id,
                                          Long participantCourseId,
                                          Long participantId,
                                          Boolean isPassed,
-                                         Boolean isPaid) {
+                                         Boolean isPaid,
+                                         String participantFirstName,
+                                         String participantLastName,
+                                         String participantEmail) {
 }

@@ -30,7 +30,9 @@ public class ParticipantCoursesCBHelper {
                                                  List<Predicate> predicates,
                                                  Join<CourseEntity, ParticipantCourseEntity> joinParticipantCourse,
                                                  Long participantId) {
-        predicates.add(cb.equal(joinParticipantCourse.get("participant").get("id"), participantId));
+        if (participantId != null) {
+            predicates.add(cb.equal(joinParticipantCourse.get("participant").get("id"), participantId));
+        }
 
     }
 
@@ -39,7 +41,12 @@ public class ParticipantCoursesCBHelper {
                                             List<Predicate> predicates,
                                             Boolean isPassed) {
         if (isPassed != null) {
-            predicates.add(cb.equal(joinParticipantCourse.get("isPassed"), isPassed));
+            if (isPassed){
+                predicates.add(cb.isTrue(joinParticipantCourse.get("isPassed")));
+            }
+            else {
+                predicates.add(cb.isFalse(joinParticipantCourse.get("isPassed")));
+            }
         }
 
     }
@@ -50,6 +57,24 @@ public class ParticipantCoursesCBHelper {
                                           Boolean isPaid) {
         if (isPaid != null) {
             predicates.add(cb.equal(joinParticipantCourse.get("isPaid"), isPaid));
+        }
+    }
+
+    public static void addEmailPredicate(CriteriaBuilder cb,
+                                            Join<CourseEntity, ParticipantCourseEntity> joinParticipantCourse,
+                                            List<Predicate> predicates,
+                                            String email) {
+        if (email != null) {
+            predicates.add(cb.equal(joinParticipantCourse.get("participant").get("email"), email));
+        }
+    }
+
+    public static void addLastNamePredicate(CriteriaBuilder cb,
+                                            Join<CourseEntity, ParticipantCourseEntity> joinParticipantCourse,
+                                            List<Predicate> predicates,
+                                            String lastName) {
+        if (lastName != null) {
+            predicates.add(cb.equal(joinParticipantCourse.get("participant").get("lastName"), lastName));
         }
     }
 }

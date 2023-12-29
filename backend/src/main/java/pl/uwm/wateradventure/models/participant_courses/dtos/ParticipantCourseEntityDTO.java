@@ -5,7 +5,8 @@ import lombok.Builder;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public record ParticipantCourseEntityDTO(Long courseId,
+public record ParticipantCourseEntityDTO(Long participantCourseId,
+                                         Long courseId,
                                          String courseType,
                                          LocalDate courseDateFrom,
                                          LocalDate courseDateTo,

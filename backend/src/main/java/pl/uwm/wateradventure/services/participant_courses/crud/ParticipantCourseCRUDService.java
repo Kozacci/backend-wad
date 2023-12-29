@@ -4,7 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.uwm.wateradventure.models.courses.CourseEntity;
 import pl.uwm.wateradventure.models.participant_courses.ParticipantCourseEntity;
+import pl.uwm.wateradventure.models.participant_courses.dtos.ParticipantCourseUpdateDTO;
 import pl.uwm.wateradventure.models.participants.ParticipantEntity;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -23,9 +26,9 @@ public class ParticipantCourseCRUDService {
         return reader.getParticipantCourseById(participantCourseId);
     }
 
-    public ParticipantCourseEntity update(Long participantCourseId, Boolean isPassed, Boolean isPaid) {
-        var participantCourseEntity = reader.getParticipantCourseById(participantCourseId);
-        return updater.update(participantCourseEntity, isPassed, isPaid);
+    public List<ParticipantCourseEntity> update(ParticipantCourseUpdateDTO dto) {
+        var participantCourseEntities = reader.getParticipantCourseByIdIn(dto.participantCourseIds());
+        return updater.update(participantCourseEntities, dto.isPassed());
     }
 
     public void deleteAssigningForCourse(Long participantCourseId) {

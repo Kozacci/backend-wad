@@ -58,6 +58,7 @@ public class ParticipantCourseEntity extends WaterAdventureChangeMetricEntity {
 
     public ParticipantCourseEntityDTO toDTO() {
         return ParticipantCourseEntityDTO.builder()
+                .participantCourseId(this.id)
                 .courseId(this.course.getId())
                 .courseType(this.course.getType().enumValue)
                 .courseDateFrom(this.course.getDateFrom())

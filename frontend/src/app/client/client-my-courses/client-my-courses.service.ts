@@ -17,7 +17,9 @@ export class ClientMyCoursesService {
   getParticipantCourses() {
     const participantId = Number(sessionStorage.getItem('cacheId'));
     return this.restClient
-      .getCoursesByParticipantIdAndFilters(participantId, undefined, undefined, null, null, 'dateFrom')
+      .getCoursesByParticipantIdAndFilters(participantId, undefined, undefined,
+        null, null, 'dateFrom',
+        null, null, null, undefined)
   }
 
   getImage(course: ParticipantCourseFilterDTO): string {
