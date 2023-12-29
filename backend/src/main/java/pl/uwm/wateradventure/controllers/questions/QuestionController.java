@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.uwm.wateradventure.models.learning.category.Category;
+import pl.uwm.wateradventure.models.questions.QuestionEntity;
 import pl.uwm.wateradventure.models.questions.dtos.QuestionCreateUpdateDTO;
 import pl.uwm.wateradventure.models.questions.dtos.QuestionEntityDTO;
 import pl.uwm.wateradventure.models.questions.dtos.QuestionFilterDTO;
@@ -42,6 +43,13 @@ class QuestionController {
     @ResponseStatus(HttpStatus.OK)
     public Page<QuestionEntityDTO> getAllQuestionsPageable() {
         return questionFacade.getAllQuestionsPageable();
+    }
+
+    @GetMapping("/random")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<QuestionEntityDTO> getRandomQuestionByCategories(@RequestParam List<Category> categories) {
+        QuestionEntityDTO randomQuestion = questionFacade.getRandomQuestionByCategories(categories);
+        return ResponseEntity.ok(randomQuestion);
     }
 
     @GetMapping("/filter-by")

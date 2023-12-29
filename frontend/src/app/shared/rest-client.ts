@@ -242,4 +242,9 @@ export class RestClient {
     return this.http.delete(url, {withCredentials: true})
   }
 
+  getRandomQuestionByCategories(categories: string[]): Observable<QuestionEntityDTO> {
+    const params = new HttpParams().set('categories', categories.join(','));
+    return this.http.get<QuestionEntityDTO>('/api/questions/random', { params });
+  }
+
 }
