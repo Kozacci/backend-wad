@@ -210,8 +210,8 @@ export class RestClient {
     return this.http.post<CourseEntityDTO>(`${this.apiUrl}/courses`, courseToAdd, {withCredentials: true})
   }
 
-  deleteCourseById(courseToEditId: number | null) {
-    const url = `${this.apiUrl}/courses/${courseToEditId}`
+  deleteCourseById(courseToDeleteId: number | null) {
+    const url = `${this.apiUrl}/courses/${courseToDeleteId}`
     return this.http.delete(url, {withCredentials: true})
   }
 
@@ -230,6 +230,16 @@ export class RestClient {
 
   addEvent(eventToAdd: EventCreateUpdateDTO): Observable<EventEntityDTO> {
     return this.http.post<EventEntityDTO>(`${this.apiUrl}/events`, eventToAdd, {withCredentials: true})
+  }
+
+  editEvent(eventToEdit: EventCreateUpdateDTO, eventId: number): Observable<EventEntityDTO> {
+    const url = `${this.apiUrl}/events/${eventId}`;
+    return this.http.put<EventEntityDTO>(url, eventToEdit, {withCredentials: true});
+  }
+
+  deleteEventById(eventToDeleteId: number | null) {
+    const url = `${this.apiUrl}/events/${eventToDeleteId}`;
+    return this.http.delete(url, {withCredentials: true})
   }
 
 }
