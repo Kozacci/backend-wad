@@ -14,7 +14,7 @@
          'box-shadow': '0 4px 8px rgba(0, 0, 0, 0.2)'
          }">
     <div class="course-image-container">
-      <img [src]="getImage(course)" alt="Course Image" class="course-image"/>
+      <img [src]="clientMyCoursesService.getImage(course)" alt="Course Image" class="course-image"/>
       <span *ngIf="course.isPaid" class="course-mode" style="color: #27ab50">Opłacony</span>
       <span *ngIf="!course.isPaid" class="course-mode" style="color: #6c757d">Nieopłacony</span>
     </div>
@@ -31,8 +31,8 @@
       </div>
     </div>
     <div class="course-actions">
-      <button pButton type="button" label="Szczegóły" icon="pi pi-info-circle" class="p-button-rounded p-button-primary" (click)="goToCourseDetails(course)"></button>
-      <button *ngIf="course.isPaid" pButton type="button" label="Nauka" icon="fa-solid fa-book-open-reader" class="p-button-rounded p-button-success" (click)="goToCourseLearning(course)"></button>
+      <button pButton type="button" label="Szczegóły" icon="pi pi-info-circle" class="p-button-rounded p-button-primary" (click)="clientMyCoursesService.goToCourseDetails(course)"></button>
+      <button *ngIf="course.isPaid" pButton type="button" label="Nauka" icon="fa-solid fa-book-open-reader" class="p-button-rounded p-button-success" (click)="clientMyCoursesService.goToCourseLearning(course)"></button>
       <button *ngIf="!course.isPaid" pButton type="button" label="Anuluj" icon="pi pi-times" class="p-button-rounded p-button-outlined p-button-secondary" (click)="cancelParticipantCourse(course)"></button>
     </div>
 <!--  TODO CERTIFICATE GENERATE BUTTON IF COURSE IS PASSED = TRUE AND HIDE "LEARNING" BUTTON THEN-->

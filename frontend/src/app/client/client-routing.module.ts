@@ -41,6 +41,7 @@ import {ClientFaqComponent} from "./client-about/client-faq/client-faq.component
 import {ClientContactComponent} from "./client-about/client-contact/client-contact.component";
 import {ClientMyEventsComponent} from "./client-my-events/client-my-events.component";
 import {ClientMyCoursesComponent} from "./client-my-courses/client-my-courses.component";
+import {ClientElearningComponent} from "./client-elearning/client-elearning.component";
 
 const routes: Routes = [
   {
@@ -137,6 +138,11 @@ const routes: Routes = [
     path: 'profil/moje-kursy',
     canActivate: undefined,
     component: ClientMyCoursesComponent
+  },
+  {
+    path: 'e-learning',
+    canActivate: undefined,
+    component: ClientElearningComponent
   },
 ];
 

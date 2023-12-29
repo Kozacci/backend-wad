@@ -57,6 +57,9 @@ import {ClientFaqComponent} from './client-about/client-faq/client-faq.component
 import {MatExpansionModule} from "@angular/material/expansion";
 import {ClientMyEventsComponent} from './client-my-events/client-my-events.component';
 import {ClientMyCoursesComponent} from './client-my-courses/client-my-courses.component';
+import { ClientElearningComponent } from './client-elearning/client-elearning.component';
+import {Button, ButtonModule} from "primeng/button";
+import {TooltipModule} from "primeng/tooltip";
 
 @NgModule({
   declarations: [
@@ -83,7 +86,8 @@ import {ClientMyCoursesComponent} from './client-my-courses/client-my-courses.co
     ClientContactComponent,
     ClientFaqComponent,
     ClientMyEventsComponent,
-    ClientMyCoursesComponent
+    ClientMyCoursesComponent,
+    ClientElearningComponent
   ],
   exports: [
     ClientLayoutComponent,
@@ -92,6 +96,8 @@ import {ClientMyCoursesComponent} from './client-my-courses/client-my-courses.co
     SharedModule,
     CommonModule,
     NgOptimizedImage,
+    ButtonModule,
+    TooltipModule,
     AnimateModule,
     MatMenuModule,
     MatButtonModule,
