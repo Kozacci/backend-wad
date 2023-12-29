@@ -34,6 +34,7 @@ export class ClientElearningComponent implements OnInit {
     sessionStorage.setItem('welcomeMessageDisplayed', 'true');
   }
 
+  // TODO -- DO NOT USE WARSZTATY_NAWIGACYJNE AND REJSY_STAZOWE ON THIS VIEW
   getParticipantCourses() {
     this.clientMyCoursesService.getParticipantCourses()
       .subscribe(response => {
@@ -48,22 +49,22 @@ export class ClientElearningComponent implements OnInit {
 
   goToStatistics(course: ParticipantCourseFilterDTO) {
     const id = course.participantCourseId;
-    this.pathService.navigate(`e-learning/statystyki/${id}`)
+    this.pathService.navigate(`e-learning/statystyki/id=${id}`)
   }
 
   goToGeneralLearning(course: ParticipantCourseFilterDTO) {
     const id = course.participantCourseId;
-    this.pathService.navigate(`/e-learning/nauka-ogolna/${id}`)
+    this.pathService.navigate(`/e-learning/nauka-ogolna/id=${id}`)
   }
 
   goToCategoryLearning(course: ParticipantCourseFilterDTO) {
     const id = course.participantCourseId;
-    this.pathService.navigate(`e-learning/nauka-dzialami/${id}`)
+    this.pathService.navigate(`e-learning/nauka-dzialami/id=${id}`)
   }
 
   goToTrialExam(course: ParticipantCourseFilterDTO) {
     const id = course.participantCourseId;
-    this.pathService.navigate(`e-learning/egzamin-probny/${id}`)
+    this.pathService.navigate(`e-learning/egzamin-probny/id=${id}`)
   }
 
   // TODO przekazac do url id participant course, sprawdzac czy ten kurs participant jakiego typu jest i zaleznie od tego generowac pytania pod to/działy/egzamin
