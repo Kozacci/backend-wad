@@ -111,7 +111,7 @@ export class AdminCoursesComponent {
 
   deleteCourse(): void {
     this.restClient.deleteCourseById(this.courseToEditId).subscribe(() => {
-      this.responseHandlerService.showSuccessPToast("Usunięcie kursu", "Kurs nr: " + this.courseToEditId + " został usunięty.");
+      this.responseHandlerService.showSuccessPToast("Usunięcie kursu", "Kurs numer: " + this.courseToEditId + " został usunięty.");
       this.removeCourseFromTable(this.courseToEditId);
       this.closeEditCourseModal();
     }, error => {
@@ -188,7 +188,7 @@ export class AdminCoursesComponent {
     return val ? this.formatDateToYYYYMMDD(new Date(val)) : null;
   }
 
-  setDateFromDate(date: Date): void {
+  setDateFromDate(date: Date): void { // those setters are probably unnessesary bcs formGroup is setting value by itself
     this.dateFormGroup.get(this.DATE_FROM)?.setValue(date);
   }
 

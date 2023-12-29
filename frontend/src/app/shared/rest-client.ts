@@ -3,13 +3,11 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {
   CourseCreateUpdateDTO,
   CourseEntityDTO,
-  CourseFilterDTO,
+  CourseFilterDTO, EventCreateUpdateDTO, EventEntityDTO,
   EventFilterDTO,
-  ParticipantCourseEntityDTO,
-  ParticipantCourseFilterDTO,
+  ParticipantCourseEntityDTO, ParticipantCourseFilterDTO,
   ParticipantEntityDTO,
-  ParticipantEventEntityCreateDTO,
-  ParticipantEventFilterDTO,
+  ParticipantEventEntityCreateDTO, ParticipantEventFilterDTO,
   ParticipantLoginDTO,
   ParticipantRegisterDTO,
   ParticipantUpdateDTO,
@@ -59,16 +57,14 @@ export class RestClient {
     return this.http.post<ParticipantCourseEntityDTO>(`${this.apiUrl}/participant-events`, participantEventCreateDTO, { withCredentials: true})
   }
 
-  getCoursesByFilters(
-    courseType: string | undefined,
-    courseStatus: string | undefined,
-    courseCity: string  | undefined,
-    dateFrom: string | null,
-    dateTo: string | null,
-    registeredParticipants: number | null,
-    participantsLimit: number | null,
-    sortBy: string | undefined): Observable<CourseFilterDTO[]>
-  {
+  getCoursesByFilters(courseType: string | undefined,
+                      courseStatus: string | undefined,
+                      courseCity: string  | undefined,
+                      dateFrom: string | null,
+                      dateTo: string | null,
+                      registeredParticipants: number | null,
+                      participantsLimit: number | null,
+                      sortBy: string | undefined): Observable<CourseFilterDTO[]> {
     let params = new HttpParams();
     if (courseType !== null && courseType !== undefined) {
       params = params.append('courseType', courseType);
@@ -152,13 +148,11 @@ export class RestClient {
     return this.http.get<EventFilterDTO[]>(`${this.apiUrl}/events/events-filter-by`, {params, withCredentials: true } );
   }
 
-  getParticipantEventsByFilters(
-    type: string | undefined,
-    city: string  | undefined,
-    clientLastName: string  | undefined,
-    clientEmail: string  | undefined,
-    sortBy: string | undefined): Observable<ParticipantEventFilterDTO[]>
-  {
+  getParticipantEventsByFilters(type: string | undefined,
+                     city: string  | undefined,
+                     clientLastName: string  | undefined,
+                     clientEmail: string  | undefined,
+                     sortBy: string | undefined): Observable<ParticipantEventFilterDTO[]> {
     let params = new HttpParams();
     if (type !== null && type !== undefined) {
       params = params.append('type', type);
@@ -178,12 +172,10 @@ export class RestClient {
     return this.http.get<ParticipantEventFilterDTO[]>(`${this.apiUrl}/events/participant-events-filter-by`, {params, withCredentials: true } );
   }
 
-  getQuestionsByFilters(
-    id: number | null,
-    content: string | null,
-    category: string | undefined,
-    sortBy: string | undefined): Observable<QuestionFilterDTO[]>
-  {
+  getQuestionsByFilters(id: number | null,
+                        content: string | null,
+                        category: string | undefined,
+                        sortBy: string | undefined): Observable<QuestionFilterDTO[]> {
     let params = new HttpParams();
     if (id !== null) {
       params = params.append('id', id);
@@ -218,12 +210,12 @@ export class RestClient {
     return this.http.post<CourseEntityDTO>(`${this.apiUrl}/courses`, courseToAdd, {withCredentials: true})
   }
 
-  deleteCourseById(courseToEditId: number | null) {
-    const url = `${this.apiUrl}/courses/${courseToEditId}`
+  deleteCourseById(courseToDeleteId: number | null) {
+    const url = `${this.apiUrl}/courses/${courseToDeleteId}`
     return this.http.delete(url, {withCredentials: true})
   }
 
-  editCourse(courseToEdit: CourseCreateUpdateDTO, courseToEditId: number) {
+  editCourse(courseToEdit: CourseCreateUpdateDTO, courseToEditId: number): Observable<CourseEntityDTO> {
     const url = `${this.apiUrl}/courses/${courseToEditId}`;
     return this.http.put<CourseEntityDTO>(url, courseToEdit, {withCredentials: true});
   }
@@ -234,6 +226,20 @@ export class RestClient {
 
   deleteAssigningForCourse(participantCourseId: number | null) {
     return this.http.delete(`${this.apiUrl}/participant-courses/${participantCourseId}`, {withCredentials: true})
+  }
+
+  addEvent(eventToAdd: EventCreateUpdateDTO): Observable<EventEntityDTO> {
+    return this.http.post<EventEntityDTO>(`${this.apiUrl}/events`, eventToAdd, {withCredentials: true})
+  }
+
+  editEvent(eventToEdit: EventCreateUpdateDTO, eventId: number): Observable<EventEntityDTO> {
+    const url = `${this.apiUrl}/events/${eventId}`;
+    return this.http.put<EventEntityDTO>(url, eventToEdit, {withCredentials: true});
+  }
+
+  deleteEventById(eventToDeleteId: number | null) {
+    const url = `${this.apiUrl}/events/${eventToDeleteId}`;
+    return this.http.delete(url, {withCredentials: true})
   }
 
 }

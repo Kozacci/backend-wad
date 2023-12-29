@@ -18,6 +18,8 @@ public class EventCRUDService {
     private final EventDeleter deleter;
 
     public EventEntityDTO addEvent(EventCreateUpdateDTO eventCreateDTO) {
+        // TODO:
+        //  obecnie brakuje walidacji sprawdzającej czy event o tej dacie i takim duration może zostać dodany, czy nie koliduje z istniejącym już
         return creator.addEvent(eventCreateDTO);
     }
 

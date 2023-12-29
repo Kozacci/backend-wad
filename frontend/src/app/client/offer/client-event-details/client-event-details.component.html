@@ -133,7 +133,7 @@
   </p-table>
 
   <div class="modal-actions">
-    <button pButton type="button" label="Przejdź dalej" class="date-modal-events-p-button p-button-rounded p-button-primary" [disabled]="chosenEvent.id==null" (click)="signForEventModalChange()"></button>
+    <button pButton type="button" label="Przejdź dalej" class="date-modal-events-p-button p-button-rounded p-button-primary" [disabled]="chosenEvent.eventId==null" (click)="signForEventModalChange()"></button>
     <button pButton type="button" label="Anuluj" class="date-modal-p-button p-button-rounded p-button-outlined p-button-secondary" (click)="modalDateVisibility = false"></button>
   </div>
 </p-dialog>
