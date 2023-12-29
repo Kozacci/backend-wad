@@ -1,18 +1,20 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ParticipantCourseFilterDTO} from "../../shared/dto";
 import {MessageService} from "primeng/api";
 import {ClientMyCoursesService} from "../client-my-courses/client-my-courses.service";
+import {PathService} from "../../shared/services/path.service";
 
 @Component({
   selector: 'app-client-elearning',
   templateUrl: './client-elearning.component.html',
   styleUrls: ['./client-elearning.component.css']
 })
-export class ClientElearningComponent {
+export class ClientElearningComponent implements OnInit {
 
   courses: ParticipantCourseFilterDTO[] = [];
 
   constructor(
+    private readonly pathService: PathService,
     private readonly messageService: MessageService,
     protected readonly clientMyCoursesService: ClientMyCoursesService
   ) {}
@@ -43,5 +45,29 @@ export class ClientElearningComponent {
         }
       })
   }
+
+  goToStatistics(course: ParticipantCourseFilterDTO) {
+    const id = course.participantCourseId;
+    this.pathService.navigate(`e-learning/statystyki/${id}`)
+  }
+
+  goToGeneralLearning(course: ParticipantCourseFilterDTO) {
+    const id = course.participantCourseId;
+    this.pathService.navigate(`/e-learning/nauka-ogolna/${id}`)
+  }
+
+  goToCategoryLearning(course: ParticipantCourseFilterDTO) {
+    const id = course.participantCourseId;
+    this.pathService.navigate(`e-learning/nauka-dzialami/${id}`)
+  }
+
+  goToTrialExam(course: ParticipantCourseFilterDTO) {
+    const id = course.participantCourseId;
+    this.pathService.navigate(`e-learning/egzamin-probny/${id}`)
+  }
+
+  // TODO przekazac do url id participant course, sprawdzac czy ten kurs participant jakiego typu jest i zaleznie od tego generowac pytania pod to/działy/egzamin
+  // TODO NASTEPNIE STATYSTYKI NAUKI BAZUJAC NA TYM SAMYM ID
+
 
 }

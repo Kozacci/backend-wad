@@ -28,10 +28,10 @@
         <strong><br>Termin od:</strong> {{ course.dateFrom }}
         <strong><br>Termin do:</strong> {{ course.dateTo }}
       </div>
-      <p-button icon="pi pi-chart-bar" styleClass="p-button-rounded p-button-text" class="custom-icon-button" (click)="clientMyCoursesService.goToCourseDetails(course)" [pTooltip]="'Statystyki nauki'"></p-button>
-      <p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-text" class="custom-icon-button" (click)="clientMyCoursesService.goToCourseDetails(course)" [pTooltip]="'Nauka ogólna'"></p-button>
-      <p-button icon="pi pi-bars" styleClass="p-button-rounded p-button-text" class="custom-icon-button" (click)="clientMyCoursesService.goToCourseDetails(course)" [pTooltip]="'Nauka działami'"></p-button>
-      <p-button icon="pi pi-check-square" styleClass="p-button-rounded p-button-text" class="custom-icon-button" (click)="clientMyCoursesService.goToCourseDetails(course)" [pTooltip]="'Próbny egzamin'"></p-button>
+      <p-button icon="pi pi-chart-bar" styleClass="p-button-rounded p-button-text" class="custom-icon-button" (click)="goToStatistics(course)" [pTooltip]="'Statystyki nauki'"></p-button>
+      <p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-text" class="custom-icon-button" (click)="goToGeneralLearning(course)" [pTooltip]="'Nauka ogólna'"></p-button>
+      <p-button icon="pi pi-bars" styleClass="p-button-rounded p-button-text" class="custom-icon-button" (click)="goToCategoryLearning(course)" [pTooltip]="'Nauka działami'"></p-button>
+      <p-button icon="pi pi-check-square" styleClass="p-button-rounded p-button-text" class="custom-icon-button" (click)="goToTrialExam(course)" [pTooltip]="'Próbny egzamin'"></p-button>
     </div>
   </div>
 </div>

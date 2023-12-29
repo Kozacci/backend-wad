@@ -42,6 +42,9 @@ import {ClientContactComponent} from "./client-about/client-contact/client-conta
 import {ClientMyEventsComponent} from "./client-my-events/client-my-events.component";
 import {ClientMyCoursesComponent} from "./client-my-courses/client-my-courses.component";
 import {ClientElearningComponent} from "./client-elearning/client-elearning.component";
+import {
+  ClientGeneralLearningComponent
+} from "./client-elearning/client-general-learning/client-general-learning.component";
 
 const routes: Routes = [
   {
@@ -143,6 +146,11 @@ const routes: Routes = [
     path: 'e-learning',
     canActivate: undefined,
     component: ClientElearningComponent
+  },
+  {
+    path: 'e-learning/nauka-ogolna/:id',
+    canActivate: undefined,
+    component: ClientGeneralLearningComponent
   },
 ];
 
