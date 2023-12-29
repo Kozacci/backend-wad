@@ -288,6 +288,21 @@ export interface CourseFilterDTO {
   registeredParticipants: number
 }
 
+export interface ParticipantCourseFilterDTO {
+  id: number,
+  dateFrom: Date,
+  dateTo: Date,
+  courseStatus: CourseStatus,
+  maxParticipantsNumber: number,
+  city: CourseCity,
+  courseType: CourseType,
+  registeredParticipants: number,
+  participantCourseId: number,
+  participantId: number,
+  isPassed: boolean,
+  isPaid: boolean
+}
+
 export interface CourseCreateUpdateDTO {
   courseType: CourseType,
   dateFrom: string | null,

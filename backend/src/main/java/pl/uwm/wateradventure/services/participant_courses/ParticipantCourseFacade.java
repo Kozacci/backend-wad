@@ -15,14 +15,19 @@ public class ParticipantCourseFacade {
     private final ParticipantCRUDService participantCRUDService;
     private final CourseCRUDService courseCRUDService;
 
-    public ParticipantCourseEntity update(Long participantCourseId, Boolean isPassed, Boolean isPaid) {
-        return participantCourseCRUDService.update(participantCourseId, isPassed, isPaid);
-    }
-
     public ParticipantCourseEntity signIn(Long participantId, Long courseId) {
         var participant = participantCRUDService.getParticipantById(participantId);
         var course = courseCRUDService.getCourseById(courseId);
         return participantCourseCRUDService.signIn(participant, course);
     }
+
+    public ParticipantCourseEntity update(Long participantCourseId, Boolean isPassed, Boolean isPaid) {
+        return participantCourseCRUDService.update(participantCourseId, isPassed, isPaid);
+    }
+
+    public void deleteAssigningForCourse(Long participantCourseId) {
+        participantCourseCRUDService.deleteAssigningForCourse(participantCourseId);
+    }
+
 
 }

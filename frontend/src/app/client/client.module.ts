@@ -56,6 +56,7 @@ import {ClientContactComponent} from './client-about/client-contact/client-conta
 import {ClientFaqComponent} from './client-about/client-faq/client-faq.component';
 import {MatExpansionModule} from "@angular/material/expansion";
 import {ClientMyEventsComponent} from './client-my-events/client-my-events.component';
+import {ClientMyCoursesComponent} from './client-my-courses/client-my-courses.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import {ClientMyEventsComponent} from './client-my-events/client-my-events.compo
     ClientMyProfileComponent,
     ClientContactComponent,
     ClientFaqComponent,
-    ClientMyEventsComponent
+    ClientMyEventsComponent,
+    ClientMyCoursesComponent
   ],
   exports: [
     ClientLayoutComponent,

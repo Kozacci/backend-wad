@@ -14,6 +14,8 @@ public record ParticipantCourseFilterDTO(Long id,
                                          CourseCity city,
                                          CourseType courseType,
                                          Long registeredParticipants,
+                                         Long participantCourseId,
+                                         Long participantId,
                                          Boolean isPassed,
                                          Boolean isPaid) {
 }

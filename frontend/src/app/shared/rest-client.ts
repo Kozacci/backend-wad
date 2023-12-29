@@ -93,12 +93,41 @@ export class RestClient {
     return this.http.get<CourseFilterDTO[]>(`${this.apiUrl}/courses/filter-by`, {params, withCredentials: true } );
   }
 
-  getEventsByFilters(type: string | undefined,
-                     city: string  | undefined,
-                     cost: number | undefined,
-                     maxParticipantsNumber: number | undefined,
-                     sortBy: string | undefined,
-                     adminSearch: boolean): Observable<EventFilterDTO[]> {
+  getCoursesByParticipantIdAndFilters(
+    participantId: number,
+    courseType: string | undefined,
+    courseStatus: string | undefined,
+    isPaid: boolean | null,
+    isPassed: boolean | null,
+    sortBy: string | undefined): Observable<ParticipantCourseFilterDTO[]>
+  {
+    let params = new HttpParams();
+    if (courseType !== null && courseType !== undefined) {
+      params = params.append('courseType', courseType);
+    }
+    if (courseStatus !== null  && courseStatus !== undefined) {
+      params = params.append('courseStatus', courseStatus);
+    }
+    if (isPaid !== null) {
+      params = params.append('isPaid', isPaid);
+    }
+    if (isPassed !== null) {
+      params = params.append('isPassed', isPassed);
+    }
+    if (sortBy !== null && sortBy !== undefined) {
+      params = params.append('sortBy', sortBy);
+    }
+    return this.http.get<ParticipantCourseFilterDTO[]>(`${this.apiUrl}/participants/${participantId}/courses`, {params, withCredentials: true } );
+  }
+
+  getEventsByFilters(
+    type: string | undefined,
+    city: string  | undefined,
+    cost: number | undefined,
+    maxParticipantsNumber: number | undefined,
+    sortBy: string | undefined,
+    adminSearch: boolean): Observable<EventFilterDTO[]>
+  {
     let params = new HttpParams();
     if (type !== null && type !== undefined) {
       params = params.append('type', type);
@@ -193,6 +222,10 @@ export class RestClient {
 
   deleteAssigningForEvent(participantEventId: number | null) {
     return this.http.delete(`${this.apiUrl}/participant-events/${participantEventId}`, {withCredentials: true})
+  }
+
+  deleteAssigningForCourse(participantCourseId: number | null) {
+    return this.http.delete(`${this.apiUrl}/participant-courses/${participantCourseId}`, {withCredentials: true})
   }
 
   addEvent(eventToAdd: EventCreateUpdateDTO): Observable<EventEntityDTO> {
