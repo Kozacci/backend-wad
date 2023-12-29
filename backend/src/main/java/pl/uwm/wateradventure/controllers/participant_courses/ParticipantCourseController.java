@@ -3,8 +3,12 @@ package pl.uwm.wateradventure.controllers.participant_courses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import pl.uwm.wateradventure.models.participant_courses.ParticipantCourseEntity;
 import pl.uwm.wateradventure.models.participant_courses.dtos.ParticipantCourseEntityDTO;
+import pl.uwm.wateradventure.models.participant_courses.dtos.ParticipantCourseUpdateDTO;
 import pl.uwm.wateradventure.services.participant_courses.ParticipantCourseFacade;
+
+import java.util.List;
 
 /** REST Controller created in the needs of Create, Read, Update, Delete
  * and more complex operations for Participant Courses Entity
@@ -25,13 +29,12 @@ class ParticipantCourseController {
     }
 
 //    @AdminOnly
-    @PutMapping("/{participantCourseId}")
+    @PutMapping()
     @ResponseStatus(HttpStatus.OK)
-    ParticipantCourseEntityDTO update(@PathVariable Long participantCourseId,
-                                      @RequestParam(required = false) Boolean isPassed,
-                                      @RequestParam(required = false) Boolean isPaid) {
-
-        return participantCourseFacade.update(participantCourseId, isPassed, isPaid).toDTO();
+    List<ParticipantCourseEntityDTO> update(@RequestBody ParticipantCourseUpdateDTO dto) {
+        return participantCourseFacade.update(dto).stream()
+                .map(ParticipantCourseEntity::toDTO)
+                .toList();
     }
 
     @DeleteMapping("/{participantCourseId}")

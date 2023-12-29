@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.models.participant_courses.ParticipantCourseEntity;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -12,17 +12,11 @@ class ParticipantCourseUpdater {
 
     private final ParticipantCourseRepository repository;
 
-    public ParticipantCourseEntity update(ParticipantCourseEntity entity, Boolean isPassed, Boolean isPaid) {
-        if (isPassed != null) {
-            entity.setIsPassed(isPassed);
+    public List<ParticipantCourseEntity> update(List<ParticipantCourseEntity> entities, Boolean isPassed) {
+        for (ParticipantCourseEntity participantCourse: entities) {
+            participantCourse.setIsPassed(isPassed);
         }
-        if (isPaid != null) {
-            entity.setIsPaid(isPaid);
-            if (isPaid) {
-                entity.setAccessDate(LocalDateTime.now());
-            }
-        }
-        return repository.saveAndFlush(entity);
+        return repository.saveAllAndFlush(entities);
     }
 
 }
