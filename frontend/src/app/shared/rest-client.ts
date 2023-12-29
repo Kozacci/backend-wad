@@ -261,4 +261,8 @@ export class RestClient {
     return this.http.put<GeneralLearningUpdateDTO>(`${this.apiUrl}/questions/${participantCourseId}/general-learning`, dto, { withCredentials: true })
   }
 
+  getParticipantCourseById(participantCourseId: number | null) {
+    return this.http.get<ParticipantCourseEntityDTO>(`${this.apiUrl}/participant-courses/${participantCourseId}`, { withCredentials: true });
+  }
+
 }
