@@ -29,7 +29,7 @@ public class ParticipantCoursesCriteriaBuilder {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<ParticipantCourseFilterDTO> query = cb.createQuery(ParticipantCourseFilterDTO.class);
         Root<CourseEntity> course = query.from(CourseEntity.class);
-        joinParticipantCourse = course.join("participants"); // might need to add JoinType.LEFT to obtain results without assigned participants
+        joinParticipantCourse = course.join("participants", JoinType.LEFT);
 
         List<Predicate> predicates = new ArrayList<>();
 
@@ -37,7 +37,11 @@ public class ParticipantCoursesCriteriaBuilder {
         addStatusPredicate(cb, course, predicates, filters.courseStatus());
         addIsPaidPredicate(cb, joinParticipantCourse, predicates, filters.isPaid());
         addIsPassedPredicate(cb, joinParticipantCourse, predicates, filters.isPassed());
+        addCityPredicate(cb, course, predicates, filters.courseCity());
+        addLastNamePredicate(cb, joinParticipantCourse, predicates, filters.lastName());
+        addEmailPredicate(cb, joinParticipantCourse, predicates, filters.email());
         addParticipantIdPredicate(cb, predicates, joinParticipantCourse, filters.participantId());
+        addDateFromEqualPredicate(cb, course, predicates, filters.dateFrom());
 
         query.select(cb.construct(
                 ParticipantCourseFilterDTO.class,
@@ -66,7 +70,10 @@ public class ParticipantCoursesCriteriaBuilder {
                 joinParticipantCourse.get("id"),
                 joinParticipantCourse.get("participant").get("id"),
                 joinParticipantCourse.get("isPassed"),
-                joinParticipantCourse.get("isPaid")
+                joinParticipantCourse.get("isPaid"),
+                joinParticipantCourse.get("participant").get("firstName"),
+                joinParticipantCourse.get("participant").get("lastName"),
+                joinParticipantCourse.get("participant").get("email")
         );
     }
 

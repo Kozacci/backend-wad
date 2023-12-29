@@ -73,6 +73,13 @@ public class CourseCBHelper {
         }
     }
 
+    public static void addDateFromEqualPredicate(CriteriaBuilder cb, Root<CourseEntity> course,
+                                                 List<Predicate> predicates, LocalDate dateFrom) {
+        if (dateFrom != null) {
+            predicates.add(cb.equal(course.get("dateFrom"), dateFrom));
+        }
+    }
+
     public static void addDateToPredicate(CriteriaBuilder cb, Root<CourseEntity> course,
                                           List<Predicate> predicates, LocalDate dateTo) {
         if (dateTo != null) {

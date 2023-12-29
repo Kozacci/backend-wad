@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.exceptions.custom_exceptions.EntityNotFoundException;
 import pl.uwm.wateradventure.models.participant_courses.ParticipantCourseEntity;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 class ParticipantCourseReader {
@@ -18,4 +20,7 @@ class ParticipantCourseReader {
                 ));
     }
 
+    public List<ParticipantCourseEntity> getParticipantCourseByIdIn(List<Long> longs) {
+        return repository.findAllById(longs);
+    }
 }

@@ -53,11 +53,12 @@ public class ParticipantCourseEntity extends WaterAdventureChangeMetricEntity {
         this.onlinePayment = false;
         this.course = course;
         this.participant = participant;
-//        this.answerHistory = new AnswerHistoryEntity(this);
+        this.answerHistory = new AnswerHistoryEntity(this);
     }
 
     public ParticipantCourseEntityDTO toDTO() {
         return ParticipantCourseEntityDTO.builder()
+                .participantCourseId(this.id)
                 .courseId(this.course.getId())
                 .courseType(this.course.getType().enumValue)
                 .courseDateFrom(this.course.getDateFrom())

@@ -10,6 +10,7 @@ import pl.uwm.wateradventure.models.participants.dtos.ParticipantEntityDTO;
 import pl.uwm.wateradventure.models.participants.security.dtos.ParticipantUpdateDTO;
 import pl.uwm.wateradventure.services.participants.ParticipantFacade;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /** REST Controller created in the needs of Create, Read, Update, Delete
@@ -29,16 +30,21 @@ class ParticipantController {
     }
 
     // TODO - move below method to participant courses / or move participant events filter method there
-    @GetMapping("/{participantId}/courses")
+    @GetMapping("/courses/filter-by")
     ResponseEntity<List<ParticipantCourseFilterDTO>> getCoursesByParticipantIdAndFilters(
-            @PathVariable Long participantId,
+            @RequestParam(required = false) Long participantId,
             @RequestParam(required = false) String courseType,
             @RequestParam(required = false) String courseStatus,
             @RequestParam(required = false) Boolean isPaid,
             @RequestParam(required = false) Boolean isPassed,
-            @RequestParam(required = false) String sortBy
+            @RequestParam(required = false) String sortBy,
+            @RequestParam(required = false) String email, // participant Email
+            @RequestParam(required = false) String lastName, // participant lastName
+            @RequestParam(required = false) LocalDate dateFrom, // course dateFrom
+            @RequestParam(required = false) String courseCity // course dateFrom
     ) {
-        var filters = new ParticipantCourseFiltersDTO(participantId, courseType, courseStatus, isPaid, isPassed, sortBy);
+        var filters = new ParticipantCourseFiltersDTO(participantId, courseType,
+                courseStatus, isPaid, isPassed, sortBy, email, lastName, dateFrom, courseCity);
         var filteredParticipantCourses = participantFacade.getCoursesByParticipant(filters);
         return !filteredParticipantCourses.isEmpty() ? ResponseEntity.ok(filteredParticipantCourses) : ResponseEntity.noContent().build();
     }
