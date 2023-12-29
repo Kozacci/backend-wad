@@ -17,6 +17,12 @@ class ParticipantCourseController {
 
     private final ParticipantCourseFacade participantCourseFacade;
 
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    ParticipantCourseEntityDTO getParticipantCourseById(@PathVariable Long id) {
+        return participantCourseFacade.getParticipantCourseById(id);
+    }
+
     @PostMapping("/{participantId}/sign-in/{courseId}")
     @ResponseStatus(HttpStatus.OK)
     ParticipantCourseEntityDTO signIn(@PathVariable Long participantId,
