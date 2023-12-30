@@ -11,7 +11,10 @@ public class CategoryLearningCRUDService {
 
     private final CategoryLearningUpdater updater;
 
-    public CategoryLearningEntity update(CategoryLearningEntity categoryLearningToChange, CategoryLearningUpdateDTO dto) {
+    public CategoryLearningEntity update(
+            CategoryLearningEntity categoryLearningToChange,
+            CategoryLearningUpdateDTO dto
+    ) {
         return updater.update(categoryLearningToChange, dto);
     }
 }
