@@ -38,10 +38,18 @@ export class AdminPassingComponent {
   }
 
   findPassings() {
-    this.restClient.getCoursesByParticipantIdAndFilters(undefined,
-      this.courseType?.name, this.courseStatus?.name, null,
-      this.mapPassingType(this.passingType), this.sortBy?.value, this.participantEmail,
-      this.participantLastName, formatDateToYYYYMMDD(this.dateFormGroup.value.dateFrom), this.courseCity?.name)
+    this.restClient.getCoursesByParticipantIdAndFilters(
+      undefined,
+      this.courseType?.name,
+      this.courseStatus?.name,
+      null,
+      this.mapPassingType(this.passingType),
+      this.sortBy?.value,
+      this.participantEmail,
+      this.participantLastName,
+      formatDateToYYYYMMDD(this.dateFormGroup.value.dateFrom),
+      this.courseCity?.name,
+      null)
       .subscribe(response => {
         this.passingsList = response;
       }, error => {

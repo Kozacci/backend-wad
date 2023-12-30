@@ -19,7 +19,7 @@ export class ClientMyCoursesService {
     return this.restClient
       .getCoursesByParticipantIdAndFilters(participantId, undefined, undefined,
         null, null, 'dateFrom',
-        null, null, null, undefined)
+        null, null, null, undefined, null)
   }
 
   getImage(course: ParticipantCourseFilterDTO): string {

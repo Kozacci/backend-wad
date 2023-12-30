@@ -111,7 +111,8 @@ export class RestClient {
     participantEmail: string | null,
     participantLastName: string | null,
     courseDateFrom: string | null,
-    courseCity: string | undefined): Observable<ParticipantCourseFilterDTO[]>
+    courseCity: string | undefined,
+    participantPhoneNumber: string | null): Observable<ParticipantCourseFilterDTO[]>
   {
     let params = new HttpParams();
     if (participantId !== null && participantId !== undefined) {
@@ -143,6 +144,9 @@ export class RestClient {
     }
     if (courseCity !== null && courseCity !== undefined) {
       params = params.append('courseCity', courseCity);
+    }
+    if (participantPhoneNumber !== null && participantPhoneNumber !== undefined && participantPhoneNumber !== "") {
+      params = params.append('phoneNumber', participantPhoneNumber);
     }
     return this.http.get<ParticipantCourseFilterDTO[]>(`${this.apiUrl}/participants/courses/filter-by`, {params, withCredentials: true } );
   }

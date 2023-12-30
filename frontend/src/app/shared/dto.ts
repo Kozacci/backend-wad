@@ -346,7 +346,8 @@ export interface ParticipantCourseFilterDTO {
   isPaid: boolean,
   participantFirstName: string,
   participantLastName: string,
-  participantEmail: string
+  participantEmail: string,
+  participantPhoneNumber: string
 }
 
 export interface ParticipantCourseUpdateDTO {

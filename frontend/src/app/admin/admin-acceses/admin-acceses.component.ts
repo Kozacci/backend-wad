@@ -4,6 +4,7 @@ import {NameValueNull} from "../../shared/dto";
 import {RestClient} from "../../shared/rest-client";
 import {HttpResponseHandlerService} from "../../shared/services/http-response-handler.service";
 import {FormService} from "../../shared/services/form/form.service";
+import {formatDateToYYYYMMDD} from "../date-utils.service";
 
 @Component({
   selector: 'app-admin-acceses',
@@ -29,7 +30,23 @@ export class AdminAccesesComponent {
   }
 
   findAccesses(): void {
-
+    this.restClient.getCoursesByParticipantIdAndFilters(
+      undefined,
+      undefined,
+      undefined,
+      null,
+      null,
+      this.sortBy?.value,
+      this.participantEmail,
+      this.participantLastName,
+      formatDateToYYYYMMDD(this.dateFormGroup.value.dateFrom),
+      undefined,
+      this.participantPhoneNumber
+      ).subscribe(response => {
+        this.accessesList = response;
+      }, error => {
+        this.responseHandlerService.handleErrorsPtoasts(error);
+      })
   }
 
   passAccess(): void {
