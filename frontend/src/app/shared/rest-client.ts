@@ -1,21 +1,27 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {
-  CategoryLearningDTO, CategoryLearningUpdateDTO,
+  CategoryLearningEntityDTO,
+  CategoryLearningUpdateDTO,
   CourseCreateUpdateDTO,
   CourseEntityDTO,
-  CourseFilterDTO, EventCreateUpdateDTO, EventEntityDTO,
-  EventFilterDTO, GeneralLearningDTO, GeneralLearningUpdateDTO,
+  CourseFilterDTO,
+  EventCreateUpdateDTO,
+  EventEntityDTO,
+  EventFilterDTO, GeneralLearningEntityDTO,
   ParticipantCourseEntityDTO,
-  ParticipantCourseFilterDTO, ParticipantCourseUpdateDTO,
+  ParticipantCourseFilterDTO,
+  ParticipantCourseUpdateDTO,
   ParticipantEntityDTO,
-  ParticipantEventEntityCreateDTO, ParticipantEventFilterDTO,
+  ParticipantEventEntityCreateDTO,
+  ParticipantEventFilterDTO,
   ParticipantLoginDTO,
   ParticipantRegisterDTO,
   ParticipantUpdateDTO,
   QuestionCreateUpdateDTO,
   QuestionEntityDTO,
-  QuestionFilterDTO, TrialExamDTO
+  QuestionFilterDTO,
+  TrialExamEntityDTO
 } from "./dto";
 import {Observable} from "rxjs";
 
@@ -274,15 +280,16 @@ export class RestClient {
 
   updateTrialExamLearning(participantCourseId: number | null, isPassed: boolean) {
     const params = new HttpParams().set('isPassed', isPassed);
-    return this.http.put<TrialExamDTO>(`${this.apiUrl}/questions/${participantCourseId}/trial-exam`, null, { params, withCredentials: true } )
+    return this.http.put<TrialExamEntityDTO>(`${this.apiUrl}/learning/${participantCourseId}/trial-exam`, null, { params, withCredentials: true } )
   }
 
   updateCategoryLearning(participantCourseId: number | null, dto: CategoryLearningUpdateDTO) {
-    return this.http.put<CategoryLearningDTO>(`${this.apiUrl}/questions/${participantCourseId}/category-learning`, dto, { withCredentials: true })
+    return this.http.put<CategoryLearningEntityDTO>(`${this.apiUrl}/learning/${participantCourseId}/category-learning`, dto, { withCredentials: true })
   }
 
-  updateGeneralLearning(participantCourseId: number | null, dto: GeneralLearningUpdateDTO) {
-    return this.http.put<GeneralLearningUpdateDTO>(`${this.apiUrl}/questions/${participantCourseId}/general-learning`, dto, { withCredentials: true })
+  updateGeneralLearning(participantCourseId: number | null, isCorrectAnswer: boolean) {
+    const params = new HttpParams().set('isCorrectAnswer', isCorrectAnswer);
+    return this.http.put<GeneralLearningEntityDTO>(`${this.apiUrl}/learning/${participantCourseId}/general-learning`, null, { params, withCredentials: true })
   }
 
   getParticipantCourseById(participantCourseId: number | null) {

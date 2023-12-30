@@ -409,19 +409,19 @@ export interface EventCreateUpdateDTO {
 
 export interface EntireLearningDTO {
   answerHistoryId: number,
-  categoryLearningDTO: CategoryLearningDTO[],
-  trialExamDTO: TrialExamDTO,
-  generalLearningDTO: GeneralLearningDTO
+  categoryLearningDTO: CategoryLearningEntityDTO[],
+  trialExamDTO: TrialExamEntityDTO,
+  generalLearningDTO: GeneralLearningEntityDTO
 }
 
-export interface TrialExamDTO {
+export interface TrialExamEntityDTO {
   id: number,
   total: number,
   passed: number,
   failed: number
 }
 
-export interface CategoryLearningDTO {
+export interface CategoryLearningEntityDTO {
   id: number,
   questionsAnswered: number,
   correctAnswers: number,
@@ -429,18 +429,12 @@ export interface CategoryLearningDTO {
 }
 
 export interface CategoryLearningUpdateDTO {
-  questionsAnswered: number,
-  correctAnswers: number,
+  isCorrectAnswer: boolean;
   category: string
 }
 
-export interface GeneralLearningDTO {
+export interface GeneralLearningEntityDTO {
   id: number,
-  questionsAnswered: number,
-  correctAnswers: number
-}
-
-export interface GeneralLearningUpdateDTO {
   questionsAnswered: number,
   correctAnswers: number
 }
