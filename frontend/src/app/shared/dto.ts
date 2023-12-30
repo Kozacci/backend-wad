@@ -409,9 +409,9 @@ export interface EventCreateUpdateDTO {
 
 export interface EntireLearningDTO {
   answerHistoryId: number,
-  categoryLearningDTO: CategoryLearningEntityDTO[],
-  trialExamDTO: TrialExamEntityDTO,
-  generalLearningDTO: GeneralLearningEntityDTO
+  categoryLearningEntityDTO: CategoryLearningEntityDTO[],
+  trialExamEntityDTO: TrialExamEntityDTO,
+  generalLearningEntityDTO: GeneralLearningEntityDTO
 }
 
 export interface TrialExamEntityDTO {
