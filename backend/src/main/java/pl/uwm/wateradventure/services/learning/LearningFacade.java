@@ -4,11 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.models.learning.EntireLearningDTO;
 import pl.uwm.wateradventure.models.learning.category.Category;
-import pl.uwm.wateradventure.models.learning.category.CategoryLearningEntity;
+import pl.uwm.wateradventure.models.learning.category.CategoryLearningEntityDTO;
 import pl.uwm.wateradventure.models.learning.category.CategoryLearningUpdateDTO;
-import pl.uwm.wateradventure.models.learning.general.GeneralLearningEntity;
-import pl.uwm.wateradventure.models.learning.general.dtos.GeneralLearningUpdateDTO;
-import pl.uwm.wateradventure.models.learning.trial_exams.TrialExamEntity;
+import pl.uwm.wateradventure.models.learning.general.dtos.GeneralLearningEntityDTO;
+import pl.uwm.wateradventure.models.learning.trial_exams.dtos.TrialExamEntityDTO;
 import pl.uwm.wateradventure.services.learning.answers_history.AnswerHistoryCRUDService;
 import pl.uwm.wateradventure.services.learning.catergory.CategoryLearningCRUDService;
 import pl.uwm.wateradventure.services.learning.general.GeneralLearningCRUDService;
@@ -26,22 +25,27 @@ public class LearningFacade {
     private final TrialExamCRUDService trialExamCRUDService;
     private final LearningCounter counter;
 
-    public GeneralLearningEntity updateGeneralLearning(Long participantCourseId, GeneralLearningUpdateDTO dto) {
+    public GeneralLearningEntityDTO updateGeneralLearning(
+            Long participantCourseId,
+            Boolean isCorrectAnswer
+    ) {
         var participantCourse = participantCourseCRUDService.getParticipantCourseById(participantCourseId);
         var generalLearningToChange = answerHistoryCRUDService.getGeneralLearningByParticipantCourse(participantCourse);
-        return generalLearningCRUDService.update(generalLearningToChange, dto);
+        return generalLearningCRUDService
+                .update(generalLearningToChange, isCorrectAnswer)
+                .toDTO();
     }
 
-    public CategoryLearningEntity updateCategoryLearning(Long participantCourseId, CategoryLearningUpdateDTO dto) {
+    public CategoryLearningEntityDTO updateCategoryLearning(Long participantCourseId, CategoryLearningUpdateDTO dto) {
         var participantCourse = participantCourseCRUDService.getParticipantCourseById(participantCourseId);
         var categoryLearningToChange = answerHistoryCRUDService.getCategoryLearningByParticipantCourseAndCategory(participantCourse, Category.getCategory(dto.category()));
-        return categoryLearningCRUDService.update(categoryLearningToChange, dto);
+        return categoryLearningCRUDService.update(categoryLearningToChange, dto).toDTO();
     }
 
-    public TrialExamEntity updateTrialExamLearning(Long participantCourseId, Boolean isPassed) {
+    public TrialExamEntityDTO updateTrialExamLearning(Long participantCourseId, Boolean isPassed) {
         var participantCourse = participantCourseCRUDService.getParticipantCourseById(participantCourseId);
         var trialExamToChange = answerHistoryCRUDService.getTrialExamByParticipantCourse(participantCourse);
-        return trialExamCRUDService.update(trialExamToChange, isPassed);
+        return trialExamCRUDService.update(trialExamToChange, isPassed).toDTO();
     }
 
     // later might need to add ParticipantId for security purposes - to check if person who sends request is a
