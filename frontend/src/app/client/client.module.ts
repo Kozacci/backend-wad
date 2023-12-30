@@ -65,6 +65,7 @@ import {
 } from './client-elearning/client-general-learning/client-general-learning.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
+import { ClientCategoryLearningComponent } from './client-elearning/client-category-learning/client-category-learning.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import {MatDividerModule} from "@angular/material/divider";
     ClientMyEventsComponent,
     ClientMyCoursesComponent,
     ClientElearningComponent,
-    ClientGeneralLearningComponent
+    ClientGeneralLearningComponent,
+    ClientCategoryLearningComponent
   ],
   exports: [
     ClientLayoutComponent,
