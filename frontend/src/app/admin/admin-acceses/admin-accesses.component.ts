@@ -103,8 +103,10 @@ export class AdminAccessesComponent {
   }
 
   sortByValues = [
-    {name: "Miasto", value: "city"},
+    {name: "Posiada dostęp", value: "hasAccess"},
     {name: "Data rozpoczęcia kursu", value: "dateFrom"},
-    {name: "Typ kursu", value: "type"},
+    {name: "Data zakończenia kursu", value: "dateTo"},
+    {name: "Nazwisko kursanta", value: "lastName"},
+    {name: "Email kursanta", value: "email"},
   ]
 }
