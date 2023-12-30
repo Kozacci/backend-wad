@@ -41,8 +41,8 @@ class QuestionController {
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public Page<QuestionEntityDTO> getAllQuestionsPageable() {
-        return questionFacade.getAllQuestionsPageable();
+    public List<QuestionEntityDTO> getAllQuestionsAndDraw() {
+        return questionFacade.getAllQuestionsAndDraw();
     }
 
     @GetMapping("/random")

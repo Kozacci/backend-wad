@@ -3,7 +3,6 @@ package pl.uwm.wateradventure.services.questions.crud;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.exceptions.custom_exceptions.EntityNotFoundException;
 import pl.uwm.wateradventure.models.learning.category.Category;
@@ -13,10 +12,7 @@ import pl.uwm.wateradventure.models.questions.dtos.QuestionFilterDTO;
 import pl.uwm.wateradventure.models.questions.dtos.QuestionFiltersDTO;
 import pl.uwm.wateradventure.services.global.PageReader;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import static pl.uwm.wateradventure.services.questions.crud.QuestionCBHelper.*;
 
@@ -35,10 +31,11 @@ public class QuestionReader extends PageReader<QuestionEntity> {
                 );
     }
 
-    public Page<QuestionEntityDTO> getAllQuestionsPageable() {
-        return super
-                .getAllSortedPageable(questionRepository, "id", true)
-                .map(QuestionEntity::toDTO);
+    public List<QuestionEntityDTO> getAllQuestionsAndDraw() {
+        var questionList = new ArrayList<>(questionRepository.findAll().stream().map(QuestionEntity::toDTO).toList());
+        Collections.shuffle(questionList);
+        return questionList;
+
     }
 
     public QuestionEntityDTO getRandomQuestionByCategories(List<Category> categories) {
