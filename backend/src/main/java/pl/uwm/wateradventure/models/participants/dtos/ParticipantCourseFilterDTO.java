@@ -21,5 +21,6 @@ public record ParticipantCourseFilterDTO(Long id,
                                          String participantFirstName,
                                          String participantLastName,
                                          String participantEmail,
-                                         String participantPhoneNumber) {
+                                         String participantPhoneNumber,
+                                         Boolean hasAccess) {
 }

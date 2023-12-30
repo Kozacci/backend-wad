@@ -75,7 +75,8 @@ public class ParticipantCoursesCriteriaBuilder {
                 joinParticipantCourse.get("participant").get("firstName"),
                 joinParticipantCourse.get("participant").get("lastName"),
                 joinParticipantCourse.get("participant").get("email"),
-                joinParticipantCourse.get("participant").get("phoneNumber")
+                joinParticipantCourse.get("participant").get("phoneNumber"),
+                joinParticipantCourse.get("hasAccess")
         );
     }
 
