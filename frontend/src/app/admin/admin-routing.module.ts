@@ -11,7 +11,6 @@ import {AdminCalendarComponent} from "./admin-calendar/admin-calendar.component"
 const routes: Routes = [
   {
     path: '',
-    canActivate: undefined,
     component: AdminHomeComponent
   },
   {

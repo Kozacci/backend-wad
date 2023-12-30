@@ -34,6 +34,7 @@ export class AuthService {
                   sessionStorage.setItem('cacheFirstName', response.firstName);
                   sessionStorage.setItem('cacheLastName', response.lastName);
                   sessionStorage.setItem('cachePhoneNumber', response.phoneNumber);
+                  sessionStorage.setItem('cacheRole', response.role);
                   if(response.courses != null) {
                     sessionStorage.setItem('cacheParticipantCourses', response.courses.length.toString());
                     sessionStorage.setItem('cacheParticipantPassedCourses', response.courses.filter(course => course.isPassed).length.toString());
@@ -57,6 +58,13 @@ export class AuthService {
   isLogged(): boolean {
     const token = this.cookieService.get("JWT");
     return !!token;
+  }
+
+  isAdmin(): boolean {
+    const role = sessionStorage.getItem('cacheRole');
+    if (role == null) return false;
+    if (role == 'ADMIN') return true;
+    return false;
   }
 
   messageIfNotLogged() {

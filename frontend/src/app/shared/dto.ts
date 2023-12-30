@@ -1,7 +1,7 @@
 /** ---------------------- ENUMS ---------------------- **/
 export enum Role {
-  CLIENT,
-  ADMIN
+  CLIENT = "CLIENT",
+  ADMIN = "ADMIN"
 }
 
 export enum CourseStatus {

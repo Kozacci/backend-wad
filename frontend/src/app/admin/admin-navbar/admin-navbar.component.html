@@ -76,6 +76,13 @@
     <p-divider></p-divider>
     <div class="last-section">
       <text-icon
+        [text]="'Strona główna'"
+        [iconClass]="'pi pi-compass'"
+        [textVisible]="isExtended"
+        (onClick)="navigateToHomePage()"
+        [isClickable]="true">
+      </text-icon>
+      <text-icon
         [text]="'Wyloguj'"
         [iconClass]="'pi pi-sign-out'"
         [textVisible]="isExtended"
