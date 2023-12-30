@@ -68,6 +68,7 @@ import {MatDividerModule} from "@angular/material/divider";
 import { ClientCategoryLearningComponent } from './client-elearning/client-category-learning/client-category-learning.component';
 import { ClientTrialExamLearningComponent } from './client-elearning/client-trial-exam-learning/client-trial-exam-learning.component';
 import { ClientStatisticsLearningComponent } from './client-elearning/client-statistics-learning/client-statistics-learning.component';
+import {ChartModule} from "primeng/chart";
 
 @NgModule({
   declarations: [
@@ -123,6 +124,7 @@ import { ClientStatisticsLearningComponent } from './client-elearning/client-sta
     MatIconModule,
     MatInputModule,
     MatExpansionModule,
+    ChartModule
   ]
 })
 export class ClientModule { }

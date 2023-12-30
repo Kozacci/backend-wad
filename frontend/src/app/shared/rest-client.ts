@@ -5,7 +5,7 @@ import {
   CategoryLearningUpdateDTO,
   CourseCreateUpdateDTO,
   CourseEntityDTO,
-  CourseFilterDTO,
+  CourseFilterDTO, EntireLearningDTO,
   EventCreateUpdateDTO,
   EventEntityDTO,
   EventFilterDTO, GeneralLearningEntityDTO,
@@ -294,6 +294,14 @@ export class RestClient {
 
   getParticipantCourseById(participantCourseId: number | null) {
     return this.http.get<ParticipantCourseEntityDTO>(`${this.apiUrl}/participant-courses/${participantCourseId}`, { withCredentials: true });
+  }
+
+  getAllQuestionsAndDraw() {
+    return this.http.get<QuestionEntityDTO[]>(`${this.apiUrl}/questions`, { withCredentials: true });
+  }
+
+  getAnswerHistoryByParticipantCourseId(participantCourseId: number | null) {
+    return this.http.get<EntireLearningDTO>(`${this.apiUrl}/learning/${participantCourseId}/answer-history`, { withCredentials: true });
   }
 
 }
