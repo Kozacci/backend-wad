@@ -63,6 +63,7 @@
           [dateFormat]="'dd.mm.yy'"
           (onSelect)="setDateFromDate($event)"
           [showIcon]="true"
+          [appendTo]="'body'"
           [placeholder]="'01.01.2024'">
         </p-calendar>
       </div>
@@ -74,6 +75,7 @@
             [dateFormat]="'dd.mm.yy'"
             (onSelect)="setDateToDate($event)"
             [showIcon]="true"
+            [appendTo]="'body'"
             [placeholder]="'01.01.2024'">
           </p-calendar>
         </div>
@@ -89,6 +91,7 @@
           [options]="sortByValues"
           [(ngModel)]="sortBy"
           optionLabel="name"
+          [appendTo]="'body'"
           placeholder="Sortowanie"
           [showClear]="true">
         </p-dropdown>
@@ -188,6 +191,7 @@
           [options]="courseTypes"
           [(ngModel)]="courseTypeToAdd"
           optionLabel="value"
+          [appendTo]="'body'"
           placeholder="Sternik motorowodny"
           [showClear]="true">
         </p-dropdown>
@@ -203,6 +207,7 @@
           [(ngModel)]="courseCityToAdd"
           optionLabel="value"
           placeholder="Olecko"
+          [appendTo]="'body'"
           [showClear]="true">
         </p-dropdown>
         <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'city')">
@@ -307,6 +312,7 @@
           [(ngModel)]="courseTypeToEdit"
           optionLabel="value"
           placeholder="Sternik motorowodny"
+          [appendTo]="'body'"
           [showClear]="true">
         </p-dropdown>
         <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'courseType')">
@@ -321,6 +327,7 @@
           [(ngModel)]="courseCityToEdit"
           optionLabel="value"
           placeholder="Olecko"
+          [appendTo]="'body'"
           [showClear]="true">
         </p-dropdown>
         <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'city')">
