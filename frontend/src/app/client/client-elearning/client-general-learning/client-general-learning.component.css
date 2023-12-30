@@ -1,22 +1,22 @@
 .e-learning-container {
   max-width: 1200px;
   margin: 6rem auto 0;
-  padding: 20px;
+  padding: 1rem;
   text-align: center;
 }
 
 .section-title {
   font-size: 1.5em;
-  margin: 20px 0;
+  margin: 1rem 0;
 }
 
 .question {
   font-size: 1.2em;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
 }
 
 .mat-divider {
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
 }
 
 .answers-section {
@@ -53,7 +53,7 @@
   border: 1px solid #ccc;
   text-align: left;
   margin-bottom: 10px;
-  padding: 10px;
+  padding: 1rem;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   transition: background-color 0.2s ease, border 0.2s ease;
@@ -101,7 +101,7 @@
   background-color: var(--blue);
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 0.8rem 1rem;
   text-align: center;
   transition: background-color 0.3s ease;
 }
@@ -115,7 +115,7 @@ button.active {
   background-color: var(--blue);
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 0.8rem 1rem;
   text-align: center;
   transition: background-color 0.3s ease;
 }
@@ -126,12 +126,34 @@ button.active:hover {
 
 .next-question {
   display: block;
-  margin-top: 20px;
+  margin-top: 1rem;
   font-weight: bold;
   cursor: pointer;
 }
 
 @media (max-width: 768px) {
+  .category-section {
+    margin: auto;
+    padding: 1rem 2rem;
+  }
+  .category-title {
+    font-weight: bold;
+    display: block;
+    margin: auto;
+  }
+  .answers-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .next-section {
+    text-align: center;
+  }
+  .next-question {
+    padding: 1rem 2rem;
+    margin-left: auto;
+  }
   .answers > div {
     width: 70%;
   }
