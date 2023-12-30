@@ -1,0 +1,23 @@
+.statistics-container {
+  margin-top: 8rem;
+  text-align: center;
+}
+
+.statistics-container h1 {
+  font-size: xx-large;
+  font-weight: 500;
+  color: var(--blue);
+}
+
+.divider {
+  height: 3px;
+  width: 30%;
+  margin: auto;
+  background-color: var(--blue);
+}
+
+.chart-container {
+  margin: 2rem;
+  width: 30%;
+  display: inline-block;
+}
