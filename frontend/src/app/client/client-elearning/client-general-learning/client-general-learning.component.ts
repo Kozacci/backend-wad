@@ -29,7 +29,7 @@ export class ClientGeneralLearningComponent implements OnInit {
 
   getParticipantCourse() {
     this.route.params.subscribe(params => {
-      this.participantCourseId = this.route.snapshot.params['id'];
+      this.participantCourseId = params['id'];
       this.restClient.getParticipantCourseById(this.participantCourseId).subscribe(
         response => {
           this.participantCourse = response;
