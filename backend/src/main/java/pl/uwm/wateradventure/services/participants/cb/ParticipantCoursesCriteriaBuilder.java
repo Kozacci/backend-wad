@@ -42,6 +42,7 @@ public class ParticipantCoursesCriteriaBuilder {
         addEmailPredicate(cb, joinParticipantCourse, predicates, filters.email());
         addParticipantIdPredicate(cb, predicates, joinParticipantCourse, filters.participantId());
         addDateFromEqualPredicate(cb, course, predicates, filters.dateFrom());
+        addPhoneNumberPredicate(cb, joinParticipantCourse, predicates, filters.phoneNumber());
 
         query.select(cb.construct(
                 ParticipantCourseFilterDTO.class,
@@ -73,7 +74,9 @@ public class ParticipantCoursesCriteriaBuilder {
                 joinParticipantCourse.get("isPaid"),
                 joinParticipantCourse.get("participant").get("firstName"),
                 joinParticipantCourse.get("participant").get("lastName"),
-                joinParticipantCourse.get("participant").get("email")
+                joinParticipantCourse.get("participant").get("email"),
+                joinParticipantCourse.get("participant").get("phoneNumber"),
+                joinParticipantCourse.get("hasAccess")
         );
     }
 

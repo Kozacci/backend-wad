@@ -1,7 +1,7 @@
 /** ---------------------- ENUMS ---------------------- **/
 export enum Role {
-  CLIENT,
-  ADMIN
+  CLIENT = "CLIENT",
+  ADMIN = "ADMIN"
 }
 
 export enum CourseStatus {
@@ -346,12 +346,15 @@ export interface ParticipantCourseFilterDTO {
   isPaid: boolean,
   participantFirstName: string,
   participantLastName: string,
-  participantEmail: string
+  participantEmail: string,
+  participantPhoneNumber: string,
+  hasAccess: boolean
 }
 
 export interface ParticipantCourseUpdateDTO {
   participantCourseIds: number[],
-  isPassed: boolean
+  isPassed: boolean,
+  hasAccess: boolean
 }
 
 export interface CourseCreateUpdateDTO {

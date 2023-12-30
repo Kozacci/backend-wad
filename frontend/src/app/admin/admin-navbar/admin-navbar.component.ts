@@ -45,8 +45,11 @@ export class AdminNavbarComponent {
     this.router.navigate(['/admin/accesses'])
   }
 
-  navigateToCalendar(): void {
-    this.router.navigate(['/admin/calendar'])
+  navigateToHomePage(): void {
+    this.router.navigate(['']);
   }
+  // navigateToCalendar(): void {
+  //   this.router.navigate(['/admin/calendar'])
+  // }
 
 }

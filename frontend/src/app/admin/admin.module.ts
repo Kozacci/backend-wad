@@ -8,7 +8,7 @@ import {AdminQuestionsComponent} from './admin-questions/admin-questions.compone
 import {AdminCoursesComponent} from './admin-courses/admin-courses.component';
 import {AdminEventsComponent} from './admin-events/admin-events.component';
 import {AdminPassingComponent} from './admin-passing/admin-passing.component';
-import {AdminAccesesComponent} from './admin-acceses/admin-acceses.component';
+import {AdminAccessesComponent} from './admin-acceses/admin-accesses.component';
 import {AdminCalendarComponent} from './admin-calendar/admin-calendar.component';
 import {FormsModule} from "@angular/forms";
 import {DropdownModule} from "primeng/dropdown";
@@ -22,7 +22,7 @@ import {DropdownModule} from "primeng/dropdown";
     AdminCoursesComponent,
     AdminEventsComponent,
     AdminPassingComponent,
-    AdminAccesesComponent,
+    AdminAccessesComponent,
     AdminCalendarComponent,
   ],
   exports: [

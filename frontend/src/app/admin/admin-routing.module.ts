@@ -5,13 +5,12 @@ import {AdminQuestionsComponent} from "./admin-questions/admin-questions.compone
 import {AdminCoursesComponent} from "./admin-courses/admin-courses.component";
 import {AdminEventsComponent} from "./admin-events/admin-events.component";
 import {AdminPassingComponent} from "./admin-passing/admin-passing.component";
-import {AdminAccesesComponent} from "./admin-acceses/admin-acceses.component";
+import {AdminAccessesComponent} from "./admin-acceses/admin-accesses.component";
 import {AdminCalendarComponent} from "./admin-calendar/admin-calendar.component";
 
 const routes: Routes = [
   {
     path: '',
-    canActivate: undefined,
     component: AdminHomeComponent
   },
   {
@@ -32,7 +31,7 @@ const routes: Routes = [
   },
   {
     path: 'accesses',
-    component: AdminAccesesComponent
+    component: AdminAccessesComponent
   },
   {
     path: 'calendar',

@@ -9,14 +9,18 @@ export class HttpResponseHandlerService {
   }
 
   // httpError is an object containing error, header, message, name, status, statusText, url
-  handleErrorsPtoasts(httpError: any) {
-    this.getErrorDTOS(httpError)
-      .forEach(errorDTO => this.showErrorPToast(errorDTO.fieldName, errorDTO.message))
+  handleErrorsPtoasts(httpError: any): void {
+    let errors = this.getErrorDTOS(httpError);
+
+    errors.forEach(errorDTO => this.showErrorPToast(errorDTO.fieldName, errorDTO.message))
   }
 
-  private getErrorDTOS(httpError: any) {
-    return Object.values(<ErrorDTO>httpError.error)
-      .map(error => <ErrorDTO>{fieldName: error.fieldName, message: error.message});
+  private getErrorDTOS(httpError: any): ErrorDTO[] {
+    if (httpError.error instanceof Array) {
+      return Object.values(<ErrorDTO>httpError.error)
+        .map(error => <ErrorDTO>{fieldName: error.fieldName, message: error.message});
+    }
+    return [<ErrorDTO>{fieldName: httpError.error.fieldName, message: httpError.error.message}];
   }
 
   private groupErrorsByField(errors: ErrorDTO[]): GroupedErrorDTO[] {

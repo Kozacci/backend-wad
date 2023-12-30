@@ -11,5 +11,6 @@ public record ParticipantCourseFiltersDTO(Long participantId,
                                           String email,
                                           String lastName,
                                           LocalDate dateFrom,
-                                          String courseCity) {
+                                          String courseCity,
+                                          String phoneNumber) {
 }

@@ -50,6 +50,7 @@
           formControlName="dateFrom"
           [dateFormat]="'dd.mm.yy'"
           [showIcon]="true"
+          [appendTo]="'body'"
           [placeholder]="'01.01.2024'">
         </p-calendar>
       </div>
@@ -60,6 +61,7 @@
           [options]="courseTypes"
           [(ngModel)]="courseType"
           optionLabel="value"
+          [appendTo]="'body'"
           placeholder="Sternik motorowodny"
           [showClear]="true">
         </p-dropdown>
@@ -71,6 +73,7 @@
           [options]="courseStatuses"
           [(ngModel)]="courseStatus"
           optionLabel="value"
+          [appendTo]="'body'"
           placeholder="Nierozpoczęty"
           [showClear]="true">
         </p-dropdown>
@@ -94,6 +97,7 @@
           [options]="sortByValues"
           [(ngModel)]="sortBy"
           optionLabel="name"
+          [appendTo]="'body'"
           placeholder="Sortowanie"
           [showClear]="true">
         </p-dropdown>

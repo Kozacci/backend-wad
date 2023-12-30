@@ -28,7 +28,7 @@ public class ParticipantCourseCRUDService {
 
     public List<ParticipantCourseEntity> update(ParticipantCourseUpdateDTO dto) {
         var participantCourseEntities = reader.getParticipantCourseByIdIn(dto.participantCourseIds());
-        return updater.update(participantCourseEntities, dto.isPassed());
+        return updater.update(participantCourseEntities, dto.isPassed(), dto.hasAccess());
     }
 
     public void deleteAssigningForCourse(Long participantCourseId) {

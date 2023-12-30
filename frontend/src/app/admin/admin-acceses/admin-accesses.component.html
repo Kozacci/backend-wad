@@ -38,7 +38,7 @@
                type="text"
                class="form-control"
                id="phoneNumber"
-               placeholder="nowak@gmail.pl">
+               placeholder="505404606">
       </div>
 
       <div [formGroup]="dateFormGroup" class="col-md-3 mb-3 d-flex flex-column align-items-center">
@@ -103,6 +103,7 @@
         <th>Imie i nazwisko kursanta</th>
         <th>Email kursanta</th>
         <th>Numer telefonu</th>
+        <th>Posiada dostęp</th>
         <th>Rodzaj kursu</th>
         <th>Data rozpoczęcia kursu</th>
         <th>Data zakończenia kursu</th>
@@ -115,7 +116,8 @@
         </td>
         <td>{{access.participantFirstName + " " + access.participantLastName}}</td>
         <td>{{access.participantEmail}}</td>
-        <td>{{access.phoneNumber}}</td>
+        <td>{{access.participantPhoneNumber}}</td>
+        <td>{{access.hasAccess | hasAccess}}</td>
         <td>{{access.courseType | courseType}}</td>
         <td>{{access.dateFrom | date:'yyyy-MM-dd HH:mm'}}</td>
         <td>{{access.dateTo | date:'yyyy-MM-dd HH:mm'}}</td>
