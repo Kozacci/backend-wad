@@ -49,22 +49,22 @@ export class ClientElearningComponent implements OnInit {
 
   goToStatistics(course: ParticipantCourseFilterDTO) {
     const id = course.participantCourseId;
-    this.pathService.navigate(`e-learning/statystyki/id=${id}`)
+    this.pathService.navigate(`e-learning/statystyki/${id}`)
   }
 
   goToGeneralLearning(course: ParticipantCourseFilterDTO) {
     const id = course.participantCourseId;
-    this.pathService.navigate(`/e-learning/nauka-ogolna/id=${id}`)
+    this.pathService.navigate(`/e-learning/nauka-ogolna/${id}`)
   }
 
   goToCategoryLearning(course: ParticipantCourseFilterDTO) {
     const id = course.participantCourseId;
-    this.pathService.navigate(`e-learning/nauka-dzialami/id=${id}`)
+    this.pathService.navigate(`e-learning/nauka-dzialami/${id}`)
   }
 
   goToTrialExam(course: ParticipantCourseFilterDTO) {
     const id = course.participantCourseId;
-    this.pathService.navigate(`e-learning/egzamin-probny/id=${id}`)
+    this.pathService.navigate(`e-learning/egzamin-probny/${id}`)
   }
 
   // TODO przekazac do url id participant course, sprawdzac czy ten kurs participant jakiego typu jest i zaleznie od tego generowac pytania pod to/działy/egzamin

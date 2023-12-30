@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.uwm.wateradventure.models.global.WaterAdventureEntity;
 import pl.uwm.wateradventure.models.learning.answershistory.AnswerHistoryEntity;
-import pl.uwm.wateradventure.models.learning.trial_exams.dtos.TrialExamDTO;
+import pl.uwm.wateradventure.models.learning.trial_exams.dtos.TrialExamEntityDTO;
 
 @Entity
 @Table(name = "trial_exams")
@@ -35,26 +35,13 @@ public class TrialExamEntity extends WaterAdventureEntity {
         this.answerHistory = answerHistory;
     }
 
-    public TrialExamDTO toDTO() {
-        return TrialExamDTO.builder()
+    public TrialExamEntityDTO toDTO() {
+        return TrialExamEntityDTO.builder()
                 .id(this.id)
                 .total(this.total)
                 .passed(this.passed)
                 .failed(this.failed)
                 .build();
-    }
-
-    public void incrementPassedOrFailed(Boolean isPassed) {
-        if (isPassed) {
-            this.passed += 1;
-        }
-        if (!isPassed) {
-            this.failed += 1;
-        }
-    }
-
-    public void incrementTotal() {
-        this.total++;
     }
 
 }

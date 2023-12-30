@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.uwm.wateradventure.models.global.WaterAdventureEntity;
 import pl.uwm.wateradventure.models.learning.answershistory.AnswerHistoryEntity;
-import pl.uwm.wateradventure.models.learning.general.dtos.GeneralLearningDTO;
+import pl.uwm.wateradventure.models.learning.general.dtos.GeneralLearningEntityDTO;
 
 @Entity
 @Table(name = "general_learning")
@@ -31,8 +31,8 @@ public class GeneralLearningEntity extends WaterAdventureEntity {
         this.answerHistory = answerHistory;
     }
 
-    public GeneralLearningDTO toDTO() {
-        return GeneralLearningDTO.builder()
+    public GeneralLearningEntityDTO toDTO() {
+        return GeneralLearningEntityDTO.builder()
                 .id(this.id)
                 .questionsAnswered(this.questionsAnswered)
                 .correctAnswers(this.correctAnswers)

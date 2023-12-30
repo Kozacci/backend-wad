@@ -1,0 +1,144 @@
+.e-learning-container {
+  max-width: 1200px;
+  margin: 6rem auto 0;
+  padding: 20px;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 1.5em;
+  margin: 20px 0;
+}
+
+.question {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+.mat-divider {
+  margin-bottom: 20px;
+}
+
+.answers-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category-section {
+  margin-right: 8rem;
+  width: 20vh;
+}
+
+.category-title {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.category-value {
+  color: #6c757d;
+  font-weight: normal;
+}
+
+.answers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.answers > div {
+  width: 100%;
+  border: 1px solid #ccc;
+  text-align: left;
+  margin-bottom: 10px;
+  padding: 10px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  transition: background-color 0.2s ease, border 0.2s ease;
+  cursor: pointer;
+}
+
+.answers > div:not(.correct, .incorrect):hover {
+  background-color: #f8f8f8;
+}
+
+.answers > div.selected {
+  border-color: #007bff;
+}
+
+.answers > div.correct {
+  border-color: #70f170;
+}
+
+.answers > div.incorrect {
+  border-color: #ee706e;
+}
+
+.next-section {
+  text-align: right;
+}
+
+.next-question {
+  width: 20vh;
+  padding: 1rem 2rem;
+  margin-left: 8rem;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: transparent;
+  color: #414141;
+  border: none;
+  transition: color 0.3s;
+}
+
+.next-question:hover {
+  color: #0056b3;
+}
+
+.btn-primary {
+  margin-top: 1rem;
+  background-color: var(--blue);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #22719B;
+}
+
+button.active {
+  margin-top: 1rem;
+  background-color: var(--blue);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+button.active:hover {
+  background-color: #22719B;
+}
+
+.next-question {
+  display: block;
+  margin-top: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .answers > div {
+    width: 70%;
+  }
+}
+
+@media (max-width: 480px) {
+  .answers > div {
+    width: 90%;
+  }
+}

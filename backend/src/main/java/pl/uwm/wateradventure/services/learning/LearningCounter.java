@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.models.learning.EntireLearningDTO;
 import pl.uwm.wateradventure.models.learning.answershistory.AnswerHistoryEntity;
 import pl.uwm.wateradventure.models.learning.category.Category;
-import pl.uwm.wateradventure.models.learning.category.CategoryLearningDTO;
+import pl.uwm.wateradventure.models.learning.category.CategoryLearningEntityDTO;
 import pl.uwm.wateradventure.models.learning.category.CategoryLearningEntity;
 
 import java.util.ArrayList;
@@ -32,8 +32,8 @@ class LearningCounter {
                 .collect(Collectors.groupingBy(CategoryLearningEntity::getCategory));
     }
 
-    private List<CategoryLearningDTO> sumByCategories(Map<Category, List<CategoryLearningEntity>> map) {
-        var result = new ArrayList<CategoryLearningDTO>();
+    private List<CategoryLearningEntityDTO> sumByCategories(Map<Category, List<CategoryLearningEntity>> map) {
+        var result = new ArrayList<CategoryLearningEntityDTO>();
 
         map.forEach((category, categoryLearningEntities) -> {
             Integer totalQuestionsAnswered =
@@ -46,7 +46,7 @@ class LearningCounter {
                             .mapToInt(CategoryLearningEntity::getCorrectAnswers)
                             .sum();
 
-            result.add(new CategoryLearningDTO(0L, totalQuestionsAnswered, totalCorrectAnswers, category.enumValue));
+            result.add(new CategoryLearningEntityDTO(0L, totalQuestionsAnswered, totalCorrectAnswers, category.enumValue));
         });
 
         return result;

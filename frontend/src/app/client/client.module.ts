@@ -63,6 +63,8 @@ import {TooltipModule} from "primeng/tooltip";
 import {
   ClientGeneralLearningComponent
 } from './client-elearning/client-general-learning/client-general-learning.component';
+import {MatCardModule} from "@angular/material/card";
+import {MatDividerModule} from "@angular/material/divider";
 
 @NgModule({
   declarations: [
@@ -104,6 +106,8 @@ import {
     TooltipModule,
     AnimateModule,
     MatMenuModule,
+    MatCardModule,
+    MatDividerModule,
     MatButtonModule,
     CarouselModule,
     RatingModule,
