@@ -1,17 +1,46 @@
 package pl.uwm.wateradventure.services.participants.cb;
 
 import jakarta.persistence.criteria.*;
+import pl.uwm.wateradventure.exceptions.value_objects_exceptions.InvalidSortByValueException;
 import pl.uwm.wateradventure.models.courses.CourseEntity;
 import pl.uwm.wateradventure.models.participant_courses.ParticipantCourseEntity;
+import pl.uwm.wateradventure.models.participants.ParticipantEntity;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
-import static pl.uwm.wateradventure.services.courses.crud.CourseCBHelper.checkSortByValue;
 
 public class ParticipantCoursesCBHelper {
 
-    public static void addSortBy(String sort, CriteriaQuery<?> query,
-                                 CriteriaBuilder cb, Root<CourseEntity> course, Join<CourseEntity, ParticipantCourseEntity> participantsJoin) {
+    private static final Field[] participantCourseEntityFields = ParticipantCourseEntity.class.getDeclaredFields();
+    private static final Field[] courseEntityFields = CourseEntity.class.getDeclaredFields();
+    private static final Field[] participantEntityFields = ParticipantEntity.class.getDeclaredFields();
+
+    public static void checkSortByValue(String sortBy) {
+        if (sortBy == null) return;
+        var courseEntityFieldsNames = Arrays.stream(courseEntityFields).map(Field::getName).toList();
+        var participantCourseEntityFieldsNames = Arrays.stream(participantCourseEntityFields).map(Field::getName).toList();
+        var participantEntityFieldsNames = Arrays.stream(participantEntityFields).map(Field::getName).toList();
+        var allEntitiesFieldNames = new ArrayList<>();
+        allEntitiesFieldNames.addAll(courseEntityFieldsNames);
+        allEntitiesFieldNames.addAll(participantCourseEntityFieldsNames);
+        allEntitiesFieldNames.addAll(participantEntityFieldsNames);
+
+        var isSortByValueEqualToOneEntitiesField = allEntitiesFieldNames.stream()
+                        .anyMatch(entityFieldName -> entityFieldName.equals(sortBy));
+
+        if (!isSortByValueEqualToOneEntitiesField) {
+            throw new InvalidSortByValueException("Given sortBy value doesn't match any CourseEntity " +
+                    "or ParticipantCourseEntity or ParticipantEntity field.");
+        }
+    }
+
+    public static void addSortBy(String sort,
+                                 CriteriaQuery<?> query,
+                                 CriteriaBuilder cb,
+                                 Root<CourseEntity> course,
+                                 Join<CourseEntity, ParticipantCourseEntity> participantsJoin) {
         checkSortByValue(sort);
         if (sort == null) {
             query.orderBy(cb.asc(course.get("dateFrom")));
@@ -23,7 +52,29 @@ public class ParticipantCoursesCBHelper {
             query.orderBy(cb.desc(countParticipants));
             return;
         }
+        if (sortValueIsEqualToOneOfParticipantCourseEntityFields(sort)) {
+            query.orderBy(cb.asc(course.get("participants").get(sort)));
+            return;
+        }
+        if (sortValueIsEqualToOneOfParticipantEntityFields(sort)) {
+            query.orderBy(cb.asc(course.get("participants").get("participant").get(sort)));
+            return;
+        }
         query.orderBy(cb.asc(course.get(sort)));
+    }
+
+    private static boolean sortValueIsEqualToOneOfParticipantCourseEntityFields(String sort) {
+        return Arrays.stream(participantCourseEntityFields)
+                .map(Field::getName)
+                .toList()
+                .contains(sort);
+    }
+
+    private static boolean sortValueIsEqualToOneOfParticipantEntityFields(String sort) {
+        return Arrays.stream(participantEntityFields)
+                .map(Field::getName)
+                .toList()
+                .contains(sort);
     }
 
     public static void addParticipantIdPredicate(CriteriaBuilder cb,
