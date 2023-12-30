@@ -347,12 +347,14 @@ export interface ParticipantCourseFilterDTO {
   participantFirstName: string,
   participantLastName: string,
   participantEmail: string,
-  participantPhoneNumber: string
+  participantPhoneNumber: string,
+  hasAccess: boolean
 }
 
 export interface ParticipantCourseUpdateDTO {
   participantCourseIds: number[],
-  isPassed: boolean
+  isPassed: boolean,
+  hasAccess: boolean
 }
 
 export interface CourseCreateUpdateDTO {
