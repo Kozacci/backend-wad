@@ -77,4 +77,14 @@ public class ParticipantCoursesCBHelper {
             predicates.add(cb.equal(joinParticipantCourse.get("participant").get("lastName"), lastName));
         }
     }
+
+
+    public static void addPhoneNumberPredicate(CriteriaBuilder cb,
+                                               Join<CourseEntity, ParticipantCourseEntity> joinParticipantCourse,
+                                               List<Predicate> predicates,
+                                               String phoneNumber) {
+        if (phoneNumber != null) {
+            predicates.add(cb.equal(joinParticipantCourse.get("participant").get("phoneNumber"), phoneNumber));
+        }
+    }
 }

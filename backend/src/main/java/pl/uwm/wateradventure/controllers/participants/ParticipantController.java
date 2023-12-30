@@ -41,10 +41,11 @@ class ParticipantController {
             @RequestParam(required = false) String email, // participant Email
             @RequestParam(required = false) String lastName, // participant lastName
             @RequestParam(required = false) LocalDate dateFrom, // course dateFrom
-            @RequestParam(required = false) String courseCity // course dateFrom
+            @RequestParam(required = false) String courseCity, // course dateFrom
+            @RequestParam(required = false) String phoneNumber // course dateFrom
     ) {
         var filters = new ParticipantCourseFiltersDTO(participantId, courseType,
-                courseStatus, isPaid, isPassed, sortBy, email, lastName, dateFrom, courseCity);
+                courseStatus, isPaid, isPassed, sortBy, email, lastName, dateFrom, courseCity, phoneNumber);
         var filteredParticipantCourses = participantFacade.getCoursesByParticipant(filters);
         return !filteredParticipantCourses.isEmpty() ? ResponseEntity.ok(filteredParticipantCourses) : ResponseEntity.noContent().build();
     }
