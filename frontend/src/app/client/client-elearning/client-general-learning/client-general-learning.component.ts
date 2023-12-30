@@ -16,6 +16,23 @@ export class ClientGeneralLearningComponent implements OnInit {
   categories: string[] = [];
   randomQuestion: QuestionEntityDTO = <QuestionEntityDTO>{};
 
+  submitted: boolean = false;
+  selectedAnswer: string | null = null;
+
+  selectAnswer(answer: string) {
+    this.selectedAnswer = answer;
+  }
+
+  checkAnswer() {
+    if(this.selectedAnswer == this.randomQuestion.correctAnswer) {
+      this.updateGeneralLearning(this.participantCourseId, true)
+    }
+    else {
+      this.updateGeneralLearning(this.participantCourseId, false)
+    }
+    this.submitted = true;
+  }
+
   constructor(
     private readonly restClient: RestClient,
     private route: ActivatedRoute,
@@ -24,13 +41,13 @@ export class ClientGeneralLearningComponent implements OnInit {
   }
   ngOnInit() {
     this.getParticipantCourse();
-    // this.getRandomQuestion(); --  wywolywac na starcie w metodzie do pobrania kursu uzytkownika a pozniej przy kliknieciu w nastepne pytanie...
   }
 
   getParticipantCourse() {
     this.route.params.subscribe(params => {
       this.participantCourseId = params['id'];
-      this.restClient.getParticipantCourseById(this.participantCourseId).subscribe(
+      this.restClient.getParticipantCourseById(this.participantCourseId)
+        .subscribe(
         response => {
           this.participantCourse = response;
           this.categories = this.clientElearningService.getCategoriesByCourseType(this.participantCourse);
@@ -41,12 +58,24 @@ export class ClientGeneralLearningComponent implements OnInit {
   }
 
   getRandomQuestion() {
-    this.restClient.getRandomQuestionByCategories(this.categories).subscribe(
+    this.restClient.getRandomQuestionByCategories(this.categories)
+      .subscribe(
       response => {
         this.randomQuestion = response;
         console.log("LOSOWE PYTANIE:", this.randomQuestion);
+        this.selectedAnswer = null;
+        this.submitted = false;
       }
     )
+  }
+
+  updateGeneralLearning(participantCourseId: number, isCorrectAnswer: boolean) {
+    return this.restClient.updateGeneralLearning(participantCourseId, isCorrectAnswer)
+      .subscribe(
+        response => {
+          console.log("GENERAL LEARNING ENTITY DTO : ", response);
+        }
+      )
   }
 
 }
