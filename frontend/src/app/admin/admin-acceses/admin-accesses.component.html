@@ -103,6 +103,7 @@
         <th>Imie i nazwisko kursanta</th>
         <th>Email kursanta</th>
         <th>Numer telefonu</th>
+        <th>Posiada dostęp</th>
         <th>Rodzaj kursu</th>
         <th>Data rozpoczęcia kursu</th>
         <th>Data zakończenia kursu</th>
@@ -116,6 +117,7 @@
         <td>{{access.participantFirstName + " " + access.participantLastName}}</td>
         <td>{{access.participantEmail}}</td>
         <td>{{access.participantPhoneNumber}}</td>
+        <td>{{access.hasAccess | hasAccess}}</td>
         <td>{{access.courseType | courseType}}</td>
         <td>{{access.dateFrom | date:'yyyy-MM-dd HH:mm'}}</td>
         <td>{{access.dateTo | date:'yyyy-MM-dd HH:mm'}}</td>
