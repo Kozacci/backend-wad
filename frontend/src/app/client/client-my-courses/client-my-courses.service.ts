@@ -56,8 +56,8 @@ export class ClientMyCoursesService {
     }
   }
 
-  goToCourseLearning(course: ParticipantCourseFilterDTO) {
-    // TODO
+  goToCourseLearning() {
+    this.pathService.navigate('/e-learning')
   }
 
 }
