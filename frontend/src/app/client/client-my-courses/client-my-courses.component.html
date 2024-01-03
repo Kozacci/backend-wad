@@ -32,7 +32,7 @@
     </div>
     <div class="course-actions">
       <button pButton type="button" label="Szczegóły" icon="pi pi-info-circle" class="p-button-rounded p-button-primary" (click)="clientMyCoursesService.goToCourseDetails(course)"></button>
-      <button *ngIf="course.isPaid" pButton type="button" label="Nauka" icon="fa-solid fa-book-open-reader" class="p-button-rounded p-button-success" (click)="clientMyCoursesService.goToCourseLearning(course)"></button>
+      <button *ngIf="course.isPaid" pButton type="button" label="Nauka" icon="fa-solid fa-book-open-reader" class="p-button-rounded p-button-success" (click)="clientMyCoursesService.goToCourseLearning()"></button>
       <button *ngIf="!course.isPaid" pButton type="button" label="Anuluj" icon="pi pi-times" class="p-button-rounded p-button-outlined p-button-secondary" (click)="cancelParticipantCourse(course)"></button>
     </div>
 <!--  TODO CERTIFICATE GENERATE BUTTON IF COURSE IS PASSED = TRUE AND HIDE "LEARNING" BUTTON THEN-->

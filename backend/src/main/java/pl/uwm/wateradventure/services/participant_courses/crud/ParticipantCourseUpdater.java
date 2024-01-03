@@ -20,6 +20,7 @@ class ParticipantCourseUpdater {
                 participantCourse.setIsPassed(isPassed);
             }
             if (hasAccess != null) {
+                participantCourse.setIsPaid(hasAccess);
                 participantCourse.setHasAccess(hasAccess);
                 participantCourse.setAccessDate(LocalDateTime.now());
             }
