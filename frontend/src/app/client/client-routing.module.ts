@@ -45,6 +45,12 @@ import {ClientElearningComponent} from "./client-elearning/client-elearning.comp
 import {
   ClientGeneralLearningComponent
 } from "./client-elearning/client-general-learning/client-general-learning.component";
+import {
+  ClientTrialExamLearningComponent
+} from "./client-elearning/client-trial-exam-learning/client-trial-exam-learning.component";
+import {
+  ClientStatisticsLearningComponent
+} from "./client-elearning/client-statistics-learning/client-statistics-learning.component";
 
 const routes: Routes = [
   {
@@ -151,6 +157,16 @@ const routes: Routes = [
     path: 'e-learning/nauka-ogolna/:id',
     canActivate: undefined,
     component: ClientGeneralLearningComponent
+  },
+  {
+    path: 'e-learning/egzamin-probny/:id',
+    canActivate: undefined,
+    component: ClientTrialExamLearningComponent
+  },
+  {
+    path: 'e-learning/statystyki/:id',
+    canActivate: undefined,
+    component: ClientStatisticsLearningComponent
   },
 ];
 

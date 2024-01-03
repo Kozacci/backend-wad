@@ -19,6 +19,16 @@ export class ClientGeneralLearningComponent implements OnInit {
   submitted: boolean = false;
   selectedAnswer: string | null = null;
 
+  constructor(
+    private readonly restClient: RestClient,
+    private route: ActivatedRoute,
+    private readonly clientElearningService: ClientElearningService
+  ) { }
+
+  ngOnInit() {
+    this.getParticipantCourse();
+  }
+
   selectAnswer(answer: string) {
     this.selectedAnswer = answer;
   }
@@ -31,16 +41,6 @@ export class ClientGeneralLearningComponent implements OnInit {
       this.updateGeneralLearning(this.participantCourseId, false)
     }
     this.submitted = true;
-  }
-
-  constructor(
-    private readonly restClient: RestClient,
-    private route: ActivatedRoute,
-    private readonly clientElearningService: ClientElearningService
-  ) {
-  }
-  ngOnInit() {
-    this.getParticipantCourse();
   }
 
   getParticipantCourse() {
