@@ -245,7 +245,7 @@ export class AdminCoursesComponent {
     { name: "Miasto", value: "city"},
     { name: "Data rozpoczęcia", value: "dateFrom"},
     { name: "Data zakończenia", value: "dateTo"},
-    { name: "Zapisanych kursantów", value: "participants"},
+    { name: "Zapisanych kursantów", value: "participants"}, // sprawdzic czemu idzie po emailu na backend zapytanie
     { name: "Maksymalna liczba kursantów", value: "maxParticipantsNumber"}
   ]
 

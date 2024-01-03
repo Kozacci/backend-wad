@@ -143,6 +143,7 @@ export class AdminQuestionsComponent {
     }, error => {
       this.responseHandlerService.handleErrorsPtoasts(error);
     });
+    this.groupedErrors = [];
   }
 
   private changeEditedQuestionValuesInTable() {
@@ -167,10 +168,12 @@ export class AdminQuestionsComponent {
 
   showAddQuestionModal(): void {
     this.addQuestionModalVisible = true;
+    this.groupedErrors = [];
   }
 
   closeAddQuestionModal(): void {
     this.addQuestionModalVisible = false;
+    this.groupedErrors = [];
   }
 
   showEditQuestionModal(): void {
@@ -179,6 +182,7 @@ export class AdminQuestionsComponent {
 
   closeEditQuestionModal(): void {
     this.editQuestionModalVisible = false;
+    this.groupedErrors = [];
   }
 
   removeQuestionFromTable(deletedQuestionId: number | null) {

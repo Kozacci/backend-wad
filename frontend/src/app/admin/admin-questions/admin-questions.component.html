@@ -116,6 +116,7 @@
   [style]="{ width: '50rem' }"
   [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
   [contentStyle]="{maxheight: '80%'}"
+  (onHide)="closeAddQuestionModal()"
   >
 
   <ng-template pTemplate="header">
@@ -245,6 +246,7 @@
   [style]="{ width: '50rem' }"
   [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
   [contentStyle]="{maxheight: '80%'}"
+  (onHide)="closeEditQuestionModal()"
 >
 
   <ng-template pTemplate="header">

@@ -88,7 +88,7 @@ export class AdminPassingComponent {
       this.responseHandlerService.showWarningPToast("Zaliczenia", "Najpierw wybierz kursantów, którym chcesz zaliczyć kurs.");
       return;
     }
-
+    // TODO: dodać możliwość zmiany na oplacony/nieoplacony
     this.showEditPassingsModal = true;
   }
 
