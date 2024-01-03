@@ -14,16 +14,14 @@ class ParticipantEventCreator {
 
     private final ParticipantEventRepository repository;
 
-    public ParticipantEventEntityDTO signInForEvent(EventEntity event, ParticipantEventEntityCreateDTO dto) {
-        // TODO: testy tutaj
+    public ParticipantEventEntity signInForEvent(EventEntity event, ParticipantEventEntityCreateDTO dto) {
         checkIfThereAreEnoughSeats(event, dto);
         var participantEvent = new ParticipantEventEntity(event, dto.ordererEmail(),
                 dto.ordererFirstName(), dto.ordererLastName(),
                 dto.ordererPhoneNumber(), dto.participantsNumber());
-        var savedParticipantEvent = repository.saveAndFlush(participantEvent);
         // some bug here appears, assignedParticipantsNumber in ParticipantEventEntityDTO has only assignedParticipantsNumber from the past,
         // without those given in ParticipantEventEntityCreateDTO
-        return savedParticipantEvent.toDTO();
+        return repository.saveAndFlush(participantEvent);
     }
 
     private void checkIfThereAreEnoughSeats(EventEntity event, ParticipantEventEntityCreateDTO dto) {

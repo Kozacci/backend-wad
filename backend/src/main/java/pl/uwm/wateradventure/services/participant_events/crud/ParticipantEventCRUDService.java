@@ -18,7 +18,7 @@ public class ParticipantEventCRUDService {
     private final ParticipantEventDeleter deleter;
 
     public ParticipantEventEntityDTO signInForEvent(EventEntity event, ParticipantEventEntityCreateDTO dto) {
-        return creator.signInForEvent(event, dto);
+        return creator.signInForEvent(event, dto).toDTO();
     }
 
     public List<ParticipantEventInfoDTO> getAssignedParticipantsForAnEventByEventId(Long eventId) {

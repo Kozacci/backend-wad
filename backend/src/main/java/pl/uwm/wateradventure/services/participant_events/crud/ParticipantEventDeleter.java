@@ -15,14 +15,17 @@ class ParticipantEventDeleter {
     private final ParticipantEventRepository repository;
 
     public void deleteAssigningForEvent(ParticipantEventEntity participantEventEntity) {
-        // TODO: testy tutaj + refactor linijek 19-24 -> wydziedziczyć do metody
+        checkIfAssignmentIsBeingCancelledBeforePermittedTime(participantEventEntity);
+        repository.delete(participantEventEntity);
+    }
+
+    private static void checkIfAssignmentIsBeingCancelledBeforePermittedTime(ParticipantEventEntity participantEventEntity) {
         LocalDateTime eventDate = participantEventEntity.getEvent().getDate();
         LocalDateTime nowDate = LocalDateTime.now();
         long differenceInHours = ChronoUnit.HOURS.between(eventDate, nowDate);
-        if(differenceInHours < 48) {
+        if(differenceInHours > 48) {
             throw new EventCancellationTimeoutException();
         }
-        repository.delete(participantEventEntity);
     }
 
 }

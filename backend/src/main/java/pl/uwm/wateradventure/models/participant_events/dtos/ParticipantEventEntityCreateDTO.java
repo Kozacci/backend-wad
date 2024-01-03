@@ -1,6 +1,7 @@
 package pl.uwm.wateradventure.models.participant_events.dtos;
 
 import jakarta.validation.constraints.*;
+import lombok.Builder;
 
 public record ParticipantEventEntityCreateDTO(@NotNull(message = "'Event id' must be filled.")
                                               Long eventId,
@@ -23,4 +24,6 @@ public record ParticipantEventEntityCreateDTO(@NotNull(message = "'Event id' mus
                                               @NotNull(message = "'Participants number' field must be filled.")
                                               @Positive(message = "'Participants number' field must be higher than 0.")
                                               Integer participantsNumber) {
+
+    @Builder public ParticipantEventEntityCreateDTO {}
 }
