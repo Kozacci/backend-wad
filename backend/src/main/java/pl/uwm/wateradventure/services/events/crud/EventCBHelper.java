@@ -109,7 +109,7 @@ class EventCBHelper {
     ) {
         Subquery<Integer> subQuery = query.subquery(Integer.class);
         Root<ParticipantEventEntity> participantEvent = subQuery.from(ParticipantEventEntity.class);
-        subQuery.select(cb.sum(participantEvent.get("participantsNumber")))
+        subQuery.select(cb.coalesce(cb.sum(participantEvent.get("participantsNumber")), 0))
                 .where(cb.equal(participantEvent.get("event"), event));
         Predicate participantsNotFull = cb.lessThan(subQuery, event.get("maxParticipantsNumber"));
         predicates.add(participantsNotFull);
