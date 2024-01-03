@@ -25,6 +25,7 @@ public class LearningFacade {
     private final TrialExamCRUDService trialExamCRUDService;
     private final LearningCounter counter;
 
+    // TODO: tutaj mozna testy wrzucic do updateów
     public GeneralLearningEntityDTO updateGeneralLearning(
             Long participantCourseId,
             Boolean isCorrectAnswer

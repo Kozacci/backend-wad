@@ -16,6 +16,7 @@ public class ParticipantCourseDeleter {
     private final ParticipantCourseRepository participantCourseRepository;
 
     public void deleteAssigningForCourse(ParticipantCourseEntity participantCourseEntity) {
+        // TODO: tutaj testy
         Boolean isPaid = participantCourseEntity.getIsPaid();
         if(isPaid) {
             throw new CourseCancellationTimeoutException();

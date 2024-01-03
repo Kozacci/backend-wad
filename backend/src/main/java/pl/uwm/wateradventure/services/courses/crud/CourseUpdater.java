@@ -19,6 +19,7 @@ class CourseUpdater {
     private final CourseRepository courseRepository;
 
     protected CourseEntityDTO updateCourse(CourseEntity courseToUpdate, CourseCreateUpdateDTO courseUpdateDTO) {
+        // TODO: tutaj testy
         checkType(courseToUpdate, courseUpdateDTO.courseType());
         checkDateFromAndDateTo(courseToUpdate, courseUpdateDTO.dateFrom(), courseUpdateDTO.dateTo());
         checkCity(courseToUpdate, courseUpdateDTO.city());

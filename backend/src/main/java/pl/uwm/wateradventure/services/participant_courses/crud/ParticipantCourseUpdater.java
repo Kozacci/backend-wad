@@ -14,6 +14,7 @@ class ParticipantCourseUpdater {
     private final ParticipantCourseRepository repository;
 
     public List<ParticipantCourseEntity> update(List<ParticipantCourseEntity> entities, Boolean isPassed, Boolean hasAccess) {
+        // TODO: tutaj testy
         for (ParticipantCourseEntity participantCourse: entities) {
             if (isPassed != null) {
                 participantCourse.setIsPassed(isPassed);

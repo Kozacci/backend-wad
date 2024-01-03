@@ -22,6 +22,7 @@ class ParticipantCourseCreator {
     @Transactional
     public ParticipantCourseEntity signIn(ParticipantEntity participant, CourseEntity course) {
         // some basic validation
+        // TODO: tutaj testy
         isMaxParticipantsNumberIsExceeded(course.getParticipants(), course.getMaxParticipantsNumber());
         isCourseStatusNotBegun(course.getStatus());
         isParticipantAlreadySignedInForCourse(participant, course.getParticipants());

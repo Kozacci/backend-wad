@@ -15,6 +15,7 @@ class ParticipantEventDeleter {
     private final ParticipantEventRepository repository;
 
     public void deleteAssigningForEvent(ParticipantEventEntity participantEventEntity) {
+        // TODO: testy tutaj + refactor linijek 19-24 -> wydziedziczyć do metody
         LocalDateTime eventDate = participantEventEntity.getEvent().getDate();
         LocalDateTime nowDate = LocalDateTime.now();
         long differenceInHours = ChronoUnit.HOURS.between(eventDate, nowDate);

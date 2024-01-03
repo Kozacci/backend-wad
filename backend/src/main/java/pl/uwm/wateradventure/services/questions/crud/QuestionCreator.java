@@ -15,6 +15,7 @@ class QuestionCreator {
     private final QuestionRepository repository;
 
     public QuestionEntityDTO addQuestion(QuestionCreateUpdateDTO questionCreateDTO) {
+        // TODO: dodać test sprawdzajacy czy dodaje sie czy nie xd
         var questionEntity = repository.saveAndFlush(
                 new QuestionEntity(
                     questionCreateDTO.content(),

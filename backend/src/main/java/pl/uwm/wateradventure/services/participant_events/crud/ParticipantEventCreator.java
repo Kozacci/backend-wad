@@ -15,6 +15,7 @@ class ParticipantEventCreator {
     private final ParticipantEventRepository repository;
 
     public ParticipantEventEntityDTO signInForEvent(EventEntity event, ParticipantEventEntityCreateDTO dto) {
+        // TODO: testy tutaj
         checkIfThereAreEnoughSeats(event, dto);
         var participantEvent = new ParticipantEventEntity(event, dto.ordererEmail(),
                 dto.ordererFirstName(), dto.ordererLastName(),

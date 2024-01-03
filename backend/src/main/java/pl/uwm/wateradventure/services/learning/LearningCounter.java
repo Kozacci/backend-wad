@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 @Component
 class LearningCounter {
 
+    // TODO: tutaj testy
     public EntireLearningDTO countAllAnswers(AnswerHistoryEntity answerHistory) {
         var categoryLearningEntities = answerHistory.getCategoryLearningList();
         var entitiesGroupedByCategory = groupByCategories(categoryLearningEntities);
