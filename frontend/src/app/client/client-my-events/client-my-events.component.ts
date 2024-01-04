@@ -87,7 +87,7 @@ export class ClientMyEventsComponent implements OnInit{
           this.messageService.add({life:5000, severity:'success', summary:'Rezygnacja z eventu', detail:"Pomyślnie udało Ci się zrezygnować z eventu"})
         },
         (error) => {
-          this.messageService.add({life:4000, severity:'error', summary:'Rezygnacja z eventu', detail: error.error.message})
+          this.messageService.add({life:4000, severity:'error', summary:'Rezygnacja z eventu', detail: error.message})
           console.error('Błąd rezygnacji z eventu', error);
         })
   }

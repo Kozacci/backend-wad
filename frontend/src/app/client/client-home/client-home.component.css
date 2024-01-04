@@ -518,6 +518,7 @@ body {
 }
 
 .reviews-disclaimer {
+  margin-bottom: 0;
   font-size: 0.75em;
   color: #666;
 }

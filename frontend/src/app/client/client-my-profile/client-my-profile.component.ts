@@ -17,21 +17,21 @@ export class ClientMyProfileComponent {
   formGroup = new FormGroup({
     firstName:
       new FormControl(
-        null,
+        null as any,
         [
           Validators.minLength(2)
         ]
       ),
     lastName:
       new FormControl(
-        null,
+        null as any,
         [
           Validators.minLength(2)
         ]
       ),
     email:
       new FormControl(
-        null,
+        null as any,
         [
           Validators.minLength(5),
           Validators.email
@@ -39,7 +39,7 @@ export class ClientMyProfileComponent {
       ),
     phoneNumber:
       new FormControl(
-        null,
+        null as any,
         [
           Validators.maxLength(9),
           Validators.pattern(/^\d{9}$/)
