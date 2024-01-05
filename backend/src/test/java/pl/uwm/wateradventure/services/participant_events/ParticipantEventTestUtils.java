@@ -33,7 +33,7 @@ public class ParticipantEventTestUtils {
                 .build();
     }
 
-    public static ParticipantEventEntity getParticipantEventEntityWithEventDatePastThreeDays() {
+    public static ParticipantEventEntity getParticipantEventEntityWithEventDatePastOneDay() {
         var entity = new ParticipantEventEntity();
         var event = getEvent();
         event.setDate(LocalDateTime.now().minusDays(1));

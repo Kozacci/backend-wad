@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import pl.uwm.wateradventure.exceptions.custom_exceptions.EventCancellationTimeoutException;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static pl.uwm.wateradventure.services.participant_events.ParticipantEventTestUtils.getParticipantEventEntityWithEventDatePastThreeDays;
+import static pl.uwm.wateradventure.services.participant_events.ParticipantEventTestUtils.getParticipantEventEntityWithEventDatePastOneDay;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -29,7 +29,7 @@ class ParticipantEventDeleterTest {
     @Test
     void shouldThrowException() {
         logger.info("Should throw EventCancellationTimeoutException");
-        var participantEvent = getParticipantEventEntityWithEventDatePastThreeDays();
+        var participantEvent = getParticipantEventEntityWithEventDatePastOneDay();
         assertThatThrownBy(() -> participantEventDeleter.deleteAssigningForEvent(participantEvent))
                 .isInstanceOf(EventCancellationTimeoutException.class);
         logger.info("Successful test!");
