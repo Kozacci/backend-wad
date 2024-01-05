@@ -12,18 +12,18 @@ import java.time.temporal.ChronoUnit;
 @RequiredArgsConstructor
 class ParticipantEventDeleter {
 
-    private final ParticipantEventRepository repository;
+    private final ParticipantEventRepository participantEventRepository;
 
     public void deleteAssigningForEvent(ParticipantEventEntity participantEventEntity) {
-        checkIfAssignmentIsBeingCancelledBeforePermittedTime(participantEventEntity);
-        repository.delete(participantEventEntity);
+        checkIfAssignmentIsBeingCancelledAfterPermittedTime(participantEventEntity);
+        participantEventRepository.delete(participantEventEntity);
     }
 
-    private static void checkIfAssignmentIsBeingCancelledBeforePermittedTime(ParticipantEventEntity participantEventEntity) {
+    private static void checkIfAssignmentIsBeingCancelledAfterPermittedTime(ParticipantEventEntity participantEventEntity) {
         LocalDateTime eventDate = participantEventEntity.getEvent().getDate();
         LocalDateTime nowDate = LocalDateTime.now();
         long differenceInHours = ChronoUnit.HOURS.between(eventDate, nowDate);
-        if(differenceInHours > 48) {
+        if(differenceInHours < 48) {
             throw new EventCancellationTimeoutException();
         }
     }
