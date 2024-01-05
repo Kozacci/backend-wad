@@ -3,6 +3,7 @@ package pl.uwm.wateradventure.services.participant_courses;
 import pl.uwm.wateradventure.models.courses.CourseCity;
 import pl.uwm.wateradventure.models.courses.CourseEntity;
 import pl.uwm.wateradventure.models.courses.CourseType;
+import pl.uwm.wateradventure.models.participant_courses.ParticipantCourseEntity;
 import pl.uwm.wateradventure.models.participants.ParticipantEntity;
 
 import java.time.LocalDate;
@@ -52,6 +53,11 @@ public class ParticipantCourseTestUtils {
                         "andrzej55@email.com",
                         "passwordtest",
                         "901454223"));
+
+        first.getParticipant().setId(1L);
+        second.getParticipant().setId(2L);
+        third.getParticipant().setId(3L);
+        third.setIsPaid(true);
 
         return List.of(first, second, third);
     }
