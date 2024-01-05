@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import pl.uwm.wateradventure.models.questions.QuestionEntity;
 import pl.uwm.wateradventure.models.questions.dtos.QuestionEntityDTO;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static pl.uwm.wateradventure.services.questions.QuestionUtilsTest.getQuestionCreateUpdateDTO;

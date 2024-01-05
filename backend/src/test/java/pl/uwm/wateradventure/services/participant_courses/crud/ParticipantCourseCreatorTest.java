@@ -10,13 +10,14 @@ import pl.uwm.wateradventure.exceptions.custom_exceptions.ParticipantAlreadySign
 import pl.uwm.wateradventure.exceptions.value_objects_exceptions.InvalidCourseStatusException;
 import pl.uwm.wateradventure.models.courses.CourseEntity;
 import pl.uwm.wateradventure.models.courses.CourseStatus;
-import pl.uwm.wateradventure.models.participants.ParticipantEntity;
 import pl.uwm.wateradventure.models.participant_courses.ParticipantCourseEntity;
+import pl.uwm.wateradventure.models.participants.ParticipantEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

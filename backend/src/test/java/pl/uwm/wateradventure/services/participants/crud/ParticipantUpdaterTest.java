@@ -8,7 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static pl.uwm.wateradventure.services.participants.ParticipantsUtilsTest.getParticipantEntity;
 import static pl.uwm.wateradventure.services.participants.ParticipantsUtilsTest.getParticipantUpdateDTO;
 
