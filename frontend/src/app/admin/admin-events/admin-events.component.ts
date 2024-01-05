@@ -3,8 +3,11 @@ import {
   EventCity,
   EventCreateUpdateDTO,
   EventEntityDTO,
-  EventFilterDTO, EventType,
-  GroupedErrorDTO, mapToEventCity, mapToEventType,
+  EventFilterDTO,
+  EventType,
+  GroupedErrorDTO,
+  mapToEventCity,
+  mapToEventType,
   NameValueNull
 } from "../../shared/dto";
 import {RestClient} from "../../shared/rest-client";

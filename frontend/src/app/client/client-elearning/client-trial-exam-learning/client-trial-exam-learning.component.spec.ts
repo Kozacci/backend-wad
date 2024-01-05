@@ -1,4 +1,4 @@
-import { ClientTrialExamLearningComponent } from './client-trial-exam-learning.component';
+import {ClientTrialExamLearningComponent} from './client-trial-exam-learning.component';
 import {RestClient} from "../../../shared/rest-client";
 import {ActivatedRoute} from "@angular/router";
 import {PathService} from "../../../shared/services/path.service";

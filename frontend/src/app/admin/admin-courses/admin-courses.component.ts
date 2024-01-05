@@ -3,8 +3,12 @@ import {
   CourseCity,
   CourseCreateUpdateDTO,
   CourseEntityDTO,
-  CourseFilterDTO, CourseType,
-  GroupedErrorDTO, mapToCourseCity, mapToCourseStatus, mapToCourseType,
+  CourseFilterDTO,
+  CourseType,
+  GroupedErrorDTO,
+  mapToCourseCity,
+  mapToCourseStatus,
+  mapToCourseType,
   NameValueNull
 } from "../../shared/dto";
 import {RestClient} from "../../shared/rest-client";

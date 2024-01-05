@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {ParticipantCourseEntityDTO, QuestionEntityDTO} from "../../../shared/dto";
 import {RestClient} from "../../../shared/rest-client";
 import {ActivatedRoute} from "@angular/router";

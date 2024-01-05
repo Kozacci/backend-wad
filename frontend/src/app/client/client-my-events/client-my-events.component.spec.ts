@@ -3,10 +3,7 @@ import {ClientMyEventsComponent} from './client-my-events.component';
 import {RestClient} from "../../shared/rest-client";
 import {MessageService} from "primeng/api";
 import {of, throwError} from "rxjs";
-import {
-  EventCity, EventType,
-  ParticipantEventFilterDTO
-} from "../../shared/dto";
+import {EventCity, EventType, ParticipantEventFilterDTO} from "../../shared/dto";
 import {PathService} from "../../shared/services/path.service";
 
 /**

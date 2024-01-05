@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {RestClient} from "../../shared/rest-client";
 import {HttpResponseHandlerService} from "../../shared/services/http-response-handler.service";
 import {FormService} from "../../shared/services/form/form.service";

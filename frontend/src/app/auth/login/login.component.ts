@@ -2,9 +2,6 @@ import {Component} from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 import {AuthService} from "../../shared/services/auth/auth.service";
 import {FormService} from "../../shared/services/form/form.service";
-import {RestClient} from "../../shared/rest-client";
-import {PathService} from "../../shared/services/path.service";
-import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-client-login',

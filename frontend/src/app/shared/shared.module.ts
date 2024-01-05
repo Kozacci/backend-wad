@@ -19,17 +19,17 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
-import { CorrectAnswerPipe } from './pipes/correct-answer.pipe';
-import { CategoryPipe } from './pipes/category.pipe';
+import {CorrectAnswerPipe} from './pipes/correct-answer.pipe';
+import {CategoryPipe} from './pipes/category.pipe';
 import {DangerButtonComponent} from "./buttons/danger-button/danger-button.component";
 import {CalendarModule} from "primeng/calendar";
-import { CourseTypePipe } from './pipes/course-type.pipe';
-import { CourseStatusPipe } from './pipes/course-status.pipe';
-import { CourseCityPipe } from './pipes/course-city.pipe';
-import { EventCityPipe } from './pipes/event-city.pipe';
-import { EventTypePipe } from './pipes/event-type.pipe';
-import { IsCoursePassedPipe } from './pipes/is-course-passed.pipe';
-import { HasAccessPipe } from './pipes/has-access.pipe';
+import {CourseTypePipe} from './pipes/course-type.pipe';
+import {CourseStatusPipe} from './pipes/course-status.pipe';
+import {CourseCityPipe} from './pipes/course-city.pipe';
+import {EventCityPipe} from './pipes/event-city.pipe';
+import {EventTypePipe} from './pipes/event-type.pipe';
+import {IsCoursePassedPipe} from './pipes/is-course-passed.pipe';
+import {HasAccessPipe} from './pipes/has-access.pipe';
 
 
 @NgModule({
