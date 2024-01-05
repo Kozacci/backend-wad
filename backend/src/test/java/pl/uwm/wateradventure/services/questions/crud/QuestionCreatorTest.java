@@ -36,7 +36,7 @@ class QuestionCreatorTest {
         var result = questionCreator.addQuestion(dto);
         assertThat(result).isNotNull();
         assertThat(result).isInstanceOf(QuestionEntityDTO.class);
-        logger.info("Successfull test!");
+        logger.info("Successful test!");
     }
 
 
