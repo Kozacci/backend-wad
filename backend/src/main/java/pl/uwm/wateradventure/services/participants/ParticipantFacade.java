@@ -25,6 +25,7 @@ public class ParticipantFacade {
     public ParticipantEntityDTO getParticipantByEmail(String email) {
         return participantCRUDService.getParticipantByEmail(email).toDTO();
     }
+
     public ParticipantEntityDTO register(ParticipantRegisterDTO participantRegisterDTO) {
         return participantCRUDService.register(participantRegisterDTO);
     }
