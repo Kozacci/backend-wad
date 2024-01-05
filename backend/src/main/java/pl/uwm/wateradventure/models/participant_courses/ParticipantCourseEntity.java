@@ -23,6 +23,9 @@ public class ParticipantCourseEntity extends WaterAdventureChangeMetricEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime accessDate;
 
+    @Column(name = "has_access")
+    private Boolean hasAccess;
+
     @Column(name = "is_passed")
     private Boolean isPassed;
 
@@ -49,6 +52,7 @@ public class ParticipantCourseEntity extends WaterAdventureChangeMetricEntity {
         this.accessDate = LocalDateTime.of(2000, 1, 1, 12, 0);
         this.isPassed = false;
         this.isPaid = false;
+        this.hasAccess = false;
         // online payment will not be possible in engineering work
         this.onlinePayment = false;
         this.course = course;
@@ -58,6 +62,7 @@ public class ParticipantCourseEntity extends WaterAdventureChangeMetricEntity {
 
     public ParticipantCourseEntityDTO toDTO() {
         return ParticipantCourseEntityDTO.builder()
+                .participantCourseId(this.id)
                 .courseId(this.course.getId())
                 .courseType(this.course.getType().enumValue)
                 .courseDateFrom(this.course.getDateFrom())

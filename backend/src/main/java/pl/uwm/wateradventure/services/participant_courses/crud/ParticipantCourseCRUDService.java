@@ -4,27 +4,36 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.uwm.wateradventure.models.courses.CourseEntity;
 import pl.uwm.wateradventure.models.participant_courses.ParticipantCourseEntity;
+import pl.uwm.wateradventure.models.participant_courses.dtos.ParticipantCourseUpdateDTO;
 import pl.uwm.wateradventure.models.participants.ParticipantEntity;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class ParticipantCourseCRUDService {
 
+    private final ParticipantCourseCreator creator;
     private final ParticipantCourseReader reader;
     private final ParticipantCourseUpdater updater;
-    private final ParticipantCourseCreator creator;
+    private final ParticipantCourseDeleter deleter;
+
+    public ParticipantCourseEntity signIn(ParticipantEntity participant, CourseEntity course) {
+        return creator.signIn(participant, course);
+    }
 
     public ParticipantCourseEntity getParticipantCourseById(Long participantCourseId) {
         return reader.getParticipantCourseById(participantCourseId);
     }
 
-    public ParticipantCourseEntity update(Long participantCourseId, Boolean isPassed, Boolean isPaid) {
-        var participantCourseEntity = reader.getParticipantCourseById(participantCourseId);
-        return updater.update(participantCourseEntity, isPassed, isPaid);
+    public List<ParticipantCourseEntity> update(ParticipantCourseUpdateDTO dto) {
+        var participantCourseEntities = reader.getParticipantCourseByIdIn(dto.participantCourseIds());
+        return updater.update(participantCourseEntities, dto.isPassed(), dto.hasAccess());
     }
 
-    public ParticipantCourseEntity signIn(ParticipantEntity participant, CourseEntity course) {
-        return creator.signIn(participant, course);
+    public void deleteAssigningForCourse(Long participantCourseId) {
+        var participantCourseEntity = reader.getParticipantCourseById(participantCourseId);
+        deleter.deleteAssigningForCourse(participantCourseEntity);
     }
 
 }

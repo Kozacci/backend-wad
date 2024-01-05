@@ -1,0 +1,210 @@
+<div class="item-detail-container">
+  <div class="item-main">
+    <h1 class="item-title">{{ event.title }}</h1>
+    <img class="item-image" [src]="event.image" alt="Zdjęcie kursu">
+    <h2>Co zawiera oferta</h2>
+    <ul class="item-description">
+      <li *ngFor="let profit of event.profits">
+        {{ profit }}
+      </li>
+    </ul>
+    <h2>Dodatkowe informacje</h2>
+    <ul class="item-conditions">
+      <li *ngFor="let condition of event.conditions">
+        {{ condition }}
+      </li>
+    </ul>
+    <h2>Dostępne terminy</h2>
+    <p-table
+      [value]="availableEvents"
+      [paginator]="true"
+      [rows]="3"
+      [showCurrentPageReport]="true"
+      [alwaysShowPaginator]="availableEvents.length > 3"
+      currentPageReportTemplate="{first} z {totalRecords}"
+      styleClass="p-datatable p-datatable-resizable p-datatable-events"
+      [tableStyle]="{'width': '100%' }"
+      [rowHover]="true"
+      [resizableColumns]="true"
+      [scrollable]="true"
+      scrollHeight="300px">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Termin</th>
+          <th>Czas trwania</th>
+          <th>Lokalizacja</th>
+          <th>Ilość wolnych miejsc</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-availableEvent>
+        <tr>
+          <td>{{ availableEvent.date | date: 'yyyy-MM-dd HH:mm' }}</td>
+          <td>{{ availableEvent.duration }}</td>
+          <td>{{ availableEvent.city }}</td>
+          <td [ngClass]="{
+              'green-text': availableEvent.maxParticipantsNumber - availableEvent.assignedParticipants >= 5,
+              'orange-text': availableEvent.maxParticipantsNumber - availableEvent.assignedParticipants >= 3,
+              'red-text': availableEvent.maxParticipantsNumber - availableEvent.assignedParticipants >= 0
+              }">
+            {{ availableEvent.maxParticipantsNumber-availableEvent.assignedParticipants }} / {{ availableEvent.maxParticipantsNumber }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <div class="item-info-aside">
+    <div class="item-meta-info">
+      <h2>INFORMACJE</h2>
+      <p><strong>Czas trwania:</strong> {{ event.duration }}</p>
+      <p><strong>Łódź:</strong> {{ event.yacht }}</p>
+      <p><strong>Lokalizacja:</strong> Sopot lub Olecko</p>
+      <p><strong>Kapitan:</strong> Hubert Wróblewski-Klimaszewski</p>
+      <p><strong>{{ event.additionalInfo1 }}</strong></p>
+      <p><strong>{{ event.additionalInfo2 }}</strong></p>
+      <p><strong>{{ event.additionalInfo3 }}</strong></p>
+      <p><strong>{{ event.additionalInfo4 }}</strong></p>
+    </div>
+
+    <div *ngIf="availableEvents.length > 0" class="item-enroll-info">
+      <div class="item-price">
+        Cena: {{ event.price }}
+      </div>
+      <button pButton type="button" label="Wybierz termin" class="sign-on-event-p-button p-button-rounded p-button-primary" (click)="modalDateVisibility = true"><i class="pi pi-plus"></i></button>
+    </div>
+
+    <div *ngIf="availableEvents.length == 0" class="item-enroll-info">
+      <div class="item-price">
+        Cena: {{ event.price }}
+      </div>
+      <h3>Brak dostępnych terminów!</h3>
+      <button pButton type="button" label="Wybierz termin" class="sign-on-event-p-button p-button-rounded p-button-primary" [disabled]="availableEvents.length == 0" (click)="modalDateVisibility = true"><i class="pi pi-plus"></i></button>
+    </div>
+  </div>
+
+</div>
+
+<!--    FOR NOW IT IS USABLE EVEN WITHOUT LOGGIN' IN -->
+<!--    <div *ngIf="!authService.isLogged()" class="item-enroll-info">-->
+<!--      <div class="item-price">-->
+<!--        Cena: {{ event.price }} zł-->
+<!--      </div>-->
+<!--      <h3>Musisz się najpierw zalogować!</h3>-->
+<!--      <button pButton type="button" label="Wybierz termin" class="sign-on-event-p-button p-button-rounded p-button-primary" [disabled]="!authService.isLogged()" (click)="modalDateVisibility = true"><i class="pi pi-plus"></i></button>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<p-dialog header="Wybierz dostępny termin" [(visible)]="modalDateVisibility" [style]="{'min-width': '50vw'}" [modal]="true" [dismissableMask]="true">
+  <p-table [value]="availableEvents"
+           [paginator]="true"
+           [rows]="5"
+           [showCurrentPageReport]="true"
+           [alwaysShowPaginator]="availableEvents.length > 5"
+           currentPageReportTemplate="{first} z {totalRecords}"
+           styleClass="p-datatable p-datatable-resizable p-datatable-events"
+           [tableStyle]="{'width': '100%' }"
+           [rowHover]="true"
+           [selectionMode]="'single'"
+           [resizableColumns]="true"
+           [scrollable]="true"
+           scrollHeight="300px">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Termin</th>
+        <th>Czas trwania</th>
+        <th>Lokalizacja</th>
+        <th>Ilość wolnych miejsc</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-availableEvent>
+      <tr [pSelectableRow]="availableEvent" (click)="selectAvailableEvent(availableEvent)">
+        <td>{{ availableEvent.date | date: 'yyyy-MM-dd HH:mm' }}</td>
+        <td>{{ availableEvent.duration }}</td>
+        <td>{{ availableEvent.city }}</td>
+        <td [ngClass]="{
+              'green-text': availableEvent.maxParticipantsNumber - availableEvent.assignedParticipants >= 5,
+              'orange-text': availableEvent.maxParticipantsNumber - availableEvent.assignedParticipants >= 3,
+              'red-text': availableEvent.maxParticipantsNumber - availableEvent.assignedParticipants >= 0
+              }">
+          {{ availableEvent.maxParticipantsNumber-availableEvent.assignedParticipants }} / {{ availableEvent.maxParticipantsNumber }}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <div class="modal-actions">
+    <button pButton type="button" label="Przejdź dalej" class="date-modal-events-p-button p-button-rounded p-button-primary" [disabled]="chosenEvent.eventId==null" (click)="signForEventModalChange()"></button>
+    <button pButton type="button" label="Anuluj" class="date-modal-p-button p-button-rounded p-button-outlined p-button-secondary" (click)="modalDateVisibility = false"></button>
+  </div>
+</p-dialog>
+
+
+<p-dialog header="Wypełnij formularz" class="sign-on-event-modal" [(visible)]="modalFormVisibility" [modal]="true" [dismissableMask]="true">
+
+  <div class="sign-on-event-modal-content">
+    <div class="sign-on-event-modal-left">
+      <form class="sign-on-event-form" [formGroup]="formGroup">
+        <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>Imię</mat-label>
+          <input matInput type="firstName" [formControl]="formGroup.controls.ordererFirstName" required>
+          <mat-error *ngIf="formGroup.controls.ordererFirstName.invalid">{{ formService.getInputErrorMessage(formGroup.controls.ordererFirstName) }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nazwisko</mat-label>
+          <input matInput type="firstName" [formControl]="formGroup.controls.ordererLastName" required>
+          <mat-error *ngIf="formGroup.controls.ordererLastName.invalid">{{ formService.getInputErrorMessage(formGroup.controls.ordererLastName) }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Numer telefonu</mat-label>
+          <input matInput type="phoneNumber" [maxlength]="9" [formControl]="formGroup.controls.ordererPhoneNumber" required>
+          <mat-error *ngIf="formGroup.controls.ordererPhoneNumber.invalid">{{ formService.getInputErrorMessage(formGroup.controls.ordererPhoneNumber) }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>E-mail</mat-label>
+          <input matInput type="email" [formControl]="formGroup.controls.ordererEmail" required>
+          <mat-error *ngIf="formGroup.controls.ordererEmail.invalid">{{ formService.getInputErrorMessage(formGroup.controls.ordererEmail) }}</mat-error>
+        </mat-form-field>
+      </form>
+    </div>
+
+    <div class="sign-on-event-modal-right">
+      <img [src]="event.image" alt="Zdjęcie eventu" class="sign-on-event-modal-image">
+      <div class="sign-on-event-event-info">
+        <h3>{{ event.title }}</h3>
+        <p><strong>Czas trwania:</strong></p>
+        <p>{{ chosenEvent.duration }}</p>
+        <p><strong>Liczba wolnych miejsc:</strong></p>
+        <p> {{ chosenEvent.maxParticipantsNumber - chosenEvent.assignedParticipants }} / {{ chosenEvent.maxParticipantsNumber}}</p>
+      </div>
+      <div class="people-count">
+        <mat-form-field style="z-index: 1050" appearance="outline">
+          <mat-label>Liczba osób</mat-label>
+          <input matInput type="number" [(ngModel)]="participantsNumber" (ngModelChange)="updateFinalCost()" [min]="1" [max]="this.chosenEvent.maxParticipantsNumber" required>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <div class="sign-on-event-modal-actions">
+
+    <div class="sign-on-event-payment-info">
+      <div class="sign-on-event-payment-title">
+        <h2>Do zapłaty</h2>
+      </div>
+      <div class="sign-on-event-payment-amount">
+        <p class="sign-on-event-total-cost"><strong>Koszt ogólny z VAT</strong></p>
+        <p class="sign-on-event-price">Łącznie {{ finalCost }} zł</p>
+      </div>
+    </div>
+
+    <div class="sign-on-event-payment-actions">
+      <button pButton type="button" label="Zarezerwuj" icon="pi pi-check" class="date-modal-events-p-button p-button-rounded p-button-primary" (click)="signForEvent()"></button>
+      <button pButton type="button" label="Anuluj" icon="pi pi-times" class="date-modal-p-button p-button-rounded p-button-outlined p-button-secondary" (click)="modalFormVisibility = false"></button>
+    </div>
+
+  </div>
+
+</p-dialog>

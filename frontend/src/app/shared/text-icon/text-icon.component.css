@@ -1,0 +1,35 @@
+.panel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  min-height: 70px;
+  padding-left: 5px;
+}
+
+p {
+  margin-top: 10px;
+  padding-left: 10px;
+}
+
+i {
+  color: #053742;
+  position: relative;
+  top: 6px;
+}
+
+span {
+  display: flex;
+  justify-content: center;
+  background: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+
+span:hover {
+  background: #d0d0d0;
+}
+
+span:active {
+  background: #a6a6a6;
+}

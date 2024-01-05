@@ -1,0 +1,252 @@
+.e-learning-container {
+  max-width: 1200px;
+  margin: 6rem auto 0;
+  padding: 1rem;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 1.5em;
+  margin: 1rem 0;
+}
+
+.question {
+  font-size: 1.2em;
+  margin-bottom: 1rem;
+}
+
+.mat-divider {
+  margin-bottom: 1rem;
+}
+
+.answers-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.previous-section {
+  margin-right: 8rem;
+  width: 30vh;
+}
+
+.answers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.answers > div {
+  width: 100%;
+  border: 1px solid #ccc;
+  text-align: left;
+  margin-bottom: 10px;
+  padding: 1rem;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  transition: background-color 0.2s ease, border 0.2s ease;
+  cursor: pointer;
+}
+
+.answers > div:not(.correct, .incorrect):hover {
+  background-color: #f8f8f8;
+}
+
+.answers > div.selected {
+  border-color: #007bff;
+}
+
+
+.next-section {
+  margin-left: 8rem;
+  text-align: right;
+}
+
+.next-question {
+  width: 30vh;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: transparent;
+  color: #414141;
+  border: none;
+  transition: color 0.3s;
+  display: block;
+  margin-top: 1rem;
+}
+
+.next-question:hover {
+  color: #0056b3;
+}
+
+.questions-list-title {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.question-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px; /* Odstęp między przyciskami */
+  margin-top: 10px;
+}
+
+.question-navigation button {
+  background-color: transparent; /* Przezroczyste tło */
+  border: 1px solid #ccc; /* Szare obramowanie */
+  color: #333; /* Ciemniejszy kolor tekstu */
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.question-navigation button:hover {
+  background-color: #f8f8f8; /* Lekkie tło przy najechaniu */
+  color: #007bff; /* Niebieski kolor tekstu przy najechaniu */
+}
+
+.timer-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 1em;
+  margin-top: 20px;
+}
+
+.timer-label {
+  font-weight: normal;
+}
+
+.timer-value {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.btn-primary {
+  margin-top: 2rem;
+  background-color: var(--blue);
+  color: white;
+  border: none;
+  padding: 0.8rem 1rem;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #22719B;
+}
+
+.btn-secondary {
+  margin-top: 2rem;
+  background-color: var(--dark-blue);
+  color: white;
+  border: none;
+  padding: 0.8rem 1rem;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #022026;
+}
+
+.exam-summary-container {
+  margin-top: 9rem;
+  text-align: center;
+}
+
+.divider {
+  border: 0;
+  height: 1px;
+  background: #dcdcdc;
+  margin: 20px 0;
+}
+
+.result-container,
+.time-container,
+.answers-container {
+  margin: 1rem 0;
+}
+
+.result-container span,
+.time-container span,
+.answers-container span {
+  margin-top: 2rem;
+}
+
+.label {
+  display: block;
+  margin-top: 10px;
+  font-size: 1.2em;
+}
+
+.percentage-result {
+  font-size: 2.5em;
+  margin-top: 10px;
+}
+
+.percentage-result.passed {
+  color: #44cc44;
+}
+
+.percentage-result.failed {
+  color: #e75959;
+}
+
+.time-value,
+.answers-count {
+  font-size: 2.5em;
+  margin-top: 10px;
+  color: var(--blue);
+}
+
+.pi {
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
+.exam-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.exam-actions button {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+@media (max-width: 768px) {
+  .previous-section {
+    margin: auto;
+    text-align: center;
+  }
+  .answers-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .next-section {
+    margin: auto;
+    text-align: center;
+  }
+  .next-question {
+    padding: 1rem 2rem;
+    margin: auto;
+  }
+  .answers > div {
+    width: 70%;
+  }
+}
+
+@media (max-width: 480px) {
+  .answers > div {
+    width: 90%;
+  }
+}

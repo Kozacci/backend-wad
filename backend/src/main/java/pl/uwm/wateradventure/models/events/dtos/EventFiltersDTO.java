@@ -5,8 +5,9 @@ import pl.uwm.wateradventure.models.events.EventType;
 
 public record EventFiltersDTO(EventType type,
                               EventCity city,
-                              String ordererLastName,
-                              String ordererEmail,
-                              String sortBy) {
+                              Double cost,
+                              Integer maxParticipantsNumber,
+                              String sortBy,
+                              Boolean adminSearch) {
 
 }

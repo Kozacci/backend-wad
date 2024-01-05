@@ -1,1 +1,55 @@
-/* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+@import "~node_modules/bootstrap/dist/css/bootstrap.css";
+
+/* TODO - create media mobile variable for smaller devices */
+
+:root {
+  /** client **/
+  --white-grey: #E8F0F2;
+  --white-blue: #A2DBFA;
+  --grey-blue: #80B3CB;
+  --blue: #39A2DB;
+  --dark-blue: #053742;
+  /** admin **/
+  --dark-blue-admin: #2a5f6e;
+  --admin-header: #22719B;
+  --primary-button-color: #51DE79;
+}
+
+*, html, body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.responsive-img {
+  max-width: 80%;
+  height: auto;
+}
+
+/** ANIMATIONS **/
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

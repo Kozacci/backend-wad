@@ -1,0 +1,97 @@
+
+<div class="sidebar" [style.width]="getNavBarWidth()">
+
+  <div class="content">
+
+    <div class="first-section">
+
+        <text-icon
+          [iconClass]="extendHideIcon"
+          [textVisible]="false"
+          (onClick)="changeIsExtended()"
+          [isClickable]="true"
+        ></text-icon>
+
+    </div>
+
+    <p-divider></p-divider>
+    <div class="middle-section">
+
+      <text-icon
+        [text]="'Pytania'"
+        [iconClass]="'pi pi-comments'"
+        [textVisible]="isExtended"
+        (onClick)="navigateToQuestions()"
+        [isClickable]="true">
+      </text-icon>
+
+      <text-icon
+        [text]="'Kursy'"
+        [iconClass]="'pi pi-check-square'"
+        [textVisible]="isExtended"
+        (onClick)="navigateToCourses()"
+        [isClickable]="true">
+      </text-icon>
+
+
+      <text-icon
+        [text]="'Eventy'"
+        [iconClass]="'pi pi-ticket'"
+        [textVisible]="isExtended"
+        (onClick)="navigateToEvents()"
+        [isClickable]="true">
+      </text-icon>
+
+
+
+      <text-icon
+        [text]="'Zaliczenia'"
+        [iconClass]="'pi pi-book'"
+        [textVisible]="isExtended"
+        (onClick)="navigateToPassing()"
+        [isClickable]="true">
+      </text-icon>
+
+
+
+      <text-icon
+        [text]="'Dostępy'"
+        [iconClass]="'pi pi-plus-circle'"
+        [textVisible]="isExtended"
+        (onClick)="navigateToAccesses()"
+        [isClickable]="true">
+      </text-icon>
+
+<!--      <text-icon-->
+<!--        [text]="'Kalendarz'"-->
+<!--        [iconClass]="'pi pi-calendar'"-->
+<!--        [textVisible]="isExtended"-->
+<!--        (onClick)="navigateToCalendar()"-->
+<!--        [isClickable]="true">-->
+<!--      </text-icon>-->
+
+
+    </div>
+
+    <p-divider></p-divider>
+    <div class="last-section">
+      <text-icon
+        [text]="'Główna'"
+        [iconClass]="'pi pi-compass'"
+        [textVisible]="isExtended"
+        (onClick)="navigateToHomePage()"
+        [isClickable]="true">
+      </text-icon>
+      <text-icon
+        [text]="'Wyloguj'"
+        [iconClass]="'pi pi-sign-out'"
+        [textVisible]="isExtended"
+        (onClick)="authService.logout()"
+        [isClickable]="true">
+      </text-icon>
+    </div>
+
+
+  </div>
+
+</div>

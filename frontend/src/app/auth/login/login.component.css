@@ -1,0 +1,112 @@
+.login-page-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+.login-form-container {
+  width: 35%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: white;
+  transition: background-color 0.3s;
+  animation: 0.6s ease-out 0.4s 1 slideInFromLeft; /* TODO LAZY LOADIN IMAGE - UNTIL PAGE STARTS, FINISH RENDERIN OF IMAGE */
+  padding: 2rem;
+}
+
+.login-form-container:hover {
+  background-color: #f2f5f6;
+}
+
+.login-logo img {
+  max-width: 100%;
+  height: auto;
+}
+
+.login-form {
+  width: 100%;
+  margin-left: 3rem;
+  max-width: 500px;
+  align-items: stretch;
+  padding: 4rem;
+  margin-bottom: 4rem;
+}
+
+.mat-form-field {
+  width: 100%;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+}
+
+.mat-mdc-text-field-wrapper {
+  min-width: 250px;
+}
+
+.forgot-password-link {
+  margin-top: 0.5rem;
+  display: block;
+  text-align: left;
+  margin-bottom: 1rem;
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.register-link-container {
+  margin-top: 1rem;
+}
+
+.register-link {
+  color: var(--blue);
+  text-decoration: none;
+  margin-left: 0.5rem;
+}
+
+.login-form-container .login-form .login-button {
+  background-color: #39A2DB;
+  color: #FFFFFF;
+}
+
+.login-button {
+  width: 100%;
+  max-width: 250px;
+}
+
+.back-to-home-link {
+  text-decoration: none;
+  color: var(--blue);
+  font-size: 1rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.login-image-container img {
+  width: 100%;
+  height: 100%;
+  background: no-repeat center center;
+  background-size: cover;
+}
+
+@media (max-width: 1400px) {
+  .login-form {
+    margin: 0;
+  }
+}
+
+
+@media (max-width: 1000px) {
+  .login-page-container {
+    flex-direction: column;
+  }
+
+  .login-form-container,
+  .login-image-container {
+    width: 100%;
+  }
+}

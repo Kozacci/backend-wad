@@ -1,0 +1,39 @@
+<body>
+  <div *ngIf="events.length == 0" class="event-empty-list">
+    <div class="event-empty-list-title">Brak zarezerwowanych rejsów</div>
+  </div>
+  <div *ngIf="events.length != 0" class="event-list">
+    <div *ngFor="let event of events" class="event-card"
+         [ngStyle]="event.isPaid
+         ? {
+         'border': '3px solid #27ab50',
+         'box-shadow': '0 4px 8px rgba(65, 110, 65, 0.3)'
+         }
+         : {
+         'border': '3px solid #ddd',
+         'box-shadow': '0 4px 8px rgba(0, 0, 0, 0.2)'
+         }">
+      <div class="event-image-container">
+        <img [src]="getImage(event)" alt="Event Image" class="event-image"/>
+        <span *ngIf="event.isPaid" class="event-mode" style="color: #27ab50">Opłacony</span>
+        <span *ngIf="!event.isPaid" class="event-mode" style="color: #6c757d">Nieopłacony</span>
+      </div>
+      <div class="event-content">
+        <div class="event-title">
+          <h3 class="event-title">{{ event.type | eventType }}</h3>
+          {{ event.city }}
+        </div>
+        <div class="event-date-section">
+          <div class="event-date">
+            <strong>Termin rejsu:</strong> {{ getDate(event) }}
+            <strong>Godzina:</strong> {{ getHours(event) }}
+            <strong>Czas trwania:</strong> {{ event.duration }}
+          </div>
+        </div>
+      </div>
+      <div class="event-actions">
+        <button pButton type="button" label="Szczegóły" icon="pi pi-info-circle" class="p-button-rounded p-button-primary" (click)="goToEventDetails(event)"></button>
+        <button pButton type="button" label="Anuluj" icon="pi pi-times" class="p-button-rounded p-button-outlined p-button-secondary" (click)="cancelParticipantEvent(event)"></button>      </div>
+    </div>
+  </div>
+</body>

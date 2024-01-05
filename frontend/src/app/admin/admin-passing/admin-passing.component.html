@@ -1,0 +1,229 @@
+<div class="content">
+
+  <div class="container d-flex flex-column justify-content-between justify-content-md-between">
+
+    <div class="row justify-content-center">
+      <div class="col-xl-8 d-flex justify-content-center align-items-center">
+        <text-icon [text]="'Zaliczenia'"
+                   [iconClass]="'pi pi-book'"
+                   [fontSize]="'3em'">
+        </text-icon>
+      </div>
+      <p-divider></p-divider>
+    </div>
+
+    <div class="row mt-2 align-items-center">
+
+      <div class="col-md-3 mb-3 d-flex flex-column align-items-center">
+        <label class="form-label">Nazwisko kursanta</label>
+        <input [(ngModel)]="participantLastName"
+               type="text"
+               class="form-control"
+               id="cost"
+               placeholder="Nowak">
+      </div>
+
+      <div class="col-md-3 mb-3 d-flex flex-column align-items-center">
+        <label class="form-label">Email kursanta</label>
+        <input [(ngModel)]="participantEmail"
+               type="text"
+               class="form-control"
+               id="participantNumber"
+               placeholder="nowak@gmail.pl">
+      </div>
+
+      <div class="col-md-3 mb-3 d-flex flex-column align-items-center">
+        <label class="form-label">Stasus zaliczenia kursu:</label>
+        <p-dropdown
+          [options]="passingTypes"
+          [(ngModel)]="passingType"
+          optionLabel="value"
+          placeholder="Niezaliczony"
+          appendTo="body"
+          [showClear]="true">
+        </p-dropdown>
+      </div>
+
+      <div [formGroup]="dateFormGroup" class="col-md-3 mb-3 d-flex flex-column align-items-center">
+        <label class="form-label">Data rozpoczęcia kursu</label>
+        <p-calendar
+          formControlName="dateFrom"
+          [dateFormat]="'dd.mm.yy'"
+          [showIcon]="true"
+          [appendTo]="'body'"
+          [placeholder]="'01.01.2024'">
+        </p-calendar>
+      </div>
+
+      <div class="col-md-3 mb-3 d-flex flex-column align-items-center">
+        <label class="form-label">Rodzaj kursu:</label>
+        <p-dropdown
+          [options]="courseTypes"
+          [(ngModel)]="courseType"
+          optionLabel="value"
+          [appendTo]="'body'"
+          placeholder="Sternik motorowodny"
+          [showClear]="true">
+        </p-dropdown>
+      </div>
+
+      <div class="col-md-3 mb-3 d-flex flex-column align-items-center">
+        <label class="form-label">Status kursu:</label>
+        <p-dropdown
+          [options]="courseStatuses"
+          [(ngModel)]="courseStatus"
+          optionLabel="value"
+          [appendTo]="'body'"
+          placeholder="Nierozpoczęty"
+          [showClear]="true">
+        </p-dropdown>
+      </div>
+
+      <div class="col-md-3 mb-3 d-flex flex-column align-items-center">
+        <label class="form-label">Miasto:</label>
+        <p-dropdown
+          [options]="courseCities"
+          [(ngModel)]="courseCity"
+          optionLabel="value"
+          placeholder="Gdańsk"
+          appendTo="body"
+          [showClear]="true">
+        </p-dropdown>
+      </div>
+
+      <div class="col-md-3 mb-3 d-flex flex-column align-items-center">
+        <label class="form-label">Sortowanie po:</label>
+        <p-dropdown
+          [options]="sortByValues"
+          [(ngModel)]="sortBy"
+          optionLabel="name"
+          [appendTo]="'body'"
+          placeholder="Sortowanie"
+          [showClear]="true">
+        </p-dropdown>
+      </div>
+
+    </div>
+
+    <div class="row mt-5 justify-content-end align-items-center">
+
+      <div class="col-sm-2 d-flex justify-content-end custom-justify-start pe-2">
+        <primary-button [label]="'Wyszukaj'" (onClick)="findPassings()"></primary-button>
+      </div>
+
+      <div class="col-sm-2 d-flex justify-content-start ps-2">
+        <secondary-button [label]="'Zalicz kurs'" (onClick)="openEditPassingsModal()"></secondary-button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <p-table
+    [value]="passingsList"
+    [paginator]="true"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[5, 10, 15]"
+    currentPageReportTemplate="{first} Wyników z {totalRecords}"
+    styleClass="p-datatable-gridlines p-datatable-resizable"
+    [tableStyle]="{'width': '100%' }"
+    [rowHover]="true"
+    [resizableColumns]="true"
+    [scrollable]="true"
+    scrollHeight="500px"
+    class="sticky-to-bottom mt-5"
+    [(selection)]="selectedPassings">
+<!--    obczaic selectedSize-->
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 4rem">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th>Imie i nazwisko kursanta</th>
+        <th>Email kursanta</th>
+        <th>Status zaliczenia</th>
+        <th>Rodzaj kursu</th>
+        <th>Status kursu</th>
+        <th>Data kursu</th>
+        <th>Miasto kursu</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-passing>
+      <tr>
+        <td class="d-flex justify-content-center">
+          <p-tableCheckbox [value]="passing"></p-tableCheckbox>
+        </td>
+        <td>{{passing.participantFirstName + " " + passing.participantLastName}}</td>
+        <td>{{passing.participantEmail}}</td>
+        <td>{{passing.isPassed | isCoursePassed }}</td> <!-- pipe here to show 'Zaliczony', 'Niezaliczony' -->
+        <td>{{passing.courseType | courseType}}</td>
+        <td>{{passing.courseStatus | courseStatus}}</td>
+        <td>{{passing.dateFrom | date:'yyyy-MM-dd HH:mm'}}</td>
+        <td>{{passing.city | courseCity}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+</div>
+
+<!--edit passing modal-->
+
+<p-dialog
+  [(visible)]="showEditPassingsModal"
+  [modal]="true"
+  [draggable]="false"
+  [style]="{ width: '30rem'}"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  [contentStyle]="{maxheight: '80%'}"
+  (onHide)="closeEditPassingsModal()"
+>
+
+  <ng-template pTemplate="header">
+    <text-icon
+      [text]="'Zaliczenie kursu'"
+      [textVisible]="true"
+      [iconClass]="'pi pi-book'">
+    </text-icon>
+  </ng-template>
+
+  <div class="container d-flex flex-column pt-3 justify-content-between" >
+    <div class="row d-flex flex-column">
+
+      <label class="form-label text-center">Zaliczenie kursu dla:</label>
+      <div *ngFor="let passing of selectedPassings" class="col-md-3 mb-3 d-flex flex-column align-items-center w-100">
+        <input
+               type="text"
+               class="form-control text-center"
+               [disabled]="true"
+               id="participant"
+               placeholder="{{passing.participantFirstName + ' ' + passing.participantLastName}}">
+      </div>
+
+
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-xl-6 d-flex justify-content-between">
+        <primary-button
+          [label]="'Zalicz'"
+          (onClick)="passCourses()">
+        </primary-button>
+      </div>
+      <div class="col-xl-6 d-flex justify-content-between">
+        <danger-button
+          [label]="'Cofnij zaliczenie'"
+          (onClick)="unPassCourses()">
+        </danger-button>
+        <secondary-button
+          [label]="'Anuluj'"
+          (onClick)="closeEditPassingsModal()"
+          [bordered]="true">
+        </secondary-button>
+      </div>
+
+    </div>
+  </div>
+
+</p-dialog>

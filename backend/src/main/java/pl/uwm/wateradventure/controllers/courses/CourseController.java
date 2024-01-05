@@ -45,14 +45,16 @@ class CourseController {
     }
 
     @GetMapping("/filter-by")
-    ResponseEntity<List<CourseFilterDTO>> getCoursesByFilters(@RequestParam(required = false) String courseType,
-                                                              @RequestParam(required = false) String courseStatus,
-                                                              @RequestParam(required = false) String courseCity,
-                                                              @RequestParam(required = false) LocalDate dateFrom,
-                                                              @RequestParam(required = false) LocalDate dateTo,
-                                                              @RequestParam(required = false) Integer registeredParticipants,
-                                                              @RequestParam(required = false) Integer participantsLimit,
-                                                              @RequestParam(required = false) String sortBy) {
+    ResponseEntity<List<CourseFilterDTO>> getCoursesByFilters(
+            @RequestParam(required = false) String courseType,
+            @RequestParam(required = false) String courseStatus,
+            @RequestParam(required = false) String courseCity,
+            @RequestParam(required = false) LocalDate dateFrom,
+            @RequestParam(required = false) LocalDate dateTo,
+            @RequestParam(required = false) Integer registeredParticipants,
+            @RequestParam(required = false) Integer participantsLimit,
+            @RequestParam(required = false) String sortBy
+    ) {
         var filters = new CourseFiltersDTO(courseType, courseStatus, courseCity, dateFrom, dateTo,
                             registeredParticipants, participantsLimit, sortBy);
         List<CourseFilterDTO> filteredCourses = courseFacade.getCoursesByFilters(filters);

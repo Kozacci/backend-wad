@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.exceptions.custom_exceptions.EntityNotFoundException;
 import pl.uwm.wateradventure.models.participants.ParticipantEntity;
@@ -55,12 +54,4 @@ class ParticipantReader {
         return ResponseEntity.ok().build();
     }
 
-    public ResponseEntity<?> logout(HttpServletResponse response) {
-        Cookie jwtCookie = new Cookie("JWT", null);
-        jwtCookie.setPath("/");
-        jwtCookie.setMaxAge(0);
-        response.addCookie(jwtCookie);
-        SecurityContextHolder.clearContext();
-        return ResponseEntity.ok().build();
-    }
 }

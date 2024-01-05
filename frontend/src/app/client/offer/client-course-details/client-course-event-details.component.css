@@ -1,0 +1,351 @@
+.item-detail-container {
+  background-color: white;
+  margin: 8rem auto auto 8rem;
+  display: flex;
+  max-width: 80%;
+}
+
+.item-main {
+  margin-top: 1.2rem;
+  margin-left: 1.2rem;
+  background-color: rgba(230, 240, 240, 0.40);
+  flex: 3;
+  max-width: 60%;
+  padding: 2rem;
+  transition: background-color 0.3s;
+}
+
+.item-main:hover {
+  background-color: white;
+}
+
+.item-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.item-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s;
+}
+
+.item-description {
+  margin-bottom: 20px;
+}
+
+.item-terms {
+  width: 100%;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  text-align: center;
+  background-color: var(--dark-blue);
+  padding: 0.5rem 0.5rem;
+  color: var(--white-grey);
+  border: solid #272727;
+  border-width: 0 0 1.6px 0;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+  text-align: center;
+  padding: 0.6rem 0.6rem;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr:hover {
+  cursor: pointer;
+}
+
+/* Style for selected(highlighted) row (primeNG after clickin on row creates a new p-highlight class) */
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr.p-highlight {
+  border: 1px solid var(--blue);
+  background-color: var(--white-grey);
+  color: var(--dark-blue);
+}
+
+:host ::ng-deep .p-datatable-events .p-datatable-thead > tr > th {
+  text-align: center;
+  background-color: var(--blue);
+  padding: 0.5rem 0.5rem;
+  color: var(--white-grey);
+  border: solid var(--white-blue);
+  border-width: 0 0 1.6px 0;
+}
+
+:host ::ng-deep .p-datatable-events .p-datatable-tbody > tr > td {
+  text-align: center;
+  padding: 0.6rem 0.6rem;
+}
+
+:host ::ng-deep .p-datatable-events .p-datatable-tbody > tr:hover {
+  cursor: pointer;
+}
+
+:host ::ng-deep .p-datatable-events .p-datatable-tbody > tr.p-highlight {
+  border: 1px solid var(--blue);
+  background-color: var(--white-grey);
+  color: var(--dark-blue);
+}
+
+.orange-text {
+  color: #dca43e;
+}
+
+.red-text {
+  color: #cc3d3d;
+}
+
+.green-text {
+  color: #27ab50;
+}
+
+.item-info-aside {
+  flex: 1;
+  padding: 20px;
+}
+
+.item-info-aside > div {
+  margin-top: 2rem;
+  background-color: rgba(230, 240, 240, 0.40);
+  border-top: 3px solid var(--dark-blue);
+  margin-bottom: 4rem;
+  transition: background-color 0.3s;
+}
+
+.item-info-aside > div:hover {
+  background-color: white;
+}
+
+.item-meta-info {
+  background-color: #f2f2f2;
+  padding: 1rem 2rem 2rem;
+}
+
+.item-meta-info h2 {
+  text-align: center;
+}
+
+.item-price {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.item-enroll-info {
+  border-top: 3px solid var(--dark-blue);
+  background-color: #f2f2f2;
+  padding: 3rem;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.item-enroll-info h3{
+  color: #ff6666;
+}
+
+.item-enroll-info:hover {
+  background-color: white;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+  gap: 10px;
+}
+
+.sign-on-course-p-button {
+  width: 75%;
+  height: 3rem;
+  border-radius: 1rem;
+  padding: 0.4rem 1.5rem;
+}
+
+.sign-on-course-p-button.p-button-rounded.p-button-primary, .date-modal-p-button.p-button-rounded.p-button-primary {
+  background-color: var(--dark-blue);
+  transition: background-color 0.3s;
+  border: none;
+  color: var(--white-grey);
+}
+
+.sign-on-course-p-button.p-button-rounded.p-button-primary:hover, .date-modal-p-button.p-button-rounded.p-button-primary:hover{
+  background-color: #126079;
+}
+
+.sign-on-event-p-button {
+  width: 75%;
+  height: 3rem;
+  border-radius: 1rem;
+  padding: 0.4rem 1.5rem;
+}
+
+.sign-on-event-p-button.p-button-rounded.p-button-primary, .date-modal-events-p-button.p-button-rounded.p-button-primary {
+  background-color: var(--blue);
+  transition: background-color 0.3s;
+  border: none;
+  color: var(--white-grey);
+}
+
+.sign-on-event-p-button.p-button-rounded.p-button-primary:hover, .date-modal-events-p-button.p-button-rounded.p-button-primary:hover{
+  background-color: var(--dark-blue);
+  color: white;
+}
+
+.date-modal-p-button {
+  border-radius: 1rem;
+  padding: 0.4rem 1.5rem;
+}
+
+.date-modal-p-button.p-button-rounded.p-button-outlined.p-button-secondary {
+  transition: background-color 0.3s;
+}
+
+.date-modal-p-button.p-button-rounded.p-button-outlined.p-button-secondary:hover {
+  background-color: #989898;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .item-detail-container {
+    flex-direction: column;
+    max-width: 100%;
+    margin: 6rem auto auto auto;
+  }
+
+  .item-main {
+    background-color: rgba(230, 240, 240, 0.40);
+    margin: auto auto auto auto;
+    max-width: 100%;
+  }
+
+  .item-main, .item-sidebar {
+    width: 100%;
+  }
+
+  .item-title {
+    text-align: start;
+  }
+
+  .item-image {
+    height: 10rem;
+    width: auto;
+  }
+}
+
+:host ::ng-deep .p-dialog {
+  max-width: 60vw;
+}
+
+@media (max-width: 800px) {
+  :host ::ng-deep .p-dialog {
+    max-width: 100vw;
+  }
+}
+
+.sign-on-event-modal-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.sign-on-event-form {
+  margin-left: 1rem;
+  margin-top: 1rem;
+  width: 25%;
+}
+
+.sign-on-event-modal-left, .sign-on-event-modal-right {
+  flex: 1;
+}
+
+.sign-on-event-full-width-input {
+  width: 100%;
+}
+
+.sign-on-event-event-info  {
+  padding: 10px;
+}
+
+.sign-on-event-event-info h3 {
+  font-size: large;
+  font-weight: bold;
+}
+
+.sign-on-event-modal-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sign-on-event-modal-image {
+  width: 35%;
+  height: auto;
+}
+
+.sign-on-event-payment-info {
+  width: 100%;
+  background-color: var(--blue);
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.sign-on-event-payment-title {
+  margin-bottom: 15px;
+}
+
+.sign-on-event-payment-title h2 {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.sign-on-event-payment-amount {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sign-on-event-total-cost {
+  font-size: 1em;
+  margin: 0;
+}
+
+.sign-on-event-price {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.sign-on-event-payment-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .sign-on-event-modal-content {
+    flex-direction: column;
+  }
+  .sign-on-event-modal-left, .sign-on-event-modal-right {
+    width: 100%;
+  }
+  .sign-on-event-modal-image {
+    width: 100%;
+    height: auto;
+  }
+  .sign-on-event-payment-title h2 {
+    font-size: 1rem;
+  }
+  .sign-on-event-total-cost {
+    font-size: 1rem;
+  }
+  .sign-on-event-price {
+    font-size: 1.2rem;
+  }
+}
+

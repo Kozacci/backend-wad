@@ -42,8 +42,8 @@ public class CategoryLearningEntity extends WaterAdventureEntity {
         this.correctAnswers += number;
     }
 
-    public CategoryLearningDTO toDTO() {
-        return CategoryLearningDTO.builder()
+    public CategoryLearningEntityDTO toDTO() {
+        return CategoryLearningEntityDTO.builder()
                 .id(this.id)
                 .questionsAnswered(this.questionsAnswered)
                 .correctAnswers(this.correctAnswers)

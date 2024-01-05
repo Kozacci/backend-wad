@@ -11,8 +11,11 @@ class TrialExamUpdater {
     private final TrialExamRepository repository;
 
     public TrialExamEntity update(TrialExamEntity trialExamToChange, Boolean isPassed) {
-        trialExamToChange.incrementTotal();
-        trialExamToChange.incrementPassedOrFailed(isPassed);
+        if (isPassed) {
+            trialExamToChange.setPassed(trialExamToChange.getPassed() + 1);
+        }
+        trialExamToChange.setFailed(trialExamToChange.getFailed() + 1);
+        trialExamToChange.setTotal(trialExamToChange.getTotal() + 1);
         return repository.saveAndFlush(trialExamToChange);
     }
 }

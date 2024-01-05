@@ -7,9 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.exceptions.custom_exceptions.EntityNotFoundException;
 import pl.uwm.wateradventure.models.events.EventEntity;
-import pl.uwm.wateradventure.models.events.dtos.EventEntityDTO;
-import pl.uwm.wateradventure.models.events.dtos.EventFilterDTO;
-import pl.uwm.wateradventure.models.events.dtos.EventFiltersDTO;
+import pl.uwm.wateradventure.models.events.dtos.*;
 import pl.uwm.wateradventure.models.participant_events.ParticipantEventEntity;
 import pl.uwm.wateradventure.services.global.PageReader;
 
@@ -42,18 +40,21 @@ class EventReader extends PageReader<EventEntity> {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<EventFilterDTO> query = cb.createQuery(EventFilterDTO.class);
         Root<EventEntity> event = query.from(EventEntity.class);
-        joinParticipantEvents = event.join("participantEvents", JoinType.LEFT);
         List<Predicate> predicates = new ArrayList<>();
 
         addTypePredicate(cb, event, predicates, filters.type());
         addCityPredicate(cb, event, predicates, filters.city());
-        addOrdererEmailPredicate(cb, predicates, joinParticipantEvents, filters.ordererEmail());
-        addOrdererLastNamePredicate(cb, predicates, joinParticipantEvents, filters.ordererLastName());
+        addCostPredicate(cb, event, predicates, filters.cost());
+
+        addMaxParticipantsNumberPredicate(cb, event, predicates, filters.maxParticipantsNumber());
+        if (!filters.adminSearch()) {
+            addMaxParticipantsLimitNotCappedPredicate(cb, event, predicates, query);
+        }
 
         query.select(
                 cb.construct(
-                    EventFilterDTO.class,
-                    toSelection(event).toArray(new Selection<?>[0])
+                        EventFilterDTO.class,
+                        eventsToSelection(event, query, cb).toArray(new Selection<?>[0])
                 )
         );
 
@@ -64,15 +65,64 @@ class EventReader extends PageReader<EventEntity> {
         return em.createQuery(query).getResultList();
     }
 
-    private List<Selection<?>> toSelection(Root<EventEntity> root) {
+    // TODO - move it to participant-events package
+    public List<ParticipantEventFilterDTO> getParticipantEventsByFilters(ParticipantEventFiltersDTO filters) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<ParticipantEventFilterDTO> query = cb.createQuery(ParticipantEventFilterDTO.class);
+        Root<EventEntity> event = query.from(EventEntity.class);
+        joinParticipantEvents = event.join("eventParticipants", JoinType.LEFT);
+        List<Predicate> predicates = new ArrayList<>();
+
+        addTypePredicate(cb, event, predicates, filters.type());
+        addCityPredicate(cb, event, predicates, filters.city());
+        addOrdererEmailPredicate(cb, predicates, joinParticipantEvents, filters.ordererEmail());
+        addOrdererLastNamePredicate(cb, predicates, joinParticipantEvents, filters.ordererLastName());
+
+        query.select(
+                cb.construct(
+                    ParticipantEventFilterDTO.class,
+                    participantEventsToSelection(event, query, cb).toArray(new Selection<?>[0])
+                )
+        );
+
+        query.where(predicates.toArray(new Predicate[predicates.size()]));
+
+        addSortBy(filters.sortBy(), query, cb, event, joinParticipantEvents);
+
+        return em.createQuery(query).getResultList();
+    }
+
+    private List<Selection<?>> eventsToSelection(Root<EventEntity> root,
+                                                 CriteriaQuery<EventFilterDTO> cq,
+                                                 CriteriaBuilder cb) {
         return Arrays.asList(
                 root.get("id"),
                 root.get("type"),
                 root.get("city"),
+                root.get("cost"),
+                addAssignedParticipants(cb, root, cq),
                 root.get("maxParticipantsNumber"),
+                root.get("date"),
+                root.get("duration")
+        );
+    }
+
+    private List<Selection<?>> participantEventsToSelection(Root<EventEntity> root,
+                                           CriteriaQuery<ParticipantEventFilterDTO> cq,
+                                           CriteriaBuilder cb) {
+        return Arrays.asList(
+                root.get("id"),
+                root.get("type"),
+                root.get("city"),
+                root.get("cost"),
+                addAssignedParticipants(cb, root, cq),
+                root.get("maxParticipantsNumber"),
+                root.get("date"),
                 root.get("duration"),
+                joinParticipantEvents.get("id"),
                 joinParticipantEvents.get("ordererLastName"),
-                joinParticipantEvents.get("ordererEmail")
+                joinParticipantEvents.get("ordererEmail"),
+                joinParticipantEvents.get("isPaid")
         );
     }
 

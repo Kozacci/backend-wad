@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {PathService} from "./shared/services/path.service";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'water adventure';
+
+  isAdminPath: boolean = false;
+  isAuthPath: boolean = false;
+
+  constructor(private pathService: PathService) {
+    this.pathService.getCurrentPath().subscribe(path => {
+      this.isAdminPath = path.startsWith('/admin');
+      this.isAuthPath = path.startsWith('/autoryzacja')
+    });
+  }
+
 }

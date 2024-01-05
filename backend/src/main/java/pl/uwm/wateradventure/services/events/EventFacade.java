@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.models.events.EventEntity;
-import pl.uwm.wateradventure.models.events.dtos.EventCreateUpdateDTO;
-import pl.uwm.wateradventure.models.events.dtos.EventEntityDTO;
-import pl.uwm.wateradventure.models.events.dtos.EventFilterDTO;
-import pl.uwm.wateradventure.models.events.dtos.EventFiltersDTO;
+import pl.uwm.wateradventure.models.events.dtos.*;
 import pl.uwm.wateradventure.services.events.crud.EventCRUDService;
 
 import java.util.List;
@@ -32,6 +29,10 @@ public class EventFacade {
 
     public List<EventFilterDTO> getEventsByFilers(EventFiltersDTO filters) {
         return eventCRUDService.getEventsByFilters(filters);
+    }
+
+    public List<ParticipantEventFilterDTO> getParticipantEventsByFilers(ParticipantEventFiltersDTO filters) {
+        return eventCRUDService.getParticipantEventsByFilters(filters);
     }
 
     public EventEntityDTO updateEvent(Long eventId, EventCreateUpdateDTO eventUpdateDTO) {

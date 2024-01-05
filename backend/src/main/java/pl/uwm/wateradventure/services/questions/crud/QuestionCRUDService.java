@@ -1,8 +1,8 @@
 package pl.uwm.wateradventure.services.questions.crud;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import pl.uwm.wateradventure.models.learning.category.Category;
 import pl.uwm.wateradventure.models.questions.dtos.QuestionCreateUpdateDTO;
 import pl.uwm.wateradventure.models.questions.dtos.QuestionEntityDTO;
 import pl.uwm.wateradventure.models.questions.dtos.QuestionFilterDTO;
@@ -27,8 +27,12 @@ public class QuestionCRUDService {
         return reader.getQuestionById(questionId).toDTO();
     }
 
-    public Page<QuestionEntityDTO> getAllQuestionsPageable() {
-        return reader.getAllQuestionsPageable();
+    public List<QuestionEntityDTO> getAllQuestionsAndDraw() {
+        return reader.getAllQuestionsAndDraw();
+    }
+
+    public QuestionEntityDTO getRandomQuestionByCategories(List<Category> categories) {
+        return reader.getRandomQuestionByCategories(categories);
     }
 
     public List<QuestionFilterDTO> getQuestionsByFilters(QuestionFiltersDTO filters) {

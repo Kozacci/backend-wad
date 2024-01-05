@@ -1,0 +1,375 @@
+<div class="content">
+
+  <div class="container d-flex flex-column justify-content-between justify-content-md-between">
+
+    <div class="row justify-content-center">
+      <div class="col-xl-8 d-flex justify-content-center align-items-center">
+        <text-icon [text]="'Baza Pytań'" [iconClass]="'pi pi-comments'" [fontSize]="'3em'"></text-icon>
+      </div>
+      <p-divider></p-divider>
+    </div>
+
+    <div class="row mt-2 align-items-center">
+      <div class="col-md-3 mb-3 d-flex flex-column align-items-center">
+        <label class="form-label">Numer pytania (ID)</label>
+        <input [(ngModel)]="id" type="text" class="form-control" id="id" placeholder="101">
+      </div>
+
+      <div class="col-md-3 mb-3 d-flex flex-column align-items-center">
+        <label class="form-label">Treść pytania</label>
+        <input [(ngModel)]="content" type="text" class="form-control" id="content" placeholder="Który znak...">
+      </div>
+
+      <div class="col-md-3 mb-3 d-flex flex-column align-items-center">
+        <label class="form-label">Dział:</label>
+        <p-dropdown
+          [options]="categories"
+          [(ngModel)]="category"
+          optionLabel="value"
+          [appendTo]="'body'"
+          placeholder="Dział"
+          [showClear]="true">
+        </p-dropdown>
+      </div>
+
+      <div class="col-md-3 mb-3 d-flex flex-column align-items-center">
+        <label class="form-label">Sortowanie po:</label>
+        <p-dropdown
+          [options]="sortByValues"
+          [(ngModel)]="sortBy"
+          optionLabel="name"
+          [appendTo]="'body'"
+          placeholder="Sortowanie"
+          [showClear]="true">
+        </p-dropdown>
+      </div>
+    </div>
+
+
+    <div class="row mt-5 justify-content-end align-items-center">
+
+      <div class="col-sm-2 d-flex justify-content-end custom-justify-start pe-2">
+        <primary-button [label]="'Wyszukaj'" (onClick)="findQuestions()"></primary-button>
+      </div>
+
+      <div class="col-sm-2 d-flex justify-content-start ps-2">
+        <secondary-button [label]="'Dodaj pytanie'" (onClick)="showAddQuestionModal()"></secondary-button>
+      </div>
+    </div>
+
+  </div>
+
+  <p-table
+    [value]="questionsList"
+    [paginator]="true"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[5, 10, 15]"
+    currentPageReportTemplate="{first} Pytań z {totalRecords}"
+    styleClass="p-datatable-gridlines p-datatable-resizable"
+    [tableStyle]="{'width': '100%' }"
+    [rowHover]="true"
+    [resizableColumns]="true"
+    [scrollable]="true"
+    scrollHeight="500px"
+    class="sticky-to-bottom mt-5">
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th></th>
+        <th>Numer pytania</th>
+        <th>Treść pytania</th>
+        <th>Dział</th>
+        <th>Odp A</th>
+        <th>Odp B</th>
+        <th>Odp C</th>
+        <th>Poprawna odpowiedź</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-question>
+      <tr>
+        <td class="d-flex justify-content-center">
+          <text-icon
+            [textVisible]="false"
+            [isClickable]="true"
+            [iconClass]="'pi pi-pencil'"
+            (onClick)="insertDataIntoEditQuestionModal(question)"
+          ></text-icon></td>
+        <td>{{question.id}}</td>
+        <td>{{question.content}}</td>
+        <td>{{question.category | category}}</td>
+        <td>{{question.firstAnswer}}</td>
+        <td>{{question.secondAnswer}}</td>
+        <td>{{question.thirdAnswer}}</td>
+        <td>{{question.correctAnswer | correctAnswer}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+</div>
+
+<!--add question modal-->
+<p-dialog
+  [(visible)]="addQuestionModalVisible"
+  [modal]="true"
+  [draggable]="false"
+  [style]="{ width: '50rem' }"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  [contentStyle]="{maxheight: '80%'}"
+  (onHide)="closeAddQuestionModal()"
+  >
+
+  <ng-template pTemplate="header">
+    <text-icon
+      text="Dodanie pytania"
+      [textVisible]="true"
+      [iconClass]="'pi pi-comments'">
+    </text-icon>
+  </ng-template>
+
+  <div class="container d-flex flex-column pt-3 justify-content-between" >
+    <div class="row d-flex flex-column">
+
+      <div class="row-cols-md-2 d-flex flex-column flex-md-row">
+
+        <div class="col ps-1 mb-3 d-flex flex-column align-items-center">
+          <label class="form-label">Dział:</label>
+          <p-dropdown
+            [options]="categories"
+            [(ngModel)]="categoryToAdd"
+            optionLabel="value"
+            placeholder="Dział"
+            appendTo="body"
+            [showClear]="true">
+          </p-dropdown>
+          <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'category')">
+            {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'category')}}
+          </mat-error>
+        </div>
+
+        <div class="col ps-1 d-flex flex-column align-items-center">
+          <label class="form-label">Poprawna odpowiedź:</label>
+          <p-dropdown
+            [options]="correctAnswerValues"
+            [(ngModel)]="correctAnswerToAdd"
+            optionLabel="name"
+            placeholder="Poprawna odpowiedź"
+            appendTo="body"
+            [showClear]="true">
+          </p-dropdown>
+          <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'correctAnswer')">
+            {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'correctAnswer')}}
+          </mat-error>
+        </div>
+
+      </div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Treść pytania</mat-label>
+        <input matInput placeholder="Treść pytania"
+               type="text"
+               [formControl]="formGroupAddQuestion.controls.contentToAdd" required>
+        <mat-error *ngIf="formGroupAddQuestion.controls.contentToAdd.invalid ">
+          {{ formService.getInputErrorMessage(formGroupAddQuestion.controls.contentToAdd) }}
+        </mat-error>
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'content')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'content')}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Odpowiedź A</mat-label>
+        <input matInput placeholder="Odpowiedź A"
+               type="text"
+               [formControl]="formGroupAddQuestion.controls.firstAnswerToAdd" required>
+        <mat-error *ngIf="formGroupAddQuestion.controls.firstAnswerToAdd.invalid">
+          {{ formService.getInputErrorMessage(formGroupAddQuestion.controls.firstAnswerToAdd) }}
+        </mat-error>
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'firstAnswer')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'firstAnswer')}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Odpowiedź B</mat-label>
+        <input matInput placeholder="Odpowiedź B"
+               type="text"
+               [formControl]="formGroupAddQuestion.controls.secondAnswerToAdd" required>
+        <mat-error *ngIf="formGroupAddQuestion.controls.secondAnswerToAdd.invalid">
+          {{ formService.getInputErrorMessage(formGroupAddQuestion.controls.secondAnswerToAdd) }}
+        </mat-error>
+
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'secondAnswer')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'secondAnswer')}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Odpowiedź C</mat-label>
+        <input matInput placeholder="Odpowiedź C"
+               type="text"
+               [formControl]="formGroupAddQuestion.controls.thirdAnswerToAdd" required>
+        <mat-error *ngIf="formGroupAddQuestion.controls.thirdAnswerToAdd.invalid">
+          {{ formService.getInputErrorMessage(formGroupAddQuestion.controls.thirdAnswerToAdd) }}
+        </mat-error>
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'thirdAnswer')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'thirdAnswer')}}
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div class="row">
+      <div class="col-xl-12 d-flex justify-content-between">
+        <primary-button
+          [label]="'Dodaj'"
+          (onClick)="addQuestion()">
+        </primary-button>
+        <secondary-button
+          [label]="'Anuluj'"
+          (onClick)="closeAddQuestionModal()"
+          [bordered]="true">
+        </secondary-button>
+      </div>
+
+    </div>
+  </div>
+
+</p-dialog>
+
+<!--edit question modal-->
+
+<p-dialog
+  [(visible)]="editQuestionModalVisible"
+  [modal]="true"
+  [draggable]="false"
+  [style]="{ width: '50rem' }"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  [contentStyle]="{maxheight: '80%'}"
+  (onHide)="closeEditQuestionModal()"
+>
+
+  <ng-template pTemplate="header">
+    <text-icon
+      text="Edycja pytania #{{questionToEditId}}"
+      [textVisible]="true"
+      [iconClass]="'pi pi-comments'">
+    </text-icon>
+  </ng-template>
+
+  <div class="container d-flex flex-column pt-3 justify-content-between" >
+    <div class="row d-flex flex-column">
+
+      <div class="row-cols-md-2 d-flex flex-column flex-md-row">
+
+        <div class="col ps-1 mb-3 d-flex flex-column align-items-center">
+          <label class="form-label">Dział:</label>
+          <p-dropdown
+            [options]="categories"
+            [(ngModel)]="categoryToEdit"
+            optionLabel="value"
+            placeholder="Dział"
+            [appendTo]="'body'"
+            [showClear]="true">
+          </p-dropdown>
+          <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'category')">
+            {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'category')}}
+          </mat-error>
+        </div>
+
+        <div class="col ps-1 d-flex flex-column align-items-center">
+          <label class="form-label">Poprawna odpowiedź:</label>
+          <p-dropdown
+            [options]="correctAnswerValues"
+            [(ngModel)]="correctAnswerToEdit"
+            optionLabel="name"
+            [appendTo]="'body'"
+            placeholder="Poprawna odpowiedź"
+            [showClear]="true"
+          >
+          </p-dropdown>
+          <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'correctAnswer')">
+            {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'correctAnswer')}}
+          </mat-error>
+        </div>
+
+      </div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Treść pytania</mat-label>
+        <input matInput placeholder="Treść pytania"
+               type="text"
+               [formControl]="formGroupEditQuestion.controls.contentToEdit" required>
+        <mat-error *ngIf="formGroupEditQuestion.controls.contentToEdit.invalid ">
+          {{ formService.getInputErrorMessage(formGroupEditQuestion.controls.contentToEdit) }}
+        </mat-error>
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'content')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'content')}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Odpowiedź A</mat-label>
+        <input matInput placeholder="Odpowiedź A"
+               type="text"
+               [formControl]="formGroupEditQuestion.controls.firstAnswerToAdd" required>
+        <mat-error *ngIf="formGroupEditQuestion.controls.firstAnswerToAdd.invalid">
+          {{ formService.getInputErrorMessage(formGroupEditQuestion.controls.firstAnswerToAdd) }}
+        </mat-error>
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'firstAnswer')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'firstAnswer')}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Odpowiedź B</mat-label>
+        <input matInput placeholder="Odpowiedź B"
+               type="text"
+               [formControl]="formGroupEditQuestion.controls.secondAnswerToAdd" required>
+        <mat-error *ngIf="formGroupEditQuestion.controls.secondAnswerToAdd.invalid">
+          {{ formService.getInputErrorMessage(formGroupEditQuestion.controls.secondAnswerToAdd) }}
+        </mat-error>
+
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'secondAnswer')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'secondAnswer')}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Odpowiedź C</mat-label>
+        <input matInput placeholder="Odpowiedź C"
+               type="text"
+               [formControl]="formGroupEditQuestion.controls.thirdAnswerToAdd" required>
+        <mat-error *ngIf="formGroupEditQuestion.controls.thirdAnswerToAdd.invalid">
+          {{ formService.getInputErrorMessage(formGroupEditQuestion.controls.thirdAnswerToAdd) }}
+        </mat-error>
+        <mat-error *ngIf="responseHandlerService.groupedErrorsContainsFieldName(groupedErrors, 'thirdAnswer')">
+          {{ responseHandlerService.extractInputErrorMessages(groupedErrors, 'thirdAnswer')}}
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div class="row">
+      <div class="col-xl-8 d-flex justify-content-between">
+        <primary-button
+          [label]="'Edytuj'"
+          (onClick)="editQuestion()">
+        </primary-button>
+      </div>
+        <div class="col-xl-4 d-flex justify-content-end">
+          <danger-button
+            [label]="'Usuń'"
+            (onClick)="deleteQuestion()">
+          </danger-button>
+          <secondary-button
+            [label]="'Anuluj'"
+            (onClick)="closeEditQuestionModal()"
+            [bordered]="true">
+          </secondary-button>
+        </div>
+
+    </div>
+  </div>
+
+</p-dialog>

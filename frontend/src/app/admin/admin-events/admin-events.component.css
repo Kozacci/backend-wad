@@ -1,0 +1,77 @@
+.content {
+  background-color: #22719B;
+  height: 100%;
+  width: calc(100vw - 75px);
+  color: #FFF;
+}
+
+@media (max-width: 575px) {
+  .custom-justify-start {
+    justify-content: start !important;
+  }
+}
+
+th {
+  background-color: #E8F0F2;
+}
+
+:host ::ng-deep .p-dropdown {
+  width: 15vw;
+  max-width: 15vw;
+}
+
+::ng-deep p-dialog .ui-dialog {
+  overflow: scroll;
+  max-height: 100%;
+}
+
+@media (max-width: 575px) {
+  :host ::ng-deep .p-dropdown {
+    width: 70vw;
+    max-width: 70vw;
+  }
+}
+
+@media (max-width: 767px) {
+  :host ::ng-deep .p-dropdown {
+    width: 70vw;
+    max-width: 70vw;
+  }
+  .content {
+    width: 100vw;
+  }
+}
+
+.input {
+  width: 250px;
+}
+
+@media (min-width: 770px) {
+  .sticky-to-bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin-top: 1000px;
+  }
+}
+
+td {
+  height: 55px !important;
+}
+
+td ::ng-deep .panel {
+  min-height: 0;
+}
+/* ========= modal styles =========== */
+
+:host ::ng-deep .p-dialog .p-dialog-header{
+  background-color: var(--dark-blue);
+  color: #FFF;
+}
+
+:host ::ng-deep p.dialog .p-dialog-content {
+  background-color: var(--dark-blue-admin);
+}
+
+/*calendar styles*/
+

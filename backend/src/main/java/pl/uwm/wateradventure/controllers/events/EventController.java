@@ -8,10 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.uwm.wateradventure.models.events.EventCity;
 import pl.uwm.wateradventure.models.events.EventType;
-import pl.uwm.wateradventure.models.events.dtos.EventCreateUpdateDTO;
-import pl.uwm.wateradventure.models.events.dtos.EventEntityDTO;
-import pl.uwm.wateradventure.models.events.dtos.EventFilterDTO;
-import pl.uwm.wateradventure.models.events.dtos.EventFiltersDTO;
+import pl.uwm.wateradventure.models.events.dtos.*;
 import pl.uwm.wateradventure.services.events.EventFacade;
 
 import java.util.List;
@@ -45,15 +42,28 @@ class EventController {
         return eventFacade.getAllEventsPageable();
     }
 
-    @GetMapping("/filter-by")
+    @GetMapping("/events-filter-by")
     ResponseEntity<List<EventFilterDTO>> getEventsByFilters(@RequestParam(required = false) EventType type,
-                                                            @RequestParam(required = false) EventCity city,
-                                                            @RequestParam(required = false) String clientLastName,
-                                                            @RequestParam(required = false) String clientEmail,
-                                                            @RequestParam(required = false) String sortBy
-                                              ) {
-        var filters = new EventFiltersDTO(type, city, clientLastName, clientEmail, sortBy);
+                                                                       @RequestParam(required = false) EventCity city,
+                                                                       @RequestParam(required = false) Double cost,
+                                                                       @RequestParam(required = false) Integer maxParticipantsNumber,
+                                                                       @RequestParam(required = false) String sortBy,
+                                                                       @RequestParam(required = false) Boolean adminSearch
+    ) {
+        var filters = new EventFiltersDTO(type, city, cost, maxParticipantsNumber, sortBy, adminSearch);
         List<EventFilterDTO> filteredEvents = eventFacade.getEventsByFilers(filters);
+        return !filteredEvents.isEmpty() ? ResponseEntity.ok(filteredEvents) : ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/participant-events-filter-by")
+    ResponseEntity<List<ParticipantEventFilterDTO>> getParticipantEventsByFilters(@RequestParam(required = false) EventType type,
+                                                                                  @RequestParam(required = false) EventCity city,
+                                                                                  @RequestParam(required = false) String clientLastName,
+                                                                                  @RequestParam(required = false) String clientEmail,
+                                                                                  @RequestParam(required = false) String sortBy
+                                              ) {
+        var filters = new ParticipantEventFiltersDTO(type, city, clientLastName, clientEmail, sortBy);
+        List<ParticipantEventFilterDTO> filteredEvents = eventFacade.getParticipantEventsByFilers(filters);
         return !filteredEvents.isEmpty() ? ResponseEntity.ok(filteredEvents) : ResponseEntity.noContent().build();
     }
 

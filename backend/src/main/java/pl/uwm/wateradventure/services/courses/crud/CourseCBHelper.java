@@ -13,7 +13,6 @@ import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 
 // TODO -- maybe create root CBHelper to inherit it in EntityCBHelper ?
@@ -23,7 +22,7 @@ import java.util.Objects;
 public class CourseCBHelper {
 
     // could be method in EntityCBHelper if it will ever be created
-    private static void checkSortByValue(String sortBy) {
+    public static void checkSortByValue(String sortBy) {
         if (sortBy == null) return;
         Field[] courseEntityFields = CourseEntity.class.getDeclaredFields();
 
@@ -39,7 +38,11 @@ public class CourseCBHelper {
     public static void addSortBy(String sort, CriteriaQuery<CourseFilterDTO> query,
                                  CriteriaBuilder cb, Root<CourseEntity> course) {
         checkSortByValue(sort);
-        query.orderBy(cb.asc(course.get(Objects.requireNonNullElse(sort, "dateFrom"))));
+        if (sort == null) {
+            query.orderBy(cb.asc(course.get("dateFrom")));
+            return;
+        }
+        query.orderBy(cb.asc(course.get(sort)));
     }
 
     public static void addTypePredicate(CriteriaBuilder cb, Root<CourseEntity> course,
@@ -70,6 +73,13 @@ public class CourseCBHelper {
         }
     }
 
+    public static void addDateFromEqualPredicate(CriteriaBuilder cb, Root<CourseEntity> course,
+                                                 List<Predicate> predicates, LocalDate dateFrom) {
+        if (dateFrom != null) {
+            predicates.add(cb.equal(course.get("dateFrom"), dateFrom));
+        }
+    }
+
     public static void addDateToPredicate(CriteriaBuilder cb, Root<CourseEntity> course,
                                           List<Predicate> predicates, LocalDate dateTo) {
         if (dateTo != null) {
@@ -77,8 +87,17 @@ public class CourseCBHelper {
         }
     }
 
+    public static void addRegisteredParticipantsPredicate(CriteriaBuilder cb,
+                                                   Root<CourseEntity> course,
+                                                   List<Predicate> predicates,
+                                                   Integer registeredParticipants) {
+        if (registeredParticipants != null) {
+            predicates.add(cb.equal(cb.size(course.get("participants")), registeredParticipants));
+        }
+    }
+
     public static Subquery<Long> addRegisteredParticipants(CriteriaBuilder cb, Root<CourseEntity> course,
-                                                          CriteriaQuery<CourseFilterDTO> query) {
+                                                          CriteriaQuery<?> query) {
         Subquery<Long> subQuery = query.subquery(Long.class);
         Root<ParticipantCourseEntity> subQueryRoot = subQuery.from(ParticipantCourseEntity.class);
         Join<ParticipantCourseEntity, CourseEntity> join = subQueryRoot.join("course");

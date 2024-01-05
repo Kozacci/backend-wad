@@ -11,9 +11,17 @@ class CategoryLearningUpdater {
 
     private final CategoryLearningRepository repository;
 
-    public CategoryLearningEntity update(CategoryLearningEntity categoryLearningToChange, CategoryLearningUpdateDTO dto) {
-        categoryLearningToChange.addCorrectAnswers(dto.correctAnswers());
-        categoryLearningToChange.addQuestionsAnswered(dto.questionsAnswered());
+    public CategoryLearningEntity update(
+            CategoryLearningEntity categoryLearningToChange,
+            CategoryLearningUpdateDTO dto
+    ) {
+        if(dto.isCorrectAnswer()) {
+            categoryLearningToChange.addCorrectAnswers(1);
+            categoryLearningToChange.addQuestionsAnswered(1);
+        }
+        else {
+            categoryLearningToChange.addQuestionsAnswered(1);
+        }
         return repository.saveAndFlush(categoryLearningToChange);
     }
 

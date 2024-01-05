@@ -63,7 +63,7 @@ class CourseUpdater {
 
         var amountOfAssignedParticipants = course.getParticipants().size();
 
-        if (amountOfAssignedParticipants < maxParticipantNumber) {
+        if (amountOfAssignedParticipants > maxParticipantNumber) {
             throw new InvalidMaxParticipantsValueException(
                             "You can't change number of maximum participants for " + maxParticipantNumber +
                             ", because there are already " + amountOfAssignedParticipants + " " +

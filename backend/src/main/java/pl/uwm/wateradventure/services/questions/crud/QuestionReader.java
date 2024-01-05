@@ -3,18 +3,16 @@ package pl.uwm.wateradventure.services.questions.crud;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.exceptions.custom_exceptions.EntityNotFoundException;
+import pl.uwm.wateradventure.models.learning.category.Category;
 import pl.uwm.wateradventure.models.questions.QuestionEntity;
 import pl.uwm.wateradventure.models.questions.dtos.QuestionEntityDTO;
 import pl.uwm.wateradventure.models.questions.dtos.QuestionFilterDTO;
 import pl.uwm.wateradventure.models.questions.dtos.QuestionFiltersDTO;
 import pl.uwm.wateradventure.services.global.PageReader;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static pl.uwm.wateradventure.services.questions.crud.QuestionCBHelper.*;
 
@@ -33,10 +31,23 @@ public class QuestionReader extends PageReader<QuestionEntity> {
                 );
     }
 
-    public Page<QuestionEntityDTO> getAllQuestionsPageable() {
-        return super
-                .getAllSortedPageable(questionRepository, "id", true)
-                .map(QuestionEntity::toDTO);
+    public List<QuestionEntityDTO> getAllQuestionsAndDraw() {
+        var questionList = new ArrayList<>(questionRepository.findAll().stream().map(QuestionEntity::toDTO).toList());
+        Collections.shuffle(questionList);
+        return questionList;
+
+    }
+
+    public QuestionEntityDTO getRandomQuestionByCategories(List<Category> categories) {
+        List<QuestionEntityDTO> allQuestions =
+                questionRepository
+                .findAllByCategoryIn(categories)
+                .stream()
+                .map(QuestionEntity::toDTO)
+                .toList();
+        Random random = new Random();
+        int randomIndex = random.nextInt(allQuestions.size());
+        return allQuestions.get(randomIndex);
     }
 
     public List<QuestionFilterDTO> getQuestionsByFilters(QuestionFiltersDTO filters) {
@@ -70,7 +81,8 @@ public class QuestionReader extends PageReader<QuestionEntity> {
                 root.get("category"),
                 root.get("firstAnswer"),
                 root.get("secondAnswer"),
-                root.get("thirdAnswer")
+                root.get("thirdAnswer"),
+                root.get("correctAnswer")
         );
     }
 }

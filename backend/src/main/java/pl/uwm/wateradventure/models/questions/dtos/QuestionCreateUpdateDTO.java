@@ -3,6 +3,7 @@ package pl.uwm.wateradventure.models.questions.dtos;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 import pl.uwm.wateradventure.models.validators.Category;
 import pl.uwm.wateradventure.models.validators.CorrectAnswer;
 
@@ -26,4 +27,6 @@ public record QuestionCreateUpdateDTO(@NotBlank(message = "'Content' field must 
                                       String explanation,
                                       String image
                                       ) {
+
+    @Builder public QuestionCreateUpdateDTO {}
 }

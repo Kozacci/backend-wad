@@ -1,0 +1,41 @@
+<body>
+<div *ngIf="courses.length == 0" class="course-empty-list">
+  <div class="course-empty-list-title">Brak wykupionych kursów</div>
+</div>
+<div *ngIf="courses.length != 0" class="course-list">
+  <div *ngFor="let course of courses" class="course-card"
+       [ngStyle]="course.isPaid
+         ? {
+         'border': '3px solid #27ab50',
+         'box-shadow': '0 4px 8px rgba(65, 110, 65, 0.3)'
+         }
+         : {
+         'border': '3px solid #ddd',
+         'box-shadow': '0 4px 8px rgba(0, 0, 0, 0.2)'
+         }">
+    <div class="course-image-container">
+      <img [src]="clientMyCoursesService.getImage(course)" alt="Course Image" class="course-image"/>
+      <span *ngIf="course.isPaid" class="course-mode" style="color: #27ab50">Opłacony</span>
+      <span *ngIf="!course.isPaid" class="course-mode" style="color: #6c757d">Nieopłacony</span>
+    </div>
+    <div class="course-content">
+      <div class="course-title">
+        <h3 class="course-title">{{ course.courseType | courseType }}</h3>
+        {{ course.city }}
+      </div>
+      <div class="course-date-section">
+        <div class="course-date">
+          <strong>Termin od:</strong> {{ course.dateFrom }}
+          <strong>Termin do:</strong> {{ course.dateTo }}
+        </div>
+      </div>
+    </div>
+    <div class="course-actions">
+      <button pButton type="button" label="Szczegóły" icon="pi pi-info-circle" class="p-button-rounded p-button-primary" (click)="clientMyCoursesService.goToCourseDetails(course)"></button>
+      <button *ngIf="course.isPaid" pButton type="button" label="Nauka" icon="fa-solid fa-book-open-reader" class="p-button-rounded p-button-success" (click)="clientMyCoursesService.goToCourseLearning()"></button>
+      <button *ngIf="!course.isPaid" pButton type="button" label="Anuluj" icon="pi pi-times" class="p-button-rounded p-button-outlined p-button-secondary" (click)="cancelParticipantCourse(course)"></button>
+    </div>
+<!--  TODO CERTIFICATE GENERATE BUTTON IF COURSE IS PASSED = TRUE AND HIDE "LEARNING" BUTTON THEN-->
+  </div>
+</div>
+</body>

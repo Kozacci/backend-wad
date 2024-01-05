@@ -1,0 +1,54 @@
+<div class="e-learning-container">
+  <h2 class="section-title">Pytanie numer {{ randomQuestion.questionId }}</h2>
+  <p class="question">{{ randomQuestion.content }}</p>
+  <mat-divider></mat-divider>
+  <div class="answers-section">
+    <div class="category-section">
+      <span class="category-title">Dział</span>
+      <span class="category-value">{{ randomQuestion.category }}</span>
+    </div>
+    <div class="answers">
+      <div
+        (click)="selectAnswer('Odpowiedź A')"
+        [ngClass]="{
+           'selected': selectedAnswer === 'Odpowiedź A',
+           'correct': submitted && 'Odpowiedź A' === randomQuestion.correctAnswer,
+           'incorrect': submitted && 'Odpowiedź A' !== randomQuestion.correctAnswer
+        }">
+        <span><strong>A:</strong> {{ randomQuestion.firstAnswer }}</span>
+      </div>
+      <div
+        (click)="selectAnswer('Odpowiedź B')"
+        [ngClass]="{
+           'selected': selectedAnswer === 'Odpowiedź B',
+           'correct': submitted && 'Odpowiedź B' === randomQuestion.correctAnswer,
+           'incorrect': submitted && 'Odpowiedź B' !== randomQuestion.correctAnswer
+        }">
+        <span><strong>B:</strong> {{ randomQuestion.secondAnswer }}</span>
+      </div>
+      <div
+        (click)="selectAnswer('Odpowiedź C')"
+        [ngClass]="{
+           'selected': selectedAnswer === 'Odpowiedź C',
+           'correct': submitted && 'Odpowiedź C' === randomQuestion.correctAnswer,
+           'incorrect': submitted && 'Odpowiedź C' !== randomQuestion.correctAnswer
+        }">
+        <span><strong>C:</strong> {{ randomQuestion.thirdAnswer }}</span>
+      </div>
+    </div>
+    <div class="next-section">
+      <button (click)="getRandomQuestion()"
+              class="next-question">
+        Następne pytanie >
+      </button>
+    </div>
+  </div>
+
+  <button pButton class="btn btn-primary" (click)="checkAnswer()"
+          [disabled]="selectedAnswer === null"
+          [ngClass]="{'active': selectedAnswer !== null}">
+    Sprawdź odpowiedź
+  </button>
+
+
+</div>

@@ -1,0 +1,85 @@
+<div *ngIf="!this.isFinished" class="e-learning-container">
+  <h2 class="section-title">Pytanie numer {{ randomQuestion.questionId }}</h2>
+  <p class="question">{{ randomQuestion.content }}</p>
+  <mat-divider></mat-divider>
+  <div class="answers-section">
+    <div class="previous-section">
+      <button (click)="getPreviousQuestion()"
+              class="next-question">
+        < Poprzednie pytanie
+      </button>
+    </div>
+    <div class="answers">
+      <div
+        (click)="selectAnswer('Odpowiedź A')"
+        [ngClass]="{'selected': selectedAnswer === 'Odpowiedź A'}">
+        <span><strong>A:</strong> {{ randomQuestion.firstAnswer }}</span>
+      </div>
+      <div
+        (click)="selectAnswer('Odpowiedź B')"
+        [ngClass]="{'selected': selectedAnswer === 'Odpowiedź B'}">
+        <span><strong>B:</strong> {{ randomQuestion.secondAnswer }}</span>
+      </div>
+      <div
+        (click)="selectAnswer('Odpowiedź C')"
+        [ngClass]="{'selected': selectedAnswer === 'Odpowiedź C'}">
+        <span><strong>C:</strong> {{ randomQuestion.thirdAnswer }}</span>
+      </div>
+    </div>
+    <div class="next-section">
+      <button (click)="getNextQuestion()"
+              class="next-question">
+        Następne pytanie >
+      </button>
+    </div>
+  </div>
+
+  <h3 class="questions-list-title">Lista pytań</h3>
+  <div class="question-navigation">
+    <button *ngFor="let question of randomQuestions; let i = index"
+            [ngClass]="{'currentQuestion': question.questionId == i}"
+            mat-mini-fab
+            (click)="getSelectedQuestion(i)">
+      {{ i + 1 }}
+    </button>
+  </div>
+
+  <div class="timer-section">
+    <i class="pi pi-timer" style="font-size: 2em;"></i>
+    <span class="timer-label">Pozostały czas</span>
+    <span class="timer-value">{{ formatTime(timeLeft) }}</span>
+  </div>
+
+  <button pButton class="btn btn-primary" (click)="finishTrialExam(this.participantCourseId)">
+    Zakończ egzamin
+  </button>
+
+</div>
+
+<div *ngIf="isFinished" class="exam-summary-container">
+  <h1>Egzamin próbny</h1>
+  <hr class="divider"/>
+
+  <div class="result-container">
+
+    <span class="label"><i class="pi pi-chart-bar" style="font-size: 2em;"> </i> Twój wynik</span>
+    <div class="percentage-result" [ngClass]="{'passed': percentage > 70, 'failed': percentage <= 70}">
+      {{ percentage }} %
+    </div>
+  </div>
+
+  <div class="time-container">
+    <span class="label"><i class="pi pi-clock" style="font-size: 2em;"> </i> Pozostały czas</span>
+    <div class="time-value">{{ formatTime(timeLeft) }}</div>
+  </div>
+
+  <div class="answers-container">
+    <span class="label"><i class="pi pi-check-circle" style="font-size: 2em;"> </i> Poprawne odpowiedzi</span>
+    <div class="answers-count">{{ totalPassedQuestions }}/{{ totalQuestions }}</div>
+  </div>
+
+  <div class="exam-actions">
+    <button pButton class="btn btn-secondary" (click)="goToStatistics()">Moje wyniki</button>
+    <button pButton class="btn btn-primary" (click)="retryExam()">Spróbuj ponownie</button>
+  </div>
+</div>

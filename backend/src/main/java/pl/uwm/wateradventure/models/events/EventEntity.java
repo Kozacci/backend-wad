@@ -63,8 +63,15 @@ public class EventEntity extends WaterAdventureChangeMetricEntity {
                 .date(this.date)
                 .city(this.city.enumValue)
                 .duration(this.duration)
+                .assignedParticipants(this.getAmountOfAssignedParticipants())
                 .maxParticipantsNumber(this.maxParticipantsNumber)
                 .build();
+    }
+
+    public Integer getAmountOfAssignedParticipants() {
+        return this.getEventParticipants().stream()
+                .mapToInt(ParticipantEventEntity::getParticipantsNumber)
+                .sum();
     }
 
 

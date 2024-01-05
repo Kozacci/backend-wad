@@ -1,0 +1,182 @@
+<body>
+  <img class="wallpaper" src="assets/images/client/overlay/Main-Wallpaper.jpg" alt="Wallpaper">
+
+  <div class="on-background">
+    <div class="left-side">
+      <div class="line-left"></div>
+      <div class="text-left">
+        <h1 class="h1-left">Kursy<br> żeglarskie</h1>
+        <p>Otrzymaj<br>patent żeglarski</p>
+        <button type="button" class="btn btn-light button-left" (click)="pathService.navigate('oferta/kursy')">Kursy</button>
+      </div>
+    </div>
+    <div class="right-side">
+      <div class="text-right">
+        <h1 class="h1-right">Organizacja<br> rejsów</h1>
+        <p>Przeżyj<br>niesamowite chwile</p>
+        <button type="button" class="btn btn-light button-right" (click)="pathService.navigate('oferta/eventy')">Eventy</button>
+      </div>
+      <div class="line-right"></div>
+    </div>
+  </div>
+
+  <div style="text-align: center">
+    <br>
+    <h1>Dostępne kursy</h1>
+    <br>
+  </div>
+
+  <div class="carousel-courses">
+    <p-carousel
+      class="p-carousel"
+      [value]="courses"
+      [numVisible]="3"
+      [numScroll]="1"
+      [circular]="true"
+      [autoplayInterval]=4000
+      [responsiveOptions]="responsiveOptionsForCarousel">
+      <ng-template pTemplate="item" let-course>
+        <a routerLink="{{ course.url }}" class="course-item-link">
+        <div class="course-item">
+          <img src="{{ course.image }}" alt="{{ course.name }}" class="responsive-img" style="min-width: 180px;"/>
+            <div class="course-info">
+              <div class="course-title">{{ course.name }}</div>
+              <div class="course-price">{{ course.cost }}</div>
+              <div class="course-status">{{ course.status }}</div>
+              <div class="learn-more"><i class="pi pi-info-circle"></i>  Dowiedz się więcej</div>
+            </div>
+        </div>
+        </a>
+      </ng-template>
+    </p-carousel>
+  </div>
+
+  <div style="text-align: center">
+    <br>
+    <h1>Dostępne eventy</h1>
+    <br>
+  </div>
+
+  <div class="carousel-courses">
+    <p-carousel
+      class="p-carousel"
+      [value]="events"
+      [numVisible]="3"
+      [numScroll]="1"
+      [circular]="true"
+      [autoplayInterval]=4000
+      [responsiveOptions]="responsiveOptionsForCarousel">
+      <ng-template pTemplate="item" let-event>
+        <a routerLink="{{ event.url }}" class="course-item-link">
+          <div class="course-item">
+            <img src="{{ event.image }}" alt="{{ event.name }}" class="responsive-img"/>
+            <div class="course-info">
+              <div class="course-title">{{ event.name }}</div>
+              <div class="course-price">{{ event.cost }}</div>
+              <div class="course-status">{{ event.status }}</div>
+              <div class="learn-more"><i class="pi pi-info-circle"></i> Dowiedz się więcej</div>
+            </div>
+          </div>
+        </a>
+      </ng-template>
+    </p-carousel>
+  </div>
+
+<div class="why-wadventure">
+  <div class="why-wadventure-logo">
+    <img src="assets/logos/LOGO-CLIENT.png" height="45" alt="LOGO">
+  </div>
+  <h1>Dlaczego Water Adventure?</h1>
+  <div class="why-wadventure-content">
+    <div class="why-wadventure-left-side">
+      <div class="why-wadventure-left-line"></div>
+        <ul class="why-wadventure-points">
+          <li>Szeroki zakres usług od warsztatów po kursy na patent sternika</li>
+          <li>Zdobywasz umiejętności z doświadczoną kadrą</li>
+          <li>Indywidualne podejście do klienta</li>
+          <li>Dzięki nam zdobywasz praktyczną wiedzę</li>
+        </ul>
+    </div>
+    <div class="why-wadventure-right-side">
+      <div class="why-wadventure-right-line"></div>
+        <ul class="why-wadventure-points">
+          <li>Gwarancja relaksu i dobrej zabawy</li>
+          <li>Możliwość podziwiania pięknych widoków</li>
+          <li>Catering i dobra muzyka na pokładzie</li>
+          <li>Rejsy zimą i latem</li>
+        </ul>
+    </div>
+  </div>
+</div>
+
+  <div class="learn-from">
+    <div class="learn-from-left">
+      <img src="assets/images/client/overlay/avatars/avatar-1.png" alt="Artur XYZ" class="learn-from-img" />
+      <h2>Hubert Wróblewski-Klimaszewski</h2>
+    </div>
+    <div class="learn-from-right">
+      <h1>Ucz się u boku profesjonalisty</h1>
+      <p>Zdawalność egzaminów na wysokim poziomie,
+        satysfakcja z każdego przebytego rejsu
+        - to dzięki temu uwielbiam wykonywać swoją pracę.
+        Jeśli chcesz zostać samodzielnym sternikiem bądź
+        przeżyć niesamowitą przygodę poza lądem,
+        to serdecznie zachęcam do skorzystania z moich usług.</p>
+      <button mat-button class="learn-from-more" (click)="pathService.navigate('/kontakt')">Więcej o mnie</button>
+    </div>
+  </div>
+
+
+  <div class="locations-block">
+    <h2 class="locations-title">Skąd wypływamy</h2>
+    <div class="locations-flex">
+      <div class="location">
+        <a href="https://www.google.com/maps/place/Plac+Zdrojowy+2,+81-718+Sopot/@54.4481623,18.5743232,17z/data=!3m1!4b1!4m6!3m5!1s0x46fd0a8c847e12db:0xa41f2699384f95f!8m2!3d54.4481623!4d18.5768981!16s%2Fg%2F11bw501r_g?entry=ttu" class="location-link">
+        <div class="location-content">
+          <img src="assets/images/client/overlay/locations/Sopot.png" alt="Sopot" class="location-img" />
+          <div class="location-info">
+            <h3>Sopot</h3>
+            <p><br>Adres: <br> Plac Zdrojowy 2,<br> 81-718 Sopot</p>
+            <p><br>Kontakt:<br> +48 602 796 566<br> +48 881 911 532</p>
+          </div>
+        </div>
+        </a>
+      </div>
+      <div class="location">
+        <a href="https://www.google.com/maps/place/Przysta%C5%84+%22LOK%22/@54.0428897,22.5023396,17z/data=!4m15!1m8!3m7!1s0x46e1a73b614316e3:0xa3148a83f7bb44e7!2sSembrzyckiego+18b,+19-400+Olecko!3b1!8m2!3d54.0428897!4d22.5049145!16s%2Fg%2F11c2ftbnrq!3m5!1s0x46e1a731582e3b0f:0x772ab41b7622dd7b!8m2!3d54.0430419!4d22.5057741!16s%2Fg%2F11h4yd3fy4?entry=ttu" class="location-link">
+        <div class="location-content">
+          <img src="assets/images/client/overlay/locations/Olecko.png" alt="Olecko" class="location-img" />
+          <div class="location-info">
+            <h3>Olecko</h3>
+            <p><br>Adres: <br> Sembryzickiego 18B,<br> 19-400 Olecko</p>
+            <p><br>Kontakt:<br> +48 602 796 566<br> +48 881 911 532</p>
+          </div>
+        </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="reviews-carousel">
+    <h2>Sprawdź opinie naszych usług</h2>
+    <p-carousel [value]="reviews"
+                [numVisible]="3"
+                [numScroll]="1"
+                [circular]="true"
+                [autoplayInterval]=3000
+                [responsiveOptions]="responsiveOptionsForCarousel">
+      <ng-template let-review pTemplate="item">
+        <div class="review-item">
+            <p-rating [(ngModel)]="review.stars" [stars]=5 [readonly]="true" [cancel]="false"></p-rating>
+            <h3>{{ review.name }}</h3>
+            <p class="review-date">{{ review.date }}</p>
+            <p class="review-content">{{ review.content }}</p>
+        </div>
+      </ng-template>
+    </p-carousel>
+    <p class="reviews-disclaimer">
+      * Wszystkie opinie pochodzą ze strony firmy Water Adventure w serwisie facebook.com
+    </p>
+  </div>
+
+</body>

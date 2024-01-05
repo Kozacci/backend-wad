@@ -2,7 +2,6 @@ package pl.uwm.wateradventure.controllers.questions;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,8 +39,15 @@ class QuestionController {
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public Page<QuestionEntityDTO> getAllQuestionsPageable() {
-        return questionFacade.getAllQuestionsPageable();
+    public List<QuestionEntityDTO> getAllQuestionsAndDraw() {
+        return questionFacade.getAllQuestionsAndDraw();
+    }
+
+    @GetMapping("/random")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<QuestionEntityDTO> getRandomQuestionByCategories(@RequestParam List<Category> categories) {
+        QuestionEntityDTO randomQuestion = questionFacade.getRandomQuestionByCategories(categories);
+        return ResponseEntity.ok(randomQuestion);
     }
 
     @GetMapping("/filter-by")
@@ -58,7 +64,7 @@ class QuestionController {
 
     @PutMapping("/{questionId}")
     @ResponseStatus(HttpStatus.OK)
-    public QuestionEntityDTO updateQuestion(@PathVariable Long questionId, @Valid @RequestBody QuestionCreateUpdateDTO questionUpdateDTO) {
+    public QuestionEntityDTO updateQuestion(@PathVariable Long questionId, @RequestBody QuestionCreateUpdateDTO questionUpdateDTO) {
         return questionFacade.updateQuestion(questionId, questionUpdateDTO);
     }
 

@@ -1,0 +1,45 @@
+<div class="user-profile-container">
+  <div class="user-stats">
+    <h1>Witaj Igor!</h1>
+    <h2>Twoje konto</h2>
+    <p>Jesteś z nami łącznie: <strong>{{ calculateDaysFromNow() }}</strong></p>
+    <p>Liczba wykupionych kursów: <strong>{{ calculateCoursesNumber() }}</strong></p>
+    <p>Liczba zaliczonych egzaminów: <strong>{{ calculatePassedCoursesNumber() }}</strong></p>
+  </div>
+
+  <div class="user-edit-form">
+    <h2>Edytuj swoje dane</h2>
+    <form [formGroup]="formGroup">
+
+       <mat-form-field appearance="outline">
+          <mat-label>Imię</mat-label>
+          <input matInput placeholder="Wprowadź imie" type="firstName" [formControl]="formGroup.controls.firstName">
+          <mat-error *ngIf="formGroup.controls.firstName.invalid">{{ formService.getInputErrorMessage(formGroup.controls.firstName) }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nazwisko</mat-label>
+          <input matInput placeholder="Wprowadź nazwisko" type="firstName" [formControl]="formGroup.controls.lastName">
+          <mat-error *ngIf="formGroup.controls.lastName.invalid">{{ formService.getInputErrorMessage(formGroup.controls.lastName) }}</mat-error>
+        </mat-form-field>
+
+<!--TODO After engineering-->
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>E-mail</mat-label>-->
+<!--          <input matInput placeholder="Wprowadź e-mail" type="email" [formControl]="formGroup.controls.email">-->
+<!--          <mat-error *ngIf="formGroup.controls.email.invalid">{{ formService.getInputErrorMessage(formGroup.controls.email) }}</mat-error>-->
+<!--        </mat-form-field>-->
+
+        <mat-form-field appearance="outline">
+          <mat-label>Numer telefonu</mat-label>
+          <input matInput placeholder="Wprowadź nr. telefonu" type="phoneNumber" [maxlength]="9" [formControl]="formGroup.controls.phoneNumber">
+          <mat-error *ngIf="formGroup.controls.phoneNumber.invalid">{{ formService.getInputErrorMessage(formGroup.controls.phoneNumber) }}</mat-error>
+        </mat-form-field>
+
+      <div>
+        <button mat-raised-button color="primary" class="my-profile-form-button" (click)="updateParticipant()">Zapisz zmiany</button>
+      </div>
+
+    </form>
+  </div>
+</div>

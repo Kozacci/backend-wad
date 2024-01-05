@@ -7,14 +7,12 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import pl.uwm.wateradventure.exceptions.custom_exceptions.EntityNotFoundException;
-import pl.uwm.wateradventure.exceptions.custom_exceptions.MaxParticipantsNumberExceededException;
-import pl.uwm.wateradventure.exceptions.custom_exceptions.ParticipantAlreadySignedInException;
+import pl.uwm.wateradventure.exceptions.custom_exceptions.*;
 import pl.uwm.wateradventure.exceptions.value_objects_exceptions.*;
 
 import java.util.List;
 
-import static pl.uwm.wateradventure.exceptions.ErrorMessage.extractFieldName;
+import static pl.uwm.wateradventure.exceptions.ErrorDTO.extractFieldName;
 
 /** REST Controller created in the needs of exception handling.
  * It consumes custom exceptions and throws them if neccessary
@@ -24,109 +22,127 @@ public class ExceptionsHandler {
 
     @ExceptionHandler(value = EntityNotFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public ErrorMessage entityNotFoundException(EntityNotFoundException exception) {
-        return new ErrorMessage(exception.entityName, exception.getMessage());
+    public ErrorDTO entityNotFoundException(EntityNotFoundException exception) {
+        return new ErrorDTO(exception.entityName, exception.getMessage());
     }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
-    public List<ErrorMessage> methodArgumentNotValidException(MethodArgumentNotValidException exception) {
+    public List<ErrorDTO> methodArgumentNotValidException(MethodArgumentNotValidException exception) {
         BindingResult result = exception.getBindingResult();
         return result.getFieldErrors().stream()
-                .map(fieldError -> new ErrorMessage(fieldError.getField(), fieldError.getDefaultMessage()))
+                .map(fieldError -> new ErrorDTO(fieldError.getField(), fieldError.getDefaultMessage()))
                 .toList();
     }
 
     @ExceptionHandler(value = ConstraintViolationException.class)
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
-    public List<ErrorMessage> constraintViolationException(ConstraintViolationException exception) {
+    public List<ErrorDTO> constraintViolationException(ConstraintViolationException exception) {
         return exception.getConstraintViolations().stream()
-                .map(violation -> new ErrorMessage(extractFieldName(violation), violation.getMessage()))
+                .map(violation -> new ErrorDTO(extractFieldName(violation), violation.getMessage()))
                 .toList();
     }
 
     @ExceptionHandler(value = InvalidCourseTypeException.class)
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
-    public ErrorMessage invalidCourseTypeException(InvalidCourseTypeException exception) {
-        return new ErrorMessage("courseType", exception.getMessage());
+    public ErrorDTO invalidCourseTypeException(InvalidCourseTypeException exception) {
+        return new ErrorDTO("courseType", exception.getMessage());
     }
 
     @ExceptionHandler(value = InvalidCourseStatusException.class)
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
-    public ErrorMessage invalidCourseStatusException(InvalidCourseStatusException exception) {
-        return new ErrorMessage("status", exception.getMessage());
+    public ErrorDTO invalidCourseStatusException(InvalidCourseStatusException exception) {
+        return new ErrorDTO("status", exception.getMessage());
     }
 
     @ExceptionHandler(value = InvalidCourseCityException.class)
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
-    public ErrorMessage invalidCourseCityException(InvalidCourseCityException exception) {
-        return new ErrorMessage("city", exception.getMessage());
+    public ErrorDTO invalidCourseCityException(InvalidCourseCityException exception) {
+        return new ErrorDTO("city", exception.getMessage());
     }
 
     @ExceptionHandler(value = InvalidEventTypeException.class)
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
-    public ErrorMessage invalidEventTypeException(InvalidEventTypeException exception) {
-        return new ErrorMessage("type", exception.getMessage());
+    public ErrorDTO invalidEventTypeException(InvalidEventTypeException exception) {
+        return new ErrorDTO("type", exception.getMessage());
     }
 
     @ExceptionHandler(value = InvalidEventCityException.class)
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
-    public ErrorMessage invalidEventCityException(InvalidEventCityException exception) {
-        return new ErrorMessage("city", exception.getMessage());
+    public ErrorDTO invalidEventCityException(InvalidEventCityException exception) {
+        return new ErrorDTO("city", exception.getMessage());
     }
 
     @ExceptionHandler(value = InvalidQuestionCategoryException.class)
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
-    public ErrorMessage invalidQuestionCategoryException(InvalidQuestionCategoryException exception) {
-        return new ErrorMessage("category", exception.getMessage());
+    public ErrorDTO invalidQuestionCategoryException(InvalidQuestionCategoryException exception) {
+        return new ErrorDTO("category", exception.getMessage());
     }
 
     @ExceptionHandler(value = InvalidQuestionCorrectAnswerException.class)
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
-    public ErrorMessage invalidQuestionCorrectAnswerException(InvalidQuestionCorrectAnswerException exception) {
-        return new ErrorMessage("correctAnswer", exception.getMessage());
+    public ErrorDTO invalidQuestionCorrectAnswerException(InvalidQuestionCorrectAnswerException exception) {
+        return new ErrorDTO("correctAnswer", exception.getMessage());
     }
 
     @ExceptionHandler(value = InvalidRoleException.class)
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
-    public ErrorMessage invalidRoleException(InvalidRoleException exception) {
-        return new ErrorMessage("role", exception.getMessage());
+    public ErrorDTO invalidRoleException(InvalidRoleException exception) {
+        return new ErrorDTO("role", exception.getMessage());
     }
 
     @ExceptionHandler(value = InvalidSortByValueException.class)
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
-    public ErrorMessage invalidSortByValueException(InvalidSortByValueException exception) {
-        return new ErrorMessage("sortBy", exception.getMessage());
+    public ErrorDTO invalidSortByValueException(InvalidSortByValueException exception) {
+        return new ErrorDTO("sortBy", exception.getMessage());
     }
 
     @ExceptionHandler(value = MaxParticipantsNumberExceededException.class)
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
-    public ErrorMessage maxParticipantsNumberExceededException(MaxParticipantsNumberExceededException exception) {
-        return new ErrorMessage("course", exception.getMessage());
+    public ErrorDTO maxParticipantsNumberExceededException(MaxParticipantsNumberExceededException exception) {
+        return new ErrorDTO("course", exception.getMessage());
     }
 
     @ExceptionHandler(value = ParticipantAlreadySignedInException.class)
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
-    public ErrorMessage participantAlreadySignedInException(ParticipantAlreadySignedInException exception) {
-        return new ErrorMessage("course", exception.getMessage());
+    public ErrorDTO participantAlreadySignedInException(ParticipantAlreadySignedInException exception) {
+        return new ErrorDTO("course", exception.getMessage());
     }
 
     @ExceptionHandler(value = InvalidDateException.class)
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
-    public ErrorMessage invalidDateException(InvalidDateException exception) {
-        return new ErrorMessage(exception.fieldName, exception.getMessage());
+    public ErrorDTO invalidDateException(InvalidDateException exception) {
+        return new ErrorDTO(exception.fieldName, exception.getMessage());
     }
 
     @ExceptionHandler(value = InvalidMaxParticipantsValueException.class)
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
-    public ErrorMessage invalidMaxParticipantsValueException(InvalidMaxParticipantsValueException exception) {
-        return new ErrorMessage("maxParticipantsNumber", exception.getMessage());
+    public ErrorDTO invalidMaxParticipantsValueException(InvalidMaxParticipantsValueException exception) {
+        return new ErrorDTO("maxParticipantsNumber", exception.getMessage());
     }
 
     @ExceptionHandler(value = VarLengthExceededException.class)
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
-    public ErrorMessage varLengthExceededException(VarLengthExceededException exception) {
-        return new ErrorMessage(exception.fieldName, exception.getMessage());
+    public ErrorDTO varLengthExceededException(VarLengthExceededException exception) {
+        return new ErrorDTO(exception.fieldName, exception.getMessage());
+    }
+
+    @ExceptionHandler(value = NotEnoughSeatsForEventException.class)
+    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+    public ErrorDTO notEnoughSeatsForEventException(NotEnoughSeatsForEventException exception) {
+        return new ErrorDTO("participantsNumber", exception.getMessage());
+    }
+
+    @ExceptionHandler(value = EventCancellationTimeoutException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorDTO eventCancellationTimeoutException(EventCancellationTimeoutException exception) {
+        return new ErrorDTO("date", exception.getMessage());
+    }
+
+    @ExceptionHandler(value = CourseCancellationTimeoutException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorDTO courseCancellationTimeoutException(CourseCancellationTimeoutException exception) {
+        return new ErrorDTO("date", exception.getMessage());
     }
 
 }
