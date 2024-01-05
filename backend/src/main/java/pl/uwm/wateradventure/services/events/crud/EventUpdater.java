@@ -21,7 +21,6 @@ class EventUpdater {
     private final EventRepository eventRepository;
 
     public EventEntityDTO updateEvent(EventEntity eventToUpdate, EventCreateUpdateDTO dto) {
-        // TODO: tutaj mozna testy nawalic
         checkType(eventToUpdate, dto.type());
         checkCost(eventToUpdate, dto.cost());
         checkDate(eventToUpdate, dto.date());

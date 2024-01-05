@@ -1,15 +1,14 @@
-package pl.uwm.wateradventure.services.participant_courses.crud;
+package pl.uwm.wateradventure.services.participant_courses;
 
 import pl.uwm.wateradventure.models.courses.CourseCity;
 import pl.uwm.wateradventure.models.courses.CourseEntity;
 import pl.uwm.wateradventure.models.courses.CourseType;
-import pl.uwm.wateradventure.models.participant_courses.ParticipantCourseEntity;
 import pl.uwm.wateradventure.models.participants.ParticipantEntity;
 
 import java.time.LocalDate;
 import java.util.List;
 
-class ParticipantCourseTestUtils {
+public class ParticipantCourseTestUtils {
 
     public static List<ParticipantCourseEntity> getParticipantCourseEntities() {
         var first = new ParticipantCourseEntity(

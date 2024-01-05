@@ -4,8 +4,8 @@ import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.models.learning.EntireLearningDTO;
 import pl.uwm.wateradventure.models.learning.answershistory.AnswerHistoryEntity;
 import pl.uwm.wateradventure.models.learning.category.Category;
-import pl.uwm.wateradventure.models.learning.category.CategoryLearningEntityDTO;
 import pl.uwm.wateradventure.models.learning.category.CategoryLearningEntity;
+import pl.uwm.wateradventure.models.learning.category.CategoryLearningEntityDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 @Component
 class LearningCounter {
 
-    // TODO: tutaj testy
     public EntireLearningDTO countAllAnswers(AnswerHistoryEntity answerHistory) {
         var categoryLearningEntities = answerHistory.getCategoryLearningList();
         var entitiesGroupedByCategory = groupByCategories(categoryLearningEntities);

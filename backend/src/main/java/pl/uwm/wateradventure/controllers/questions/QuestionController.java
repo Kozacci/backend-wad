@@ -2,12 +2,10 @@ package pl.uwm.wateradventure.controllers.questions;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.uwm.wateradventure.models.learning.category.Category;
-import pl.uwm.wateradventure.models.questions.QuestionEntity;
 import pl.uwm.wateradventure.models.questions.dtos.QuestionCreateUpdateDTO;
 import pl.uwm.wateradventure.models.questions.dtos.QuestionEntityDTO;
 import pl.uwm.wateradventure.models.questions.dtos.QuestionFilterDTO;

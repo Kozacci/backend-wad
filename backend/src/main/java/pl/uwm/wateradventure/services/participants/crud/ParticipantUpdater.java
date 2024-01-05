@@ -13,7 +13,6 @@ class ParticipantUpdater {
     private final ParticipantRepository participantRepository;
 
     public ParticipantEntityDTO updateParticipant(ParticipantEntity participantToUpdate, ParticipantUpdateDTO participantUpdateDTO) {
-        // TODO: tutaj testy
         if (participantUpdateDTO.getFirstName() != null) {
             participantToUpdate.setFirstName(participantUpdateDTO.getFirstName());
         }

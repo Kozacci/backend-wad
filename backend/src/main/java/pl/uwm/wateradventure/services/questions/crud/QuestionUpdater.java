@@ -16,7 +16,6 @@ public class QuestionUpdater {
     private final QuestionRepository questionRepository;
 
     public QuestionEntityDTO updateQuestion(QuestionEntity questionToUpdate, QuestionCreateUpdateDTO questionUpdateDTO) {
-        // TODO: tutaj testy
         checkContent(questionToUpdate, questionUpdateDTO.content());
         checkCategory(questionToUpdate, questionUpdateDTO.category());
         checkAnswer(questionToUpdate, questionUpdateDTO.firstAnswer(), 1);

@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static pl.uwm.wateradventure.services.participant_courses.crud.ParticipantCourseTestUtils.getParticipantCourseEntities;
+import static pl.uwm.wateradventure.services.participant_courses.ParticipantCourseTestUtils.getParticipantCourseEntities;
 
 @ExtendWith(MockitoExtension.class)
 class ParticipantCourseUpdaterTest {

@@ -6,7 +6,6 @@ import pl.uwm.wateradventure.exceptions.custom_exceptions.NotEnoughSeatsForEvent
 import pl.uwm.wateradventure.models.events.EventEntity;
 import pl.uwm.wateradventure.models.participant_events.ParticipantEventEntity;
 import pl.uwm.wateradventure.models.participant_events.dtos.ParticipantEventEntityCreateDTO;
-import pl.uwm.wateradventure.models.participant_events.dtos.ParticipantEventEntityDTO;
 
 @Component
 @RequiredArgsConstructor
