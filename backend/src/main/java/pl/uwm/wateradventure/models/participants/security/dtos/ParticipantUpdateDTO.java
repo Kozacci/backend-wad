@@ -4,12 +4,14 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import pl.uwm.wateradventure.models.validators.EmailAlreadyExists;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class ParticipantUpdateDTO {
 
     @NotBlank(message = "'First name' field must be filled.")
