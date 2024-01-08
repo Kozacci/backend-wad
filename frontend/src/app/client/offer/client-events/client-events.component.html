@@ -1,6 +1,6 @@
 <body>
 <div class="course-list">
-  <div *ngFor="let event of events" class="course-card">
+  <div *ngFor="let event of events" class="course-card" [pTooltip]="'Kliknij w Zobacz Więcej, aby przejść do szczegółów eventu'">
     <div class="course-image-container">
       <img [src]="event.image" alt="{{ event.title }}" class="course-image"/>
       <span class="course-mode">ONLINE / STACJONARNIE</span>
