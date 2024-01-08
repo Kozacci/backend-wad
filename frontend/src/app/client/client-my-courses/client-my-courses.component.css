@@ -34,7 +34,7 @@
 }
 
 .course-card:hover {
-  background-color: var(--white-grey);
+  background-color: #f5f5f5;
 }
 
 .course-image-container {

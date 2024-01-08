@@ -34,7 +34,7 @@
 }
 
 .event-card:hover {
-  background-color: var(--white-grey);
+  background-color: #f5f5f5;
 }
 
 .event-image-container {
