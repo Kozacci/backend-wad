@@ -24,20 +24,14 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>E-mail</mat-label>
-          <input matInput placeholder="Wprowadź e-mail" type="email" [formControl]="formGroup.controls.email">
-          <mat-error *ngIf="formGroup.controls.email.invalid">{{ formService.getInputErrorMessage(formGroup.controls.email) }}</mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
           <mat-label>Numer telefonu</mat-label>
           <input matInput placeholder="Wprowadź nr. telefonu" type="phoneNumber" [maxlength]="9" [formControl]="formGroup.controls.phoneNumber">
           <mat-error *ngIf="formGroup.controls.phoneNumber.invalid">{{ formService.getInputErrorMessage(formGroup.controls.phoneNumber) }}</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Hasło</mat-label>
-          <input matInput placeholder="Wprowadź hasło" [type]="passwordHide ? 'password' : 'text'" [formControl]="formGroup.controls.password">
+          <mat-label>Podaj Hasło w celu weryfikacji</mat-label>
+          <input matInput placeholder="Wprowadź hasło" [type]="passwordHide ? 'password' : 'text'" [formControl]="formGroup.controls.password" required>
           <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="passwordHide">
             <mat-icon>{{ passwordHide ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>

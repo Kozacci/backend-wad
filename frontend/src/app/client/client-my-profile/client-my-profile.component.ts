@@ -113,13 +113,14 @@ export class ClientMyProfileComponent {
             sessionStorage.setItem('cacheFirstName', response.firstName);
             sessionStorage.setItem('cacheLastName', response.lastName);
             sessionStorage.setItem('cachePhoneNumber', response.phoneNumber);
-            // Logout after changing email
-            if(participantUpdateDTO.email != null) {
-              this.authService.logout();
-            }
+            // TODO changing email causes logout bug (spring security tries to logout user with old email which no longer exists)
+            //  TODO Logout after changing email
+            // if(participantUpdateDTO.email != null) {
+            //   this.authService.logout();
+            // }
           },
           (error) => {
-            this.messageService.add({life:4000, severity:'error', summary:'Edycja', detail: 'Pole ' + error.error[0].fieldName + ' ' + error.error[0].message})
+            this.messageService.add({life:4000, severity:'error', summary:'Edycja', detail:"Niepoprawne hasło!"})
             console.error('Błąd edycji', error);
           })
     }

@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 import {AuthService} from "../../shared/services/auth/auth.service";
 import {FormService} from "../../shared/services/form/form.service";
-import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-client-login',
@@ -32,15 +31,13 @@ export class LoginComponent {
 
   constructor(
     public readonly authService: AuthService,
-    public readonly formService: FormService,
-    private readonly messageService: MessageService
+    public readonly formService: FormService
   )
   { }
 
   login() {
     if(this.email.valid && this.password.valid) {
       this.authService.login(this.email.value!, this.password.value!)
-      this.messageService.add({life:5000, severity:'success', summary:'Logowanie', detail:"Pomyślnie zalogowano!"});
     }
   }
 

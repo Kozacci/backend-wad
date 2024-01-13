@@ -28,6 +28,7 @@ export class AuthService {
             this.restClient.getParticipantByEmail(participantToLogin.email)
               .subscribe(
                 response => {
+                  this.messageService.add({life:5000, severity:'success', summary:'Logowanie', detail:"Pomyślnie zalogowano!"});
                   sessionStorage.setItem('cacheId', response.id.toString());
                   sessionStorage.setItem('cacheCreatedAt', response.createdAt.toString().split('T')[0])
                   sessionStorage.setItem('cacheEmail', response.email);

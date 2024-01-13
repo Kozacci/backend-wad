@@ -2,6 +2,7 @@ package pl.uwm.wateradventure.exceptions;
 
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -143,6 +144,12 @@ public class ExceptionsHandler {
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public ErrorDTO courseCancellationTimeoutException(CourseCancellationTimeoutException exception) {
         return new ErrorDTO("date", exception.getMessage());
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
+    public ErrorDTO handleAuthenticationException(){
+        return new ErrorDTO("password", "Nieprawidłowe dane");
     }
 
 }
