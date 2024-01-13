@@ -1,6 +1,7 @@
 package pl.uwm.wateradventure.services.participants.crud;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.uwm.wateradventure.models.participants.ParticipantEntity;
 import pl.uwm.wateradventure.models.participants.dtos.ParticipantEntityDTO;
@@ -11,6 +12,7 @@ import pl.uwm.wateradventure.models.participants.security.dtos.ParticipantUpdate
 class ParticipantUpdater {
 
     private final ParticipantRepository participantRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public ParticipantEntityDTO updateParticipant(ParticipantEntity participantToUpdate, ParticipantUpdateDTO participantUpdateDTO) {
         if (participantUpdateDTO.getFirstName() != null) {
@@ -21,6 +23,9 @@ class ParticipantUpdater {
         }
         if (participantUpdateDTO.getEmail() != null) {
             participantToUpdate.setEmail(participantUpdateDTO.getEmail());
+        }
+        if (participantUpdateDTO.getPassword() != null) {
+            participantToUpdate.setPassword(passwordEncoder.encode(participantUpdateDTO.getPassword()));
         }
         if(participantUpdateDTO.getPhoneNumber() != null) {
             participantToUpdate.setPhoneNumber(participantUpdateDTO.getPhoneNumber());

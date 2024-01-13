@@ -30,6 +30,10 @@ public class ParticipantUpdateDTO {
     @EmailAlreadyExists
     String email;
 
+    @NotBlank(message = "'Password' field must be filled.")
+    @Size(max = 30, message = "Password must contain less than 30 signs.")
+    String password;
+
     @NotBlank(message = "'Phone number' field must be filled.")
     @Size(min = 9, max = 9, message = "'Phone number' must contains 9 digits.")
     @Pattern(regexp = "[\\d]+", message = "'Phone number' field can contain only digits.")

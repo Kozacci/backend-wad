@@ -20,6 +20,7 @@ public class ParticipantsUtilsTest {
                 "Sebastian",
                 "Nowak",
                 "nowy@email.com",
+                "passwordTest123",
                 "667154628"
         );
     }

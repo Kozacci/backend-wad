@@ -7,6 +7,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static pl.uwm.wateradventure.services.participants.ParticipantsUtilsTest.getParticipantEntity;
@@ -17,12 +18,13 @@ import static pl.uwm.wateradventure.services.participants.ParticipantsUtilsTest.
 class ParticipantUpdaterTest {
 
     private final ParticipantRepository participantRepository = Mockito.mock(ParticipantRepository.class);
+    private final PasswordEncoder passwordEncoder = Mockito.mock(PasswordEncoder.class);
     private static final Logger logger = LoggerFactory.getLogger(ParticipantUpdaterTest.class);
     private ParticipantUpdater participantUpdater;
 
     @BeforeEach
     void setUp() {
-        participantUpdater = new ParticipantUpdater(participantRepository);
+        participantUpdater = new ParticipantUpdater(participantRepository, passwordEncoder);
     }
 
     @Test
