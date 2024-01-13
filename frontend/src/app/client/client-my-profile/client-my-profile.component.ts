@@ -4,6 +4,7 @@ import {FormService} from "../../shared/services/form/form.service";
 import {RestClient} from "../../shared/rest-client";
 import {MessageService} from "primeng/api";
 import {ParticipantUpdateDTO} from "../../shared/dto";
+import {AuthService} from "../../shared/services/auth/auth.service";
 
 @Component({
   selector: 'app-client-my-profile',
@@ -13,6 +14,7 @@ import {ParticipantUpdateDTO} from "../../shared/dto";
 export class ClientMyProfileComponent {
 
   protected readonly sessionStorage = sessionStorage;
+  passwordHide: boolean = true;
 
   formGroup = new FormGroup({
     firstName:
@@ -37,6 +39,13 @@ export class ClientMyProfileComponent {
           Validators.email
         ]
       ),
+    password:
+      new FormControl(
+        null as any,
+        [
+          Validators.minLength(8)
+        ]
+      ),
     phoneNumber:
       new FormControl(
         null as any,
@@ -49,6 +58,7 @@ export class ClientMyProfileComponent {
 
   constructor(
     public readonly formService: FormService,
+    private readonly authService: AuthService,
     public restClient: RestClient,
     private readonly messageService: MessageService,
   ) {}
@@ -92,7 +102,8 @@ export class ClientMyProfileComponent {
       const participantUpdateDTO: ParticipantUpdateDTO = {
         firstName: this.formGroup.value.firstName,
         lastName: this.formGroup.value.lastName,
-        email: null, // TODO update of email and password
+        email: this.formGroup.value.email,
+        password: this.formGroup.value.password,
         phoneNumber: this.formGroup.value.phoneNumber
       }
       this.restClient.updateParticipant(Number(sessionStorage.getItem('cacheId')), participantUpdateDTO)
@@ -102,9 +113,10 @@ export class ClientMyProfileComponent {
             sessionStorage.setItem('cacheFirstName', response.firstName);
             sessionStorage.setItem('cacheLastName', response.lastName);
             sessionStorage.setItem('cachePhoneNumber', response.phoneNumber);
-            // if(participantUpdateDTO.email != null) {
-            //   this.authService.logout();
-            // }
+            // Logout after changing email
+            if(participantUpdateDTO.email != null) {
+              this.authService.logout();
+            }
           },
           (error) => {
             this.messageService.add({life:4000, severity:'error', summary:'Edycja', detail: 'Pole ' + error.error[0].fieldName + ' ' + error.error[0].message})
