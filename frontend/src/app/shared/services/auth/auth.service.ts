@@ -23,7 +23,7 @@ export class AuthService {
       }
       this.restClient.login(participantToLogin)
         .subscribe(
-          (response) => {
+          () => {
             this.pathService.navigate('/');
             this.restClient.getParticipantByEmail(participantToLogin.email)
               .subscribe(
@@ -41,7 +41,6 @@ export class AuthService {
                   }
                 }
               )
-            this.messageService.add({life:5000, severity:'success', summary:'Logowanie', detail:"Pomyślnie zalogowano!"});
           },
           (error) => {
             this.messageService.add({life:4000, severity:'error', summary:'Logowanie', detail:"Niepoprawne dane!"})
@@ -65,10 +64,6 @@ export class AuthService {
     if (role == null) return false;
     if (role == 'ADMIN') return true;
     return false;
-  }
-
-  messageIfNotLogged() {
-    this.messageService.add({life:4000, severity:'error', summary:'Login', detail:"Nie jesteś zalogowany!"})
   }
 
 }
