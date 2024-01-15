@@ -26,9 +26,9 @@ export class ClientMyCoursesService {
     switch (course.courseType) {
       case CourseType.STERNIK_MOTOROWODNY:
         return 'assets/images/client/overlay/courses/course-1.png';
-      case CourseType.JACHTOWY_STERNIK_MORSKI:
-        return 'assets/images/client/overlay/courses/course-3.png';
       case CourseType.MOTOROWODNY_STERNIK_MORSKI:
+        return 'assets/images/client/overlay/courses/course-3.png';
+      case CourseType.JACHTOWY_STERNIK_MORSKI:
         return 'assets/images/client/overlay/courses/course-4.png';
       case CourseType.ZEGLARZ_JACHTOWY:
         return 'assets/images/client/overlay/courses/course-5.png';
