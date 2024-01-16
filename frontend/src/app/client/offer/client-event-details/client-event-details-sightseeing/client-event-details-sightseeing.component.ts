@@ -37,7 +37,7 @@ export class ClientEventDetailsSightseeingComponent {
       'Możliwość poprowadzenia jachtu',
       'Opieka wykwalifikowanego sternika',
       'Kamizelki ratunkowe oraz ciepłe koce dla komfortu usługi',
-      '175 / osoba',
+      '175zł / osoba',
     );
   }
 
