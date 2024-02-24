@@ -73,6 +73,7 @@ public class SecurityConfig {
         return httpSecurity.build();
     }
 
+    // TODO -- modify of CORS config after deploy
     @Bean
     public CorsConfigurationSource corsConfiguration() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
